@@ -1,0 +1,918 @@
+6.1.2 - 2022-03-16
+- updated footprints values, and fixed table of contents
+
+6.1.1 - 2022-03-15
+- Changes for TO-Protect 2.0.0
+
+6.0.2 - 2021-12-14
+- doc: minor fix
+
+6.0.1 - 2021-12-09
+- TLS: improve documentation about HANDSHAKE ONLY mode
+- add TO_ prefix to headers to avoid name conflicts with mbedOS
+
+6.0.0 - 2021-12-03
+TLS: fix invalid max_length when receiving data
+- TLS: fix src/dst inversion in memmove
+- TLS: fix bad handling of partial records
+- TLS: add the default cipher aes-gcm for HANDSHAKE_ONLY mode
+- TLS: deprecate TOSE_helper_tls_receive()
+- Certs: fix TOSE_helper_get_certificate_x509_and_sign() output size
+- TLS: fix regression when multiple handshake messages are contained inside a single record
+
+5.14.1 - 2021-10-22
+- TLS: fix buffer overflow in GCM/CCM modes when encrypting messages
+- TLS: fix handshake failure with 0-length session_id in server_hello
+- sphinx theme: fix configuration of html_static_path
+- doc: set all doxygen group tags in lower case
+
+5.14.0 - 2021-10-07
+- TLS: rename 'ret2' to a name with a bit more meaning
+- fix: regression with TLS HANDSHAKE_ONLY mode
+- TLS SNI extension: add API to support SNI
+
+5.13.0 - 2021-08-31
+- install: adjust prefix of python's TOdir
+- TLS: add python entry points to TLS API
+- Fix typos spotted by Michel
+- TLS: remove automatic mode selection in TLS 1.2
+- TLS: add definitions for CMD_TLS_GET_MASTER_SECRET_DERIVED_KEYS
+- TLS: remove stack allocated variable length array
+- TLS: clean (a bit) the #ifdef mess
+- TLS: improve (a bit) the documentation
+- Add tls_send_record()
+- TLS: calculate maximum plain text length to send once
+- TLS: clean (a bit) the #ifdef mess
+- Add TOSE_helper_tls_recv()
+- helper_certs: add TOSE_helper_get_certificate_x509_and_sign()
+- TLS_set_session: cache the current session
+- TLS: move close_received state into global state
+- Fixed buffer overflow described in TOSF-63
+
+5.12.4 - 2021-07-12
+- Fixed make install for autotools dist release, now run 'make full-dist-zip'
+instead of 'make install' to generate dist-zip archive
+
+5.12.3 - 2021-06-23
+- use get_certificate_x509 init/update/final API through TOsh.py
+- add get_certificate_x509 init/update/final API
+- Doc improvment: Precise AES128 (not -CBC) is used for initial chaining vector, in admin commands
+- Doc improvment: Add precisions to CRC byte ordering in Administration Commands
+
+5.12.2 - 2021-04-08
+- Broadcast loader helper: do not fail in case of retry and if the ongoing
+migration has been already done
+
+5.12.1 - 2021-04-08
+- Add API to get Measured Boot SE measurement
+
+5.12.0 - 2021-04-07
+- Broadcast loader helper now supports TUP chaining, data migration tags, TUP
+file integrity check API, and minimum version constraint
+- Handling minimum required version on broadcast loader restoration
+- Upgraded broadcast loader API to get info by adding expected software version
+
+5.11.5 - 2021-03-10
+- Fixed MeasuredBoot helper functions returns and error handling
+- Measured boot documentation improved
+
+5.11.4 - 2021-03-09
+- Add missing sha256.h
+
+5.11.3 - 2021-03-03
+- Measured boot: changed invalidate_new_hash() API to no longer use HMAC
+- Improved measured boot documentation
+
+5.11.2 - 2021-03-01
+- Fixed measured boot invalidate_new_hash API to take hmac instead of password
+
+5.11.1 - 2021-03-01
+- Missing measured boot header in delivery
+
+5.11.0 - 2021-02-25
+- Adding Measured Boot support
+
+5.10.0 - 2020-12-03
+- helper_tls: adjust the maximum TX buffer length for CCM/GCM modes
+- helper_tls: minor fixes about code review remarks
+- helper_tls: fix buffer overflow while sending data larger than txbuf
+- tls_helper: update TOSE_helper_tls_send() to send data with arbitrary sizes
+- Fix build warning
+- TLS helper: Fix DTLS build
+- TLS helper: Move handshake done actions in step
+- TLS helper: Fix define check
+- TLS helper: Fix missing TOSE_HELPER_TLS_RX_BUFFER_SIZE in config
+- helper_tls: remove use of flight_buf outside the TLS handshake
+- config: add tls_rx_buffer_size option
+- config: --disable_tls_full_duplex produces TO_DISABLE_TLS_FULL_DUPLEX in config.h
+- enable full duplex transmission after handshake
+- use txbuf instead of flight_buf whenever possible
+- add rx/tx buflen
+- helper_tls: remove useless macros
+- helper_tls: enable full-duplex TLS communication
+- tls_helper: dissociate RX and TX buffers (even if they still overlap)
+- fix logging error code
+
+5.9.1 - 2020-11-20
+- TLS helper: Cleanup TLS context at close (to be able to handshake again)
+
+5.9.0 - 2020-11-18
+- TLS helper: Log timeout as debug
+
+5.8.2 - 2020-11-13
+- Add TOSE_data_migration API
+
+5.8.1 - 2020-11-12
+- Update ChangeLog and VERSION for 5.8.0
+- Fix version
+
+5.8.0 - 2020-11-12
+- TLS helper: Use first unused context instead of mapping session to context
+- TLS helper: Add close and fini functions
+- Hide bad type warning (legacy)
+- Add migration guide
+
+5.7.1 - 2020-10-22
+- TLS helper: Do not wait for close notify if already received
+- TLS helper: Set session right before secure element call
+- TLS helper: Mediator certificate now after ServerHelloDone
+- Merge branch 'wip_sba_mediator4' into master
+
+5.7.0 - 2020-10-19
+- Avoid hardcoded length (use driver maximum length instead)
+- Add set_certificate_x509 CAPI commands
+- doc: Add migration guides
+
+5.6.1 - 2020-10-19
+- Add GET_PRODUCT_ID API
+
+5.5.3 - 2020-10-14
+- examples: Do not fail tls_handshake example if new functions are not present
+
+5.5.2 - 2020-09-28
+- TLS helper: Fix PSK
+
+5.5.1 - 2020-09-28
+- ChangeLog: Fix missing delivered 5.2.5
+- examples: Fix multiple TLS slots
+
+5.5.0 - 2020-09-25
+- Add User Configuration file TO_user_config.h capability
+
+5.4.2 - 2020-09-25
+- TLS helper: Allow RSA without mediator
+- Disable TLS mediator by default
+
+5.4.1 - 2020-09-25
+- TLS helper: Input data buffer must be const
+
+5.4.0 - 2020-09-25
+- examples: tls_handshake: Use warning level by default
+- TLS helper: Use warning log level for alerts
+- TLS helper: Fix alerts in DTLS
+- TLS helper: Try to receive close notify alert from server
+- TLS helper: Use warning alert level for close notify alerts (fatal is killing session at server side)
+- Merge
+- TLS helper: Add function to set config
+- TLS: Add functions to get certificate slot used during handshake
+- examples: Add certificate slot management to TLS handshake example
+- Merge branch 'wip_tls_close'
+- Merge branch 'wip_tls_certificate_slot'
+- TLS helper: Replay set session to handle nested TLS sessions
+- Merge branch 'wip_tls_nested'
+- TLS: Add ServerKeyExchange CAPI
+- TLS helper: Support mediator
+- Merge branch 'wip_sba_mediator3'
+- Merge branch 'wip_tls_server_key_exchange'
+- Fix macro call
+- TLS helper: New init function to explicitly select TLS slot to use
+- Merge branch 'wip_tls_force_session'
+- Update libTO-common dependency
+- doc: Add migration guide for new TLS API
+
+5.3.1 - 2020-08-07
+- Deprecate some certificate personalization functions
+
+5.3.0 - 2020-08-06
+- Add admin_command_with_response2 (response length as input & output length with output length <= input length)
+- Add CSR functions
+- Merge branch 'wip_csr'
+- Update dependencies
+
+5.2.5 - 2020-07-21
+- Add loader helper
+
+5.2.1 - 2020-07-06
+- Fix merge
+
+5.2.0 - 2020-07-06
+- doc: Add precisions about toolchain headers
+- Fixed Python module SecLink usage on keys callbacks declaration
+- Update to new driver API
+- driver_client: Use structure cast instead of offsetof
+- TO_legacy.h: Fix missing header include
+- Add GET_HW_SN API
+- doc: Add precisions about toolchain headers
+- Merge branch 'wip_multiple_driver'
+- Update libTO-common dependency
+
+5.1.1 - 2020-06-18
+- pyutils: Fix function name
+- Luatex >= 1.2 compatibility
+- Remove breathe version limit, enumeration issue fixed
+- Import & export libtool dependencies
+- Merge branch 'wip_libtool_deps'
+- Update libTO-common dependency
+
+5.1.0 - 2020-06-02
+- pyutils: Rename driver config to generic name SE config
+- pyutils: Add DTLS configuration
+
+5.0.12 - 2020-05-13
+- Remove redundancy on TO-Protect components list
+- Doc: temporary fix for array word wrapping issue
+- Doc: minor fixes
+- Doc: Set version to 2.3
+- Pull request #3: Wip doc review tls 2
+- examples: Disable perso in x86 build (perso stored in shared file)
+
+5.0.11 - 2020-04-29
+- Add instructions for Flashing with KEIL Applications
+- Clarified instructions and choices for Flashing
+- Pull request #1: Add instructions for Flashing with KEIL Applications
+- doc: Fix parameter SE context in call to TOSE_lora_get_join_request_phypayload()
+- doc: Add User example for TLS (when in SSE case)
+- doc: add information about TOP_infos.h
+- Doc improvments
+- Fix doc
+- Pull request #2: Wip doc review tls
+- doc: Update TO-Protect LoRaWAN footprints
+
+5.0.10 - 2020-04-14
+- Doc: typo fix for broadcast loader
+- Doc: legal date auto-update
+- Fix TLS legacy APIs in DTLS
+- pyutils: Fix missing configuration check
+
+5.0.9 - 2020-04-10
+- Trusted-Objects Broadcast Loader API
+
+5.0.8 - 2020-04-09
+- Fix missing consts
+- Always include helpers common files, needed to detect helper configuration
+- examples: Fix warnings
+- TLS helper: Fix first session usage (commited by accident)
+- examples: Improve RAM secure storage NVM-like behavior
+- examples: Compile secure storage example to detect compilation issue
+- examples: Fix secure storage RAM example
+
+5.0.7 - 2020-03-31
+- Add TO-Protect self-test example
+- doc: Support full TO-Protect documentation
+- examples: Secure storage in RAM
+- doc: Move API examples to dedicated section
+- examples: Fix warning and check
+- examples: Do not build when build is disabled
+- Merge branch 'wip_top_self_tests'
+- examples: Remove TO-Protect examples from TO136 dist package
+
+5.0.6 - 2020-03-27
+- doc: Check breathe < 4.12.0 (avoid enum issue)
+
+5.0.5 - 2020-03-25
+- Fix prototype
+
+5.0.4 - 2020-03-24
+- Doc: fixed references to TO_init
+- Add new line at end of all files
+- Fix implicit cast warning
+- examples: Split STM32 example
+- Do not use typeof
+- External compilation flags
+- Standard C99 support
+- doc: Add missing errors codes
+
+5.0.3 - 2020-03-20
+- Driver init/fini have specific return
+- Fix SE return type
+- Doc: set User Manual to Rev 2.1
+- Merge branch 'wip_fix_rettypes'
+
+5.0.2 - 2020-03-19
+- Improve and simplify configuration detection
+- Fix template
+- TLS helper: Fix bad initialization
+- full-dist: Add packages versions
+- Support build disabling
+
+5.0.1 - 2020-03-18
+- Install dist packages
+
+5.0.0 - 2020-03-18
+- New TOSE_ API
+
+4.19.1 - 2019-12-18
+- doc: low-level LoRa API
+
+4.19.0 - 2019-12-16
+- autotools: Add optimization parameter
+- doc: Add migration guide
+
+4.18.6 - 2019-12-12
+- Fixed dist (for PC target)
+
+4.18.5 - 2019-12-11
+- TLS helper: Fix record length with CID
+- TLS helper: Fix memory overflow with CID without DTLS retransmission
+- TO SW: Use external random for evaluation RNG (to avoid always same randoms)
+- Log level is signed
+
+4.18.4 - 2019-12-03
+- TO-Protect: Fix alignment issue on some platforms
+- Fix alignment warnings
+- Add compile-time assertions
+
+4.18.3 - 2019-11-27
+- examples: Fix build flags
+
+4.18.2 - 2019-11-27
+- Admin: Add API to set keys slot
+- admin: Rename admin keys slot to admin slot
+- doc: Admin slot
+- doc: Fix typo
+- doc: Fix typo
+
+4.18.1 - 2019-11-27
+- Changed Jenkins workspace cleanup rule Cleanup is always performed after a build
+- Added an option to discard old builds
+- Use deterministic sized types instead of enumerations
+
+4.18.0 - 2019-11-22
+- TO_cfg: Add database define
+- Do not use TO_ENABLE_SW_CORE_API in examples
+- configure.ac: Create parameter for CAPI enabling
+- TO_cfg: Add personalization
+- examples: Improve database deliveries
+- TOsh: TO-Protect support
+- pyutils: Fix missing config
+- TOsh.py: Add personalization functions
+- log: Remove useless limitation
+- Disable forgotten CAPI with TO_DISABLE_CAPI
+- configure: Fix secure messaging helper mapped on secure messaging parameter
+- examples: Improve error logs
+- doc: Remove TO_cfg.h from Doxygen parsing
+- example: Update Mbed database example with FlashIAP API
+- Disable GCC pragmas on other compilers
+- Perso: replaced TO_perso_cert_set_CA by TO_perso_cert_set_CA_kpub and TO_perso_cert_set_CA_key_identifier
+- Allow TO_get_certificate_x509 to return only certificate size
+- configure.ac: Fix AM defines
+- examples: Update Avnet Generic certificate (good certificate SN)
+- ecies: Personalize certificate subject CN
+- ecies: Fix example issue without helpers
+- doc: Add migration guide
+- TO SW: Restore index check in get_certificate functions (before private key usage)
+
+4.17.1 - 2019-11-13
+- TO SW: Remove dependancy with libc rand_r in evaluation
+
+4.17.0 - 2019-11-13
+- TLS: Remove TO_renew_tls_keys
+- Enable TLS by default with SE
+- Switch from spaces to tabs
+- Move I2C wrapper link options in wrapper Makefile.am
+- examples: Link with I2C wrapper
+- Fix missing include
+- Fix TO_endian.h with other compilers than GCC
+- Fix warning on some compilers
+- doc: TLS is now enabled by default with autotools
+
+4.16.0 - 2019-11-06
+- TO_cfg: Remove internal define usage
+- TLS helper: Disable some function without DTLS/retransmission
+- TLS helper: Set retransmission maximum API
+- examples: Use DTLS parametering functions
+
+4.15.5 - 2019-10-22
+- TLS helper: Handle missing cookie exchange in DTLS session resumption
+
+4.15.4 - 2019-10-22
+4.15.3 - 2019-10-22
+- Administration API: command to get data added
+
+4.15.2 - 2019-10-18
+- Improved cross-building, shared libraries generated only for PC OS targets
+- Serial wrapper: fixed warning
+- TLS helper: Use 32-bits timeouts to avoid limit to 65,536 seconds
+- TLS helper: Fix ServerHello extensions parsing
+- TLS helper: Use CID for all encrypted messages
+
+4.15.1 - 2019-10-08
+- examples: Use generic certificates
+
+4.15.0 - 2019-10-01
+- TO SW: TLS is not relative to certificate management parameter anymore
+- Fixed small typo
+- slight change for linux distrib where default python is not a python3.x version
+- TO SW: Simplify database read/write/erase functions to give
+- TO SW: Rename unstripped TO-Protect library
+- Dedicate TO_cfg.h per core API
+- TLS: improve documentation of TO_LIB_INTERNAL_TLS_FLIGHT_BUFFER_SIZE
+- TLS: increase I/O buffer size
+- TLS helper: Return error if cipher suite is unknown
+- Fix misaligned command code values for TOCMD_AES128ECB_ENCRYPT and TOCMD_AES128ECB_DECRYPT
+- doc: Add missing migration guides
+- TLS helper: add precision about cleanup
+- TLS: Implement TO_tls_set_config
+
+4.14.0 - 2019-09-19
+- TO-Protect TLS support
+- Add missing TLS stack define MCU documentation
+- doc: Align tables widths
+- Remove TO_DEBUG define
+- Move default maximum log level configuration to TO_cfg.h
+- Headers C++ compatibility
+- examples: Fix Mbed examples link
+- Fix missing include
+
+4.13.4 - 2019-09-17
+- PCSC wrapper improved, and now supports T=1 and ISO/IEC 14443
+
+4.13.3 - 2019-08-21
+- Add NORDIC boards to I2C Wrapper for MBED
+- Documentation revision
+
+4.13.2 - 2019-08-02
+- TO-Protect improvment
+- TLS helper: Fix undefined symbol with DTLS
+
+4.13.1 - 2019-07-31
+- TO-Protect improvment
+
+4.13.0 - 2019-07-29
+- ecies: Compile both client & server with autotools
+- ecies: Support X509 certificates in example
+- LoRa: Fix memory overflow
+- Add example to get LoRa DevEUI and AppEUI
+- TO-Protect integration
+
+4.12.3 - 2019-07-18
+- LoRa function to get DevAddr
+- Add some LoRa function to Python utils and to shell
+
+4.12.2 - 2019-07-10
+- Documentation revision
+- ISO-7816 wrapper for PC
+
+4.12.1 - 2019-06-27
+- Fixed build for Ubuntu 18.04.2
+
+4.12.0 - 2019-05-28
+- Documentation improvements
+- Serial wrapper
+- Add AES ECB APIs support
+- Removed useless TO_HWVERSION_* defines
+- ISO 7816 wrapper
+- Improve error forwarding with helpers
+- TLS helper: Use fallbacks only in case of unknown command
+
+4.11.2 - 2019-03-27
+- Python utils: Python API reworked for easier integration and use
+- Python utils: Python2 & Python3 are supported
+
+4.11.1 - 2019-03-12
+- TLS helper: Connection ID applies only to application data
+- TLS helper: Change record type for application data when ConnectionID is used
+- TLS helper: Only move data for in-place encryption
+- TLS helper: Buffer overflow protection
+
+4.11.0 - 2019-03-07
+- TLS helper: AES GCM support
+- Secmsg: AES GCM support
+- Unsecure CAPIs: Clear already decrypted data in case of failure
+
+4.10.2 - 2019-02-22
+- TOsh: Restore verify_certificate_and_store short option
+- Update ECIES example with new APIs
+- Depreciate old secure messaging API
+- Inform new API to use for deprecated APIs
+- Define default values in TO_cfg.h
+- TLS helper: Add new TO_DISABLE_* defines
+- Secmsg: Add macros to computes different sizes
+- doc: Add details about TLS APIs
+- doc: Add new APIs details and migration guide
+- doc: Improve migration guide for 4.7.0
+
+4.10.1 - 2019-02-13
+- TO136RSP_COM_ERROR deprecated, use TORSP_COM_ERROR instead
+
+4.10.0 - 2019-02-12
+- TLS helper: Handle cipher suites by types
+- TLS helper: CCM/CCM_8 support
+- TLS: Completely remove ECDH
+- Implement AES128-CCM encrypt/decrypt commands
+- TLS helper: DTLS retransmission timeout is now configurable
+- TLS helper: Add server extensions parsing mechanism
+- TLS Optimized: Handle ConnectionID extension
+- TLS Optimized: Add setter for DTLS connection ID extension ID (not fixed yet by RFC)
+- TLS helper: Set connection ID extension ID at init
+- TLS helper: DTLS fragment size is now configurable
+- TLS examples: Print errors
+- TLS helper: Add handshake step failure informations
+- TLS / Secmsg: Rename new APIs, restore old APIs
+- Helper: Old secure messaging API is deprecated
+- Store version in file to automatically change both configure.ac
+- Add old firmware retrocompatibility
+
+4.9.3 - 2019-02-07
+- Administration commands guide
+- Some fixes for RaspberryPi wrapper
+
+4.9.2 - 2019-01-30
+- Administration commands APIs
+- Doc: SE power management is recommended to be done from TO_init() and TO_fini()
+
+4.9.1 - 2019-12-08
+- Shell: Add missing secure messaging APIs
+- Secmsg: Add macro to extract payload parts
+- doc: Improve helpers documentation
+- TLS helper: PSK support
+- TLS helper: Add link to macros in documentation for secure messaging
+- TLS helper: Assume missing CertificateRequest / ServerKeyExchange is not a lost packet
+
+4.9.0 - 2018-12-20
+- TLS helper: Buffers dumps are debug
+- Remove secure message aliases
+- New secure messaging APIs
+- Secmsg: Simplify helper APIs by considering sequence, iv and cryptogram as opaque payload
+
+4.8.0 - 2018-11-7
+- TLS helper: New context based API for multiple sessions support
+- TLS helper: Use non-CAPI method for (un)secure messages during handshake
+- raspberrypi: ISR based last command duration
+- mbed: ISR based last command duration
+
+4.7.2 - 2018-10-17
+- TLS helper: Remove all traces of sessions
+
+4.7.1 - 2018-10-16
+- Add verify_chain_certificate_and_store_* APIs
+- TLS helper: Remove session support on old APIs
+
+4.7.0 - 2018-10-10
+- Added an example to get X.509 certificate DER file from SE
+- Doc: RaspberryPi I2C bitbanging fast mode instructions
+- Log level management
+- Arduino wrapper: Use define to select power pin
+- TLS helper: Support multiple sessions
+- TLS helper: Fallback on TO_tls_(un)secure_message if TO_helper_tls_(un)secure_message fails (probably undefined)
+- TLS helper: Continue if set session fails with first session (probably undefined)
+- doc: Add production optimizations guide
+- Extract TO core API
+- TLS helper: Receive timeout now configureable
+- Compile wrapper as submodule of TO core API
+- Support cross-compilation
+- secmsg: Add secmsg APIs using CMAC
+
+4.6.5 - 2018-07-25
+- Add AES128-GCM API
+- Mbed wrapper: Use define to select power pin
+- Moved *secure_message APIs to aes128cbc_hmac_*secure_message ; aliased old
+APIs to preserve compatibility
+- Moved aes_* APIs to aes128cbc_* ; aliased old APIs to preserve compatibility
+
+4.6.4 - 2018-07-18
+- TLS helper: Fix random behaviour due to undefined variable
+
+4.6.3 - 2018-07-18
+- LoRa standard API is now disabled by default
+- Revert "NVM API is now disabled by default"
+- Fingerprint is now disabled by default
+
+4.6.2 - 2018-07-12
+- TLS helper: Fallback on TO_tls_get_certificate if TO_helper_tls_get_certificate fails (probably undefined)
+
+4.6.1 - 2018-07-11
+- Fix crash during TLS handshake (DTLS disabled)
+- examples: Fix recvfrom EINVAL return in TLS handshake
+- doc: Add some missing parts about TLS helper APIs
+
+4.6.0 - 2018-07-04
+- TLS helper: Use IO buffer for data receive
+- Add wrapper for Arduino
+- Fix configuration file
+- TLS Optimized: Add get Certificate CAPI
+- TLS helper: Add buffer overflow protections
+- TLS helper: Use get Certificate CAPI
+- TLS helper: Adapt updates sizes to IO buffer size
+- Include TO_cfg.h in TO_defs.h (avoid issues if TO_defs.h is included first)
+- TLS helper: More buffer overflow checks
+- Remove usage of ssize_t/size_t (size is architecture dependant)
+- TLS helper: Add TO_helper_tls_receive_message_with_timeout
+- TLS helper: DTLS retransmission now disableable
+- TO_helper_tls_unsecure_message: Always send updates aligned to AES block size
+- NVM API is now disabled by default
+
+4.5.2 - 2018-05-17
+- doc: Update to new defines name (add it to migration doc)
+
+4.5.1 - 2018-05-14
+- TLS Optimized: Fix define name
+
+4.5.0 - 2018-05-14
+- TLS helper: Support session resumption
+- TLS helper: Send close notify alert in case of error
+- TLS Optimized: New command to reset session
+- TLS helper: Use cache for application data
+- TLS Optimized: Add secure/unsecure message CAPIs
+- TLS helper: Use secure/unsecure message CAPIs
+
+4.4.0 - 2018-04-19
+- Add include/TO_cfg.h header to manage library settings otherwise than with
+project preprocessor definitions
+- LoRa and TLS are now enabled by default
+(read migration guide 4.3.x -> 4.4.x)
+
+4.3.4 - 2018-04-10
+- Add post-command hook
+- Add verify_chain_ca_certificate_and_store CAPI & helper
+- Rename CAPI helper
+
+4.3.3 - 2018-03-29
+- Add verify_chain_certificate_and_store_init/update/final()
+- Add verify_chain_certificate_and_store() helper
+- Status PIO documentation detailed
+- Add pre-command hook
+
+4.3.1 - 2018-03-20
+- Commands to manage status PIO config: TO_set_status_PIO_config() and
+TO_get_status_PIO_config
+- Library hook just after writing command and before reading response
+- Doc: power optimization guide
+- Mbed wrapper: Power up before init, and misc. fixes
+- STM32 wrapper: Extend compatibility, and standard Arduino pins by default
+- RPi wrapper: fix intermittent bad last command duration
+
+4.3.0 - 2018-03-08
+- mbed wrapper: Control D2 PIO
+- TLS helper: Provide a step API
+- TLS helper: regroup static variables in a context
+- Use secure messaging in ECIES example
+- TLS helper: Remove useless caches (use pointer instead)
+- TLS helper: Buffers sizes by define
+- TLS helper: Handle alerts
+- mbed wrapper: Handle I2C timeouts for MCUXpresso_MCUS targets (NXP)
+- TLS Optimized: Support one-way authentication
+- mbed wrapper: Fix timeout for STM platforms
+
+4.2.8 - 2018-02-23
+- Doc: misc. distribution changes
+- TLS example fix for parsing stdout
+- Python shell: run_cmd now supports sessions
+- Python shell: add version to hello message
+
+4.2.7 - 2018-02-16
+- Doc: clarification for last command duration
+- Add missing TLS options in config.py
+- Mbed wrapper: directly use STM HAL synchronous API with timeouts for mbed OS
+on STM platforms
+
+4.2.6 - 2018-02-12
+- Update mbedOS wrapper
+- Wrapper: Add TO_data_last_command_duration() API
+- Wrapper: provide TO_data_last_command_duration() for raspberry and net_bridge
+- Allow to not have net bridge configuration file (with environment variables)
+- Wrapper: net_bridge: update protocol version for last command duration
+
+4.2.5 - 2018-01-30
+- ECIES example improved
+
+4.2.4 - 2018-01-22
+- Add ECIES example
+- Possibility to use TO_stdint.h if stdint.h is not available on the target
+platform (see doc about define HAVE_NO_STDINT_H)
+- Now using secure_memcmp(), secure_memcpy(), secure_memmove(), and
+secure_memset()
+- Network bridge I2C wrapper: ability to take port from environment variable
+
+4.2.3 - 2018-01-12
+- Add short to TO_verify_certificate_and_store() compatible formats
+- Add TO_verify_ca_certificate_and_store()
+- Add TO_get_nvm_size() to know available client NVM SE space
+
+4.2.2 - 2017-12-08
+- Remove TO_compute_ecdh
+
+4.2.1 - 2017-12-08
+- Fix missing import
+- Fix TLS helper with DTLS
+
+4.2.0 - 2017-12-08
+- TLS handshake: Force ECC keys renewal before handshake
+- TLS Optimized: Add length output parameter to TO_tls_get_certificate
+
+4.1.4 - 2017-12-05
+- Add x509 dedicated get functions
+- Shell: persistent session option, to avoid shutting of SE power on each
+command
+- Logs are now enabled by defining TO_DEBUG
+
+4.1.3 - 2017-11-16
+- Secure link: fix context desynchronisation in case of communication error
+
+4.1.2 - 2017-10-27
+- Disable unused seclink code to prevent build errors
+- Change secure link internal callbacks names to avoid conflicts
+- Secure link: minor changes related to keys renewal
+
+4.1.1 - 2017-10-10
+- Documentation size optimized
+
+4.1.0 - 2017-10-05
+- TLS optimized
+- DTLS
+- Renamed main.c/h to core.c/h
+- Endianness runtime detection fallback if not explicitely defined
+
+4.0.5 - 2017-09-28
+- Secure link keys renewal mechanism for ARC4 and AES/HMAC protocols
+- Secure link example for keys renewal handling from client application code
+
+4.0.4 - 2017-09-25
+- Fixes for Windows build
+
+4.0.3 - 2017-09-22
+- C++ APIs compatibility
+- Wrapper: STM32F4xx using ST HAL, provided by ZHAW university
+- Net bridge TLS support
+
+4.0.2 - 2017-08-24
+- Wrapper: net_bridge: fixed protocol status usage
+- Doc minor changes
+
+4.0.1 - 2017-08-17
+- Doc: LoRa application notes
+- Doc: PDF Trusted Objects Latex style
+
+4.0.0 - 2017-07-21
+- Doc: HTML / PDF generator based on Doxygen and Sphinx
+- Library refactor (TO136 => TO, files reorganization...)
+- Improved error handling
+- Better built features configurability
+
+3.0.9 - 2017-06-27
+- AES/HMAC Secure Link based on external Tinycrypt library
+- Secure Links: new API to compute command and response length
+
+3.0.7 - 2017-06-15
+- Secure Link mechanism
+- ARC4 Secure Link support
+
+3.0.6 - 2017-06-01
+- Endianness support, documentation in doc/install/endianness.txt
+- CP2112 wrapper LEDs support for Windows
+
+3.0.5 - 2017-05-10
+- Add read/write NVM helpers
+- LoRa: Fix bad TO136_lora_encrypt_payload parameter
+- LoRa: Add optimized helpers.
+- Handle host endianess
+- _send_command: Try to read response in case of write failure
+
+3.0.3 - 2017-05-05
+- Linux generic I2C wrapper
+
+3.0.2 - 2017-05-04
+- Support SHA256 init/update/final APIs
+
+3.0.1 - 2017-04-26
+- Add compute_ecdh() functio
+
+3.0.0 - 2017-04-05
+- changed library name from libto136_client to libto136
+
+2.1.16 - 2017-03-29
+- to136_i2c_wrapper.h now depends on to136_defs.h instead of to136.h
+
+2.1.15 - 2017-03-28
+- Python utils: fixed to136_config function call
+
+2.1.14 - 2017-03-16
+- LoRa: add TO136_lora_set_app_eui method
+- CP2112 linux wrapper: add kernel module patch for rx/tx led blink
+
+2.1.13 - 2017-02-16
+- Intruducing helpers: ECIES sequence
+
+2.1.12 - 2017-02-11
+- Network I2C wrapper now supports Windows
+- Wrapper: raspberrypi power GPIO is now controlled on GND to avoid TO136 to
+take power on I2C while powered off
+- Doc: RaspberryPi installation instructions
+- Wrapper TO136_data_config() function applies configuration and now must ensure
+it is taken into account
+
+2.1.11 - 2017-02-08
+- Add TLS API
+
+2.1.10 - 2017-02-08
+- Network bridge wrapper: protocol finalization, read config file to get bridge
+address
+
+2.1.8 - 2017-02-07
+- LoRa bugfix on TO136_lora_compute_shared_keys()
+- Wrapper API: added optional TO136_data_config() function, to give I2C
+settings to the wrapper, added it also into library headers and Python tools
+- Add network wrapper to use I2C device through a remote I2C proxy
+(experimental)
+
+2.1.7 - 2017-01-31
+- Improved debug logs
+
+2.1.6 - 2017-01-06
+- Headers: fix definition bug of TO136_restore_sld
+
+2.1.5 - 2017-01-05
+- Pyutils: made methods.py more generic to be usable by other libraries
+- Verify certificate and store: fixed supported certificates types
+- Headers: move some declarations from to136.h to to136_defs.h, certificates
+format details, TO136_read/write() documentation
+- Doc: wrapper generalities, Windows MSYS2 installation test details, CP2112
+Linux patch update
+
+2.1.4 - 2016-12-21
+- Wrapper CP2112 Windows: cosmetic
+- Doc: wrapper implementation guidelines: timeouts
+
+2.1.3 - 2016-12-20
+- fix raw_cmd (length was invalid)
+
+2.1.2 - 2016-12-20
+- to136sh.py: now support newline/CR in raw_cmd
+- cp2112-win: add reset on cp2112 open
+
+2.1.1 - 2016-12-20
+- Shell: allow raw commands with spaces
+
+2.1.0 - 2016-12-19
+- Add get_key_fingerprint() API
+
+2.0.0 - 2016-12-19
+- Changed secure/unsecure_message API to have an explicit Initial Vector
+argument
+- ECIES remote public key and TO136 public key signatures made optional (enabled
+by default)
+- Documentation global revision and reorganization
+
+1.5.0 - 2016-12-6
+- API: compute/verify hmac init/update/final
+- Removed useless lengths from API
+- API: aes_iv_encrypt()
+- Shell: add raw_cmd to send and recieve command and data bytes directly from
+TO136
+
+1.4.5 - 2016-11-29
+- Autotools: support for MSYS2 build
+
+1.4.4 - 2016-11-25
+- Autotools: installing headers into /usr/include/trusted-objects
+- Doc: installation details
+
+1.4.3 - 2016-11-15
+- Fixes for Windows support
+
+1.4.2 - 2016-11-14
+- Windows port, based on CP2112 adapter
+
+1.4.1 - 2016-10-27
+- Add sign_hash and verify_hash_signature APIs
+- Tools: to136_set_remote_pubkey: removed useless public key display
+- Tools: to136_set_remote_pubkey now renews shared keys and prints out public
+key
+- Wrapper: cp2112: use udev to discover devices, set sysfs driver settings,
+documented udev rules
+
+1.4.0 - 2016-10-21
+- Memory optimizations: no malloc, less copies, smaller memory usage
+- Reworked _send_command data returns
+- Wrapper: cp2112: support for more than 61 bytes writes
+- API: add TO136_verify()
+- Python utils to use libto136, and tools (to136 shell)
+- Doc: Linux installation instructions
+
+1.3.1 - 2016-10-10
+- Doc: wrapper integration
+
+1.3.0 - 2016-10-03
+- Now using autotools for Unix systems
+- API to restore SLD
+
+1.2 - 2016-09-28
+- Renamed to136 API to to136
+- Doc update
+
+1.1 - 2016-09-28
+- CP2112 I2C wrapper
+- Doc: wrapper HOWTO
+
+1.0 - 2016-09-07
+- First release

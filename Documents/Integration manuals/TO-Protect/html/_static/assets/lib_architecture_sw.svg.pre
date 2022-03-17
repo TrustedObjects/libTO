@@ -1,0 +1,137 @@
+#!define ORANGE1_BACKGROUND   \#ED7D31
+#!define ORANGE1_STROKE       \#AE5A21
+#!define ORANGE2_BACKGROUND   \#FFB200
+#!define ORANGE2_STROKE       \#C59300
+#!define ORANGE3_BACKGROUND   \#FFC000
+#!define ORANGE3_STROKE       \#C59300
+#!define ORANGE4_BACKGROUND   \#C55A11
+#!define ORANGE4_STROKE       \#BC8C00
+#!define GREEN_BACKGROUND     \#9BD6AD
+#!define GREEN_STROKE         \#3A5743
+#!define GREEN_TEXT           \#093B18
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="340" height="370">
+	<style>
+		.text {
+			text-anchor: middle;
+			font-size: 15px;
+			font-family: Sans;
+		}
+
+		.rect {
+			fill-opacity: 1;
+			stroke-width: 0.3;
+			stroke-dasharray: none;
+			stroke-opacity: 1;
+		}
+	</style>
+	<rect
+		class="rect"
+		style="
+			fill: GREEN_BACKGROUND;
+			stroke: GREEN_STROKE;"
+		x="40"
+		y="0"
+		width="300"
+		height="40"
+	/>
+	<rect
+		class="rect"
+		style="
+			fill: ORANGE1_BACKGROUND;
+			stroke: ORANGE1_STROKE;"
+		x="40"
+		y="50"
+		width="300"
+		height="280"
+	/>
+	<rect
+		class="rect"
+		style="
+			fill: ORANGE2_BACKGROUND;
+			stroke: ORANGE2_STROKE;"
+		x="50"
+		y="60"
+		width="280"
+		height="50"
+	/>
+	<rect
+		class="rect"
+		style="
+			fill: ORANGE3_BACKGROUND;
+			stroke: ORANGE3_STROKE;"
+		x="50"
+		y="110"
+		width="280"
+		height="100"
+	/>
+	<rect
+		class="rect"
+		style="
+			fill: ORANGE4_BACKGROUND;
+			stroke: ORANGE4_STROKE;"
+		x="50"
+		y="220"
+		width="280"
+		height="100"
+	/>
+	<rect
+		class="rect"
+		style="
+			fill: GREEN_BACKGROUND;
+			stroke: GREEN_STROKE;"
+		x="40"
+		y="340"
+		width="300"
+		height="30"
+	/>
+	<text
+		class="text"
+		style="
+			fill: GREEN_TEXT;
+			font-weight: bold;"
+		x="190"
+		y="25"
+	>Application Firmware</text>
+	<text
+		class="text"
+		style="
+			fill: ORANGE4_BACKGROUND;
+			font-weight: bold;"
+		x="-30"
+		y="150"
+		transform="rotate(-90 20 140)"
+	>DEVICE_NAME</text>
+	<text
+		class="text"
+		style="
+			fill: ORANGE4_BACKGROUND;"
+		x="190"
+		y="88"
+	>TO-Protect APIs</text>
+	<text
+		class="text"
+		style="
+			fill: white;
+			font-weight: bold;"
+		x="190"
+		y="163"
+	>LibTO (sources)</text>
+	<text
+		class="text"
+		style="
+			fill: white;
+			font-weight: bold;"
+		x="190"
+		y="273"
+	>Secure Core (binary file)</text>
+	<text
+		class="text"
+		style="
+			fill: GREEN_TEXT;
+			font-weight: bold;"
+		x="190"
+		y="358"
+	>NVM Adaptation Layer</text>
+</svg>

@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Use the library in an MCU project &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Library configuration for an MCU project" href="settings.html" />
+    <link rel="prev" title="Overall architecture" href="../overview.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Use the library in an MCU project</a><ul>
+<li><a class="reference internal" href="#configure-your-project">Configure your project</a><ul>
+<li><a class="reference internal" href="#headers-include-paths">Headers include paths</a></li>
+<li><a class="reference internal" href="#preprocessor-definitions">Preprocessor definitions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-an-existing-i2c-wrapper-or-develop-your-own-one">Use an existing I2C wrapper or develop your own one</a><ul>
+<li><a class="reference internal" href="#use-an-existing-i2c-wrapper">Use an existing I2C wrapper</a></li>
+<li><a class="reference internal" href="#implement-your-own-i2c-wrapper">Implement your own I2C wrapper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="use-the-library-in-an-mcu-project">
+<span id="setup-mcu"></span><h1>Use the library in an MCU project<a class="headerlink" href="#use-the-library-in-an-mcu-project" title="Permalink to this headline">¶</a></h1>
+<p>In order to work with this library
+in an MCU project, please follow the integration instructions below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following prerequisites are expected in this article:</p>
+<ul class="simple">
+<li><p>a Secure Element soldered onto a development board and connected to the I2C bus</p></li>
+<li><p>the ability to build C code for the target hardware</p></li>
+</ul>
+</div>
+<p>Install library in your sources tree</p>
+<p>The following directories are to be considered:</p>
+<ul class="simple">
+<li><p><strong>include</strong>: header files, providing definitions and APIs</p></li>
+<li><p><strong>src</strong>: implementation</p></li>
+<li><p><strong>wrapper</strong>: I2C wrapper (platform dependent), to allow the library and the
+Secure Element communications, see
+<a class="reference internal" href="#use-an-existing-i2c-wrapper-or-develop-your-own-one">Use an existing I2C wrapper or develop your own one</a></p></li>
+</ul>
+<p>There are two ways to install the library in your sources tree:</p>
+<ul class="simple">
+<li><p>you can simply put
+the Secure Element library
+folder in your sources tree, it will be easier to update it
+on future deliveries, by replacing the folder</p></li>
+<li><p>or you can integrate different
+library
+parts among your project files, for example copy the <cite>include</cite> directory
+content with your own headers, or <cite>src</cite> directory contents with your HAL APIs
+sources</p></li>
+</ul>
+<p>From the <cite>src</cite> folder, the following files are to be included into your build
+process:</p>
+<ul>
+<li><p><strong>src/*.c</strong> library files</p></li>
+<li><p><strong>src/core.c</strong>, the library core</p></li>
+<li><p><strong>src/api_*.c</strong>, Secure Element API</p></li>
+<li><p><strong>src/helper_*.c</strong>, library helpers API, based on Secure Element API</p></li>
+<li><p><strong>src/seclink_*.c</strong>, Secure Link support API</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Secure Link protocol you choose must be enabled in your
+delivered Secure Element chips (read Secure Link documentation
+for more details)</p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<div class="section" id="configure-your-project">
+<h2>Configure your project<a class="headerlink" href="#configure-your-project" title="Permalink to this headline">¶</a></h2>
+<p>Your build process needs some configurations to be able to build and use
+the library.</p>
+<div class="section" id="headers-include-paths">
+<h3>Headers include paths<a class="headerlink" href="#headers-include-paths" title="Permalink to this headline">¶</a></h3>
+<p>No matter the way you installed the library into your source tree, be sure its
+headers (the files provided in the <cite>include</cite> directory of the library) are
+accessible from one of your include path.</p>
+</div>
+<div class="section" id="preprocessor-definitions">
+<h3>Preprocessor definitions<a class="headerlink" href="#preprocessor-definitions" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>TO_LOG_LEVEL_MAX</strong> preprocessor definition is available to set maximal
+logs level. Debug level prints out additional logs to help you debugging
+your application.</p>
+<p>Read <a class="reference internal" href="settings.html#settings-mcu"><span class="std std-ref">Library configuration for an MCU project</span></a> for details on all available preprocessor definitions.
+This document also details endianness settings.</p>
+</div>
+</div>
+<div class="section" id="use-an-existing-i2c-wrapper-or-develop-your-own-one">
+<h2>Use an existing I2C wrapper or develop your own one<a class="headerlink" href="#use-an-existing-i2c-wrapper-or-develop-your-own-one" title="Permalink to this headline">¶</a></h2>
+<p>The I2C wrapper is handling the Secure Element I2C inputs/outputs. It is an underlying
+stack of the Secure Element library used by every provided API. The wrapper is platform
+dependent, and you need to use an already existing implementation for your
+platform, or implement your own.
+More details from <a class="reference internal" href="../wrapper/overview.html#i2c-wrapper"><span class="std std-ref">I2C wrapper</span></a>.</p>
+<div class="section" id="use-an-existing-i2c-wrapper">
+<h3>Use an existing I2C wrapper<a class="headerlink" href="#use-an-existing-i2c-wrapper" title="Permalink to this headline">¶</a></h3>
+<p>Available I2C wrappers are provided into the library <cite>src/wrapper</cite> directory.
+Just ensure to build the right one for your platform. If there is no wrapper for
+your platform, continue with <a class="reference internal" href="#implement-your-own-i2c-wrapper">Implement your own I2C wrapper</a>.</p>
+</div>
+<div class="section" id="implement-your-own-i2c-wrapper">
+<h3>Implement your own I2C wrapper<a class="headerlink" href="#implement-your-own-i2c-wrapper" title="Permalink to this headline">¶</a></h3>
+<p>No wrapper is already available for your hardware, then you need to implement a
+wrapper for your specific platform, according to the provided I2C wrapper API.
+Please read <a class="reference internal" href="../wrapper/implementation_guidelines.html#i2c-wrapper-implem-guide"><span class="std std-ref">I2C wrapper implementation guidelines</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

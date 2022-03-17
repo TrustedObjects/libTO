@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to use TO-Protect TLS &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Overall architecture" href="overview.html" />
+    <link rel="prev" title="Legal" href="legal.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-use-to-protect-tls">
+<h1>How to use TO-Protect TLS<a class="headerlink" href="#how-to-use-to-protect-tls" title="Permalink to this headline">¶</a></h1>
+<p>If you are starting a new project, you can use
+<a class="reference internal" href="api/helper.html#api-tls-helper"><span class="std std-ref">Trusted-Objects TLS stack</span></a> which is as optimized as
+possible in terms of footprint, and which contains a full TLS Stack. This is the
+easiest way to implement a firmware with a full TLS stack.</p>
+<p>On projects already using Mbed TLS, you also have the choice to continue to use
+TLS stack directly.
+TLS stack will be adapted to use TO-Protect automatically (see Mbed TLS
+Application Note for details).</p>
+<p>It has the advantage to avoid modification in your firmware, but the footprint
+will be higher.</p>
+<div class="figure align-default">
+<img alt="_images/lib_usage_sw.svg" src="_images/lib_usage_sw.svg" /></div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

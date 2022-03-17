@@ -1,0 +1,56 @@
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="180">
+	<style>
+		.text {
+			fill: white;
+			text-anchor: middle;
+			font-size: 15px;
+			font-family: Sans;
+		}
+
+		.rect {
+			fill-opacity: 1;
+			stroke-width: 0.3;
+			stroke-dasharray: none;
+			stroke-opacity: 1;
+		}
+
+	</style>
+	<rect
+		class="rect"
+		style="
+			fill:#2E7B01;
+			stroke:#194500;"
+		x="0"
+		y="0"
+		width="200"
+		height="60"
+	/>
+	<text x="100" y="33" class="text">Application firmware</text>
+	<rect
+		class="rect"
+		style="
+			fill:#0058B5;
+			stroke:#003369;"
+		x="0"
+		y="60"
+		width="200"
+		height="60"
+	/>
+	<text x="100" y="93" class="text">
+		TLS
+		stack
+	</text>
+	<rect
+		class="rect"
+		style="
+			fill:#F29047;
+			stroke:#BF5A0D;"
+		x="0"
+		y="120"
+		width="200"
+		height="60"
+	/>
+	<text x="100" y="153" class="text">TO-Protect TLS</text>
+</svg>

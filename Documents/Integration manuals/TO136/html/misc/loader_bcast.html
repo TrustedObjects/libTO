@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Loader Broadcast Protocol &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Production optimizations" href="prod_optim.html" />
+    <link rel="prev" title="Power optimization" href="power_optim.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Secure Loader Broadcast Protocol</a><ul>
+<li><a class="reference internal" href="#intended-use-of-the-broadcast-protocol">Intended use of the Broadcast Protocol</a></li>
+<li><a class="reference internal" href="#protocol-process-flow">Protocol process flow</a></li>
+<li><a class="reference internal" href="#security">Security</a><ul>
+<li><a class="reference internal" href="#involved-credientials">Involved credientials</a></li>
+<li><a class="reference internal" href="#security-considerations">Security considerations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#library-api">Library API</a><ul>
+<li><a class="reference internal" href="#high-level-api">High-level API</a></li>
+<li><a class="reference internal" href="#low-level-api">Low-level API</a></li>
+<li><a class="reference internal" href="#other-api">Other API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#trusted-objects-upgrade-file-tup">Trusted Objects Upgrade file (TUP)</a><ul>
+<li><a class="reference internal" href="#tup-format">TUP format</a></li>
+<li><a class="reference internal" href="#file-example">File example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="secure-loader-broadcast-protocol">
+<h1>Secure Loader Broadcast Protocol<a class="headerlink" href="#secure-loader-broadcast-protocol" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="intended-use-of-the-broadcast-protocol">
+<h2>Intended use of the Broadcast Protocol<a class="headerlink" href="#intended-use-of-the-broadcast-protocol" title="Permalink to this headline">¶</a></h2>
+<p>This protocol is suitable for use when devices on the field can only receive
+broadcasted firmware upgrades (all devices gets the same upgrade data).</p>
+<p>It does not allow Secure Element features use during upgrade process.
+You should ensure the use-case is compliant with that (for example, no LoRa
+connectivity until upgrade is complete).</p>
+</div>
+<div class="section" id="protocol-process-flow">
+<h2>Protocol process flow<a class="headerlink" href="#protocol-process-flow" title="Permalink to this headline">¶</a></h2>
+<div><img height="684" src="../_images/seqdiag-9ecc3106ddd43622a7b9c5a5963d57a4083142b4.png" width="776" /></div><p>The upgrade service sends to the device an upgrade request, composed by a
+<a class="reference internal" href="#trusted-objects-upgrade-file-tup">Trusted Objects Upgrade File (TUP)</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Secure Element data and personalization are preserved across
+upgrades.</p>
+</div>
+</div>
+<div class="section" id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="involved-credientials">
+<h3>Involved credientials<a class="headerlink" href="#involved-credientials" title="Permalink to this headline">¶</a></h3>
+<p>The only credential to be managed by the device is the restoration password. It
+is the same for all customer devices on the field, and has to be known by
+devices MCUs.</p>
+<p>When restore request is performed, through
+<a class="reference internal" href="#c.TOSE_helper_loader_broadcast_firmware_upgrade" title="TOSE_helper_loader_broadcast_firmware_upgrade"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_helper_loader_broadcast_firmware_upgrade()</span></code></a> or
+<a class="reference internal" href="#c.TOSE_loader_broadcast_restore_loader" title="TOSE_loader_broadcast_restore_loader"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_loader_broadcast_restore_loader()</span></code></a>, the restoration
+password has to be given.</p>
+<p>The <a class="reference internal" href="#trusted-objects-upgrade-file-tup">Trusted Objects Upgrade File (TUP)</a> comes pre-encrypted and
+pre-authenticated, it is explained below how to parse it and submit the right
+arguments to the API to perform an upgrade.</p>
+</div>
+<div class="section" id="security-considerations">
+<h3>Security considerations<a class="headerlink" href="#security-considerations" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="#trusted-objects-upgrade-file-tup">Trusted Objects Upgrade File (TUP)</a> is usable only once. It is not possible
+to use an old file to downgrade the Secure Element firmware.</p>
+<p>The same upgrade file is used for all the customer field devices.</p>
+</div>
+</div>
+<div class="section" id="library-api">
+<h2>Library API<a class="headerlink" href="#library-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="high-level-api">
+<h3>High-level API<a class="headerlink" href="#high-level-api" title="Permalink to this headline">¶</a></h3>
+<p>The following API is provided by libTO to deal with Secure Loader Broadcast
+Protocol easily. It handles the complete upgrade sequence, from
+<a class="reference internal" href="#trusted-objects-upgrade-file-tup">Trusted Objects Upgrade File (TUP)</a> parsing, to Secure Element firmware
+upgrade.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_loader_broadcast_firmware_upgrade">
+<span class="target" id="group__helper__loader_1gadb1c94c620f09f6df5b7b7cfc822eac1"></span><a class="reference internal" href="../api/defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_loader_broadcast_firmware_upgrade</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tup_file</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">tup_length</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">TO_LD_BCAST_RESTORE_PASSWORD_SIZE</span></span><span class="p"><span class="pre">]</span></span>, <a class="reference internal" href="#c.TOSE_helper_loader_firmware_upgrade_progress" title="TOSE_helper_loader_firmware_upgrade_progress"><span class="n"><span class="pre">TOSE_helper_loader_firmware_upgrade_progress</span></span></a><span class="w"> </span><span class="n"><span class="pre">progress_cb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_loader_broadcast_firmware_upgrade" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Helper to apply Secure Element firmware upgrade with broadcast loader. </p>
+<p>
+This function handles all the firmware upgrade steps. In case of upgrade fail (for example due to power loss while upgrading), this function can be called again to restart the upgrade.</p>
+<p>If the Secure Element firmware is already up-to-date, the function successfully returns just after a call to the upgrade progress callback (if defined), with the value 100.</p>
+<p>The function fails if the Secure Element firmware version is greater than the upgrade version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>tup_file</strong> – <strong>[in]</strong> Trusted-Objects firmware upgrade file (TUP) </p></li>
+<li><p><strong>tup_length</strong> – <strong>[in]</strong> File length </p></li>
+<li><p><strong>password</strong> – <strong>[in]</strong> Password for Loader-mode restoration </p></li>
+<li><p><strong>progress_cb</strong> – <strong>[in]</strong> Upgrade progress callback, called while upgrading to notify about progress (set NULL to disable this callback)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if the upgrade succeed </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TOSE_helper_loader_firmware_upgrade_progress">
+<span class="target" id="group__helper__loader_1ga2d274de5ecc3afe1a860093fdbe0f1df"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_loader_firmware_upgrade_progress</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">percent</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.TOSE_helper_loader_firmware_upgrade_progress" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Firmware upgrade progress callback. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param percent</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Upgrade completion percentage </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="low-level-api">
+<h3>Low-level API<a class="headerlink" href="#low-level-api" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#high-level-api">High-level API</a> use is recommended, the API below should be used
+for specific workflows only.</p>
+</div>
+<p>The following API is available at a lower level if required. <a class="reference internal" href="#trusted-objects-upgrade-file-tup">Trusted Objects
+Upgrade File (TUP)</a> parsing is to be done in client application.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_loader_broadcast_get_info">
+<span class="target" id="group__loader_1ga57b31a0c6e9db5c4577c0f247ce83693"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_loader_broadcast_get_info</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">loader_version</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_SW_VERSION_SIZE" title="TO_SW_VERSION_SIZE"><span class="n"><span class="pre">TO_SW_VERSION_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">software_version</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_SW_VERSION_SIZE" title="TO_SW_VERSION_SIZE"><span class="n"><span class="pre">TO_SW_VERSION_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">upgrade_version</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_SW_VERSION_SIZE" title="TO_SW_VERSION_SIZE"><span class="n"><span class="pre">TO_SW_VERSION_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_loader_broadcast_get_info" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get broadcast loader information. </p>
+<p>
+If upgrade_version is not NULL, the Secure Element expected firmware upgrade version is returned. The value 0.0.0 is returned if no specific version is expected, as it was the case for loaders until 3.17.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>loader_version</strong> – <strong>[out]</strong> Loader version </p></li>
+<li><p><strong>software_version</strong> – <strong>[out]</strong> Current Secure Element firmware version </p></li>
+<li><p><strong>upgrade_version</strong> – <strong>[out]</strong> Expected Secure Element firmware upgrade version</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TORSP_SUCCESS on success </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_loader_broadcast_restore_loader">
+<span class="target" id="group__loader_1gab3aea5c6ec981b8998c881a60639a613"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_loader_broadcast_restore_loader</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">upgrade_version</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_SW_VERSION_SIZE" title="TO_SW_VERSION_SIZE"><span class="n"><span class="pre">TO_SW_VERSION_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">minimum_version</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_SW_VERSION_SIZE" title="TO_SW_VERSION_SIZE"><span class="n"><span class="pre">TO_SW_VERSION_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmac</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_CMAC_SIZE" title="TO_CMAC_SIZE"><span class="n"><span class="pre">TO_CMAC_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">TO_LD_BCAST_RESTORE_PASSWORD_SIZE</span></span><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_loader_broadcast_restore_loader" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Restore loader-mode in order to install a new Secure Element firmware release. </p>
+<p>
+Note: if this function succeeds, the Secure Element reboots automatically in loader-mode. The Secure Element boot delay is to be respected before any subsequent call to it. To do this, <a class="reference internal" href="../api/core.html#group__setup_1gace267d62bf78ff0f249ea9168c970af8"><span class="std std-ref">TOSE_fini()</span></a> and <a class="reference internal" href="../api/core.html#group__setup_1gaf560aa86300dc093f79ad8bf37dba757"><span class="std std-ref">TOSE_init()</span></a> can be called, as platform low-level layers take care about this boot delay on Secure Element initialization.</p>
+<p>Note: if the function returns TORSP_UNKNOWN_CMD, you are probably already in loader-mode, and you can continue with <a class="reference internal" href="#group__loader_1gadd0cb89f16c4126ac5c4cccdc568bce2"><span class="std std-ref">TOSE_loader_broadcast_send_init_data()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>upgrade_version</strong> – <strong>[in]</strong> New Secure Element firmware version to be installed </p></li>
+<li><p><strong>minimum_version</strong> – <strong>[in]</strong> Minimum Secure Element firmware version required to install this upgrade (set NULL for none) </p></li>
+<li><p><strong>cmac</strong> – <strong>[in]</strong> Authentication code </p></li>
+<li><p><strong>password</strong> – <strong>[in]</strong> Restore password</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TORSP_SUCCESS on success </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_loader_broadcast_send_init_data">
+<span class="target" id="group__loader_1gadd0cb89f16c4126ac5c4cccdc568bce2"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_loader_broadcast_send_init_data</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">init_data</span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">TO_LD_BCAST_INIT_DATA_SIZE</span></span><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmac</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_CMAC_SIZE" title="TO_CMAC_SIZE"><span class="n"><span class="pre">TO_CMAC_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_loader_broadcast_send_init_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize firmware upgrade session. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>init_data</strong> – <strong>[in]</strong> Initialization data </p></li>
+<li><p><strong>cmac</strong> – <strong>[in]</strong> Authentication code</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TORSP_SUCCESS on success </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_loader_broadcast_write_data">
+<span class="target" id="group__loader_1ga29f829689d7c6c577c8daf724654ad15"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_loader_broadcast_write_data</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">segment</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">length</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_loader_broadcast_write_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write firmware data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>segment</strong> – <strong>[in]</strong> Firmware upgrade segment </p></li>
+<li><p><strong>length</strong> – <strong>[in]</strong> Segment length</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TORSP_SUCCESS on success </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_loader_broadcast_commit_release">
+<span class="target" id="group__loader_1ga718d79cfbb652518b64b3c6f1b191d97"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_loader_broadcast_commit_release</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmac</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_CMAC_SIZE" title="TO_CMAC_SIZE"><span class="n"><span class="pre">TO_CMAC_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_loader_broadcast_commit_release" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Apply new firmware upgrade. </p>
+<p>
+Warning: do not power-off the Secure Element until this function returns.</p>
+<p>Note: if this function succeeds, the Secure Element reboots automatically in firmware-mode. The Secure Element boot delay is to be respected before any subsequent call to it. To do this, <a class="reference internal" href="../api/core.html#group__setup_1gace267d62bf78ff0f249ea9168c970af8"><span class="std std-ref">TOSE_fini()</span></a> and <a class="reference internal" href="../api/core.html#group__setup_1gaf560aa86300dc093f79ad8bf37dba757"><span class="std std-ref">TOSE_init()</span></a> can be called, as platform low-level layers take care about this boot delay on Secure Element initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>cmac</strong> – <strong>[in]</strong> Authentication code</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TORSP_SUCCESS on success </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_data_migration">
+<span class="target" id="group__loader_1ga517f76e79e48ec3e7a62b193b90d93ff"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_data_migration</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_data_migration" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>To be called after installing a migration firmware on the Secure Element. </p>
+<p>
+This function, only available on a Secure Element migration firmware, triggers the data migration. Firmware updates may require Secure Element data to be transformed to be usable by a new firmware. A migration firmware is used between the original firmware and the new firmwares to ensure data is ready to be used by the new firmware.</p>
+<p>On success, the Secure Element is automatically restored in loader-mode, ready to have its new firmware installed. On fail, for example due to power loss, you can retry to call this function.</p>
+<p>Note: this function is not callable in loader-mode, it is available only in firmware-mode, on a migration firmware.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TORSP_SUCCESS on success </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="other-api">
+<h3>Other API<a class="headerlink" href="#other-api" title="Permalink to this headline">¶</a></h3>
+<p>From Broadcast Loader 3.13.4, the following API is made available when Secure
+Element is in loader-mode.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API inputs / outputs are the same as the Secure Element one.</p>
+</div>
+<ul class="simple">
+<li><p>TOSE_get_software_version() - returns the latest installed firmware version</p></li>
+<li><p>TOSE_get_product_number() - returns prefix “TOSF-LD1” in loader-mode</p></li>
+<li><p>TOSE_get_hardware_serial_number()</p></li>
+</ul>
+<p>See Secure Element documentation for more details about this.</p>
+</div>
+</div>
+<div class="section" id="trusted-objects-upgrade-file-tup">
+<h2>Trusted Objects Upgrade file (TUP)<a class="headerlink" href="#trusted-objects-upgrade-file-tup" title="Permalink to this headline">¶</a></h2>
+<p>Secure Element firmware upgrades are provided by Trusted Objects as TUP files.
+These files have to be sent to the device MCU, and parsed to apply the Secure
+Element firmware upgrade.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#high-level-api">High-level API</a> handles TUP files parsing, then the following is
+relevant only if <a class="reference internal" href="#low-level-api">Low-level API</a> is used in your project.</p>
+</div>
+<div class="section" id="tup-format">
+<h3>TUP format<a class="headerlink" href="#tup-format" title="Permalink to this headline">¶</a></h3>
+<p>This is a Trusted-Objects proprietary format.
+Below is detailed the file format for the Broadcast Loader Protocol.</p>
+<div class="figure align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/loader_bcast_tup_format.png"><img alt="Trusted Objects Upgrade file (TUP) format" src="../_images/loader_bcast_tup_format.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Trusted Objects Upgrade file (TUP) format</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>The file structure is always in this order, which is also the order in which
+the upgrade operations are to be performed. Then you just have to read this
+file from the begining to the end to perform the right operations.</p>
+<p>Tags and data sizes are expressed as big endian.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The restoration password is not present in the file. This password is
+not transmitted, and it have to be known by the device MCU.</p>
+</div>
+<p>Then, the file parsing flow is the following:</p>
+<ol class="arabic simple">
+<li><p>Check <strong>Loader Protocol Identifier</strong> and <strong>TUP File Format Version</strong></p></li>
+<li><p>Expect <strong>Loader-mode Restoration Tag</strong></p></li>
+<li><p>Read <strong>Upgrade Version</strong> and <strong>CMAC</strong></p></li>
+<li><p>Call <a class="reference internal" href="#c.TOSE_loader_broadcast_restore_loader" title="TOSE_loader_broadcast_restore_loader"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_loader_broadcast_restore_loader()</span></code></a> with <strong>Upgrade
+Version</strong>, <strong>CMAC</strong> and the restoration password parameters, and check
+success</p></li>
+<li><p>Expect <strong>Upgrade Initialization Tag</strong></p></li>
+<li><p>Read <strong>Initialization Data</strong> and <strong>CMAC</strong></p></li>
+<li><p>Call <a class="reference internal" href="#c.TOSE_loader_broadcast_send_init_data" title="TOSE_loader_broadcast_send_init_data"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_loader_broadcast_send_init_data()</span></code></a> with <strong>Initialization
+Data</strong> and <strong>CMAC</strong> parameters, and check success</p></li>
+<li><p>Expect <strong>Write Data Tag</strong></p></li>
+<li><p>Read <strong>Data Length</strong></p></li>
+<li><p>Read <strong>Data Length</strong> bytes of <strong>Data</strong></p></li>
+<li><p>Call <a class="reference internal" href="#c.TOSE_loader_broadcast_write_data" title="TOSE_loader_broadcast_write_data"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_loader_broadcast_write_data()</span></code></a> with <strong>Data</strong> and <strong>Data
+Length</strong> parameters, and check success</p></li>
+<li><p>Expect <strong>Commit Release Tag</strong> or <strong>Write Data Tag</strong>, for this last one
+continue with step 9.</p></li>
+<li><p>Read <strong>CMAC</strong> for commit</p></li>
+<li><p>Call <a class="reference internal" href="#c.TOSE_loader_broadcast_commit_release" title="TOSE_loader_broadcast_commit_release"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_loader_broadcast_commit_release()</span></code></a> with <strong>CMAC</strong>
+parameter, and check success.</p></li>
+</ol>
+</div>
+<div class="section" id="file-example">
+<h3>File example<a class="headerlink" href="#file-example" title="Permalink to this headline">¶</a></h3>
+<p>Here is presented an example file parsing.</p>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/loader_bcast_tup_example.png"><img alt="Trusted Objects Upgrade file (TUP) example" src="../_images/loader_bcast_tup_example.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-text">Trusted Objects Upgrade file (TUP) example</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>TUP file for Broadcast Loader maximum size is 137 826 bytes. You can
+substract to this value the size of your personalization page, which
+persists across upgrades (ask Trusted-Objects to know this page size, as it
+depends on your Secure Element firmware features and options).</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library core APIs &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Types and definitions" href="defs.html" />
+    <link rel="prev" title="I2C wrapper API" href="i2c_wrapper.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Library core APIs</a><ul>
+<li><a class="reference internal" href="#data-buffers">Data buffers</a></li>
+<li><a class="reference internal" href="#command-data-preparation">Command data preparation</a></li>
+<li><a class="reference internal" href="#send-command">Send command</a></li>
+<li><a class="reference internal" href="#hooks">Hooks</a><ul>
+<li><a class="reference internal" href="#hooks-functions-prototypes">Hooks functions prototypes</a></li>
+<li><a class="reference internal" href="#hooks-setup-functions">Hooks setup functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logs">Logs</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="library-core-apis">
+<span id="api-lib"></span><h1>Library core APIs<a class="headerlink" href="#library-core-apis" title="Permalink to this headline">¶</a></h1>
+<img alt="location into library structure" class="align-right" src="../_images/lib_part_core.png" />
+<p>These APIs are available if it is needed to add some custom tuning on the
+library behavior. For example, the <a class="reference internal" href="core.html#api-to-functions"><span class="std std-ref">Secure Element functions</span></a> can be
+completely rewritten using the following APIs, if the way some of them are
+implemented does not fit your needs.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TODRV_HSE_cmd.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<div class="section" id="data-buffers">
+<h2>Data buffers<a class="headerlink" href="#data-buffers" title="Permalink to this headline">¶</a></h2>
+<p>The following buffers are accessible.</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.TODRV_HSE_command_data">
+<span class="target" id="TODRV__HSE__cmd_8h_1a530ae911f98d59be30e9456109acc4b0"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_command_data</span></span></span><a class="headerlink" href="#c.TODRV_HSE_command_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Helper to access internal I/O buffer command data section, only valid before TO_send_command() call (even if an error occured while sending command). </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.TODRV_HSE_response_data">
+<span class="target" id="TODRV__HSE__cmd_8h_1aaa02241e6cc46e32bf932dd363d5489d"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_response_data</span></span></span><a class="headerlink" href="#c.TODRV_HSE_response_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Helper to access internal I/O buffer response data section, only valid after TO_send_command() call. </p>
+</dd></dl>
+
+</div>
+<div class="section" id="command-data-preparation">
+<h2>Command data preparation<a class="headerlink" href="#command-data-preparation" title="Permalink to this headline">¶</a></h2>
+<p>The following functions are used to prepare data before sending command to
+the Secure Element.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TODRV_HSE_prepare_command_data">
+<span class="target" id="TODRV__HSE__cmd_8h_1aac2151347331759d8123e74f2b291a8c"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_prepare_command_data</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">offset</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TODRV_HSE_prepare_command_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Prepare command data. </p>
+<p>
+Insert data into the internal I/O buffer at the specified offset.</p>
+<p>Warning: do not free data pointer parameter or overwrite data before having called <a class="reference internal" href="#TODRV__HSE__cmd_8h_1afa840564394955813b12a4b55e00343a"><span class="std std-ref">TODRV_HSE_send_command()</span></a>, or before aborted command with <a class="reference internal" href="#TODRV__HSE__cmd_8h_1a909a939fd0c12d1e4d8b960fea6a5222"><span class="std std-ref">TODRV_HSE_reset_command_data()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – Buffer offset where to insert data </p></li>
+<li><p><strong>data</strong> – Data to be copied into the buffer </p></li>
+<li><p><strong>len</strong> – Data length</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK on success TO_MEMORY_ERROR: data overflows internal I/O buffer, in this case internal command data buffers are invalidated (as if <a class="reference internal" href="#TODRV__HSE__cmd_8h_1a909a939fd0c12d1e4d8b960fea6a5222"><span class="std std-ref">TODRV_HSE_reset_command_data()</span></a> has been called). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TODRV_HSE_prepare_command_data_byte">
+<span class="target" id="TODRV__HSE__cmd_8h_1a5a6712f450e1e6110c167339c56afd5a"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_prepare_command_data_byte</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">offset</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">byte</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TODRV_HSE_prepare_command_data_byte" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Prepare command data byte. </p>
+<p>
+Insert data byte into the internal I/O buffer at the specified offset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – Buffer offset where to insert data </p></li>
+<li><p><strong>byte</strong> – Data byte to be copied into the buffer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK on success TO_MEMORY_ERROR: data byte overflows internal I/O buffer, in this case internal command data buffers are invalidated (as if <a class="reference internal" href="#TODRV__HSE__cmd_8h_1a909a939fd0c12d1e4d8b960fea6a5222"><span class="std std-ref">TODRV_HSE_reset_command_data()</span></a> has been called). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TODRV_HSE_set_command_data">
+<span class="target" id="TODRV__HSE__cmd_8h_1a7c7bb0b7bd93b25c9891d8226227ba7e"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_set_command_data</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">offset</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">byte</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TODRV_HSE_set_command_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set data range. </p>
+<p>
+Set internal I/O buffer range bytes to a defined value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – Buffer offset where to begin range </p></li>
+<li><p><strong>byte</strong> – Value to be set for each byte in the range </p></li>
+<li><p><strong>len</strong> – Range length</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK on success TO_MEMORY_ERROR: range overflows internal I/O buffer, in this case internal command data buffers are invalidated (as if <a class="reference internal" href="#TODRV__HSE__cmd_8h_1a909a939fd0c12d1e4d8b960fea6a5222"><span class="std std-ref">TODRV_HSE_reset_command_data()</span></a> has been called). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>And to reset command context:</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TODRV_HSE_reset_command_data">
+<span class="target" id="TODRV__HSE__cmd_8h_1a909a939fd0c12d1e4d8b960fea6a5222"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_reset_command_data</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TODRV_HSE_reset_command_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset command data. </p>
+<p>This function resets command data. It MUST be called if command data has been prepared without subsequent call to <a class="reference internal" href="#TODRV__HSE__cmd_8h_1afa840564394955813b12a4b55e00343a"><span class="std std-ref">TODRV_HSE_send_command()</span></a> (if command has been aborted for example). </p>
+</dd></dl>
+
+</div>
+<div class="section" id="send-command">
+<h2>Send command<a class="headerlink" href="#send-command" title="Permalink to this headline">¶</a></h2>
+<p>The following function is used to send a command to the Secure Element,
+after <a class="reference internal" href="#command-data-preparation">Command data preparation</a>.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TODRV_HSE_send_command">
+<span class="target" id="TODRV__HSE__cmd_8h_1afa840564394955813b12a4b55e00343a"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_send_command</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd_data_len</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">resp_data_len</span></span>, <a class="reference internal" href="defs.html#c.TO_se_ret_t" title="TO_se_ret_t"><span class="n"><span class="pre">TO_se_ret_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">resp_status</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TODRV_HSE_send_command" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send command to the Secure Element device. </p>
+<p>
+Send a command to the Secure Element device and get response data. Internal command data buffers must be considered as invalidated after calling this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd</strong> – Command code (see TODRV_HSE_CMD_* definitions) </p></li>
+<li><p><strong>cmd_data_len</strong> – Command data len (got from internal I/O buffer) </p></li>
+<li><p><strong>resp_data_len</strong> – Response data len (expected) </p></li>
+<li><p><strong>resp_status</strong> – Status of the command</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK on success TO_MEMORY_ERROR: data overflows internal I/O buffer TO_DEVICE_WRITE_ERROR: unable to send command TO_DEVICE_READ_ERROR: unable to read response data TO_INVALID_RESPONSE_LENGTH: expected response length differs from headers </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="hooks">
+<h2>Hooks<a class="headerlink" href="#hooks" title="Permalink to this headline">¶</a></h2>
+<p>The following hooks can be set to automatically call client application
+functions when reaching particular steps in the library internal flow.
+This mechanism allows client application to run custom code interlaced with
+libTO code.</p>
+<div class="section" id="hooks-functions-prototypes">
+<h3>Hooks functions prototypes<a class="headerlink" href="#hooks-functions-prototypes" title="Permalink to this headline">¶</a></h3>
+<p>Below are detailled functions hooks prototypes, to be implemented by client
+application if required. Implemented hook functions have to be setup using
+<a class="reference internal" href="#hooks-setup-functions">Hooks setup functions</a>.</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TODRV_HSE_pre_command_hook">
+<span class="target" id="group__libhooks_1ga81290e908fbf0d44ceabd217f3d0d5dc"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_pre_command_hook</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd_data_len</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.TODRV_HSE_pre_command_hook" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Hook function prototype to be called by <a class="reference internal" href="#TODRV__HSE__cmd_8h_1afa840564394955813b12a4b55e00343a"><span class="std std-ref">TODRV_HSE_send_command()</span></a> just before sending a command to the Secure Element. </p>
+<p>
+Once return, the command response is read from Secure Element.</p>
+<p>Warning: do NOT call any libTO function from this kind of hook. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param cmd</dt>
+<dd class="field-odd"><p>Command code, see <a class="reference internal" href="defs.html#group__command__codes"><span class="std std-ref">Hardware Secure Element command codes</span></a> </p>
+</dd>
+<dt class="field-even">Param cmd_data_len</dt>
+<dd class="field-even"><p>Command data length</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TODRV_HSE_post_write_hook">
+<span class="target" id="group__libhooks_1ga4c094009044978ff721b5a00c4be0da0"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_post_write_hook</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd_data_len</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.TODRV_HSE_post_write_hook" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Hook function prototype to be called by <a class="reference internal" href="#TODRV__HSE__cmd_8h_1afa840564394955813b12a4b55e00343a"><span class="std std-ref">TODRV_HSE_send_command()</span></a> just after writing command to the Secure Element, and before reading its response. </p>
+<p>
+This hook can be used by client application for power optimization, for example making the system sleep for a while or until Secure Element status GPIO signals response readyness. For this second use case, it is recommended to arm GPIO wakeup interrupt by setting a hook with <a class="reference internal" href="#group__libhooks_1ga81290e908fbf0d44ceabd217f3d0d5dc"><span class="std std-ref">TODRV_HSE_pre_command_hook()</span></a>, to be sure to do not miss the response readyness GPIO toggle.</p>
+<p>Once return, the command response is read from Secure Element.</p>
+<p>Warning: do NOT call any libTO function from this kind of hook. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param cmd</dt>
+<dd class="field-odd"><p>Command code, see <a class="reference internal" href="defs.html#group__command__codes"><span class="std std-ref">Hardware Secure Element command codes</span></a> </p>
+</dd>
+<dt class="field-even">Param cmd_data_len</dt>
+<dd class="field-even"><p>Command data length</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TODRV_HSE_post_command_hook">
+<span class="target" id="group__libhooks_1gac7fd62bba130361d3e397a8248c40465"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_post_command_hook</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd_data_len</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd_rsp_len</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="defs.html#c.TO_se_ret_t" title="TO_se_ret_t"><span class="n"><span class="pre">TO_se_ret_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">cmd_status</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.TODRV_HSE_post_command_hook" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Hook function prototype to be called by <a class="reference internal" href="#TODRV__HSE__cmd_8h_1afa840564394955813b12a4b55e00343a"><span class="std std-ref">TODRV_HSE_send_command()</span></a> just after reading command response from the Secure Element. </p>
+<p>
+Warning: do NOT call any libTO function from this kind of hook. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param cmd</dt>
+<dd class="field-odd"><p>Command code, see <a class="reference internal" href="defs.html#group__command__codes"><span class="std std-ref">Hardware Secure Element command codes</span></a> </p>
+</dd>
+<dt class="field-even">Param cmd_data_len</dt>
+<dd class="field-even"><p>Command data length </p>
+</dd>
+<dt class="field-odd">Param cmd_rsp_len</dt>
+<dd class="field-odd"><p>Command response length </p>
+</dd>
+<dt class="field-even">Param cmd_status</dt>
+<dd class="field-even"><p>Command status</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="hooks-setup-functions">
+<h3>Hooks setup functions<a class="headerlink" href="#hooks-setup-functions" title="Permalink to this headline">¶</a></h3>
+<p>For each hook type, a function has to be called to setup it and to allow libTO
+to call it.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TODRV_HSE_set_lib_hook_pre_command">
+<span class="target" id="group__libhookssetup_1gacf99d340f2df843bcd5c3b17bcf99c97"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_set_lib_hook_pre_command</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TODRV_HSE_pre_command_hook" title="TODRV_HSE_pre_command_hook"><span class="n"><span class="pre">TODRV_HSE_pre_command_hook</span></span></a><span class="w"> </span><span class="n"><span class="pre">hook</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TODRV_HSE_set_lib_hook_pre_command" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a pre command hook (see TODRV_HSE_pre_command_hook). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook</strong> – Pre command hook function to set (NULL to disable). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TODRV_HSE_set_lib_hook_post_write">
+<span class="target" id="group__libhookssetup_1gaee4508d559de1382cb8099c13aeebb16"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_set_lib_hook_post_write</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TODRV_HSE_post_write_hook" title="TODRV_HSE_post_write_hook"><span class="n"><span class="pre">TODRV_HSE_post_write_hook</span></span></a><span class="w"> </span><span class="n"><span class="pre">hook</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TODRV_HSE_set_lib_hook_post_write" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a post write hook (see TODRV_HSE_post_write_hook). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook</strong> – Post write hook function to set (NULL to disable). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TODRV_HSE_set_lib_hook_post_command">
+<span class="target" id="group__libhookssetup_1ga57b11302a312bd8b1e770773a048e042"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_set_lib_hook_post_command</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TODRV_HSE_post_command_hook" title="TODRV_HSE_post_command_hook"><span class="n"><span class="pre">TODRV_HSE_post_command_hook</span></span></a><span class="w"> </span><span class="n"><span class="pre">hook</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TODRV_HSE_set_lib_hook_post_command" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a post cmd hook (see TODRV_HSE_post_command_hook). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hook</strong> – Post cmd hook function to set (NULL to disable). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hooks are set permanently until reboot, or until you set a NULL hook
+function pointer using the hook setup function.</p>
+</div>
+</div>
+</div>
+<div class="section" id="logs">
+<h2>Logs<a class="headerlink" href="#logs" title="Permalink to this headline">¶</a></h2>
+<p>The following function is used to set library log level.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TO_set_log_level">
+<span class="target" id="group__log__level_1gaf63075cf8494e7efcf05072e93e663b5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_set_log_level</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TO_log_ctx_t" title="TO_log_ctx_t"><span class="n"><span class="pre">TO_log_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">log_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">TO_log_level_t</span></span><span class="w"> </span><span class="n"><span class="pre">level</span></span>, <span class="n"><span class="pre">TO_log_func_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">log_function</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>Sets the Log function and log level. </p>
+<p>This function permits to change the log level and the log function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_ctx</strong> – Current log context </p></li>
+<li><p><strong>level</strong> – Desired log level </p></li>
+<li><p><strong>log_function</strong> – Log function (eg. TO_log) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

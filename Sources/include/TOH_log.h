@@ -1,0 +1,44 @@
+/*
+ * THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ * Copyright (C) 2022 Trusted Objects. All rights reserved.
+ */
+
+/**
+ * @file TOH_log.h
+ * @brief TOH log definitions and functions.
+ */
+
+#ifndef _TOH_LOG_H_
+#define _TOH_LOG_H_
+
+#include "TODRV_HSE.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define TOH_LOG_ERR(...) TO_LOG_ERR(__VA_ARGS__)
+#define TOH_LOG_ERR_HEX(...) TO_LOG_ERR_HEX(__VA_ARGS__)
+#define TOH_LOG_ERR_BUF(...) TO_LOG_ERR_BUF(__VA_ARGS__)
+#define TOH_LOG_WRN(...) TO_LOG_WRN(__VA_ARGS__)
+#define TOH_LOG_WRN_HEX(...) TO_LOG_WRN_HEX(__VA_ARGS__)
+#define TOH_LOG_WRN_BUF(...) TO_LOG_WRN_BUF(__VA_ARGS__)
+#define TOH_LOG_INF(...) TO_LOG_INF(__VA_ARGS__)
+#define TOH_LOG_INF_HEX(...) TO_LOG_INF_HEX(__VA_ARGS__)
+#define TOH_LOG_INF_BUF(...) TO_LOG_INF_BUF(__VA_ARGS__)
+#define TOH_LOG_DBG(...) TO_LOG_DBG(__VA_ARGS__)
+#define TOH_LOG_DBG_HEX(...) TO_LOG_DBG_HEX(__VA_ARGS__)
+#define TOH_LOG_DBG_BUF(...) TO_LOG_DBG_BUF(__VA_ARGS__)
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

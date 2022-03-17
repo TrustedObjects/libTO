@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configuration &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Helper API" href="helper.html" />
+    <link rel="prev" title="Flashing TO-Protect TLS" href="../mcu_env/flashing.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Configuration</a><ul>
+<li><a class="reference internal" href="#static-configuration">Static configuration</a></li>
+<li><a class="reference internal" href="#nvm-hal-implementation">NVM HAL implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#initialization">Initialization</a><ul>
+<li><a class="reference internal" href="#tls-usage">TLS usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uninitialization">Uninitialization</a></li>
+</ul>
+
+  </div>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="configuration">
+<span id="api-examples"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>To configure TO-Protect TLS, the following sequence must be used.</p>
+<div class="section" id="static-configuration">
+<h2>Static configuration<a class="headerlink" href="#static-configuration" title="Permalink to this headline">¶</a></h2>
+<p>First, you need to define the address where TO-Protect TLS has been flashed.
+This is detailed in <a class="reference internal" href="../mcu_env/settings.html#api-to-sw-memory-settings"><span class="std std-ref">Memory settings</span></a>.</p>
+<p>This can be achieved either:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>in your IDE, by adding compiler symbols definitions,</p></li>
+<li><p>in the file TODRV_SSE_cfg.h, like below.</p></li>
+</ul>
+</div></blockquote>
+<p>For example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* TO-Protect address */</span><span class="w"></span>
+<span class="cp">#define TODRV_SSE_TOP_ADDRESS 0x08020000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="nvm-hal-implementation">
+<span id="nvm-hal-implem"></span><h2>NVM HAL implementation<a class="headerlink" href="#nvm-hal-implementation" title="Permalink to this headline">¶</a></h2>
+<p>The file <strong>examples/secure_storage_ram.c</strong> contains an NVM HAL example, for a
+fake NVM implementation in RAM. This example needs to be adapted to your platform.</p>
+<p>In this file you will implement the three functions read/write/erase:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="core.html#c.TOP_secure_storage_read_func_t" title="TOP_secure_storage_read_func_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">TOP_secure_storage_read_func_t</span></code></a> TODRV_SSE_secure_storage_read</p></li>
+<li><p><a class="reference internal" href="core.html#c.TOP_secure_storage_write_func_t" title="TOP_secure_storage_write_func_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">TOP_secure_storage_write_func_t</span></code></a> TODRV_SSE_secure_storage_write</p></li>
+<li><p><a class="reference internal" href="core.html#c.TOP_secure_storage_erase_func_t" title="TOP_secure_storage_erase_func_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">TOP_secure_storage_erase_func_t</span></code></a> TODRV_SSE_secure_storage_erase</p></li>
+</ul>
+<p>In order to verify your implementation, we recommend to call
+<a class="reference internal" href="core.html#c.TODRV_SSE_nvm_self_test" title="TODRV_SSE_nvm_self_test"><code class="xref c c-func docutils literal notranslate"><span class="pre">TODRV_SSE_nvm_self_test()</span></code></a> (only in development mode, not in production
+as it wears down the Flash memory).</p>
+<p>In order to verify that TO-Protect is correctly flashed and not corrupted, we
+recommend to call <a class="reference internal" href="core.html#c.TODRV_SSE_top_self_test" title="TODRV_SSE_top_self_test"><code class="xref c c-func docutils literal notranslate"><span class="pre">TODRV_SSE_top_self_test()</span></code></a> (only in development mode).</p>
+</div>
+</div>
+<div class="section" id="initialization">
+<h1>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h1>
+<p>Here is how you initialize TO-Protect TLS:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">TOSE_ctx_t</span><span class="o">*</span><span class="w"> </span><span class="n">se_ctx</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">user_init</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Retrieve driver instance</span>
+<span class="w">        </span><span class="n">se_ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TODRV_SSE_get_ctx</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Initialize</span>
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TOSE_init</span><span class="p">(</span><span class="n">se_ctx</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TO_OK</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// Handle the situation</span>
+<span class="w">                </span><span class="c1">// ...</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now, you can access TO-Protect TLS functions.</p>
+<div class="section" id="tls-usage">
+<h2>TLS usage<a class="headerlink" href="#tls-usage" title="Permalink to this headline">¶</a></h2>
+<p>In <a class="reference internal" href="helper.html#api-helper"><span class="std std-ref">Helper API</span></a> are described the functions needed to perform a TLS
+handshake.</p>
+<p>First you need to implement the transport callbacks for sending/receiving data</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">user_transport_send</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// User code to send data to the server</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">user_transport_receive</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="n">read_len</span><span class="p">,</span><span class="w"> </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">timeout</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// User code to receive data to the server</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Then, performing a TLS handshake can be done with one function call.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">user_tls_do_handshake</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">TO_helper_tls_ctx_t</span><span class="w"> </span><span class="o">*</span><span class="n">tls_ctx</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">user_ctx_t</span><span class="w"> </span><span class="o">*</span><span class="n">user_ctx</span><span class="p">;</span><span class="w"> </span><span class="c1">// Opaque user context</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TOSE_helper_tls_init_session</span><span class="p">(</span><span class="n">se_ctx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tls_ctx</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">user_ctx</span><span class="p">,</span><span class="w"> </span><span class="n">user_transport_send</span><span class="p">,</span><span class="w"> </span><span class="n">user_transport_receive</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TO_OK</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// Handle the situation</span>
+<span class="w">                </span><span class="c1">// ...</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TOSE_helper_tls_do_handshake</span><span class="p">(</span><span class="n">tls_ctx</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TO_OK</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// Handle the situation</span>
+<span class="w">                </span><span class="c1">// ...</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>After handshake succeeded, use TOSE_helper_tls_send() and TO_helper_tls_receive()
+to send and receive data on the TLS link.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TOSE_helper_tls_send</span><span class="p">(</span><span class="n">tls_ctx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">rest_command</span><span class="p">,</span><span class="w"> </span><span class="n">http_len</span><span class="p">);</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TO_OK</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Handle the situation</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TOSE_helper_tls_receive</span><span class="p">(</span><span class="n">tls_ctx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">buffer_len</span><span class="p">,</span><span class="w"> </span><span class="n">response_len</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">);</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TO_OK</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Handle the situation</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="uninitialization">
+<h1>Uninitialization<a class="headerlink" href="#uninitialization" title="Permalink to this headline">¶</a></h1>
+<p>When you are done, uninitialize TO-Protect TLS</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">user_terminate</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TOSE_fini</span><span class="p">(</span><span class="n">se_ctx</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TO_OK</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// Handle the situation</span>
+<span class="w">                </span><span class="c1">// ...</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

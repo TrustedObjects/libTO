@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overall architecture &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Use the library in an MCU project" href="mcu_env/setup.html" />
+    <link rel="prev" title="Legal" href="legal.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Overall architecture</a></li>
+<li><a class="reference internal" href="#library-files-tree">Library files tree</a></li>
+<li><a class="reference internal" href="#limitations">Limitations</a></li>
+</ul>
+
+  </div>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>The libTO is to be integrated as part of your software. libTO provides to your
+application an interface to easily deal with Secure Element features. libTO
+helps developers to work with the Secure Element, as an abstraction layer
+between its API and I2C communications.</p>
+<p>The library is designed to be able to run on MCUs, as on Linux embedded
+hardwares.
+Dynamic allocation is not used by the library.</p>
+<p>You can find in this documentation details about the library, installation and
+settings instructions, information on I2C wrappers, and API references.</p>
+<div class="section" id="overall-architecture">
+<h1>Overall architecture<a class="headerlink" href="#overall-architecture" title="Permalink to this headline">¶</a></h1>
+<p>Below is the detailed library’s architecture.</p>
+<img src="_static/lib_architecture.png" width="500" height="379" border="0" usemap="#map" />
+
+<map name="map">
+<!-- #$-:Image map file created by GIMP Image Map plug-in -->
+<!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+<!-- #$-:Please do not edit lines starting with "#$" -->
+<!-- #$VERSION:2.3 -->
+<!-- #$AUTHOR:Unknown -->
+<area shape="rect" coords="73,0,298,75" alt="Secure Element Helper API" href="api/helper.html" />
+<area shape="poly" coords="297,77,72,77,71,0,1,0,1,150,297,150" alt="Secure Element API" href="api/se.html" />
+<area shape="rect" coords="1,151,297,226" alt="libTO core" href="api/lib.html" />
+<area shape="rect" coords="0,228,298,302" alt="I2C wrapper API" href="api/i2c_wrapper.html" />
+<area shape="rect" coords="0,304,298,378" alt="I2C wrapper" href="wrapper/overview.html" />
+</map>
+<p>(you can click the image to obtain details about library different
+parts)</p>
+<p>Two developer’s APIs are available to use from your application:
+<a class="reference internal" href="api/core.html#api-to"><span class="std std-ref">Secure Element API</span></a> and <a class="reference internal" href="api/helper.html#api-helper"><span class="std std-ref">Helper API</span></a>.</p>
+<p>These APIs are using library internal mechanisms to abstract the Secure Element
+communication protocol. However, this internal layer provides <a class="reference internal" href="api/lib.html#api-lib"><span class="std std-ref">Library core APIs</span></a>,
+which you may want to use for debugging or advanced uses.</p>
+<p>The communication flow can (optionally) rely on a Secure Link protocol, which
+aims to encrypt and authenticate communication between Secure Element and MCU.
+If needed, request documentation about Secure Link to Trusted Objects.</p>
+<p>Finally, everything relies on an <a class="reference internal" href="wrapper/overview.html#i2c-wrapper"><span class="std std-ref">I2C wrapper</span></a>, which is hardware
+dependent, internally accessed through the <a class="reference internal" href="api/i2c_wrapper.html#api-i2c-wrapper"><span class="std std-ref">I2C wrapper API</span></a>.</p>
+</div>
+<div class="section" id="library-files-tree">
+<h1>Library files tree<a class="headerlink" href="#library-files-tree" title="Permalink to this headline">¶</a></h1>
+<p>The libTO library files tree structure is the following:</p>
+<ul class="simple">
+<li><p><strong>/include:</strong> headers providing library APIs, see <a class="reference internal" href="index.html#apis"><span class="std std-ref">Provided API</span></a></p></li>
+<li><p><strong>/src:</strong> library sources</p></li>
+<li><p><strong>/src/:</strong> Secure Element bindings</p></li>
+<li><p><strong>/src/wrapper:</strong> I2C wrappers, to abstract Secure Element I2C
+communications, a <cite>.C</cite> file is provided for every supported platform, and you
+are free to implement your own, see <a class="reference internal" href="wrapper/overview.html#i2c-wrapper"><span class="std std-ref">I2C wrapper</span></a></p></li>
+<li><p><strong>/examples:</strong> some examples to use the library from your project</p></li>
+</ul>
+</div>
+<div class="section" id="limitations">
+<h1>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to the underlying I2C bus, the library is <strong>not</strong> designed to
+be used simultaneously by different processes, so doing that may cause
+undefined behavior.</p>
+</div>
+<p>Your application must manage concurrent accesses to
+libTO
+functions calls, and cumulative APIs sequences (init, update, final) must not
+be interrupted by another call.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

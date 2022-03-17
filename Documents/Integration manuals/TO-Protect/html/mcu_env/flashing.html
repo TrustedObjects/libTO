@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashing TO-Protect TLS &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration" href="../api/examples.html" />
+    <link rel="prev" title="Library configuration for an MCU project" href="settings.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Flashing TO-Protect TLS</a><ul>
+<li><a class="reference internal" href="#commands-to-convert-toolchain-generated-binary">Commands to convert toolchain generated binary</a></li>
+<li><a class="reference internal" href="#typical-flash-memory-mapping">Typical Flash memory mapping</a></li>
+<li><a class="reference internal" href="#how-to-flash">How to Flash</a><ul>
+<li><a class="reference internal" href="#flashing-firmware-and-to-protect-separately">Flashing Firmware and TO-Protect separately</a></li>
+<li><a class="reference internal" href="#flashing-a-single-file-combining-firmware-and-to-protect">Flashing a single file combining Firmware and TO-Protect</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="flashing-to-protect-tls">
+<span id="flashing-mcu"></span><h1>Flashing TO-Protect TLS<a class="headerlink" href="#flashing-to-protect-tls" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="commands-to-convert-toolchain-generated-binary">
+<h2>Commands to convert toolchain generated binary<a class="headerlink" href="#commands-to-convert-toolchain-generated-binary" title="Permalink to this headline">¶</a></h2>
+<p>Depending on your toolchain, your tools can generate and handle output files
+with format ELF, bin, hex or S-REC.</p>
+<p>TO-Protect is delivered as a binary file. Below are some commands that you can
+use to perform the conversions required to generate the file to flash.</p>
+<blockquote>
+<div><ul>
+<li><p>convert ELF to SREC:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arm</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="n">eabi</span><span class="o">-</span><span class="n">objcopy</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">O</span> <span class="n">srec</span> <span class="n">app</span><span class="o">.</span><span class="n">elf</span> <span class="n">app</span><span class="o">.</span><span class="n">s19</span>
+</pre></div>
+</div>
+</li>
+<li><p>convert bin to SREC:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arm</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="n">eabi</span><span class="o">-</span><span class="n">objcopy</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">O</span> <span class="n">srec</span> <span class="o">-</span><span class="n">I</span> <span class="n">binary</span> <span class="n">TO</span><span class="o">-</span><span class="n">Protect</span><span class="o">.</span><span class="n">bin</span> <span class="n">TO</span><span class="o">-</span><span class="n">Protect</span><span class="o">.</span><span class="n">s19</span>
+</pre></div>
+</div>
+</li>
+<li><p>SREC concatenation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">srec_cat</span> <span class="n">app</span><span class="o">.</span><span class="n">s19</span> <span class="n">TO</span><span class="o">-</span><span class="n">Protect</span><span class="o">.</span><span class="n">s19</span> <span class="o">-</span><span class="n">offset</span> <span class="o">&lt;</span><span class="n">TO</span><span class="o">-</span><span class="n">Protect</span> <span class="n">address</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="mh">0x8020000</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">line</span><span class="o">-</span><span class="n">length</span><span class="o">=</span><span class="mi">46</span> <span class="o">-</span><span class="n">o</span> <span class="n">full_fw</span><span class="o">.</span><span class="n">s19</span>
+</pre></div>
+</div>
+</li>
+<li><p>convert SREC to bin:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arm</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="n">eabi</span><span class="o">-</span><span class="n">objcopy</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">O</span> <span class="n">binary</span> <span class="o">-</span><span class="n">I</span> <span class="n">srec</span> <span class="n">full</span><span class="o">.</span><span class="n">s19</span> <span class="n">full</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+</li>
+<li><p>convert SREC to ELF:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arm</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="n">eabi</span><span class="o">-</span><span class="n">objcopy</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">O</span> <span class="n">elf32</span><span class="o">-</span><span class="n">littlearm</span> <span class="o">-</span><span class="n">I</span> <span class="n">srec</span> <span class="n">full</span><span class="o">.</span><span class="n">s19</span> <span class="n">full</span><span class="o">.</span><span class="n">elf</span>
+</pre></div>
+</div>
+</li>
+<li><p>insert TO-Protect into an existing ELF:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arm</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="n">eabi</span><span class="o">-</span><span class="n">objcopy</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">section</span> <span class="o">.</span><span class="n">to</span><span class="o">-</span><span class="n">protect</span><span class="o">=</span><span class="n">TO</span><span class="o">-</span><span class="n">Protect</span><span class="o">.</span><span class="n">bin</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">section</span><span class="o">-</span><span class="n">flags</span> <span class="o">.</span><span class="n">to</span><span class="o">-</span><span class="n">protect</span><span class="o">=</span><span class="n">code</span><span class="p">,</span><span class="n">alloc</span><span class="p">,</span><span class="n">load</span><span class="p">,</span><span class="n">readonly</span> <span class="o">--</span><span class="n">change</span><span class="o">-</span><span class="n">section</span><span class="o">-</span><span class="n">address</span> <span class="o">.</span><span class="n">to</span><span class="o">-</span><span class="n">protect</span><span class="o">=&lt;</span><span class="n">TO</span><span class="o">-</span><span class="n">Protect</span> <span class="n">address</span><span class="p">,</span> <span class="n">example</span><span class="p">:</span> <span class="mh">0x8020000</span><span class="o">&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">elf</span> <span class="n">full_fw</span><span class="o">.</span><span class="n">elf</span>
+</pre></div>
+</div>
+</li>
+<li><p>insert TO-Protect into an existing AXF:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">see</span> <span class="s2">&quot;single file&quot;</span> <span class="n">flashing</span> <span class="n">below</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="typical-flash-memory-mapping">
+<h2>Typical Flash memory mapping<a class="headerlink" href="#typical-flash-memory-mapping" title="Permalink to this headline">¶</a></h2>
+<p>Use the commands above to combine your firmware with TO-Protect
+Secure Core (delivered as a binary file).</p>
+<p>Below an example for a Cortex-M0+ with 192K of Flash.
+In this example, we suppose that:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>you place TO-Protect Secure Storage in Flash, at the end of the Flash space,</p></li>
+<li><p>you place TO-Protect Secure Core just before the Secure Storage,</p></li>
+<li><p>you place the Application at the beginning of the Flash space.</p></li>
+</ul>
+</div></blockquote>
+<div class="figure align-default">
+<img alt="../_images/TO-Protect_map_NVM_in_Flash.svg" src="../_images/TO-Protect_map_NVM_in_Flash.svg" /></div>
+<p>Below an example for a Cortex-M0+ with 192K of Flash and 3K of E²PROM:
+In this example, we suppose that:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>you place TO-Protect Secure Storage in E²PROM, at the end of the E²PROM space,</p></li>
+<li><p>you place TO-Protect Secure Core at the end of the Flash space,</p></li>
+<li><p>you place the Application at the beginning of the Flash space.</p></li>
+</ul>
+</div></blockquote>
+<div class="figure align-default">
+<img alt="../_images/TO-Protect_map_NVM_in_Eeprom.svg" src="../_images/TO-Protect_map_NVM_in_Eeprom.svg" /></div>
+</div>
+<div class="section" id="how-to-flash">
+<h2>How to Flash<a class="headerlink" href="#how-to-flash" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways to Flash a device:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>using a programming tool, for example STM32 ST-Link utility.</p></li>
+<li><p>copying the firmware binary file to the device’s virtual disk, with
+a shell command or using drag-and-drop.
+This is commonly used with MBED boards.</p></li>
+</ul>
+</div></blockquote>
+<p>When using drag-and-drop for flashing, you need to produce a single file,
+as required by this flashing process. So you have to combine two binaries:
+application firmware and TO-Protect.</p>
+<p>While when using a programming tool, you can flash the application and TO-Protect
+separately. Or if you prefer, you can combine the application and TO-Protect
+into a single file. Both options are valid.</p>
+<p>These two options are described below.</p>
+<div class="section" id="flashing-firmware-and-to-protect-separately">
+<h3>Flashing Firmware and TO-Protect separately<a class="headerlink" href="#flashing-firmware-and-to-protect-separately" title="Permalink to this headline">¶</a></h3>
+<p>This method supposes that you have a tool capable to Flash a file at a given
+address in memory. An example is having an ST-Link probe (already soldered on
+Nucleo development boards), and the ‘STM32 ST-Link Utility’ software.</p>
+<p>With the above mapping examples, you would perform:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Flashing of TO-Protect.bin at address 0x0802.0000</p></li>
+<li><p>Flashing of Application at address 0x0800.0000</p></li>
+</ol>
+</div></blockquote>
+<p>Depending on your flashing tool, you can use the commands above to convert your
+firmware into the file format required by your flashingtool.</p>
+</div>
+<div class="section" id="flashing-a-single-file-combining-firmware-and-to-protect">
+<h3>Flashing a single file combining Firmware and TO-Protect<a class="headerlink" href="#flashing-a-single-file-combining-firmware-and-to-protect" title="Permalink to this headline">¶</a></h3>
+<p>This method is required if you have to Flash:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>using file copy, or drag-and-drop to an MBed board,</p></li>
+<li><p>using Flashing Tool, but preferring to Flash a single file, in one shot.</p></li>
+</ul>
+</div></blockquote>
+<p>Typical sequence for generating the single result file is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">srec_cat</span> <span class="n">TO</span><span class="o">-</span><span class="n">Protect</span><span class="o">.</span><span class="n">bin</span> <span class="o">-</span><span class="n">Binary</span> <span class="o">-</span><span class="n">offset</span> <span class="mh">0x08020000</span> <span class="o">-</span><span class="n">o</span> <span class="n">TO</span><span class="o">-</span><span class="n">Protect</span><span class="o">.</span><span class="n">hex</span> <span class="o">-</span><span class="n">Intel</span>
+<span class="n">srec_cat</span> <span class="n">KEIL</span><span class="o">-</span><span class="n">Application</span><span class="o">.</span><span class="n">hex</span> <span class="o">-</span><span class="n">Intel</span> <span class="n">TO</span><span class="o">-</span><span class="n">Protect</span><span class="o">.</span><span class="n">hex</span> <span class="o">-</span><span class="n">Intel</span> <span class="o">-</span><span class="n">o</span> <span class="n">full_firmware</span><span class="o">.</span><span class="n">hex</span> <span class="o">-</span><span class="n">Intel</span>
+<span class="n">arm</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="n">eabi</span><span class="o">-</span><span class="n">objcopy</span> <span class="o">-</span><span class="n">I</span> <span class="n">srec</span> <span class="o">-</span><span class="n">O</span> <span class="n">binary</span> <span class="o">--</span><span class="n">gap</span><span class="o">-</span><span class="n">fill</span> <span class="mh">0xFF</span> <span class="n">full_firmware</span><span class="o">.</span><span class="n">hex</span> <span class="n">full_firmware</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+<p>The file <strong>full_firmware.bin</strong> is then ready to be flashed.</p>
+<p>NOTE: for a KEIL application firmware, arm-none-eabi-objcopy cannot be used
+to manipulate .axf files produced by KEIL. You must configure KEIL to generate
+a .hex file.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

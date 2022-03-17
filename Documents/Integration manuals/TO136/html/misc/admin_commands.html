@@ -1,0 +1,831 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administration commands &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Power optimization" href="power_optim.html" />
+    <link rel="prev" title="ARC4/CRC16-CCITT Secure link with Trusted Objects Secure Element" href="secure_link.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Administration commands</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#involved-keys">Involved keys</a><ul>
+<li><a class="reference internal" href="#root-keys-derivation">Root keys derivation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#administration-session-protocol">Administration session protocol</a><ul>
+<li><a class="reference internal" href="#session-context">Session context</a></li>
+<li><a class="reference internal" href="#session-steps">Session steps</a><ul>
+<li><a class="reference internal" href="#slot-selection">Slot selection</a></li>
+<li><a class="reference internal" href="#initialization">Initialization</a></li>
+<li><a class="reference internal" href="#authentication">Authentication</a></li>
+<li><a class="reference internal" href="#commands">Commands</a></li>
+<li><a class="reference internal" href="#commands-with-response">Commands with response</a></li>
+<li><a class="reference internal" href="#finish">Finish</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#library-apis">Library APIs</a></li>
+<li><a class="reference internal" href="#appendices">Appendices</a><ul>
+<li><a class="reference internal" href="#data-padding">Data padding</a></li>
+<li><a class="reference internal" href="#pre-encrypted-commands">Pre-encrypted commands</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="administration-commands">
+<h1>Administration commands<a class="headerlink" href="#administration-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Administration commands allow to securely update some Secure Elements
+settings on the field. These commands rely on an administration session
+designed to ensure the security of these operations.</p>
+<p>The administration session is initiated from a remote server on a target Secure
+Element on the field.</p>
+<p>The protocol detailed in this document is inspired by GlobalPlatform Card
+Technology - Secure Channel Protocol ‘03’, see [<a class="reference internal" href="#ref1"><span class="std std-ref">1</span></a>].</p>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/admin_context.png"><img alt="Administration context overview" src="../_images/admin_context.png" style="width: 80%;" /></a>
+</div>
+<p>The orange parts are managed or defined by Trusted-Objects, the blue parts are
+managed by the customer.</p>
+<p>The commands generation service is provided by a secret provider, whom can be
+the customer or Trusted-Objects, it aims to generate administration commands
+readable by any customer’s Secure Element, according to its administration
+needs.</p>
+<p>The administration server is managed by the customer, its role is to manage
+devices and Secure Elements for administration tasks, by handling the
+administration session. It is responsible of the administration campaigns
+deployment.</p>
+<p>The MCU embedded on the device receives administration requests encapsulated in
+a customer channel. It has to decapsulate the administration commands and
+forward them to the Secure Element.  The MCU is not dealing with security
+concerns as data confidentiality and integrity, these aspects are handled by
+the administration server and the Secure Element.</p>
+<p>The Secure Element checks the administration session integrity and applies the
+requested commands.</p>
+<p>The administration session ensures the following security rules:</p>
+<ul class="simple">
+<li><p><strong>Data confidentiality, integrity and authenticity:</strong> the administration
+commands applied by Secure Elements and their data can not be known or
+modified by an attacker, and the origin of the data is trusted.</p></li>
+<li><p><strong>Commands flow preservation:</strong> for a given administration session, the
+administration commands flow order can not be altered, the Secure Element can
+only execute commands in the intended order.</p></li>
+<li><p><strong>Session completion:</strong> the remote server is able to know if the session has
+been fully completed. If the session is complete, all the commands has been
+applied in the intended order and the Secure Element is updated as expected.</p></li>
+</ul>
+</div>
+<div class="section" id="involved-keys">
+<h2>Involved keys<a class="headerlink" href="#involved-keys" title="Permalink to this headline">¶</a></h2>
+<p>The following keys are involved in the protocol:</p>
+<ul class="simple">
+<li><p>KrootENC: root encryption key, used for key derivation - [handled by
+customer]</p></li>
+<li><p>KrootMAC: root MAC key, used for key derivation - [handled by customer]</p></li>
+<li><p>Kenc: used to generate session keys for AES encryption / decryption, this key
+is derived from KrootENC (see <a class="reference internal" href="#root-keys-derivation">Root keys derivation</a>) - [handled by
+customer]</p></li>
+<li><p>Kmac: used for session authentication, and to generate session keys for CMAC
+computation / verification, this key is derived from KrootMAC (see <a class="reference internal" href="#root-keys-derivation">Root keys
+derivation</a>) - [handled by customer]</p></li>
+<li><p>Senc: session key for encryption / decryption for administration session
+confidentiality</p></li>
+<li><p>Smac: session key for CMAC computation / verification for administration
+session integrity and authenticity</p></li>
+<li><p>Srmac: session key for CMAC computation / verification for responses
+integrity and authenticity</p></li>
+<li><p>Kdec: used to encrypt / decrypt pre-encrypted administration commands -
+[handled by a secret provider, whom can be the customer or Trusted-Objects]</p></li>
+</ul>
+<div class="section" id="root-keys-derivation">
+<h3>Root keys derivation<a class="headerlink" href="#root-keys-derivation" title="Permalink to this headline">¶</a></h3>
+<p>Kenc and Kmac are computed as follows:</p>
+<ul class="simple">
+<li><p>Kenc = CMAC(KrootENC, Pad((SHA256(diversification_data)))</p></li>
+<li><p>Kmac = CMAC(KrootMAC, Pad((SHA256(diversification_data)))</p></li>
+</ul>
+<p>The diversification data, which is the Secure Element serial number, is
+obtained from the Secure Element at the <a class="reference internal" href="#initialization">Initialization</a> step of
+administration session.</p>
+<p>The padding (Pad) is specified by PKCS#7, RFC 5652 section 6.3, see
+[<a class="reference internal" href="#ref2"><span class="std std-ref">2</span></a>]. It is added to the trailing of the data, where 16-(L mod 16)
+bytes are appended having all the value 16-(L mod 16), L is the length of the
+data.</p>
+<p>Examples of padding to be appended at the trailing of the data according to its
+size L:</p>
+<ul class="simple">
+<li><p>01: if L mod 16 = 15</p></li>
+<li><p>02 02: if L mod 16 = 14</p></li>
+<li><p>…</p></li>
+<li><p>0A 0A 0A 0A 0A 0A 0A 0A 0A 0A: if L mod 16 = 6</p></li>
+<li><p>…</p></li>
+<li><p>10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10: if L mod 16 = 0</p></li>
+</ul>
+<p>padding values above are expressed in HEX.</p>
+</div>
+</div>
+<div class="section" id="administration-session-protocol">
+<h2>Administration session protocol<a class="headerlink" href="#administration-session-protocol" title="Permalink to this headline">¶</a></h2>
+<p>Below is detailed the administration session protocol to be used to run
+administration commands on the Secure Element.</p>
+<div class="section" id="session-context">
+<h3>Session context<a class="headerlink" href="#session-context" title="Permalink to this headline">¶</a></h3>
+<p>The session context should contain the following fields:</p>
+<ul class="simple">
+<li><p>Senc and Smac: session encryption and CMAC keys</p></li>
+<li><p>CMAC chaing value (CMAC size), to be able to chain administration commands
+and ensure no one is missing in the flow</p></li>
+<li><p>EncCnt: encryption counter (2 bytes), used for Initial Chaining Vector (ICV)
+computation</p></li>
+<li><p>Administration server and Secure Element challenges, for the
+<a class="reference internal" href="#initialization">Initialization</a> and <a class="reference internal" href="#authentication">Authentication</a> steps.</p></li>
+</ul>
+</div>
+<div class="section" id="session-steps">
+<h3>Session steps<a class="headerlink" href="#session-steps" title="Permalink to this headline">¶</a></h3>
+<p>This section describes the different session steps:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#slot-selection">Slot selection</a>: select an administration slot (each slot is personalized with
+dedicated keys and permissions</p></li>
+<li><p><a class="reference internal" href="#initialization">Initialization</a>: initiates an administration session, the Secure element is
+authenticated by the administration server</p></li>
+<li><p><a class="reference internal" href="#authentication">Authentication</a>: the administration server is authenticated by the Secure
+Element</p></li>
+<li><p><a class="reference internal" href="#commands">Commands</a>: administration commands are sent from the administration server
+to the Secure Element</p></li>
+<li><p><a class="reference internal" href="#finish">Finish</a>: closes the administration session</p></li>
+</ul>
+<p>Below, the Secure Element requests and responses headers are removed, only the
+command code is given.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Secure Element must not be powered-off from <a class="reference internal" href="#initialization">Initialization</a>
+step to <a class="reference internal" href="#finish">Finish</a> step, as the session is stored in non-persistend memory.
+If it happens, the administration session has to be restarted from the
+begining.</p>
+</div>
+<div class="section" id="slot-selection">
+<h4>Slot selection<a class="headerlink" href="#slot-selection" title="Permalink to this headline">¶</a></h4>
+<p>This step selects the administration slot to use. It must be called each time we
+need to switch from a slot to another. A slot stays active even if session is
+reset. Changing active slot will destroy active session.</p>
+<p>Secure Element command code: TODRV_HSE_CMD_ADMIN_SET_SLOT (0x0053).
+See also <a class="reference internal" href="#c.TOSE_admin_set_slot" title="TOSE_admin_set_slot"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_admin_set_slot()</span></code></a>.</p>
+<p>Continue with <a class="reference internal" href="#initialization">Initialization</a> step to initiate the Secure Element
+administration session.</p>
+</div>
+<div class="section" id="initialization">
+<h4>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h4>
+<p>This step initiates an administration session between the administration server
+and the Secure Element. A server challenge is provided to the Secure Element,
+which returns its own challenge, its cryptogram, the diversification data and
+some protocol information. At the end of this step, the Secure Element is
+authenticated against the administration server.</p>
+<p>Secure Element command code: TODRV_HSE_CMD_INIT_ADMIN_SESSION (0x0049).
+See also <a class="reference internal" href="#c.TOSE_admin_session_init" title="TOSE_admin_session_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_admin_session_init()</span></code></a>.</p>
+<p>The following data is sent to the Secure Element:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Server challenge</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>8 bytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>where the server challenge is a random number.</p>
+<p>The response, in case of success, is:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Diversification data</p></th>
+<th class="head"><p>Protocol info.</p></th>
+<th class="head"><p>SE challenge</p></th>
+<th class="head"><p>SE cryptogram</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>8 bytes</p></td>
+<td><p>4 bytes</p></td>
+<td><p>8 bytes</p></td>
+<td><p>8 bytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>At this step, the server is able to derivate session keys and to authenticate
+Secure Element, as explained below.</p>
+<p>First of all, the administration server has to perform <a class="reference internal" href="#root-keys-derivation">Root keys derivation</a>,
+in order to get Kmac and Kenc.</p>
+<p>Then, to get Smac, compute CMAC using Kmac on the following derivation data:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00 0x00 0x00 0x06 0x00 0x00 0x80 0x01</p></td>
+</tr>
+<tr class="row-odd"><td><p>Server challenge (8 bytes)</p></td>
+</tr>
+<tr class="row-even"><td><p>Secure Element challenge (8 bytes)</p></td>
+</tr>
+</tbody>
+</table>
+<p>the result is Smac.</p>
+<p>To get Senc, compute CMAC using Kenc on the following derivation data:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00 0x00 0x00 0x04 0x00 0x00 0x80 0x01</p></td>
+</tr>
+<tr class="row-odd"><td><p>Server challenge (8 bytes)</p></td>
+</tr>
+<tr class="row-even"><td><p>Secure Element challenge (8 bytes)</p></td>
+</tr>
+</tbody>
+</table>
+<p>the result is Senc.</p>
+<p>And, to get Srmac, compute CMAC using Kmac on the following derivation data:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00 0x00 0x00 0x07 0x00 0x00 0x80 0x01</p></td>
+</tr>
+<tr class="row-odd"><td><p>Server challenge (8 bytes)</p></td>
+</tr>
+<tr class="row-even"><td><p>Secure Element challenge (8 bytes)</p></td>
+</tr>
+</tbody>
+</table>
+<p>the result is Srmac.</p>
+<p>The server is now able to verify the Secure Element cryptogram.
+To do this, compute CMAC using Smac on the following derivation data:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00 0x00 0x00 0x00 0x00 0x00 0x40 0x01</p></td>
+</tr>
+<tr class="row-odd"><td><p>Server challenge (8 bytes)</p></td>
+</tr>
+<tr class="row-even"><td><p>Secure Element challenge (8 bytes)</p></td>
+</tr>
+</tbody>
+</table>
+<p>If the result first 8 bytes are equal to the Secure Element cryptogram, it is
+now authenticated against the server.</p>
+<p>Continue with <a class="reference internal" href="#authentication">Authentication</a> step to authenticate server against the Secure
+Element.</p>
+</div>
+<div class="section" id="authentication">
+<h4>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h4>
+<p>This step authenticates the server against the Secure Element, once completed
+the server is able to send administration commands to the Secure Element.</p>
+<p>Secure Element command code: TODRV_HSE_CMD_AUTH_ADMIN_SESSION (0x004A).
+See also <a class="reference internal" href="#c.TOSE_admin_session_auth_server" title="TOSE_admin_session_auth_server"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_admin_session_auth_server()</span></code></a>.</p>
+<p>The following data is sent to the Secure Element:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 51%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Options</p></th>
+<th class="head"><p>Server cryptogram</p></th>
+<th class="head"><p>CMAC</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2 bytes</p></td>
+<td><p>8 bytes</p></td>
+<td><p>8 bytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>The options field must be set to 0.</p>
+<p>The server cryptogram is the first 8 bytes in the result of a CMAC computation
+using Smac on the following derivation data:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00 0x00 0x00 0x01 0x00 0x00 0x40 0x01</p></td>
+</tr>
+<tr class="row-odd"><td><p>Server challenge (8 bytes)</p></td>
+</tr>
+<tr class="row-even"><td><p>Secure Element challenge (8 bytes)</p></td>
+</tr>
+</tbody>
+</table>
+<p>The command CMAC is computed on the options and the server cryptogram
+concatenated, using Smac. Only the 8 first bytes of the result are kept in the
+command CMAC.</p>
+<p>On Secure Element success response, the server is authenticated against the
+Secure Element.</p>
+<p>The following server session fields are to be set:</p>
+<ul class="simple">
+<li><p>EncCnt = 1</p></li>
+<li><p>CMAC chaining value set to 00 00… 00</p></li>
+</ul>
+<p>and the server can continue with <a class="reference internal" href="#commands">Commands</a> step.</p>
+</div>
+<div class="section" id="commands">
+<h4>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h4>
+<p>The customer receives administration commands pre-encrypted by the secret
+provider, pre-encrypted commands format knowledge is not required for standard
+customer authentication server implementation, but more details are in
+<a class="reference internal" href="#pre-encrypted-commands">Pre-encrypted commands</a> section.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If EncCnt loops to 0, the session will be reset by the
+Secure Element on an administration command attempt. As EncCnt
+is coded on 2 bytes, starting from 1, a maximum of 65535 administration
+commands can be executed per session. In such case, go to <a class="reference internal" href="#finish">Finish</a> step.</p>
+</div>
+<p>The initial chaining vector has to be computed by AES128 (<strong>NOTE:</strong> AES128,
+not AES128-CBC !) encrypting the following block using Senc:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 89%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00</p></th>
+<th class="head"><p>EncCnt</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>14 bytes</p></td>
+<td><p>2 bytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>after this, EncCnt has to be incremented by 1.</p>
+<p>Then the pre-encrypted command has to be AES128-CBC encrypted using the initial
+chaining vector and Senc, the double-encrypted command is obtained: encrypted
+by the secret provider (Kdec) and by Senc.</p>
+<p>The command CMAC is computed on the following data using Smac:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 53%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Session CMAC chaining value</p></th>
+<th class="head"><p>Double-encrypted command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>16 bytes</p></td>
+<td><p>N-bytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>The session CMAC chaining value is replaced by the result of this computation.</p>
+<p>Finally, the command can be sent to the Secure Element.
+Secure Element command code: TODRV_HSE_CMD_ADMIN_COMMAND (0x0014).
+See also <a class="reference internal" href="#c.TOSE_admin_command" title="TOSE_admin_command"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_admin_command()</span></code></a>.</p>
+<p>The following data is sent to the Secure Element:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>CMAC</p></th>
+<th class="head"><p>Double-encrypted command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>8 bytes</p></td>
+<td><p>N bytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>only the first 8 bytes of the computed CMAC are kept in the request.</p>
+<p>On success, we can suppose the command has been applied by the Secure Element.
+It is possible now to continue with other <a class="reference internal" href="#commands">Commands</a>, and when all the
+commands have been sent, to be sure the session has been fully completed,
+continue with <a class="reference internal" href="#finish">Finish</a> step.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The administration session is reset on any command error (malformed
+request, wrong MAC, …)</p>
+</div>
+</div>
+<div class="section" id="commands-with-response">
+<h4>Commands with response<a class="headerlink" href="#commands-with-response" title="Permalink to this headline">¶</a></h4>
+<p>This particular kind of commands are built and sent like administration
+commands (see <a class="reference internal" href="#commands">Commands</a>), except that they have to be sent to the Secure
+Element using the following Secure Element command code:
+TODRV_HSE_CMD_ADMIN_COMMAND_WITH_RESPONSE (0x0051). See also
+<a class="reference internal" href="#c.TOSE_admin_command_with_response2" title="TOSE_admin_command_with_response2"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_admin_command_with_response2()</span></code></a>.</p>
+<p>And, as a response is expected, it is needed to handle it as follows.</p>
+<p>The response length depends on the administration command used. The response
+includes encrypted and padded data, and its CMAC, which have to be taken into
+account to request the right response size.</p>
+<p>First of all, the response CMAC has to be verified.
+The response CMAC is computed on the following data using Srmac:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 53%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Session CMAC chaining value</p></th>
+<th class="head"><p>Encrypted response</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>16 bytes</p></td>
+<td><p>N-bytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>Compare the first 8 bytes of the returned CMAC with the last 8 bytes of the
+response.</p>
+<p>The initial chaining vector has to be computed by AES128 encrypting the
+following block using Senc:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 86%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>0x80 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00</p></th>
+<th class="head"><p>EncCnt - 1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>14 bytes</p></td>
+<td><p>2 bytes</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>EncCnt is used decremented by 1 here because it is supposed to have
+been incremented when building the administration command frame. The
+command and the response must use the same EncCnt value for ICV.</p>
+</div>
+<p>Then the response has to be AES128-CBC decrypted using the initial
+chaining vector and Senc, the clear response (with padding) is obtained.
+Check and remove the padding before using the response data (see
+<a class="reference internal" href="#data-padding">Data padding</a>).</p>
+</div>
+<div class="section" id="finish">
+<h4>Finish<a class="headerlink" href="#finish" title="Permalink to this headline">¶</a></h4>
+<p>This step closes the administration session and allows the server to verify the
+session completion.</p>
+<p>Secure Element command code: TODRV_HSE_CMD_ADMIN_COMMAND (0x0014), no attached data.
+See also <a class="reference internal" href="#c.TOSE_admin_session_fini" title="TOSE_admin_session_fini"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_admin_session_fini()</span></code></a>.</p>
+<p>On success, the response is:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Session CMAC</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>8 bytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>The server has to check this session CMAC value by computing a CMAC on the
+session CMAC chaining value, using Smac key.
+If the first computed 8 bytes match, the administration session on this device
+can be considered as complete by the server, with the guarantee that the Secure
+Element has executed all the commands in the intended order.
+In the other hand, if the CMAC does not match, the Secure Element has to be
+considered as not correctly updated, left in an intermediate state, and a
+successful administration session has to be performed before continuing to work
+with the device in a trusted context.</p>
+<p>At this step, the administration server should clear all the session data.</p>
+</div>
+</div>
+</div>
+<div class="section" id="library-apis">
+<h2>Library APIs<a class="headerlink" href="#library-apis" title="Permalink to this headline">¶</a></h2>
+<p>The following APIs are provided by libTO to help to send administration
+commands to the Secure Element.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_admin_session_init">
+<span class="target" id="group__admin_1ga95a63f0bbeee8ec6c9320798cd67cebf"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_admin_session_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">server_challenge</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_ADMIN_CHALLENGE_SIZE" title="TO_ADMIN_CHALLENGE_SIZE"><span class="n"><span class="pre">TO_ADMIN_CHALLENGE_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">se_challenge</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_ADMIN_CHALLENGE_SIZE" title="TO_ADMIN_CHALLENGE_SIZE"><span class="n"><span class="pre">TO_ADMIN_CHALLENGE_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">se_cryptogram</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_ADMIN_CRYPTOGRAM_SIZE" title="TO_ADMIN_CRYPTOGRAM_SIZE"><span class="n"><span class="pre">TO_ADMIN_CRYPTOGRAM_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">diversification_data</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_ADMIN_DIVERS_DATA_SIZE" title="TO_ADMIN_DIVERS_DATA_SIZE"><span class="n"><span class="pre">TO_ADMIN_DIVERS_DATA_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">protocol_info</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_ADMIN_PROTO_INFO_SIZE" title="TO_ADMIN_PROTO_INFO_SIZE"><span class="n"><span class="pre">TO_ADMIN_PROTO_INFO_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_admin_session_init" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize administration session. </p>
+<p>
+This function initializes a new administration session between a server and the Secure Element. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>server_challenge</strong> – <strong>[in]</strong> Server challenge, coming from the server </p></li>
+<li><p><strong>se_challenge</strong> – <strong>[out]</strong> Returned Secure Element challenge </p></li>
+<li><p><strong>se_cryptogram</strong> – <strong>[out]</strong> Returned Secure Element cryptogram </p></li>
+<li><p><strong>diversification_data</strong> – <strong>[out]</strong> Returned diversification data </p></li>
+<li><p><strong>protocol_info</strong> – <strong>[out]</strong> Returned protocol info</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_admin_session_auth_server">
+<span class="target" id="group__admin_1ga9849154719aad7e4d5d7a23fa8d8c52c"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_admin_session_auth_server</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_ADMIN_OPTIONS_SIZE" title="TO_ADMIN_OPTIONS_SIZE"><span class="n"><span class="pre">TO_ADMIN_OPTIONS_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">server_cryptogram</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_ADMIN_CRYPTOGRAM_SIZE" title="TO_ADMIN_CRYPTOGRAM_SIZE"><span class="n"><span class="pre">TO_ADMIN_CRYPTOGRAM_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">mac</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_ADMIN_MAC_SIZE" title="TO_ADMIN_MAC_SIZE"><span class="n"><span class="pre">TO_ADMIN_MAC_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_admin_session_auth_server" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Activate administration session by authenticating server. </p>
+<p>
+This function allows the server to authenticate against the Secure Element, in order to activate authentication session. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>options</strong> – <strong>[in]</strong> Administration session options </p></li>
+<li><p><strong>server_cryptogram</strong> – <strong>[in]</strong> Server cryptogram, coming from the server </p></li>
+<li><p><strong>mac</strong> – <strong>[in]</strong> MAC computed on options and server cryptogram</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_admin_command">
+<span class="target" id="group__admin_1gaf34ae1aeb1b772d1b1ae8eef6842ed83"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_admin_command</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">command</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">length</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_admin_command" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Executes an authenticated administrative command. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>command</strong> – <strong>[in]</strong> Buffer containing the MACed command to be executed. This buffer length is length + 8 bytes. It contains :<ul>
+<li><p>8 bytes for the AES-Cmac (using the admin session KMac key)</p></li>
+<li><p>N bytes of command, encrypted using SCP03 and KMAC (using ICV and AES-CBC). Once decrypted, those contain :<ul>
+<li><p>N-16 bytes of command, encrypted with KENC (using the following IV and AES-CBC)</p></li>
+<li><p>16 bytes of IV, used for the second layer of encryption </p></li>
+</ul>
+</p></li>
+</ul>
+</p></li>
+<li><p><strong>length</strong> – <strong>[in]</strong> Expresses the length of the Command, excluding the 8 bytes of CMAC at the start </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_admin_command_with_response">
+<span class="target" id="group__admin_1ga2e44caeecbc2c4d3e82d2dbda674322c"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_admin_command_with_response</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">command</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">length</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">response</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">response_length</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_admin_command_with_response" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Administration command with response data. </p>
+<p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>This function is deprecated and may disappear in future releases, use <a class="reference internal" href="#group__admin_1ga5d109ca51dd63f6c111d60342d92a2da"><span class="std std-ref">TOSE_admin_command_with_response2()</span></a> instead.</p>
+</dd></dl>
+
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>command</strong> – <strong>[in]</strong> The command </p></li>
+<li><p><strong>length</strong> – <strong>[in]</strong> The command length </p></li>
+<li><p><strong>response</strong> – <strong>[out]</strong> Buffer to store response </p></li>
+<li><p><strong>response_length</strong> – <strong>[in]</strong> Expected response length </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_admin_command_with_response2">
+<span class="target" id="group__admin_1ga5d109ca51dd63f6c111d60342d92a2da"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_admin_command_with_response2</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">command</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">length</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">response</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">response_length</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_admin_command_with_response2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Administration command with response data with variable length. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>command</strong> – <strong>[in]</strong> The command </p></li>
+<li><p><strong>length</strong> – <strong>[in]</strong> The command length </p></li>
+<li><p><strong>response</strong> – <strong>[out]</strong> Buffer to store response </p></li>
+<li><p><strong>response_length</strong> – <strong>[inout]</strong> Buffer length (input), response length (output) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_admin_session_fini">
+<span class="target" id="group__admin_1ga1f332017d8da75ff0e717c5df2389f12"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_admin_session_fini</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">mac</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../api/defs.html#c.TO_ADMIN_MAC_SIZE" title="TO_ADMIN_MAC_SIZE"><span class="n"><span class="pre">TO_ADMIN_MAC_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_admin_session_fini" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Terminates administration session. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>mac</strong> – <strong>[out]</strong> The session MAC returned by the Secure Element </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_admin_set_slot">
+<span class="target" id="group__admin_1ga2b66c76ea2c3e469d2b089779c402575"></span><a class="reference internal" href="../api/defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_admin_set_slot</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../api/defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_admin_set_slot" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set administration slot to use from now on. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>index</strong> – <strong>[in]</strong> Admin slot index </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="appendices">
+<h2>Appendices<a class="headerlink" href="#appendices" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="data-padding">
+<h3>Data padding<a class="headerlink" href="#data-padding" title="Permalink to this headline">¶</a></h3>
+<p>Data block padding is appended according to NIST SP 800-38A, appendix A, see
+[<a class="reference internal" href="#ref3"><span class="std std-ref">3</span></a>]:</p>
+<ul class="simple">
+<li><p>append a 0x80 byte to the data</p></li>
+<li><p>if needed, append 0x00 bytes until it is block size aligned</p></li>
+</ul>
+</div>
+<div class="section" id="pre-encrypted-commands">
+<h3>Pre-encrypted commands<a class="headerlink" href="#pre-encrypted-commands" title="Permalink to this headline">¶</a></h3>
+<p>The customer receives administration commands pre-encrypted by a secret
+provider. Secret provider can be the customer himself, or Trusted-Objects.
+Below is detailed how a pre-encrypted command is formed.</p>
+<p>A raw command block is formatted like this:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 21%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Index</p></td>
+<td><p>Sub-index</p></td>
+<td><p>Data</p></td>
+<td><p>CRC-16 CCITT</p></td>
+</tr>
+<tr class="row-even"><td><p>4 bytes</p></td>
+<td><p>1 bytes</p></td>
+<td><p>n bytes</p></td>
+<td><p>2 bytes</p></td>
+</tr>
+</tbody>
+</table>
+<p>The command CRC is a CRC-16 CCITT with following characteristics:</p>
+<ul class="simple">
+<li><p><strong>0xFFFF initial value</strong>,</p></li>
+<li><p>the polynomial is <strong>0x1021</strong>,</p></li>
+<li><p>data and output are <strong>reflected</strong>.</p></li>
+<li><p>it is computed on the command index, sub-index, and data, and is here to
+prevent transfer errors,</p></li>
+<li><p>it is appended to the command data block in big endian form.</p></li>
+</ul>
+<p>To double check your CRC implementation, you should verify that an input
+pattern ‘123456789’ gives a CRC value of 0x6F91.</p>
+<p>Padding has to be appended to command data block, see <a class="reference internal" href="#data-padding">Data padding</a>.</p>
+<p>Padded data is AES128-CBC encrypted using a random initial vector and Kdec.</p>
+<p>The customer receives a pre-encrypted command block formatted like this:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 56%" />
+<col style="width: 44%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Command cryptogram</p></td>
+<td><p>Initial vector</p></td>
+</tr>
+</tbody>
+</table>
+<p>These commands can be decrypted by any customer’s Secure Element.</p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="ref1"><strong>[1]</strong> GlobalPlatform Card Technology - Secure Channel Protocol ‘03’ - Card
+Specification v2.2 Amendment D - Version 1.1.1 - GPC_SPE_014 (2014)</p>
+<p id="ref2"><strong>[2]</strong> PKCS#7 - RFC-5652 - Section 6.3 Content-encryption Process (2009)</p>
+<p id="ref3"><strong>[3]</strong> NIST Special Publication 800-38A - Recommendation for Block
+Cipher Modes of Operation - Appendix A (2001)</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

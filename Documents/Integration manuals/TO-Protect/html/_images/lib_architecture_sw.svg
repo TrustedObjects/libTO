@@ -1,0 +1,126 @@
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="340" height="370">
+	<style>
+		.text {
+			text-anchor: middle;
+			font-size: 15px;
+			font-family: Sans;
+		}
+
+		.rect {
+			fill-opacity: 1;
+			stroke-width: 0.3;
+			stroke-dasharray: none;
+			stroke-opacity: 1;
+		}
+	</style>
+	<rect
+		class="rect"
+		style="
+			fill: #9BD6AD;
+			stroke: #3A5743;"
+		x="40"
+		y="0"
+		width="300"
+		height="40"
+	/>
+	<rect
+		class="rect"
+		style="
+			fill: #ED7D31;
+			stroke: #AE5A21;"
+		x="40"
+		y="50"
+		width="300"
+		height="280"
+	/>
+	<rect
+		class="rect"
+		style="
+			fill: #FFB200;
+			stroke: #C59300;"
+		x="50"
+		y="60"
+		width="280"
+		height="50"
+	/>
+	<rect
+		class="rect"
+		style="
+			fill: #FFC000;
+			stroke: #C59300;"
+		x="50"
+		y="110"
+		width="280"
+		height="100"
+	/>
+	<rect
+		class="rect"
+		style="
+			fill: #C55A11;
+			stroke: #BC8C00;"
+		x="50"
+		y="220"
+		width="280"
+		height="100"
+	/>
+	<rect
+		class="rect"
+		style="
+			fill: #9BD6AD;
+			stroke: #3A5743;"
+		x="40"
+		y="340"
+		width="300"
+		height="30"
+	/>
+	<text
+		class="text"
+		style="
+			fill: #093B18;
+			font-weight: bold;"
+		x="190"
+		y="25"
+	>Application Firmware</text>
+	<text
+		class="text"
+		style="
+			fill: #C55A11;
+			font-weight: bold;"
+		x="-30"
+		y="150"
+		transform="rotate(-90 20 140)"
+	>TO-Protect TLS</text>
+	<text
+		class="text"
+		style="
+			fill: #C55A11;"
+		x="190"
+		y="88"
+	>TO-Protect APIs</text>
+	<text
+		class="text"
+		style="
+			fill: white;
+			font-weight: bold;"
+		x="190"
+		y="163"
+	>LibTO (sources)</text>
+	<text
+		class="text"
+		style="
+			fill: white;
+			font-weight: bold;"
+		x="190"
+		y="273"
+	>Secure Core (binary file)</text>
+	<text
+		class="text"
+		style="
+			fill: #093B18;
+			font-weight: bold;"
+		x="190"
+		y="358"
+	>NVM Adaptation Layer</text>
+</svg>

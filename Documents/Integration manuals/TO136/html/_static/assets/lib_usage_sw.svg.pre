@@ -1,0 +1,66 @@
+#!define GREEN_BACKGROUND    \#2E7B01
+#!define GREEN_STROKE        \#194500
+#!define BLUE_BACKGROUND     \#0058B5
+#!define BLUE_STROKE         \#003369
+#!define ORANGE_BACKGROUND   \#F29047
+#!define ORANGE_STROKE       \#BF5A0D
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="180">
+	<style>
+		.text {
+			fill: white;
+			text-anchor: middle;
+			font-size: 15px;
+			font-family: Sans;
+		}
+
+		.rect {
+			fill-opacity: 1;
+			stroke-width: 0.3;
+			stroke-dasharray: none;
+			stroke-opacity: 1;
+		}
+
+	</style>
+	<rect
+		class="rect"
+		style="
+			fill:GREEN_BACKGROUND;
+			stroke:GREEN_STROKE;"
+		x="0"
+		y="0"
+		width="200"
+		height="60"
+	/>
+	<text x="100" y="33" class="text">Application firmware</text>
+	<rect
+		class="rect"
+		style="
+			fill:BLUE_BACKGROUND;
+			stroke:BLUE_STROKE;"
+		x="0"
+		y="60"
+		width="200"
+		height="60"
+	/>
+	<text x="100" y="93" class="text">
+#!if DOC_CONTENT_LORA == 1
+		LoRaWAN
+#!elif DOC_CONTENT_TLS == 1
+		TLS
+#!endif
+		stack
+	</text>
+	<rect
+		class="rect"
+		style="
+			fill:ORANGE_BACKGROUND;
+			stroke:ORANGE_STROKE;"
+		x="0"
+		y="120"
+		width="200"
+		height="60"
+	/>
+	<text x="100" y="153" class="text">DEVICE_NAME</text>
+</svg>

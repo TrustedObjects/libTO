@@ -1,0 +1,727 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Helper API &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="TO-Protect TLS API" href="core.html" />
+    <link rel="prev" title="Configuration" href="examples.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Helper API</a><ul>
+<li><a class="reference internal" href="#tls-handshake">TLS handshake</a><ul>
+<li><a class="reference internal" href="#tls-callback-functions-to-define">TLS callback functions to define</a></li>
+<li><a class="reference internal" href="#handshake-api">Handshake API</a></li>
+<li><a class="reference internal" href="#messaging-api">Messaging API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="helper-api">
+<span id="api-helper"></span><h1>Helper API<a class="headerlink" href="#helper-api" title="Permalink to this headline">¶</a></h1>
+<img alt="location into library structure" class="align-right" src="../_images/lib_part_helper.png" />
+<p>Helper APIs are high level APIs designed to make integration easier.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TO_helper.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<div class="section" id="tls-handshake">
+<span id="api-tls-helper"></span><h2>TLS handshake<a class="headerlink" href="#tls-handshake" title="Permalink to this headline">¶</a></h2>
+<p>TLS Helper is a set of functions making TLS handshake easy to integrate.</p>
+<p>It only requires to provide 2 callbacks to physically send and receive data.</p>
+<div class="section" id="tls-callback-functions-to-define">
+<h3>TLS callback functions to define<a class="headerlink" href="#tls-callback-functions-to-define" title="Permalink to this headline">¶</a></h3>
+<p>These callbacks need to be implemented and passed to TLS helper APIs to be able
+to send / receive data to / from the server.</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_send_func">
+<span class="target" id="group__helper__tls__defs_1gaee7ed3b4512652bd0252d86dfe90353c"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_send_func</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">priv_ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.TOSE_helper_tls_send_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handshake helper network send function. </p>
+<p>
+This function is used by “TOSE_helper_tls_handshake” to send data on the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param priv_ctx</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Opaque context given to “TOSE_helper_tls_handshake” </p>
+</dd>
+<dt class="field-even">Param data</dt>
+<dd class="field-even"><p><strong>[in]</strong> Data to send </p>
+</dd>
+<dt class="field-odd">Param len</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Length of data</p>
+</dd>
+<dt class="field-even">Return</dt>
+<dd class="field-even"><p>TO_OK if data has been sent successfully, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_receive_func">
+<span class="target" id="group__helper__tls__defs_1gad3c838d43f50ccc67e6cfad8eefdd845"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_receive_func</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">priv_ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">len</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">read_len</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.TOSE_helper_tls_receive_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handshake helper network receive function. </p>
+<p>
+This function is used by “TOSE_helper_tls_handshake” to receive data from the network.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>#TO_AGAIN may be returned for example when this callback is implemented with POSIX’ recv(), and recv() returns #EINTR </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param priv_ctx</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Opaque context given to “TOSE_helper_tls_handshake” </p>
+</dd>
+<dt class="field-even">Param data</dt>
+<dd class="field-even"><p><strong>[in]</strong> Data output </p>
+</dd>
+<dt class="field-odd">Param len</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Length of data to read </p>
+</dd>
+<dt class="field-even">Param read_len</dt>
+<dd class="field-even"><p><strong>[out]</strong> Length of data read </p>
+</dd>
+<dt class="field-odd">Param timeout</dt>
+<dd class="field-odd"><p><strong>[in]</strong> Receive timeout in milliseconds (-1 for no timeout)</p>
+</dd>
+<dt class="field-even">Retval TO_OK</dt>
+<dd class="field-even"><p>if some data has been received successfully, read_len is updated and &gt;0 </p>
+</dd>
+<dt class="field-odd">Retval TO_TIMEOUT</dt>
+<dd class="field-odd"><p>timed out elapsed before any data was available </p>
+</dd>
+<dt class="field-even">Retval TO_AGAIN</dt>
+<dd class="field-even"><p>the function has been interrupted before receiving any data </p>
+</dd>
+<dt class="field-odd">Retval TO_ERROR</dt>
+<dd class="field-odd"><p>Other error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_unsecure_record">
+<span class="target" id="group__helper__tls__defs_1ga1197e36b8314b8c9d1fcb6933915263f"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_unsecure_record</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">header_length</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">in</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">in_length</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">out</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">out_length</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.TOSE_helper_tls_unsecure_record" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>callback to unsecure a received protected record (HANDSHAKE_ONLY_MODE) </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The in parameter isn’t const because the callback can reuse it to unsecure in place provided it doesn’t write above in_length. For example if it uses hardware decryption with constraints on memory regions used by the DMA. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param ctx</dt>
+<dd class="field-odd"><p><strong>[inout]</strong> cipher context </p>
+</dd>
+<dt class="field-even">Param header_length</dt>
+<dd class="field-even"><p><strong>[in]</strong> length of the record’s header </p>
+</dd>
+<dt class="field-odd">Param in</dt>
+<dd class="field-odd"><p><strong>[in]</strong> input buffer containing the entire protected record (e.g. with the header) </p>
+</dd>
+<dt class="field-even">Param in_length</dt>
+<dd class="field-even"><p><strong>[in]</strong> length of the protected record in the input buffer </p>
+</dd>
+<dt class="field-odd">Param out</dt>
+<dd class="field-odd"><p><strong>[out]</strong> buffer with the plain text content of the record (e.g. without the header) </p>
+</dd>
+<dt class="field-even">Param out_length</dt>
+<dd class="field-even"><p><strong>[out]</strong> length of the plain text content</p>
+</dd>
+<dt class="field-odd">Retval TO_OK</dt>
+<dd class="field-odd"><p>if the record is authenticated and decrypted </p>
+</dd>
+<dt class="field-even">Retval TO_ERROR</dt>
+<dd class="field-even"><p>Otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_secure_record">
+<span class="target" id="group__helper__tls__defs_1gaaa0c21af2edd1d4ad89d52df60f6e733"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_secure_record</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hdr</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">hdr_length</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">in</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">in_length</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">out</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">out_length</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.TOSE_helper_tls_secure_record" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>callback to secure a plain text record before sending (HANDSHAKE_ONLY_MODE) </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>input and output buffers provided by the caller may overlap with a gap of at least 1 AES block (*out + hdr_length + AES_BLOCK_LEN &lt;= in). </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param ctx</dt>
+<dd class="field-odd"><p><strong>[inout]</strong> cipher context </p>
+</dd>
+<dt class="field-even">Param hdr</dt>
+<dd class="field-even"><p><strong>[in]</strong> plain text record header buffer </p>
+</dd>
+<dt class="field-odd">Param hdr_length</dt>
+<dd class="field-odd"><p><strong>[in]</strong> plain text record header length </p>
+</dd>
+<dt class="field-even">Param in</dt>
+<dd class="field-even"><p><strong>[in]</strong> input buffer with the plain text record’s content data (e.g. withot header) </p>
+</dd>
+<dt class="field-odd">Param in_length</dt>
+<dd class="field-odd"><p><strong>[in]</strong> length of the plain text record’s content data </p>
+</dd>
+<dt class="field-even">Param out</dt>
+<dd class="field-even"><p><strong>[inout]</strong> output buffer with the ciphered content of the protected record</p>
+</dd>
+<dt class="field-odd">Retval TO_OK</dt>
+<dd class="field-odd"><p>if the record cannot be encrypted </p>
+</dd>
+<dt class="field-even">Retval TO_ERROR</dt>
+<dd class="field-even"><p>Otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_setup_cipher_ctx">
+<span class="target" id="group__helper__tls__defs_1gab431adaa0e624f54721c9c9c9d1c4a12"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_setup_cipher_ctx</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cipher_suite</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">key_block</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">key_block_length</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cipher_overhead_length</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#c.TOSE_helper_tls_unsecure_record" title="TOSE_helper_tls_unsecure_record"><span class="n"><span class="pre">TOSE_helper_tls_unsecure_record</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">unsecure_record</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#c.TOSE_helper_tls_secure_record" title="TOSE_helper_tls_secure_record"><span class="n"><span class="pre">TOSE_helper_tls_secure_record</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">secure_record</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.TOSE_helper_tls_setup_cipher_ctx" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>callback to setup the cipher context (HANDSHAKE_ONLY_MODE) </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This callback is called during the handshake after the cipher suite is negotiated with the server and before extracting the derived key from the Secure Element.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param ctx</dt>
+<dd class="field-odd"><p><strong>[inout]</strong> cipher context </p>
+</dd>
+<dt class="field-even">Param cipher_suite</dt>
+<dd class="field-even"><p><strong>[in]</strong> the negociated cipher_suite identifier (as specified in TLS RFCs) </p>
+</dd>
+<dt class="field-odd">Param key_block</dt>
+<dd class="field-odd"><p><strong>[out]</strong> pointer on the key block where key derivation from master secret is stored </p>
+</dd>
+<dt class="field-even">Param key_block_length</dt>
+<dd class="field-even"><p><strong>[out]</strong> length of the key block, depends upon the negociated cipher suite </p>
+</dd>
+<dt class="field-odd">Param cipher_overhead_length</dt>
+<dd class="field-odd"><p><strong>[inout]</strong> the maximum difference of length between the plain text content and the ciphered text content. The caller provides its own value if possible, the callee can lower it to 0 if it provides its own buffer to store protected records. </p>
+</dd>
+<dt class="field-even">Param unsecure_record</dt>
+<dd class="field-even"><p><strong>[out]</strong> callback used to authenticate and decrypt incoming records </p>
+</dd>
+<dt class="field-odd">Param secure_record</dt>
+<dd class="field-odd"><p><strong>[out]</strong> callback used to encrypt data to the outcoming records</p>
+</dd>
+<dt class="field-even">Retval TO_OK</dt>
+<dd class="field-even"><p>if setup completed correctly </p>
+</dd>
+<dt class="field-odd">Retval TO_ERROR</dt>
+<dd class="field-odd"><p>Otherwise </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_ctx_t">
+<span class="target" id="group__helper__tls__defs_1gaff3d27f907e00365a49819c44dab91aa"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">TOSE_helper_tls_ctx_s</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></span><a class="headerlink" href="#c.TOSE_helper_tls_ctx_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Opaque TLS helper context </p>
+</dd></dl>
+
+</div>
+<div class="section" id="handshake-api">
+<h3>Handshake API<a class="headerlink" href="#handshake-api" title="Permalink to this headline">¶</a></h3>
+<p>Calling one function will do all the steps of the TLS handshake.</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.default_cipher_ctx">
+<span class="target" id="group__helper__tls__handshake_1ga324f3c78e3f10297d7cf03ac6a1c486e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">default_cipher_ctx</span></span></span><a class="headerlink" href="#c.default_cipher_ctx" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>default cipher context when NULL is passed to <a class="reference internal" href="#group__helper__tls__handshake_1ga0e624e66476656861c7c17c8558b14d6"><span class="std std-ref">TOSE_helper_tls_set_mode_handshake_only()</span></a> </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.default_setup_cipher_ctx">
+<span class="target" id="group__helper__tls__handshake_1ga61d1a96a1e4a6e76eb58ca2ca37bf146"></span><a class="reference internal" href="#c.TOSE_helper_tls_setup_cipher_ctx" title="TOSE_helper_tls_setup_cipher_ctx"><span class="n"><span class="pre">TOSE_helper_tls_setup_cipher_ctx</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">default_setup_cipher_ctx</span></span></span><a class="headerlink" href="#c.default_setup_cipher_ctx" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>default setup cipher context when NULL is passed to <a class="reference internal" href="#group__helper__tls__handshake_1ga0e624e66476656861c7c17c8558b14d6"><span class="std std-ref">TOSE_helper_tls_set_mode_handshake_only()</span></a> </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_init_session">
+<span class="target" id="group__helper__tls__handshake_1ga3adbd84cbe7c2212b5556172da040ac4"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_init_session</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">session</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">priv_ctx</span></span>, <a class="reference internal" href="#c.TOSE_helper_tls_send_func" title="TOSE_helper_tls_send_func"><span class="n"><span class="pre">TOSE_helper_tls_send_func</span></span></a><span class="w"> </span><span class="n"><span class="pre">send_func</span></span>, <a class="reference internal" href="#c.TOSE_helper_tls_receive_func" title="TOSE_helper_tls_receive_func"><span class="n"><span class="pre">TOSE_helper_tls_receive_func</span></span></a><span class="w"> </span><span class="n"><span class="pre">receive_func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_init_session" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize TLS handshake. </p>
+<p>
+This function initialize TLS handshake. It configures the Secure Element and initialize static envrionment.</p>
+<p>Each initialized session must be cleaned with <a class="reference internal" href="#group__helper__tls__handshake_1gaa7967d6bef25fdd3c71005ef7ca5b40d"><span class="std std-ref">TOSE_helper_tls_cleanup()</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context assigned </p></li>
+<li><p><strong>session</strong> – <strong>[in]</strong> TLS session to use </p></li>
+<li><p><strong>priv_ctx</strong> – <strong>[in]</strong> Opaque context to forward to given functions </p></li>
+<li><p><strong>send_func</strong> – <strong>[in]</strong> Function to send on network </p></li>
+<li><p><strong>receive_func</strong> – <strong>[in]</strong> Function to receive from network</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if initialization succeed, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_close">
+<span class="target" id="group__helper__tls__handshake_1ga3225351bdd42280baf457bdf5b3c8767"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_close</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_close" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Close TLS handshake. </p>
+<p>
+This function closes TLS handshake by sending a close notify alert to the TLS server. Given context must not be used anymore. In TCP, the socket used by this session might not be usable anymore due to close notify alert.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if close succeed, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_fini">
+<span class="target" id="group__helper__tls__handshake_1ga5b9b5df0d8dbc1dda8b40f7e4837360d"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_fini</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_fini" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Finalize TLS context. </p>
+<p>
+It is needed to call this function if TCP socket closed for any reason.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if finalize succeed, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_cleanup">
+<span class="target" id="group__helper__tls__handshake_1gaa7967d6bef25fdd3c71005ef7ca5b40d"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_cleanup</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_cleanup" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Cleanup TLS handshake. </p>
+<p>
+This function closes and finalizes TLS handshake and session using TOSE_helper_tls_close and TOSE_helper_tls_fini.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if cleanup succeed, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_set_retransmission_timeout">
+<span class="target" id="group__helper__tls__handshake_1gab147ba9523f98dc407830dab72e2c80f"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_set_retransmission_timeout</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">min_timeout</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">max_timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_set_retransmission_timeout" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set DTLS retransmission timeout min/max values. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
+<li><p><strong>min_timeout</strong> – <strong>[in]</strong> Minimal (initial) retransmission timeout, in milliseconds </p></li>
+<li><p><strong>max_timeout</strong> – <strong>[in]</strong> Maximal retransmission timeout, in milliseconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if cleanup succeed, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_set_retransmission_max">
+<span class="target" id="group__helper__tls__handshake_1gac9071b4f53dc7c3c319f9a199903b87c"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_set_retransmission_max</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">max_retransmissions</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_set_retransmission_max" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set DTLS retransmission max value. </p>
+<p>
+Retransmission counter is reset in case of successful receive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
+<li><p><strong>max_retransmissions</strong> – <strong>[in]</strong> Maximal retransmissions count</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if cleanup succeed, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_set_fragment_max_size">
+<span class="target" id="group__helper__tls__handshake_1ga715acc9b89625bb123defc464ef11532"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_set_fragment_max_size</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">max_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_set_fragment_max_size" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set DTLS fragment maximum size. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
+<li><p><strong>max_size</strong> – <strong>[in]</strong> Maximum fragment size in bytes (record &amp; handshake headers excluded)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if cleanup succeed, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_set_cipher_suites">
+<span class="target" id="group__helper__tls__handshake_1ga08988c260a825cd34aa0345395b07033"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_set_cipher_suites</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cipher_suites</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cipher_suites_cnt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_set_cipher_suites" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set cipher suites list. </p>
+<p>
+cipher_suites values must be values defined in helper header (TO_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, etc)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
+<li><p><strong>cipher_suites</strong> – <strong>[in]</strong> Array of cipher suites (array of 16-bits integer values. See TO_tls_cipher_suite_e.) </p></li>
+<li><p><strong>cipher_suites_cnt</strong> – <strong>[in]</strong> Cipher suites count</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK in case of success, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_set_config_mode">
+<span class="target" id="group__helper__tls__handshake_1ga1c998ed242990c1fefe2eaaea9ad6c5c"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_set_config_mode</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <a class="reference internal" href="defs.html#c.TO_tls_mode_t" title="TO_tls_mode_t"><span class="n"><span class="pre">TO_tls_mode_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">mode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_set_config_mode" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set configuration mode of the TLS session. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>updating the mode is persistent across reboot.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
+<li><p><strong>mode</strong> – <strong>[in]</strong> configuration mode (see TO_tls_mode_e)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK in case of success, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_set_config_certificate_slot">
+<span class="target" id="group__helper__tls__handshake_1ga3f6d3744f51b434a41ade39e8015e9c4"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_set_config_certificate_slot</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">certificate_slot</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_set_config_certificate_slot" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure client certificate slot of the TLS session. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>updating the certificate slot is persistent across reboot.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
+<li><p><strong>mode</strong> – <strong>[in]</strong> client certificate mode</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK in case of success, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_set_server_name">
+<span class="target" id="group__helper__tls__handshake_1gacd07c86c7c565a4fcae85ef6271d392a"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_set_server_name</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">server_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_set_server_name" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the server’s domain name. </p>
+<p>When the server name is configured, it is used during handshake within the SNI extension (section 3 - RFC 6066)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>server_name may be NULL or empty, in that case the TLS context is configured to not use the SNI extension.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[inout]</strong> context of the TLS session </p></li>
+<li><p><strong>server_name</strong> – <strong>[in]</strong> a string with the server’s domain name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TO_OK</strong> – the server name is configured inside the TLS context </p></li>
+<li><p><strong>TO_ERROR</strong> – the server name configuration failed </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_set_mode_handshake_only">
+<span class="target" id="group__helper__tls__handshake_1ga0e624e66476656861c7c17c8558b14d6"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_set_mode_handshake_only</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cipher_ctx</span></span>, <a class="reference internal" href="#c.TOSE_helper_tls_setup_cipher_ctx" title="TOSE_helper_tls_setup_cipher_ctx"><span class="n"><span class="pre">TOSE_helper_tls_setup_cipher_ctx</span></span></a><span class="w"> </span><span class="n"><span class="pre">setup_cipher_ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_set_mode_handshake_only" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>configure the TLS session in HANDSHAKE_ONLY_MODE </p>
+<p>In this mode the encryption and decryption of TLS records is delegated to the upper layer. This layer shall provide a set of callbacks to be called by the libTO to transmit the key block and to secure/unsecure records.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The callback <code class="docutils literal notranslate"><span class="pre">setup_cipher_ctx</span></code> can been NULL if the libTO has been built with a default callback enabled. In that case the parameter <code class="docutils literal notranslate"><span class="pre">cipher_ctx</span></code> is ignored.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function shall be called with a initialized tls_ctx, so after calling <a class="reference internal" href="#group__helper__tls__handshake_1ga3adbd84cbe7c2212b5556172da040ac4"><span class="std std-ref">TOSE_helper_tls_init_session()</span></a>, and it shall be called before starting a handshake, so before <a class="reference internal" href="#group__helper__tls__handshake_1ga5fd67412eb0bedf8b0e20d6574713612"><span class="std std-ref">TOSE_helper_tls_do_handshake()</span></a> The following sequence show the calls needed to use the mode Handshake Only with the default cipher in AES128-GCM: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">function</span> <span class="n">returns</span> <span class="n">are</span> <span class="n">ignored</span> <span class="k">for</span> <span class="n">compactness</span> <span class="n">but</span> <span class="n">should</span> <span class="n">be</span> <span class="n">handled</span> <span class="ow">in</span>
+<span class="o">//</span> <span class="n">production</span> <span class="n">code</span><span class="o">.</span>
+<span class="c1">#define CIPHER_SUITE_CNT 2</span>
+<span class="n">uint16_t</span> <span class="n">cipher_suites</span><span class="p">[</span><span class="n">CIPHER_SUITE_CNT</span><span class="p">]</span> <span class="o">=</span>
+            <span class="p">{</span><span class="n">TO_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256</span><span class="p">,</span>
+            <span class="n">TO_TLS_PSK_WITH_AES_128_GCM_SHA256</span><span class="p">};</span>
+<span class="n">TOSE_helper_tls_ctx_t</span> <span class="o">*</span><span class="n">tls_ctx</span><span class="p">;</span>
+<span class="n">TOSE_helper_tls_init_session</span><span class="p">(</span><span class="n">DEFAULT_CTX</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tls_ctx</span><span class="p">,</span> <span class="n">session_slot</span><span class="p">,</span>
+            <span class="o">&amp;</span><span class="n">your_recv_send_ctx</span><span class="p">,</span> <span class="n">your_send_func</span><span class="p">,</span> <span class="n">your_receive_func</span><span class="p">);</span>
+<span class="n">TOSE_helper_tls_set_cipher_suites</span><span class="p">(</span><span class="n">tls_ctx</span><span class="p">,</span> <span class="o">//</span> <span class="n">setting</span> <span class="n">the</span> <span class="n">cipher</span> <span class="n">suite</span> <span class="ow">is</span> <span class="n">optional</span>
+            <span class="n">cipher_suites</span><span class="p">,</span>     <span class="o">//</span> <span class="k">if</span> <span class="n">the</span> <span class="n">server</span> <span class="ow">is</span> <span class="n">known</span> <span class="n">to</span> <span class="n">always</span>
+            <span class="n">CIPHER_SUITE_CNT</span><span class="p">);</span> <span class="o">//</span> <span class="n">choose</span> <span class="n">an</span> <span class="n">AES</span><span class="o">-</span><span class="n">GCM</span> <span class="n">cipher</span> <span class="n">suite</span>
+<span class="n">TOSE_helper_tls_set_mode_handshake_only</span><span class="p">(</span><span class="n">tls_ctx</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+<span class="n">TOSE_helper_tls_do_handshake</span><span class="p">(</span><span class="n">tls_ctx</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once the handshake is completed. The Secure Element can be shutdown with <a class="reference internal" href="core.html#group__setup_1gace267d62bf78ff0f249ea9168c970af8"><span class="std std-ref">TOSE_fini()</span></a> as the encryption/decryption/authentication of payloads are done at the library layer.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Setting the mode Handshake Only has for effect to change the persistent configuration of the Secure Element. In order to go back to the mode Full TLS, the session shall be re-configured using the following sequence: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">function</span> <span class="n">returns</span> <span class="n">are</span> <span class="n">ignored</span> <span class="k">for</span> <span class="n">compactness</span> <span class="n">but</span> <span class="n">should</span> <span class="n">be</span> <span class="n">handled</span> <span class="ow">in</span>
+<span class="o">//</span> <span class="n">production</span> <span class="n">code</span><span class="o">.</span>
+<span class="n">TOSE_helper_tls_ctx_t</span> <span class="o">*</span><span class="n">tls_ctx</span><span class="p">;</span>
+<span class="n">TOSE_helper_tls_init_session</span><span class="p">(</span><span class="n">DEFAULT_CTX</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">tls_ctx</span><span class="p">,</span> <span class="n">session_slot</span><span class="p">,</span>
+            <span class="o">&amp;</span><span class="n">your_recv_send_ctx</span><span class="p">,</span> <span class="n">your_send_func</span><span class="p">,</span> <span class="n">your_receive_func</span><span class="p">);</span>
+<span class="n">TOSE_helper_tls_set_mode</span><span class="p">(</span><span class="n">tls_ctx</span><span class="p">,</span> <span class="n">TO_TLS_MODE_TLS_1_2_FULL</span><span class="p">);</span>
+<span class="n">TOSE_helper_tls_do_handshake</span><span class="p">(</span><span class="n">tls_ctx</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[inout]</strong> context of the TLS session </p></li>
+<li><p><strong>cipher_ctx</strong> – <strong>[in]</strong> private cipher context given to the callbacks </p></li>
+<li><p><strong>setup_cipher_ctx</strong> – <strong>[in]</strong> callback used to setup the cipher context, call during the TLS handshake after cipher suite have been negotiated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TO_OK</strong> – the TLS session switched to HANDSHAKE_ONLY_MODE </p></li>
+<li><p><strong>TO_ERROR</strong> – the TLS session didn’t switch to HANDSHAKE_ONLY_MODE </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_do_handshake_step">
+<span class="target" id="group__helper__tls__handshake_1ga557f4699e6d49085f183e54b7dca5f09"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_do_handshake_step</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_do_handshake_step" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Do TLS handshake step. </p>
+<p>
+This function does one step of a TLS handshake. It encapsulates Secure Element payloads from optimized API in a TLS record, and sends it on the network through given function. It decapsulates TLS records received from the network and sends it to the Secure Element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_AGAIN if intermediate step suceed, TO_OK if last step succeed, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_do_handshake">
+<span class="target" id="group__helper__tls__handshake_1ga5fd67412eb0bedf8b0e20d6574713612"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_do_handshake</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_do_handshake" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Do TLS handshake. </p>
+<p>
+This function does all the steps of a TLS handshake except initialization and cleanup. It encapsulates the Secure Element payloads from optimized API in a TLS record, and sends it on the network through given function. It decapsulates TLS records received from the network and sends it to the Secure Element. This function uses TOSE_helper_tls_handshake_init() and TOSE_helper_tls_handshake_step().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if data has been sent successfully, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_get_certificate_slot">
+<span class="target" id="group__helper__tls__handshake_1ga057c935935407857caa61f63a122f259"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_get_certificate_slot</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">slot</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_get_certificate_slot" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get certificate slot used during TLS handshake. </p>
+<p>
+This function must be called after handshake.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
+<li><p><strong>slot</strong> – <strong>[out]</strong> Certificate slot</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if slot has been retrieved successfully, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="messaging-api">
+<h3>Messaging API<a class="headerlink" href="#messaging-api" title="Permalink to this headline">¶</a></h3>
+<p>Once handshake is done, these 2 functions will allow to send and receive with
+TLS encryption using just negociated session.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_send">
+<span class="target" id="group__helper__tls__messaging_1ga1698630f6af11c017952571ea2105bbd"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_send</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">msg</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">msg_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_send" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send TLS encrypted data. </p>
+<p>
+This function uses TLS handshake keys to encrypt and send a message on the network through given function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
+<li><p><strong>msg</strong> – <strong>[in]</strong> Message </p></li>
+<li><p><strong>msg_len</strong> – <strong>[in]</strong> Message length</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if message has been sent successfully, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_receive">
+<span class="target" id="group__helper__tls__messaging_1gabde1b04b7a16240c2c51a42dc52dcc73"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_receive</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">msg</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">max_msg_len</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">msg_len</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_receive" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Receive TLS encrypted data. </p>
+<p>
+This function uses given function to receive a message from the network and decrypts it with TLS handshake keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
+<li><p><strong>msg</strong> – <strong>[out]</strong> Message output buffer </p></li>
+<li><p><strong>max_msg_len</strong> – <strong>[in]</strong> Message output buffer length </p></li>
+<li><p><strong>msg_len</strong> – <strong>[out]</strong> Receive message length </p></li>
+<li><p><strong>timeout</strong> – <strong>[in]</strong> Receive timeout in milliseconds (-1 for no timeout)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TO_OK if message has been received successfully, TO_TIMEOUT if given timeout has been exceeded, else TO_ERROR </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_helper_tls_recv">
+<span class="target" id="group__helper__tls__messaging_1ga40dfb80d5dd5fd3d9eb54b67ca5dd359"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_recv</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">msg</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">max_msg_len</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">msg_len</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n"><span class="pre">timeout_ms</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_recv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>receive plain text application data </p>
+<p>More precisely, receives at most a plain text record of type application data, less if the receiving buffer is too short or if a record has been partially received previously.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>the parameter timeout_ms is given to the receive_func() callback provided to <a class="reference internal" href="#group__helper__tls__handshake_1ga3adbd84cbe7c2212b5556172da040ac4"><span class="std std-ref">TOSE_helper_tls_init_session()</span></a>. To ensure to not block more than timeout_ms, the recv() callback is called just once, thus the #TO_AGAIN retval if partial data has been received. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tls_ctx</strong> – <strong>[inout]</strong> the TLS context </p></li>
+<li><p><strong>msg</strong> – <strong>[out]</strong> received data </p></li>
+<li><p><strong>max_msg_len</strong> – <strong>[in]</strong> maximum length of data writable in msg </p></li>
+<li><p><strong>msg_len</strong> – <strong>[out]</strong> number of bytes read </p></li>
+<li><p><strong>timeout_ms</strong> – <strong>[in]</strong> the maximum time to wait data in milliseconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return values</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TO_OK</strong> – application data received with success, msg is updated and *msg_len is greater than 0 </p></li>
+<li><p><strong>TO_AGAIN</strong> – some data has been received but not enough to receive a complete record, or it was not application data (see note above) </p></li>
+<li><p><strong>TO_TIMEOUT</strong> – timeout elapsed before any bytes were received </p></li>
+<li><p><strong>TO_ERROR</strong> – data cannot be received, the connection shall be (re-)initialized</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

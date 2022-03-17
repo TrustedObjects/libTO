@@ -1,0 +1,171 @@
+%%
+%% Trusted Objects Latex style
+%%
+
+\ProvidesPackage{TOstyle}[2021/12/08 Trusted Objects style]
+
+%
+% Font
+%
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+\usepackage{enumitem}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+%
+% Enable SVG
+%
+\usepackage{svg}
+
+%
+% Figure position
+%
+\usepackage{float}
+
+%
+% Table of content
+%
+\hypersetup{
+	% numbers in PDF metadata (side-bar)
+	bookmarksnumbered=true
+}
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+%
+% Definitions
+%
+\definecolor{TOcolor}{rgb}{0.93,0.44,0.08}
+
+%
+% Special elements colors
+%
+\definecolor{TitleColor}{RGB}{0,0,0}
+\definecolor{InnerLinkColor}{RGB}{238,114,20}
+\definecolor{OuterLinkColor}{RGB}{238,114,20}
+\definecolor{VerbatimBorderColor}{RGB}{204,204,204}
+\definecolor{VerbatimColor}{RGB}{238,238,238}
+
+%
+% Tables
+%
+\usepackage{colortbl}
+\definecolor{TableHeadBgColor}{RGB}{242,144,71}
+\definecolor{TableOddRowBgColor}{RGB}{253,242,233}
+\definecolor{TableEvenRowBgColor}{RGB}{253,233,217}
+\definecolor{TableExtBorderColor}{RGB}{221,221,221}
+\protected\def\sphinxstyletheadfamily {
+	\cellcolor{TableHeadBgColor}\rmfamily
+	\leavevmode\color{white}
+	\bf
+}
+\setlength\arrayrulewidth{0pt}
+\usepackage[most]{tcolorbox}
+\tcbset{enhanced, breakable, colback=white, colframe=TableExtBorderColor,
+	sharpish corners, size=tight,
+	fuzzy shadow={0.5mm}{-0.5mm}{0mm}{0mm}TableExtBorderColor}
+
+%
+% Enums and defines lists spacing
+%
+\renewenvironment{fulllineitems}{%
+  \begin{list}{}{}%
+}{\end{list}}
+\renewcommand*{\pysigstartmultiline}{}
+\newcommand*{\pysigstopmultiline}{}
+\def\pysigline@preparevspace@i{}
+
+%
+% Sphinx specific
+%
+\sphinxsetup{
+	verbatimborder=0pt,
+	noteborder=1pt,
+	noteBorderColor={RGB}{204,204,204},
+	warningborder=1pt,
+	warningBorderColor={RGB}{255,170,170},
+	warningBgColor={RGB}{255,204,204},
+}
+
+%
+% Title page
+%
+\makeatletter
+		\def\maketitle{%
+	\newpage
+	\null
+	\thispagestyle{empty}
+	\begin{flushright}%
+		\sphinxlogo
+		\bigskip
+		\py@HeaderFamily
+		{\rmfamily
+			\@title
+			\bigskip
+			\vfill
+			{\large
+				%{\fontsize{16}{16}\selectfont Rev 2.3 \par}
+				{\LARGE \py@release\releaseinfo \par}
+				\today \par
+				\text{Authored by} \textit{\@author} \par
+			}%
+		}
+	\end{flushright}%\par
+	\if@openright\cleardoublepage\else\clearpage\fi
+	\vskip 1.5em}
+\makeatother
+\renewcommand*{\sphinxmaketitle}{\maketitle}
+
+%
+% Pages headers and footers
+%
+\usepackage{fancyhdr}
+\geometry{includefoot} % avoid footer to overflow page bottom
+\usepackage{adjustbox}
+\usepackage{lastpage}
+\usepackage{color}
+\usepackage[breakwords]{truncate} % to avoid too long titles
+\setlength\headheight{40pt}
+\renewcommand*{\headrule}{ % horizontal line under header
+	\noindent\hfil
+	\color{TOcolor}\rule{0.2\textwidth}{2pt}
+	\hfil
+}
+\renewcommand*{\footrule}{} % no footer horizontal line
+\fancypagestyle{normal}{ % define 'normal' pages style
+	\lhead{\adjincludegraphics[width=0.2\textwidth,valign=M]{logo_TO.png}}
+	\chead{
+		\nouppercase\leftmark\\
+		\parbox{0.55\textwidth}{\centering\nouppercase\rightmark}
+	}
+	\rhead{}
+	\lfoot{\adjincludegraphics[width=0.1\textwidth,valign=T]{logo_TO.png}}
+	\cfoot{\scriptsize
+		This document and the information it contains is the property
+		of Trusted Objects.\\
+		It can't be used, reproduced or transmitted to a third party
+		without prior written approval.
+	}
+	\rfoot{\textbf{\thepage~/~\pageref*{LastPage}}}
+}
+\fancypagestyle{plain}{ % define 'plain' pages style from 'normal'
+	\pagestyle{normal}
+	\chead{\nouppercase\leftmark}
+	\rfoot{\textbf{\thepage}}
+}
+
+% Titles
+\usepackage{titlesec}
+\titleformat{\chapter}[block]
+	{\rmfamily\huge\bfseries}{\thechapter.}{1em}{\huge}
+	\titlespacing*{\chapter}{0pt}{-19pt}{0pt}
+\titleformat*{\chapter}{\rmfamily\huge\bfseries}
+\titleformat*{\section}{\rmfamily\LARGE\bfseries}
+\titleformat*{\subsection}{\rmfamily\Large\bfseries}
+\titleformat*{\subsubsection}{\rmfamily\large\bfseries}
+\titleformat*{\paragraph}{\rmfamily\normalsize\bfseries}
+
+\endinput

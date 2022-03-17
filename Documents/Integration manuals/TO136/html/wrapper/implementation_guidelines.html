@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I2C wrapper implementation guidelines &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Initialization" href="../api/examples.html" />
+    <link rel="prev" title="I2C wrapper" href="overview.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">I2C wrapper implementation guidelines</a><ul>
+<li><a class="reference internal" href="#timeout">Timeout</a></li>
+<li><a class="reference internal" href="#library-debug-logs">Library debug logs</a></li>
+<li><a class="reference internal" href="#i2c-wrapper-integration">I2C wrapper integration</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="i2c-wrapper-implementation-guidelines">
+<span id="i2c-wrapper-implem-guide"></span><h1>I2C wrapper implementation guidelines<a class="headerlink" href="#i2c-wrapper-implementation-guidelines" title="Permalink to this headline">¶</a></h1>
+<p>To implement an I2C wrapper according to your I2C hardware, please refer to
+<a class="reference internal" href="../api/i2c_wrapper.html#api-i2c-wrapper"><span class="std std-ref">I2C wrapper API</span></a> and implement your own wrapper functions by following
+this API documentation.</p>
+<p>Once your implementation is complete, you should be able to call
+<a class="reference internal" href="../api/core.html#api-to"><span class="std std-ref">Secure Element API</span></a> functions to interact with the Secure Element.</p>
+<div class="section" id="timeout">
+<h2>Timeout<a class="headerlink" href="#timeout" title="Permalink to this headline">¶</a></h2>
+<p>Defining timeouts may be important to avoid blocking your code in case of I2C
+bus communication error with the Secure Element.</p>
+<p>So, in your wrapper implementation, it is recommended to define read/write
+timeouts. We suggest to define 5 seconds timeouts, knowing that this value will
+never be reached in normal use.</p>
+</div>
+<div class="section" id="library-debug-logs">
+<h2>Library debug logs<a class="headerlink" href="#library-debug-logs" title="Permalink to this headline">¶</a></h2>
+<p>You may want to enable libTO debug logs to help you implement your I2C
+wrapper. It prints out I2C read and written data on standard output, so you can
+refer to the Secure Element datasheet to compare the printed logs with what is expected
+according to the Secure Element protocol.</p>
+<p>For an MCU project, <strong>TO_LOG_LEVEL_MAX</strong> preprocessor flag can be defined to
+<strong>TO_LOG_LEVEL_DBG</strong> to enable debug mode.
+If you are building the library with Autotools, use <cite>./configure</cite> with
+<cite>log_level_max=3</cite> option.</p>
+</div>
+<div class="section" id="i2c-wrapper-integration">
+<h2>I2C wrapper integration<a class="headerlink" href="#i2c-wrapper-integration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mcu-project">
+<h3>MCU project<a class="headerlink" href="#mcu-project" title="Permalink to this headline">¶</a></h3>
+<p>For an MCU target, just build your new I2C wrapper C file with your
+project, to make the library able to rely on it for I2C communications
+with the Secure Element.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

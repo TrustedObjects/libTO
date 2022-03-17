@@ -1,0 +1,1605 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Types and definitions &#8212; libTO 6.1.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Production optimizations" href="../misc/prod_optim.html" />
+    <link rel="prev" title="Library core APIs" href="lib.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">release 6.1.2<br />doc</p>
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Types and definitions</a><ul>
+<li><a class="reference internal" href="#library-error-codes">Library error codes</a></li>
+<li><a class="reference internal" href="#secure-element-error-codes">Secure Element error codes</a></li>
+<li><a class="reference internal" href="#combined-error-codes">Combined error codes</a></li>
+<li><a class="reference internal" href="#generic-context">Generic context</a></li>
+<li><a class="reference internal" href="#log-levels">Log levels</a></li>
+<li><a class="reference internal" href="#miscellaneous-constants">Miscellaneous constants</a></li>
+<li><a class="reference internal" href="#certificates-constants">Certificates constants</a></li>
+<li><a class="reference internal" href="#tls-constants">TLS constants</a></li>
+<li><a class="reference internal" href="#admin-constants">Admin constants</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="types-and-definitions">
+<span id="api-defs"></span><h1>Types and definitions<a class="headerlink" href="#types-and-definitions" title="Permalink to this headline">¶</a></h1>
+<p>LibTO types and definitions.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TO_defs.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<div class="section" id="library-error-codes">
+<h2>Library error codes<a class="headerlink" href="#library-error-codes" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__lib__codes"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">lib_codes</span></span></dt>
+<dd><p>Error codes </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_lib_ret_t">
+<span class="target" id="group__lib__codes_1ga29c44234c2729c578a3495f8ad0114c8"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_lib_ret_e" title="TO_lib_ret_e"><span class="n"><span class="pre">TO_lib_ret_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_lib_ret_t</span></span></span><a class="headerlink" href="#c.TO_lib_ret_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e">
+<span class="target" id="group__lib__codes_1gad5f9b3a351ae3c02a68dbc50f9ddda73"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_lib_ret_e</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_OK">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73ae9bbec7bbfe972c8ecdb27d2b7e6407c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_OK</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_OK" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_MEMORY_ERROR">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73af17495f3c59a774d4d3a1044a7f61c4c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_MEMORY_ERROR</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_MEMORY_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_DEVICE_WRITE_ERROR">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73a5be95d01f96870f7b37ff13cdb5a70da"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_DEVICE_WRITE_ERROR</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_DEVICE_WRITE_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_DEVICE_READ_ERROR">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73a17bbb1686a3378877ed2a94de03f8f92"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_DEVICE_READ_ERROR</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_DEVICE_READ_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_INVALID_CA_ID">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73a143ee0bd40b52b9e03535503762c832a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_INVALID_CA_ID</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_INVALID_CA_ID" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_INVALID_CERTIFICATE_FORMAT">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73adfd2732be8760ace5f76a3b554efc634"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_INVALID_CERTIFICATE_FORMAT</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_INVALID_CERTIFICATE_FORMAT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_INVALID_CERTIFICATE_NUMBER">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73a4f971355ad3a8851edb0588952b7e4d4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_INVALID_CERTIFICATE_NUMBER</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_INVALID_CERTIFICATE_NUMBER" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_INVALID_RESPONSE_LENGTH">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73ab3752932dad6a86a135bb5b155e26c3e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_INVALID_RESPONSE_LENGTH</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_INVALID_RESPONSE_LENGTH" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_SECLINK_ERROR">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73a3a83cbb3b5af23be4c58ba3764790452"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_SECLINK_ERROR</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_SECLINK_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_TIMEOUT">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73a46f05ec1c0281cc6bff56b6504821d6c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TIMEOUT</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_TIMEOUT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_AGAIN">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73a5c074aafaafcbc064a114aa19c8e8d65"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_AGAIN</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_AGAIN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_INVALID_PARAM">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73af21d825f7010b36d37bdd188dadf16ef"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_INVALID_PARAM</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_INVALID_PARAM" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_NOT_IMPLEMENTED">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73a4909fae2c2b17788225c7373ae64fe86"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_NOT_IMPLEMENTED</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_NOT_IMPLEMENTED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_lib_ret_e.TO_ERROR">
+<span class="target" id="group__lib__codes_1ggad5f9b3a351ae3c02a68dbc50f9ddda73acc5f9cdc5a28449e190763069d40d4c5"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_ERROR</span></span></span><a class="headerlink" href="#c.TO_lib_ret_e.TO_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Less significant byte is left empty because it is reserved for
+Secure Element error codes, then it is possible to return Secure Element and
+library error codes in one single variable. See
+<a class="reference internal" href="#secure-element-error-codes">Secure Element error codes</a>.</p>
+</div>
+</div>
+<div class="section" id="secure-element-error-codes">
+<h2>Secure Element error codes<a class="headerlink" href="#secure-element-error-codes" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__se__codes"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">se_codes</span></span></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_se_ret_t">
+<span class="target" id="group__se__codes_1gaac7be3faf0f1888e1a1d95edcdc75de2"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_se_ret_e" title="TO_se_ret_e"><span class="n"><span class="pre">TO_se_ret_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_se_ret_t</span></span></span><a class="headerlink" href="#c.TO_se_ret_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Secure Element response codes. </p>
+<p>These return codes are common to all TO Secure elements, including the TO-136 and TO-Protect. Therefore, some of these return values may have a different meaning depending on the SE you are using, and the context you are receiving it. Refer yourself to the called function to have a more precise information. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_se_ret_e">
+<span class="target" id="group__se__codes_1ga736f8203688b8da2f2c1ac626716109e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_se_ret_e</span></span></span><a class="headerlink" href="#c.TO_se_ret_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Secure Element response codes. </p>
+<p>These return codes are common to all TO Secure elements, including the TO-136 and TO-Protect. Therefore, some of these return values may have a different meaning depending on the SE you are using, and the context you are receiving it. Refer yourself to the called function to have a more precise information. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_UNKNOWN_CMD">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109eaa596049eb8038293c6e6596fe37a1b0c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_UNKNOWN_CMD</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_UNKNOWN_CMD" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Indicates that the SE does not know how to handle this command </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_BAD_SIGNATURE">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109ea3775bb947280de21c6f3ed75d1fb7380"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_BAD_SIGNATURE</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_BAD_SIGNATURE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The digital signature is wrong </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_INVALID_LEN">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109ea05b64089a9e6cc085085bd76f9e16d7f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_INVALID_LEN</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_INVALID_LEN" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The provided length is wrong </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_NOT_AVAILABLE">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109ead275417564325b122ab24f333bc8de9a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_NOT_AVAILABLE</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_NOT_AVAILABLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The requested data cannot be retrieved </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_INVALID_PADDING">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109eae8b2af46397f40185f05366a6f017841"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_INVALID_PADDING</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_INVALID_PADDING" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The expected padding is not respected </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_COM_ERROR">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109eab6813d0093f1b9a9ffa45de379a94b02"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_COM_ERROR</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_COM_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A communication error has occurred </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TO136RSP_COM_ERROR">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109ea72a3061751a3c81a9489c00a1ff25c0a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO136RSP_COM_ERROR</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TO136RSP_COM_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deprecated, use TORSP_COM_ERROR instead </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_NEED_AUTHENTICATION">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109eab1edf3577b1becb62b70f32f6175a940"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_NEED_AUTHENTICATION</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_NEED_AUTHENTICATION" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>An authentication process has to be conduced to pursue </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_COND_OF_USE_NOT_SATISFIED">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109ea692dc42e0e95d942749602f6ddeaa491"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_COND_OF_USE_NOT_SATISFIED</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_COND_OF_USE_NOT_SATISFIED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This command cannot be used in this context </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_ARG_OUT_OF_RANGE">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109ea45b46b85870cb0d3d9e1ce4fc802e223"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_ARG_OUT_OF_RANGE</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_ARG_OUT_OF_RANGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>An argument is not in the expected range </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_SUCCESS">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109eaa2007f3d9335794947ff5015d72187a3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_SUCCESS</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_SUCCESS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The Command’s execution has been conduced correctly </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_SECLINK_RENEW_KEY">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109ea7889c2073bc074ea3730137ccf296d1c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_SECLINK_RENEW_KEY</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_SECLINK_RENEW_KEY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The SecLink key has to be renewed </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_INTERNAL_ERROR">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109eaedf49b303c0714a858e389b32519bdef"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_INTERNAL_ERROR</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_INTERNAL_ERROR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>An internal error has occurred. It may be the proof that something unexpected has happened (for instance, a fault has been detected). </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="combined-error-codes">
+<h2>Combined error codes<a class="headerlink" href="#combined-error-codes" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__error__codes"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">error_codes</span></span></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LIB_ERRCODE">
+<span class="target" id="group__error__codes_1gafadb9e4531b71ac96ad724a4dc8e03b0"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LIB_ERRCODE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">errcode</span></span><span class="sig-paren">)</span> <span class="pre">((errcode)</span> <span class="pre">&amp;</span> <span class="pre">0xFF00)</span><a class="headerlink" href="#c.TO_LIB_ERRCODE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Mask error code to extract library error </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_SE_ERRCODE">
+<span class="target" id="group__error__codes_1gaa62eb6840c98e530b76f920e697e5780"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_SE_ERRCODE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">errcode</span></span><span class="sig-paren">)</span> <span class="pre">((errcode)</span> <span class="pre">&amp;</span> <span class="pre">0x00FF)</span><a class="headerlink" href="#c.TO_SE_ERRCODE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Mask error code to extract SE error </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_ret_t">
+<span class="target" id="group__error__codes_1ga2cac0281021232b1a5c71129c99c2a10"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_ret_t</span></span></span><a class="headerlink" href="#c.TO_ret_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="generic-context">
+<h2>Generic context<a class="headerlink" href="#generic-context" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__tose__defs"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">tose_defs</span></span></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TOSE_drv_ctx_t">
+<span class="target" id="group__tose__defs_1ga66ae044ad447f6b827fd7a42809965c1"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.TOSE_drv_ctx_s" title="TOSE_drv_ctx_s"><span class="n"><span class="pre">TOSE_drv_ctx_s</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_drv_ctx_t</span></span></span><a class="headerlink" href="#c.TOSE_drv_ctx_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Context structure for Secure Elements (Hardware / Software / other) </p>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TOSE_ctx_t">
+<span class="target" id="group__tose__defs_1ga9c5b0ad232d42a81683488591aa4162b"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.TOSE_ctx_s" title="TOSE_ctx_s"><span class="n"><span class="pre">TOSE_ctx_s</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_ctx_t</span></span></span><a class="headerlink" href="#c.TOSE_ctx_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Context structure for Secure Elements (Hardware / Software / other) </p>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.TOSE_drv_ctx_s">
+<span class="target" id="structTOSE__drv__ctx__s"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_drv_ctx_s</span></span></span><a class="headerlink" href="#c.TOSE_drv_ctx_s" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;TO_defs.h&gt;</em></div>
+<p>Context structure for Secure Elements (Hardware / Software / other) </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.TOSE_drv_ctx_s.api">
+<span class="target" id="structTOSE__drv__ctx__s_1a660ef6635fb889e088345d8d4ebc7109"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">TODRV_api_s</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">api</span></span></span><a class="headerlink" href="#c.TOSE_drv_ctx_s.api" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Driver API </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.TOSE_drv_ctx_s.func_offset">
+<span class="target" id="structTOSE__drv__ctx__s_1ac2dd60153635d3820578ba9f6d863075"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">func_offset</span></span></span><a class="headerlink" href="#c.TOSE_drv_ctx_s.func_offset" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Offset to add to driver API functions </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.TOSE_drv_ctx_s.log_ctx">
+<span class="target" id="structTOSE__drv__ctx__s_1aa26b5db613680d9825a7da4ea1d3366c"></span><a class="reference internal" href="#c.TO_log_ctx_t" title="TO_log_ctx_t"><span class="n"><span class="pre">TO_log_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">log_ctx</span></span></span><a class="headerlink" href="#c.TOSE_drv_ctx_s.log_ctx" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Running-platform specific log function </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.TOSE_drv_ctx_s.priv_ctx">
+<span class="target" id="structTOSE__drv__ctx__s_1a6bc6c079c1a934ed31f753b7b053bd2a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">priv_ctx</span></span></span><a class="headerlink" href="#c.TOSE_drv_ctx_s.priv_ctx" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Driver private context </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.TOSE_ctx_s">
+<span class="target" id="structTOSE__ctx__s"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_ctx_s</span></span></span><a class="headerlink" href="#c.TOSE_ctx_s" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;TO_defs.h&gt;</em></div>
+<p>Context structure for Secure Elements (Hardware / Software / other) </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.TOSE_ctx_s.drv">
+<span class="target" id="structTOSE__ctx__s_1a85fe631a24edfb7c28ad30855599cd8b"></span><a class="reference internal" href="#c.TOSE_drv_ctx_t" title="TOSE_drv_ctx_t"><span class="n"><span class="pre">TOSE_drv_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">drv</span></span></span><a class="headerlink" href="#c.TOSE_ctx_s.drv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Driver context </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.TOSE_ctx_s.initialized">
+<span class="target" id="structTOSE__ctx__s_1af5859177d7c5d23555fb6c741c315249"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">initialized</span></span></span><a class="headerlink" href="#c.TOSE_ctx_s.initialized" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Context initialization state </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="log-levels">
+<h2>Log levels<a class="headerlink" href="#log-levels" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__log__level"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">log_level</span></span></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LOG_LEVEL_NONE">
+<span class="target" id="group__log__level_1gab5918021717adf999f98b5312db3d4e8"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_LEVEL_NONE</span></span></span> <span class="pre">-1</span><a class="headerlink" href="#c.TO_LOG_LEVEL_NONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Log levels </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LOG_LEVEL_ERR">
+<span class="target" id="group__log__level_1ga709ceddc15b94c46c379aeeae33966c7"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_LEVEL_ERR</span></span></span> <span class="pre">0</span><a class="headerlink" href="#c.TO_LOG_LEVEL_ERR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LOG_LEVEL_WRN">
+<span class="target" id="group__log__level_1ga1be02a5335262f6efb28f23c3e5b1133"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_LEVEL_WRN</span></span></span> <span class="pre">1</span><a class="headerlink" href="#c.TO_LOG_LEVEL_WRN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LOG_LEVEL_INF">
+<span class="target" id="group__log__level_1gaaaf4cc91df3cc59d3184583af52ad814"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_LEVEL_INF</span></span></span> <span class="pre">2</span><a class="headerlink" href="#c.TO_LOG_LEVEL_INF" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LOG_LEVEL_DBG">
+<span class="target" id="group__log__level_1ga1f358df328a629388a16826448b644ec"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_LEVEL_DBG</span></span></span> <span class="pre">3</span><a class="headerlink" href="#c.TO_LOG_LEVEL_DBG" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LOG_LEVEL_MASK">
+<span class="target" id="group__log__level_1gac86d5ecfaedee3cb76409ca2aff29c28"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_LEVEL_MASK</span></span></span> <span class="pre">0x0f</span><a class="headerlink" href="#c.TO_LOG_LEVEL_MASK" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LOG_STRING">
+<span class="target" id="group__log__level_1gac7cb6007077d770f98255000ab0441b2"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_STRING</span></span></span> <span class="pre">0x00</span><a class="headerlink" href="#c.TO_LOG_STRING" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LOG_BUFFER">
+<span class="target" id="group__log__level_1gadd3bc7fea4e1027c96085393306a9a2b"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_BUFFER</span></span></span> <span class="pre">0x10</span><a class="headerlink" href="#c.TO_LOG_BUFFER" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LOG_HEX_DISP">
+<span class="target" id="group__log__level_1ga66b884e8493797d0d4d47234467a78ba"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_HEX_DISP</span></span></span> <span class="pre">0x20</span><a class="headerlink" href="#c.TO_LOG_HEX_DISP" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_log_ctx_t">
+<span class="target" id="group__log__level_1ga065a1cd1a4ea651838e304ce31cb5930"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_log_ctx_s" title="TO_log_ctx_s"><span class="n"><span class="pre">TO_log_ctx_s</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_log_ctx_t</span></span></span><a class="headerlink" href="#c.TO_log_ctx_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The Log context, propagated to all layers. </p>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c">
+<span class="target" id="group__log__level_1gae3dcaac98f23bd3e1b5ff13cbc021ff9"></span><span class="sig-name descname"><span class="pre">void()</span> <span class="pre">TO_log_func_t</span> <span class="pre">(TO_log_ctx_t</span> <span class="pre">*log_ctx,</span> <span class="pre">const</span> <span class="pre">TO_log_level_t</span> <span class="pre">level,</span> <span class="pre">void</span> <span class="pre">*ptr,...)</span></span></dt>
+<dd><p>Pointer to a log function. </p>
+<p>This function will be responsible for displaying/processing logs in a way suitable for your application. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_log_level_e">
+<span class="target" id="group__log__level_1gacccb621f91b8dd3c8118d20b6a1d7d54"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_log_level_e</span></span></span><a class="headerlink" href="#c.TO_log_level_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Different log levels that are available to the application. </p>
+<p><em>Values:</em></p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="c function">
+<dt class="sig sig-object c">
+<span class="target" id="group__log__level_1gaf9f6ab5afa374f54977a6ff49e8c5661"></span><span class="sig-name descname"><span class="pre">enum</span> <span class="pre">TO_log_level_e</span> <span class="pre">__attribute__</span> <span class="pre">((packed))</span> <span class="pre">TO_log_level_t</span></span></dt>
+<dd><p>Different log levels that are available to the application. </p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.print_log_function">
+<span class="target" id="group__log__level_1ga404e34c19a8f0ff3bcee291901fb7144"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print_log_function</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">TO_log_level_t</span></span><span class="w"> </span><span class="n"><span class="pre">level</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">log</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.print_log_function" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default print log function, potentialy to be customized per-target. </p>
+<p>Depending on your target and the way to send string messages out, you may have to rewrite it. In this case, just declare a function having the same names/parameters, printing-out the messages. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>level</strong> – Importance level of the message </p></li>
+<li><p><strong>log</strong> – String to be displayed </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TO_log">
+<span class="target" id="group__log__level_1ga51edfdec4dcfc08f47fc1beeaef8b8b9"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_log</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TO_log_ctx_t" title="TO_log_ctx_t"><span class="n"><span class="pre">TO_log_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">log_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">TO_log_level_t</span></span><span class="w"> </span><span class="n"><span class="pre">level</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ptr</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TO_log" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default LOG “display” function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_ctx</strong> – The LOG context </p></li>
+<li><p><strong>level</strong> – The desired log display level </p></li>
+<li><p><strong>ptr</strong> – Pointer to the string (mandatory parameter) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TO_set_log_level">
+<span class="target" id="group__log__level_1gaf63075cf8494e7efcf05072e93e663b5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_set_log_level</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TO_log_ctx_t" title="TO_log_ctx_t"><span class="n"><span class="pre">TO_log_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">log_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">TO_log_level_t</span></span><span class="w"> </span><span class="n"><span class="pre">level</span></span>, <span class="n"><span class="pre">TO_log_func_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">log_function</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TO_set_log_level" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets the Log function and log level. </p>
+<p>This function permits to change the log level and the log function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_ctx</strong> – Current log context </p></li>
+<li><p><strong>level</strong> – Desired log level </p></li>
+<li><p><strong>log_function</strong> – Log function (eg. TO_log) </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TO_log_get_ctx">
+<span class="target" id="group__log__level_1ga5a55399fab291a22536dea3b4bf97562"></span><a class="reference internal" href="#c.TO_log_ctx_t" title="TO_log_ctx_t"><span class="n"><span class="pre">TO_log_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TO_log_get_ctx</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TO_log_get_ctx" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the LOG context. </p>
+<p>This function is weak, and can be replaced by your own implementation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>TO_log_ctx_t* </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.TO_log_ctx_s">
+<span class="target" id="structTO__log__ctx__s"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_log_ctx_s</span></span></span><a class="headerlink" href="#c.TO_log_ctx_s" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;TO_log.h&gt;</em></div>
+<p>The Log context, propagated to all layers. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="c var">
+<dt class="sig sig-object c" id="c.TO_log_ctx_s.log_function">
+<span class="target" id="structTO__log__ctx__s_1a5b36d12ec2015326ca505fb9697deecb"></span><span class="n"><span class="pre">TO_log_func_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">log_function</span></span></span><a class="headerlink" href="#c.TO_log_ctx_s.log_function" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pointer to a log function </p>
+</dd></dl>
+
+<dl class="c var">
+<dt class="sig sig-object c" id="c.TO_log_ctx_s.log_level">
+<span class="target" id="structTO__log__ctx__s_1a7e1cd5e2ca2365bb43bbc2832539b7f6"></span><span class="n"><span class="pre">TO_log_level_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">log_level</span></span></span><a class="headerlink" href="#c.TO_log_ctx_s.log_level" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Dynamic level management </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="miscellaneous-constants">
+<h2>Miscellaneous constants<a class="headerlink" href="#miscellaneous-constants" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__constants"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">constants</span></span></dt>
+<dd><p>Misc constants </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_INDEX_SIZE">
+<span class="target" id="group__constants_1ga3b8a15e22d78c80b5fd22af967ada353"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_INDEX_SIZE</span></span></span> <span class="pre">1UL</span><a class="headerlink" href="#c.TO_INDEX_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_FORMAT_SIZE">
+<span class="target" id="group__constants_1ga3f5dfcfad35dcd896450a7f6e297dda4"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_FORMAT_SIZE</span></span></span> <span class="pre">1UL</span><a class="headerlink" href="#c.TO_FORMAT_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_AES_BLOCK_SIZE">
+<span class="target" id="group__constants_1ga359ef7c9b6e62a7a0f2e0f26ac194cd1"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_AES_BLOCK_SIZE</span></span></span> <span class="pre">16UL</span><a class="headerlink" href="#c.TO_AES_BLOCK_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_INITIALVECTOR_SIZE">
+<span class="target" id="group__constants_1ga141ef4098e6020a8a8361fbf1abab4af"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_INITIALVECTOR_SIZE</span></span></span> <span class="pre">TO_AES_BLOCK_SIZE</span><a class="headerlink" href="#c.TO_INITIALVECTOR_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_AES_KEYSIZE">
+<span class="target" id="group__constants_1ga95730c57425f247ea5d73211abbc15db"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_AES_KEYSIZE</span></span></span> <span class="pre">16UL</span><a class="headerlink" href="#c.TO_AES_KEYSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_AESGCM_INITIALVECTOR_SIZE">
+<span class="target" id="group__constants_1ga8e6d11dbe7fb95a27ea12463014761b2"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_AESGCM_INITIALVECTOR_SIZE</span></span></span> <span class="pre">12UL</span><a class="headerlink" href="#c.TO_AESGCM_INITIALVECTOR_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_AESGCM_TAG_SIZE">
+<span class="target" id="group__constants_1gacae27cf25ebe6586ddfa7b78a3b36986"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_AESGCM_TAG_SIZE</span></span></span> <span class="pre">16UL</span><a class="headerlink" href="#c.TO_AESGCM_TAG_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_AESGCM_AAD_LEN_SIZE">
+<span class="target" id="group__constants_1ga158c8431e43f10431e46d1bd6c8f617c"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_AESGCM_AAD_LEN_SIZE</span></span></span> <span class="pre">2UL</span><a class="headerlink" href="#c.TO_AESGCM_AAD_LEN_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_AESCCM_NONCE_SIZE">
+<span class="target" id="group__constants_1ga63bdf3114f34fb4f1f397f6946e46135"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_AESCCM_NONCE_SIZE</span></span></span> <span class="pre">13UL</span><a class="headerlink" href="#c.TO_AESCCM_NONCE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_AESCCM_TAG_SIZE">
+<span class="target" id="group__constants_1ga9876c400ffe85b2a0282fc19f733c96d"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_AESCCM_TAG_SIZE</span></span></span> <span class="pre">16UL</span><a class="headerlink" href="#c.TO_AESCCM_TAG_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_AESCCM_8_TAG_SIZE">
+<span class="target" id="group__constants_1gaedbd56a16a12ecbf6de1672f4567b212"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_AESCCM_8_TAG_SIZE</span></span></span> <span class="pre">8UL</span><a class="headerlink" href="#c.TO_AESCCM_8_TAG_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_AESCCM_AAD_LEN_SIZE">
+<span class="target" id="group__constants_1ga02a1da43d52ce9f835b24d64330ae9e6"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_AESCCM_AAD_LEN_SIZE</span></span></span> <span class="pre">2UL</span><a class="headerlink" href="#c.TO_AESCCM_AAD_LEN_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_HMAC_KEYSIZE">
+<span class="target" id="group__constants_1gac0b47b791e210498e03c4608a085638b"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_HMAC_KEYSIZE</span></span></span> <span class="pre">16UL</span><a class="headerlink" href="#c.TO_HMAC_KEYSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_HMAC_SIZE">
+<span class="target" id="group__constants_1ga3662ea5cc45a1d4103321e16a0457f37"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_HMAC_SIZE</span></span></span> <span class="pre">TO_SHA256_HASHSIZE</span><a class="headerlink" href="#c.TO_HMAC_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_HMAC_MINSIZE">
+<span class="target" id="group__constants_1ga1ef6e20ae0a4bb3f82577be5b2025315"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_HMAC_MINSIZE</span></span></span> <span class="pre">10UL</span><a class="headerlink" href="#c.TO_HMAC_MINSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CMAC_KEYSIZE">
+<span class="target" id="group__constants_1ga1216ae4a54ec0af73143fd7b502f42c7"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CMAC_KEYSIZE</span></span></span> <span class="pre">16UL</span><a class="headerlink" href="#c.TO_CMAC_KEYSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CMAC_SIZE">
+<span class="target" id="group__constants_1ga0efacd87858bbf8665b0a75d8754e118"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CMAC_SIZE</span></span></span> <span class="pre">TO_AES_BLOCK_SIZE</span><a class="headerlink" href="#c.TO_CMAC_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CMAC_MIN_SIZE">
+<span class="target" id="group__constants_1ga9cf71be8143b5899fed7fc2b1c9796ca"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CMAC_MIN_SIZE</span></span></span> <span class="pre">4UL</span><a class="headerlink" href="#c.TO_CMAC_MIN_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_SEQUENCE_SIZE">
+<span class="target" id="group__constants_1ga6e02c7bceb42480c3fd9198f5e211b0c"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_SEQUENCE_SIZE</span></span></span> <span class="pre">4UL</span><a class="headerlink" href="#c.TO_SEQUENCE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_SHA256_HASHSIZE">
+<span class="target" id="group__constants_1ga8d0bd7635c95ecab107b367d262b31ea"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_SHA256_HASHSIZE</span></span></span> <span class="pre">32UL</span><a class="headerlink" href="#c.TO_SHA256_HASHSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_HASH_SIZE">
+<span class="target" id="group__constants_1gafafa71c57d62b73d9ee77fb25402e619"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_HASH_SIZE</span></span></span> <span class="pre">TO_SHA256_HASHSIZE</span><a class="headerlink" href="#c.TO_HASH_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CHALLENGE_SIZE">
+<span class="target" id="group__constants_1ga480275d7e911ed2032e776851f52a7b1"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CHALLENGE_SIZE</span></span></span> <span class="pre">32UL</span><a class="headerlink" href="#c.TO_CHALLENGE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_KEY_FINGERPRINT_SIZE">
+<span class="target" id="group__constants_1gafcfa7e43b1a80dd6dffb3e3cf543faf8"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_KEY_FINGERPRINT_SIZE</span></span></span> <span class="pre">3UL</span><a class="headerlink" href="#c.TO_KEY_FINGERPRINT_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TIMESTAMP_SIZE">
+<span class="target" id="group__constants_1ga7192cf050497914ecac93ded558532b7"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TIMESTAMP_SIZE</span></span></span> <span class="pre">4UL</span><a class="headerlink" href="#c.TO_TIMESTAMP_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CRC_SIZE">
+<span class="target" id="group__constants_1ga0d374e4206960f584ce74f8fd4bf4440"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CRC_SIZE</span></span></span> <span class="pre">2UL</span><a class="headerlink" href="#c.TO_CRC_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_SN_SIZE">
+<span class="target" id="group__constants_1gac22ad3754307a6e4b47093db44d7f720"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_SN_SIZE</span></span></span> <span class="pre">(TO_SN_CA_ID_SIZE+TO_SN_NB_SIZE)</span><a class="headerlink" href="#c.TO_SN_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_HW_SN_SIZE">
+<span class="target" id="group__constants_1gad3684d4c92b81a68934a917a7a57a81a"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_HW_SN_SIZE</span></span></span> <span class="pre">23UL</span><a class="headerlink" href="#c.TO_HW_SN_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_SN_CA_ID_SIZE">
+<span class="target" id="group__constants_1ga0e450fef96c379eee64243be21792f9e"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_SN_CA_ID_SIZE</span></span></span> <span class="pre">3UL</span><a class="headerlink" href="#c.TO_SN_CA_ID_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_SN_NB_SIZE">
+<span class="target" id="group__constants_1ga0e0db766e7e94d58649e301a56ce1f13"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_SN_NB_SIZE</span></span></span> <span class="pre">5UL</span><a class="headerlink" href="#c.TO_SN_NB_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_PN_SIZE">
+<span class="target" id="group__constants_1ga4da47e17a77601651c96509f42e0acf2"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_PN_SIZE</span></span></span> <span class="pre">12UL</span><a class="headerlink" href="#c.TO_PN_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_HW_VERSION_SIZE">
+<span class="target" id="group__constants_1gabf851b15cf1a867cc7566d9fe3ec17f9"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_HW_VERSION_SIZE</span></span></span> <span class="pre">2UL</span><a class="headerlink" href="#c.TO_HW_VERSION_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_SW_VERSION_SIZE">
+<span class="target" id="group__constants_1ga275c3b66d8afe9488aaf6bb30c90a216"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_SW_VERSION_SIZE</span></span></span> <span class="pre">3UL</span><a class="headerlink" href="#c.TO_SW_VERSION_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_PRODUCT_ID_SIZE">
+<span class="target" id="group__constants_1ga100208c7137d47199b7ae2e2807808ef"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_PRODUCT_ID_SIZE</span></span></span> <span class="pre">15UL</span><a class="headerlink" href="#c.TO_PRODUCT_ID_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_SEED_SIZE">
+<span class="target" id="group__constants_1gaf9d36c008dde5e96020c196f21874fcc"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_SEED_SIZE</span></span></span> <span class="pre">32UL</span><a class="headerlink" href="#c.TO_SEED_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="certificates-constants">
+<h2>Certificates constants<a class="headerlink" href="#certificates-constants" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__cert__constants"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">cert_constants</span></span></dt>
+<dd><p>Certificate constants </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CERT_X509_MAXSIZE">
+<span class="target" id="group__cert__constants_1ga3b4792c3a31cd765255d69120593fbcb"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_X509_MAXSIZE</span></span></span> <span class="pre">512UL</span><a class="headerlink" href="#c.TO_CERT_X509_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CERTIFICATE_SIZE">
+<span class="target" id="group__cert__constants_1ga45fafc350779d0444fa975516b86806b"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERTIFICATE_SIZE</span></span></span> <span class="pre">(TO_SN_SIZE+TO_ECC_PUB_KEYSIZE+TO_SIGNATURE_SIZE)</span><a class="headerlink" href="#c.TO_CERTIFICATE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CERT_PRIVKEY_SIZE">
+<span class="target" id="group__cert__constants_1gaf67e20a54f02710c99429b539d890c26"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_PRIVKEY_SIZE</span></span></span> <span class="pre">32UL</span><a class="headerlink" href="#c.TO_CERT_PRIVKEY_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_ECC_PRIV_KEYSIZE">
+<span class="target" id="group__cert__constants_1ga1e620e65cfe172b2f459f1ad56dcd88b"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_ECC_PRIV_KEYSIZE</span></span></span> <span class="pre">TO_CERT_PRIVKEY_SIZE</span><a class="headerlink" href="#c.TO_ECC_PRIV_KEYSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_ECC_PUB_KEYSIZE">
+<span class="target" id="group__cert__constants_1gaf2b67ca1cd2846fae4fe649940f670fa"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_ECC_PUB_KEYSIZE</span></span></span> <span class="pre">(2*TO_ECC_PRIV_KEYSIZE)</span><a class="headerlink" href="#c.TO_ECC_PUB_KEYSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_SIGNATURE_SIZE">
+<span class="target" id="group__cert__constants_1ga5169e122222dfa60e1ce91271d2514b3"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_SIGNATURE_SIZE</span></span></span> <span class="pre">TO_ECC_PUB_KEYSIZE</span><a class="headerlink" href="#c.TO_SIGNATURE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CERT_GENERALIZED_TIME_SIZE">
+<span class="target" id="group__cert__constants_1ga4478187a77ca5854ad75afbf05570045"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_GENERALIZED_TIME_SIZE</span></span></span> <span class="pre">15UL</span> <span class="pre">/*</span> <span class="pre">YYYYMMDDHHMMSSZ</span> <span class="pre">*/</span><a class="headerlink" href="#c.TO_CERT_GENERALIZED_TIME_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CERT_DATE_SIZE">
+<span class="target" id="group__cert__constants_1ga248e2c0fe4a75efe5f5d913750fc9936"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_DATE_SIZE</span></span></span> <span class="pre">((TO_CERT_GENERALIZED_TIME_SIZE</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2)</span><a class="headerlink" href="#c.TO_CERT_DATE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CERT_SUBJECT_PREFIX_SIZE">
+<span class="target" id="group__cert__constants_1ga9d23ca117fdbd49412db43912c2b139b"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_SUBJECT_PREFIX_SIZE</span></span></span> <span class="pre">15UL</span><a class="headerlink" href="#c.TO_CERT_SUBJECT_PREFIX_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_SHORTV2_CERT_SIZE">
+<span class="target" id="group__cert__constants_1gac610e479f4653ad6b73c819ae00b66ca"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_SHORTV2_CERT_SIZE</span></span></span> <span class="pre">(TO_CERTIFICATE_SIZE</span> <span class="pre">+</span> <span class="pre">TO_CERT_DATE_SIZE)</span><a class="headerlink" href="#c.TO_SHORTV2_CERT_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_REMOTE_CERTIFICATE_SIZE">
+<span class="target" id="group__cert__constants_1gacf3beb7b40e6bbb355e9eeb9a29a42c5"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_REMOTE_CERTIFICATE_SIZE</span></span></span> <span class="pre">(TO_SN_SIZE+TO_ECC_PUB_KEYSIZE)</span><a class="headerlink" href="#c.TO_REMOTE_CERTIFICATE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_REMOTE_CAID_SIZE">
+<span class="target" id="group__cert__constants_1gaa701f07680d446e2c95542f4c459907b"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_REMOTE_CAID_SIZE</span></span></span> <span class="pre">TO_SN_CA_ID_SIZE</span><a class="headerlink" href="#c.TO_REMOTE_CAID_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CERT_SUBJECT_CN_MAXSIZE">
+<span class="target" id="group__cert__constants_1ga152fb1bd98c3201f21021d7efb253bb4"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_SUBJECT_CN_MAXSIZE</span></span></span> <span class="pre">64UL</span><a class="headerlink" href="#c.TO_CERT_SUBJECT_CN_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CERT_SUBJECT_CN_PREFIX_MAXSIZE">
+<span class="target" id="group__cert__constants_1ga329cd79a53122e1ecf9f300974cb0314"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_SUBJECT_CN_PREFIX_MAXSIZE</span></span></span> <span class="pre">(TO_CERT_SUBJECT_CN_MAXSIZE</span> <span class="pre">-</span> <span class="pre">TO_SN_SIZE</span> <span class="pre">*</span> <span class="pre">2)</span><a class="headerlink" href="#c.TO_CERT_SUBJECT_CN_PREFIX_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CERT_DN_MAXSIZE">
+<span class="target" id="group__cert__constants_1ga6f2e2389425a5ef86139ade716599d69"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_DN_MAXSIZE</span></span></span> <span class="pre">127UL</span><a class="headerlink" href="#c.TO_CERT_DN_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_KEYTYPE_SIZE">
+<span class="target" id="group__cert__constants_1ga7286e400d1fd2c1c9161ddaeffd664a3"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_KEYTYPE_SIZE</span></span></span> <span class="pre">TO_SN_CA_ID_SIZE</span><a class="headerlink" href="#c.TO_KEYTYPE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CA_PUBKEY_SIZE">
+<span class="target" id="group__cert__constants_1ga0b27b7892e6a7917807bbd4bf74adf71"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CA_PUBKEY_SIZE</span></span></span> <span class="pre">TO_ECC_PUB_KEYSIZE</span><a class="headerlink" href="#c.TO_CA_PUBKEY_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_CA_PUBKEY_CAID_SIZE">
+<span class="target" id="group__cert__constants_1ga2cb5b2599df378f517a8f8c601ac8b42"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CA_PUBKEY_CAID_SIZE</span></span></span> <span class="pre">TO_SN_CA_ID_SIZE</span><a class="headerlink" href="#c.TO_CA_PUBKEY_CAID_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_KEY_IDENTIFIER_SIZE">
+<span class="target" id="group__cert__constants_1ga418336286387e96d79d1f297be9c21c7"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_KEY_IDENTIFIER_SIZE</span></span></span> <span class="pre">20UL</span><a class="headerlink" href="#c.TO_KEY_IDENTIFIER_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_KEY_IDENTIFIER_SHORT_SIZE">
+<span class="target" id="group__cert__constants_1ga59ef7bc0b18e23879c9b0da402d8c9e2"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_KEY_IDENTIFIER_SHORT_SIZE</span></span></span> <span class="pre">8UL</span><a class="headerlink" href="#c.TO_KEY_IDENTIFIER_SHORT_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="tls-constants">
+<h2>TLS constants<a class="headerlink" href="#tls-constants" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__tls__constants"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">tls_constants</span></span></dt>
+<dd><p>TLS constants </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_RECORD_CIPHER_OVERHEAD_MAX">
+<span class="target" id="group__tls__constants_1ga0094346b4ae5a5688f224a421200f683"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_RECORD_CIPHER_OVERHEAD_MAX</span></span></span> <span class="pre">(352UL)</span><a class="headerlink" href="#c.TO_TLS_RECORD_CIPHER_OVERHEAD_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>maximum data overhead between a protected record and its plain text version </p>
+<p>The theorical maximum data overhead between a protected record and its plain text version is 1024 but in practice it should not exceed AES256 with SHA512 in CBC mode with max padding: (32 (IV) + 64 (hmac) + 256 (max padding)) =&gt; 352 This value is used when the real overhead is not known, to determine if a plain text record to send need to be fragmented before encryption </p>
+</dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_RECORD_MAX_SIZE">
+<span class="target" id="group__tls__constants_1gada49eeddb81ffa5a0054aece30d38573"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_RECORD_MAX_SIZE</span></span></span> <span class="pre">(1UL</span> <span class="pre">&lt;&lt;</span> <span class="pre">14)</span><a class="headerlink" href="#c.TO_TLS_RECORD_MAX_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_RANDOM_SIZE">
+<span class="target" id="group__tls__constants_1gae79acfee2e8a2d59aefd68b6ebbdbfb9"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_RANDOM_SIZE</span></span></span> <span class="pre">(TO_TIMESTAMP_SIZE</span> <span class="pre">+</span> <span class="pre">28UL)</span><a class="headerlink" href="#c.TO_TLS_RANDOM_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_MASTER_SECRET_SIZE">
+<span class="target" id="group__tls__constants_1ga07f1f63b1443235f006e3149f0b88759"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MASTER_SECRET_SIZE</span></span></span> <span class="pre">48UL</span><a class="headerlink" href="#c.TO_TLS_MASTER_SECRET_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_SERVER_PARAMS_SIZE">
+<span class="target" id="group__tls__constants_1ga0ac60a18e158dee4f6d3d8d464f8ca15"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_SERVER_PARAMS_SIZE</span></span></span> <span class="pre">69UL</span><a class="headerlink" href="#c.TO_TLS_SERVER_PARAMS_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_HMAC_KEYSIZE">
+<span class="target" id="group__tls__constants_1ga94b34a6a112858fcd9b138893ee59047"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HMAC_KEYSIZE</span></span></span> <span class="pre">32UL</span><a class="headerlink" href="#c.TO_TLS_HMAC_KEYSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_FINISHED_SIZE">
+<span class="target" id="group__tls__constants_1gafa626c2793b15a1c001fe737c7d0dc06"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_FINISHED_SIZE</span></span></span> <span class="pre">12UL</span><a class="headerlink" href="#c.TO_TLS_FINISHED_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_CHANGE_CIPHER_SPEC_SIZE">
+<span class="target" id="group__tls__constants_1gaf237498ab4d2d94a2cf9e698ed1cafa5"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CHANGE_CIPHER_SPEC_SIZE</span></span></span> <span class="pre">1UL</span><a class="headerlink" href="#c.TO_TLS_CHANGE_CIPHER_SPEC_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_CONNECTION_ID_MAXSIZE">
+<span class="target" id="group__tls__constants_1gad614633ebb6ec041ea29d4643706052d"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CONNECTION_ID_MAXSIZE</span></span></span> <span class="pre">8UL</span><a class="headerlink" href="#c.TO_TLS_CONNECTION_ID_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_DTLS_HEADER_SIZE">
+<span class="target" id="group__tls__constants_1ga987ff8fb6855dd31e393c89a40cfee92"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HEADER_SIZE</span></span></span> <span class="pre">13UL</span><a class="headerlink" href="#c.TO_DTLS_HEADER_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_DTLS_HEADER_MAXSIZE">
+<span class="target" id="group__tls__constants_1gaff2589354b9e53806cd63b15eabc1d74"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HEADER_MAXSIZE</span></span></span> <span class="pre">(TO_DTLS_HEADER_SIZE</span> <span class="pre">+</span> <span class="pre">TO_TLS_CONNECTION_ID_MAXSIZE)</span><a class="headerlink" href="#c.TO_DTLS_HEADER_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_DTLS_HANDSHAKE_HEADER_SIZE">
+<span class="target" id="group__tls__constants_1gafb84982b935ebb8937ace7c5b3c3fe13"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HANDSHAKE_HEADER_SIZE</span></span></span> <span class="pre">12UL</span><a class="headerlink" href="#c.TO_DTLS_HANDSHAKE_HEADER_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_DTLS_HANDSHAKE_HEADER_MAXSIZE">
+<span class="target" id="group__tls__constants_1gaf44a51741e1a2489b55f009f310015f2"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HANDSHAKE_HEADER_MAXSIZE</span></span></span> <span class="pre">(TO_DTLS_HANDSHAKE_HEADER_SIZE</span> <span class="pre">+</span> <span class="pre">TO_TLS_CONNECTION_ID_MAXSIZE)</span><a class="headerlink" href="#c.TO_DTLS_HANDSHAKE_HEADER_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_HEADER_SIZE">
+<span class="target" id="group__tls__constants_1ga0d9089402d4851cc10d8b04af606ac6a"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HEADER_SIZE</span></span></span> <span class="pre">5UL</span><a class="headerlink" href="#c.TO_TLS_HEADER_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_HANDSHAKE_HEADER_SIZE">
+<span class="target" id="group__tls__constants_1gab324b6b66fa431e093e2884c56813fdb"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_HEADER_SIZE</span></span></span> <span class="pre">4UL</span><a class="headerlink" href="#c.TO_TLS_HANDSHAKE_HEADER_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_AEAD_IMPLICIT_NONCE_SIZE">
+<span class="target" id="group__tls__constants_1ga4dadffd9b6c0d56871915d225cf39cad"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_AEAD_IMPLICIT_NONCE_SIZE</span></span></span> <span class="pre">4UL</span><a class="headerlink" href="#c.TO_TLS_AEAD_IMPLICIT_NONCE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_AEAD_EXPLICIT_NONCE_SIZE">
+<span class="target" id="group__tls__constants_1ga521def16111b671c0f8a3da38fd64653"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_AEAD_EXPLICIT_NONCE_SIZE</span></span></span> <span class="pre">8UL</span><a class="headerlink" href="#c.TO_TLS_AEAD_EXPLICIT_NONCE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_DTLS_MAJOR">
+<span class="target" id="group__tls__constants_1gaff6a79fccdf7368b16da59276cdf8a80"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_MAJOR</span></span></span> <span class="pre">254</span><a class="headerlink" href="#c.TO_DTLS_MAJOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_DTLS_MINOR">
+<span class="target" id="group__tls__constants_1ga2936b0cc1f3e9f33969f27e20505364e"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_MINOR</span></span></span> <span class="pre">253</span><a class="headerlink" href="#c.TO_DTLS_MINOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_MAJOR">
+<span class="target" id="group__tls__constants_1gae0e1f4eb133168aa6df346a43d646726"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MAJOR</span></span></span> <span class="pre">3</span><a class="headerlink" href="#c.TO_TLS_MAJOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_MINOR">
+<span class="target" id="group__tls__constants_1ga7a7b0b33ac653488ed6c4d69329d72f7"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MINOR</span></span></span> <span class="pre">3</span><a class="headerlink" href="#c.TO_TLS_MINOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_SNI_LENGTH_MAX">
+<span class="target" id="group__tls__constants_1gad3ca08416dd9e39d501eb655ef16d639"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_SNI_LENGTH_MAX</span></span></span> <span class="pre">253U</span><a class="headerlink" href="#c.TO_TLS_SNI_LENGTH_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_tls_mode_t">
+<span class="target" id="group__tls__constants_1gabf6498f66cb6ea1675af20d57bb2c4ae"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_tls_mode_e" title="TO_tls_mode_e"><span class="n"><span class="pre">TO_tls_mode_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_mode_t</span></span></span><a class="headerlink" href="#c.TO_tls_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Different modes available for TO-Protect TLS. </p>
+</dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_tls_config_id_t">
+<span class="target" id="group__tls__constants_1gaa47c3780a941b33ef177e6c402f916e8"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_tls_config_id_e" title="TO_tls_config_id_e"><span class="n"><span class="pre">TO_tls_config_id_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_config_id_t</span></span></span><a class="headerlink" href="#c.TO_tls_config_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_tls_record_type_t">
+<span class="target" id="group__tls__constants_1ga7021e11d8eccaa9d1021f70a18207fe2"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_tls_record_type_e" title="TO_tls_record_type_e"><span class="n"><span class="pre">TO_tls_record_type_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_record_type_t</span></span></span><a class="headerlink" href="#c.TO_tls_record_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_t">
+<span class="target" id="group__tls__constants_1ga4fcdb09c3719599e8e77808e85f1852c"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_tls_cipher_suite_e" title="TO_tls_cipher_suite_e"><span class="n"><span class="pre">TO_tls_cipher_suite_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_cipher_suite_t</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_type_t">
+<span class="target" id="group__tls__constants_1gab413b6e6d5891de6b79d6b1e83e4f992"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_tls_cipher_suite_type_e" title="TO_tls_cipher_suite_type_e"><span class="n"><span class="pre">TO_tls_cipher_suite_type_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_cipher_suite_type_t</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_tls_encryption_type_t">
+<span class="target" id="group__tls__constants_1gac1938da3c4c85a5d033d4724f2544109"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_tls_encryption_type_e" title="TO_tls_encryption_type_e"><span class="n"><span class="pre">TO_tls_encryption_type_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_encryption_type_t</span></span></span><a class="headerlink" href="#c.TO_tls_encryption_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_t">
+<span class="target" id="group__tls__constants_1ga4a6c39d9154bb239eb02b25b85e29b21"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_tls_handshake_type_e" title="TO_tls_handshake_type_e"><span class="n"><span class="pre">TO_tls_handshake_type_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_handshake_type_t</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_tls_state_t">
+<span class="target" id="group__tls__constants_1gacc67689cea76506985276ab50e39f785"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_tls_state_e" title="TO_tls_state_e"><span class="n"><span class="pre">TO_tls_state_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_state_t</span></span></span><a class="headerlink" href="#c.TO_tls_state_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c type">
+<dt class="sig sig-object c" id="c.TO_tls_extension_t">
+<span class="target" id="group__tls__constants_1ga2ae2bae02e46d42c9abb43f740ddb072"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#c.TO_tls_extensions_e" title="TO_tls_extensions_e"><span class="n"><span class="pre">TO_tls_extensions_e</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_extension_t</span></span></span><a class="headerlink" href="#c.TO_tls_extension_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_tls_mode_e">
+<span class="target" id="group__tls__constants_1gaba7204d9e3bf554431db84cb24e636d8"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_mode_e</span></span></span><a class="headerlink" href="#c.TO_tls_mode_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Different modes available for TO-Protect TLS. </p>
+<p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_mode_e.TO_TLS_MODE_UNKNOWN">
+<span class="target" id="group__tls__constants_1ggaba7204d9e3bf554431db84cb24e636d8a38614109345e55f4bc9785b822d53e8d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MODE_UNKNOWN</span></span></span><a class="headerlink" href="#c.TO_tls_mode_e.TO_TLS_MODE_UNKNOWN" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Unknown mode (uninitialized) </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_mode_e.TO_TLS_MODE_HANDSHAKE_ONLY">
+<span class="target" id="group__tls__constants_1ggaba7204d9e3bf554431db84cb24e636d8af8e40d4cfe6e07e789e41bb547382f27"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MODE_HANDSHAKE_ONLY</span></span></span><a class="headerlink" href="#c.TO_tls_mode_e.TO_TLS_MODE_HANDSHAKE_ONLY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handshake Only mode </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_mode_e.TO_TLS_MODE_TLS_1_2">
+<span class="target" id="group__tls__constants_1ggaba7204d9e3bf554431db84cb24e636d8adc046f232b6b1161aff3e83e59f43501"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MODE_TLS_1_2</span></span></span><a class="headerlink" href="#c.TO_tls_mode_e.TO_TLS_MODE_TLS_1_2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>TLS 1.2 only </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_mode_e.TO_TLS_MODE_TLS_1_2_HANDSHAKE_ONLY">
+<span class="target" id="group__tls__constants_1ggaba7204d9e3bf554431db84cb24e636d8ad9858019d8133d4c7922f04e28132be0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MODE_TLS_1_2_HANDSHAKE_ONLY</span></span></span><a class="headerlink" href="#c.TO_tls_mode_e.TO_TLS_MODE_TLS_1_2_HANDSHAKE_ONLY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>TLS 1.2, in Handshake only </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_mode_e.TO_TLS_MODE_DTLS_1_2">
+<span class="target" id="group__tls__constants_1ggaba7204d9e3bf554431db84cb24e636d8adbd770bffc4f90b830d516c35a23e95e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MODE_DTLS_1_2</span></span></span><a class="headerlink" href="#c.TO_tls_mode_e.TO_TLS_MODE_DTLS_1_2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>DTLS 1.2 only </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_mode_e.TO_TLS_MODE_DTLS_1_2_HANDSHAKE_ONLY">
+<span class="target" id="group__tls__constants_1ggaba7204d9e3bf554431db84cb24e636d8a55dafdb5b17e8eec9a31f1621df644f2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MODE_DTLS_1_2_HANDSHAKE_ONLY</span></span></span><a class="headerlink" href="#c.TO_tls_mode_e.TO_TLS_MODE_DTLS_1_2_HANDSHAKE_ONLY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>DTLS 1.2, in Handshake only </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_tls_config_id_e">
+<span class="target" id="group__tls__constants_1gaab1f1a448e9d71ebb0139704e2e93ebf"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_config_id_e</span></span></span><a class="headerlink" href="#c.TO_tls_config_id_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_UNKNOWN">
+<span class="target" id="group__tls__constants_1ggaab1f1a448e9d71ebb0139704e2e93ebfa44a75c7c05d80ebe4b25dc3d1da88a27"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CONFIG_ID_UNKNOWN</span></span></span><a class="headerlink" href="#c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_UNKNOWN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_MODE">
+<span class="target" id="group__tls__constants_1ggaab1f1a448e9d71ebb0139704e2e93ebfae7a0bfdfaf72718ac1526acddf376dbf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CONFIG_ID_MODE</span></span></span><a class="headerlink" href="#c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_MODE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure mode on 1 byte. See TO_tls_mode_e. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_CIPHER_SUITES">
+<span class="target" id="group__tls__constants_1ggaab1f1a448e9d71ebb0139704e2e93ebfa1c5970796fb78aa920e0c3f2243ad316"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CONFIG_ID_CIPHER_SUITES</span></span></span><a class="headerlink" href="#c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_CIPHER_SUITES" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure cipher suites list (each cipher suite on 2 bytes, big-endian) </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_CERTIFICATE_SLOT">
+<span class="target" id="group__tls__constants_1ggaab1f1a448e9d71ebb0139704e2e93ebfa8d7dee1169cb8ca852099d4406ceeecd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CONFIG_ID_CERTIFICATE_SLOT</span></span></span><a class="headerlink" href="#c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_CERTIFICATE_SLOT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure certificate slot </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_MAX">
+<span class="target" id="group__tls__constants_1ggaab1f1a448e9d71ebb0139704e2e93ebfa73a8e2d01485e459dfb804e256ee5f32"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CONFIG_ID_MAX</span></span></span><a class="headerlink" href="#c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_LAST">
+<span class="target" id="group__tls__constants_1ggaab1f1a448e9d71ebb0139704e2e93ebfaf238d881cd1262d61f5b851648fd42f2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CONFIG_ID_LAST</span></span></span><a class="headerlink" href="#c.TO_tls_config_id_e.TO_TLS_CONFIG_ID_LAST" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_tls_record_type_e">
+<span class="target" id="group__tls__constants_1gaace461474f730a25d4ec87e1892bf009"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_record_type_e</span></span></span><a class="headerlink" href="#c.TO_tls_record_type_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_record_type_e.TO_TLS_RECORD_TYPE_CHANGE_CIPHER_SPEC">
+<span class="target" id="group__tls__constants_1ggaace461474f730a25d4ec87e1892bf009acfd789679c78756284f649d68f6255fa"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_RECORD_TYPE_CHANGE_CIPHER_SPEC</span></span></span><a class="headerlink" href="#c.TO_tls_record_type_e.TO_TLS_RECORD_TYPE_CHANGE_CIPHER_SPEC" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_record_type_e.TO_TLS_RECORD_TYPE_ALERT">
+<span class="target" id="group__tls__constants_1ggaace461474f730a25d4ec87e1892bf009aa7f5cafe50ed1b379b55d9fe28dcf221"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_RECORD_TYPE_ALERT</span></span></span><a class="headerlink" href="#c.TO_tls_record_type_e.TO_TLS_RECORD_TYPE_ALERT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_record_type_e.TO_TLS_RECORD_TYPE_HANDSHAKE">
+<span class="target" id="group__tls__constants_1ggaace461474f730a25d4ec87e1892bf009a2035ff52c4136cf44299be49b3fef603"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_RECORD_TYPE_HANDSHAKE</span></span></span><a class="headerlink" href="#c.TO_tls_record_type_e.TO_TLS_RECORD_TYPE_HANDSHAKE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_record_type_e.TO_TLS_RECORD_TYPE_APPLICATION_DATA">
+<span class="target" id="group__tls__constants_1ggaace461474f730a25d4ec87e1892bf009aad7dae9ee4666e3c74d607d171ecf18e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_RECORD_TYPE_APPLICATION_DATA</span></span></span><a class="headerlink" href="#c.TO_tls_record_type_e.TO_TLS_RECORD_TYPE_APPLICATION_DATA" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_record_type_e.TO_TLS_RECORD_TYPE_TLS_12_CID">
+<span class="target" id="group__tls__constants_1ggaace461474f730a25d4ec87e1892bf009abd8c654c9b4d455a775bba8367b0abb6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_RECORD_TYPE_TLS_12_CID</span></span></span><a class="headerlink" href="#c.TO_tls_record_type_e.TO_TLS_RECORD_TYPE_TLS_12_CID" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e">
+<span class="target" id="group__tls__constants_1gacf60902c7c6d3aaac25ea05a20cbf67a"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_cipher_suite_e</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e.TO_TLS_PSK_WITH_AES_128_CBC_SHA256">
+<span class="target" id="group__tls__constants_1ggacf60902c7c6d3aaac25ea05a20cbf67aa069b6b92afb7b9e89f9bf5c5c0e7ec21"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_PSK_WITH_AES_128_CBC_SHA256</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e.TO_TLS_PSK_WITH_AES_128_CBC_SHA256" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e.TO_TLS_PSK_WITH_AES_128_CCM">
+<span class="target" id="group__tls__constants_1ggacf60902c7c6d3aaac25ea05a20cbf67aa001bd2d2db4eaf0a05fad589b9a4756a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_PSK_WITH_AES_128_CCM</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e.TO_TLS_PSK_WITH_AES_128_CCM" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e.TO_TLS_PSK_WITH_AES_128_CCM_8">
+<span class="target" id="group__tls__constants_1ggacf60902c7c6d3aaac25ea05a20cbf67aa7f185c0d5757aba21f497e5dc80352cf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_PSK_WITH_AES_128_CCM_8</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e.TO_TLS_PSK_WITH_AES_128_CCM_8" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e.TO_TLS_PSK_WITH_AES_128_GCM_SHA256">
+<span class="target" id="group__tls__constants_1ggacf60902c7c6d3aaac25ea05a20cbf67aad84a05d8be44a7eadc7cf401f569f902"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_PSK_WITH_AES_128_GCM_SHA256</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e.TO_TLS_PSK_WITH_AES_128_GCM_SHA256" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256">
+<span class="target" id="group__tls__constants_1ggacf60902c7c6d3aaac25ea05a20cbf67aa2c37fd8a3a0cb4959c50d5fd93b93805"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_ECDSA_WITH_AES_128_CCM">
+<span class="target" id="group__tls__constants_1ggacf60902c7c6d3aaac25ea05a20cbf67aa94b7986e171623202f8541f9deeee482"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_ECDHE_ECDSA_WITH_AES_128_CCM</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_ECDSA_WITH_AES_128_CCM" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8">
+<span class="target" id="group__tls__constants_1ggacf60902c7c6d3aaac25ea05a20cbf67aae28550de4a309ce401cd8cdb0999b647"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256">
+<span class="target" id="group__tls__constants_1ggacf60902c7c6d3aaac25ea05a20cbf67aa10bd6aaf384934974e5774be5068cd65"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256">
+<span class="target" id="group__tls__constants_1ggacf60902c7c6d3aaac25ea05a20cbf67aa9a4b9a0118a7dbe39002db374e14ba09"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256">
+<span class="target" id="group__tls__constants_1ggacf60902c7c6d3aaac25ea05a20cbf67aa3b6bd40fd1364f6ad19d30839b05cbe6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_e.TO_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_type_e">
+<span class="target" id="group__tls__constants_1gadc2ce7f1a56830a80231d68d3a43c542"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_cipher_suite_type_e</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_type_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_type_e.TO_TLS_CIPHER_SUITE_ECDHE">
+<span class="target" id="group__tls__constants_1ggadc2ce7f1a56830a80231d68d3a43c542a88c92ecdc3183e02eba50ca0dd3bb6e4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CIPHER_SUITE_ECDHE</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_type_e.TO_TLS_CIPHER_SUITE_ECDHE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_cipher_suite_type_e.TO_TLS_CIPHER_SUITE_PSK">
+<span class="target" id="group__tls__constants_1ggadc2ce7f1a56830a80231d68d3a43c542a03015cc037ff48f56bbbd40e7265a25c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CIPHER_SUITE_PSK</span></span></span><a class="headerlink" href="#c.TO_tls_cipher_suite_type_e.TO_TLS_CIPHER_SUITE_PSK" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_tls_encryption_type_e">
+<span class="target" id="group__tls__constants_1gab48b1178b01a21c2c8ce2b48edf82b98"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_encryption_type_e</span></span></span><a class="headerlink" href="#c.TO_tls_encryption_type_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_encryption_type_e.TO_TLS_ENCRYPTION_AES_CBC">
+<span class="target" id="group__tls__constants_1ggab48b1178b01a21c2c8ce2b48edf82b98ad8b91edcb969954a522278e74f1cbcb9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_ENCRYPTION_AES_CBC</span></span></span><a class="headerlink" href="#c.TO_tls_encryption_type_e.TO_TLS_ENCRYPTION_AES_CBC" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_encryption_type_e.TO_TLS_ENCRYPTION_AES_CCM">
+<span class="target" id="group__tls__constants_1ggab48b1178b01a21c2c8ce2b48edf82b98afd64518189db6e25384c4fde73180157"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_ENCRYPTION_AES_CCM</span></span></span><a class="headerlink" href="#c.TO_tls_encryption_type_e.TO_TLS_ENCRYPTION_AES_CCM" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_encryption_type_e.TO_TLS_ENCRYPTION_AES_CCM_8">
+<span class="target" id="group__tls__constants_1ggab48b1178b01a21c2c8ce2b48edf82b98a4e8e0fc78fbf4dd5cf6f72090e10b78f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_ENCRYPTION_AES_CCM_8</span></span></span><a class="headerlink" href="#c.TO_tls_encryption_type_e.TO_TLS_ENCRYPTION_AES_CCM_8" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_encryption_type_e.TO_TLS_ENCRYPTION_AES_GCM">
+<span class="target" id="group__tls__constants_1ggab48b1178b01a21c2c8ce2b48edf82b98abf9f06888ffb5719295feff554f0dd6e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_ENCRYPTION_AES_GCM</span></span></span><a class="headerlink" href="#c.TO_tls_encryption_type_e.TO_TLS_ENCRYPTION_AES_GCM" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e">
+<span class="target" id="group__tls__constants_1ga994f5dc8f36543ef0147ae0ffec6af64"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_handshake_type_e</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_CLIENT_HELLO">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64af318fd1882aedae395b404b5b61831af"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_CLIENT_HELLO</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_CLIENT_HELLO" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_SERVER_HELLO">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64ac81882cd13f85f636947ad8614ab8dd8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_SERVER_HELLO</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_SERVER_HELLO" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_HELLO_VERIFY_REQUEST">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64ad43d8d7daa664740b8466b52792b5b42"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_HELLO_VERIFY_REQUEST</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_HELLO_VERIFY_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_CERTIFICATE">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64add337111528f8d187175fc42725dc93d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_CERTIFICATE</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_SERVER_KEY_EXCHANGE">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64adbc3a236f4dc7251e4e457e6e6d6a1ab"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_SERVER_KEY_EXCHANGE</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_SERVER_KEY_EXCHANGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_CERTIFICATE_REQUEST">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64a058242d5ccf0caa59505ebca9c53c74e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_CERTIFICATE_REQUEST</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_CERTIFICATE_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_SERVER_HELLO_DONE">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64a48f73d3464be5469b8c981c2d140a79a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_SERVER_HELLO_DONE</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_SERVER_HELLO_DONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_CERTIFICATE_VERIFY">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64a1bc8a2a04a5a4eb9e2c63c35fd241f78"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_CERTIFICATE_VERIFY</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_CERTIFICATE_VERIFY" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_CLIENT_KEY_EXCHANGE">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64a3b010b670e7ffe673fc66b03fb2e3928"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_CLIENT_KEY_EXCHANGE</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_CLIENT_KEY_EXCHANGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_FINISHED">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64a8d4a47f9bb253ab4a97358cd2ef28ee3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_FINISHED</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_FINISHED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_MEDIATOR_CERTIFICATE">
+<span class="target" id="group__tls__constants_1gga994f5dc8f36543ef0147ae0ffec6af64a3c524ecf71233708b103417d40a16849"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HANDSHAKE_TYPE_MEDIATOR_CERTIFICATE</span></span></span><a class="headerlink" href="#c.TO_tls_handshake_type_e.TO_TLS_HANDSHAKE_TYPE_MEDIATOR_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_tls_state_e">
+<span class="target" id="group__tls__constants_1ga4b2a671da6c2c9fffe8aaf3943d8fee7"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_state_e</span></span></span><a class="headerlink" href="#c.TO_tls_state_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_HANDSHAKE_START">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a343472fd42760d7df3e1d159ac2f58f9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_HANDSHAKE_START</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_HANDSHAKE_START" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_1">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a51aa078076476e0853f2fcbf4e748cae"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_1</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_CLIENT_HELLO">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a6ce8c8594105fd7793c0336fd6e31b46"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_CLIENT_HELLO</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_CLIENT_HELLO" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_1_INIT">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7aae46a6ee10c4a93ce18dd19afef53b12"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_1_INIT</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_1_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_2">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7ad8ae8df40d7349a7959fd2355641e341"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_2</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_2" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_SERVER_HELLO_VERIFY_REQUEST">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a2854cd4e26e14eb7f156d4c684bd29db"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_SERVER_HELLO_VERIFY_REQUEST</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_SERVER_HELLO_VERIFY_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_2_INIT">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a925f89ecf59af7a55b6ccbf7e7651cc1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_2_INIT</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_2_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_3">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a3d279e670c6ee33a9554ecdb69a6ca1e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_3</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_3" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_CLIENT_HELLO_WITH_COOKIE">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7ac0af0e2dcce5f7d132dd06606b35d018"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_CLIENT_HELLO_WITH_COOKIE</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_CLIENT_HELLO_WITH_COOKIE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_3_INIT">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7abf8c19c515c9542e6bec4e373fc8dedb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_3_INIT</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_3_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_4">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7af0d297514f4a9e6fde4eeeebf097ddaa"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_4</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_4" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_SERVER_HELLO">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7acedb0e7579e5bbba6c4ab46f94e0373b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_SERVER_HELLO</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_SERVER_HELLO" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_4_INIT">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a73a92b4512411c381380b4286ae31a48"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_4_INIT</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_4_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_SERVER_CERTIFICATE">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a9e4bae90aa6ccfa9f1d13e88b4962a01"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_SERVER_CERTIFICATE</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_SERVER_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_SERVER_KEY_EXCHANGE">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7abb5c26b1528379bd2d25eba0e6e26966"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_SERVER_KEY_EXCHANGE</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_SERVER_KEY_EXCHANGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_SERVER_CERTIFICATE_REQUEST">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7ae1eec1131b80c26f13402728471d1db2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_SERVER_CERTIFICATE_REQUEST</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_SERVER_CERTIFICATE_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_SERVER_HELLO_DONE">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7ab50d3334b039b53e98579b84d1399259"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_SERVER_HELLO_DONE</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_SERVER_HELLO_DONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_MEDIATOR_CERTIFICATE">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a9bbbb5638f905a0bc5974fa95f8a075b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_MEDIATOR_CERTIFICATE</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_MEDIATOR_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_5">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7adfff4e1a55d855f85c2032df28567f60"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_5</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_5" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_CLIENT_CERTIFICATE">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7ab883f95e9502755e0a64e60d070d2458"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_CLIENT_CERTIFICATE</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_CLIENT_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_5_INIT">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7abe1987390f0dd3038ccb2a0ad4c5e37c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_5_INIT</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_5_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_CLIENT_KEY_EXCHANGE">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a30c6bfe2c54157136a143bff13e69e38"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_CLIENT_KEY_EXCHANGE</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_CLIENT_KEY_EXCHANGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_5_INIT_NO_CLIENT_AUTH">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a7664f775e9e8629d17cb370277a1b709"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_5_INIT_NO_CLIENT_AUTH</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_5_INIT_NO_CLIENT_AUTH" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_CLIENT_CERTIFICATE_VERIFY">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a848169a88b943cff613c472e6750936f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_CLIENT_CERTIFICATE_VERIFY</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_CLIENT_CERTIFICATE_VERIFY" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_CLIENT_CHANGE_CIPHER_SPEC">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a99debcf2a6f64d0d95e1b8a1e76126f4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_CLIENT_CHANGE_CIPHER_SPEC</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_CLIENT_CHANGE_CIPHER_SPEC" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_CLIENT_FINISHED">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a05600ff19cbc93626f536b45afcfb03b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_CLIENT_FINISHED</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_CLIENT_FINISHED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_6">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a44ac59b4c232151e6665e2882690c585"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_6</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_6" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_SERVER_CHANGE_CIPHER_SPEC">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a329c1f476c041a4274c503178a1574fc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_SERVER_CHANGE_CIPHER_SPEC</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_SERVER_CHANGE_CIPHER_SPEC" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_6_INIT">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7ab841408c13e981a7056b027b26d41017"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FLIGHT_6_INIT</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FLIGHT_6_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_SERVER_FINISHED">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a846a7939d7f843e72dd6914cef0d376a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_SERVER_FINISHED</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_SERVER_FINISHED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_HANDSHAKE_DONE">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a4f9c3ba1214ddae8e9f831b2581d56eb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_HANDSHAKE_DONE</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_HANDSHAKE_DONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_HANDSHAKE_FAILED">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7ae7c0aab854554b5fe2c531440a565970"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_HANDSHAKE_FAILED</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_HANDSHAKE_FAILED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_FATAL_RECEIVED">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7ab13b8a8bdcb0b7f0130beeaaa775b093"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_FATAL_RECEIVED</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_FATAL_RECEIVED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_state_e.TO_TLS_STATE_CLOSE_RECEIVED">
+<span class="target" id="group__tls__constants_1gga4b2a671da6c2c9fffe8aaf3943d8fee7a2a1cef18dfc1a10ee96710f58b05da84"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_STATE_CLOSE_RECEIVED</span></span></span><a class="headerlink" href="#c.TO_tls_state_e.TO_TLS_STATE_CLOSE_RECEIVED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.TO_tls_extensions_e">
+<span class="target" id="group__tls__constants_1ga01e6ef49fdef6d411fd24575a738e3f8"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_tls_extensions_e</span></span></span><a class="headerlink" href="#c.TO_tls_extensions_e" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_extensions_e.TO_TLS_EXTENSION_SERVER_NAME">
+<span class="target" id="group__tls__constants_1gga01e6ef49fdef6d411fd24575a738e3f8ace7b62aa236bff1fa527d1fd17178923"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_EXTENSION_SERVER_NAME</span></span></span><a class="headerlink" href="#c.TO_tls_extensions_e.TO_TLS_EXTENSION_SERVER_NAME" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_extensions_e.TO_TLS_EXTENSION_SIG_ALG">
+<span class="target" id="group__tls__constants_1gga01e6ef49fdef6d411fd24575a738e3f8a76faf4f2f2cecb5cd40be5d40b096f31"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_EXTENSION_SIG_ALG</span></span></span><a class="headerlink" href="#c.TO_tls_extensions_e.TO_TLS_EXTENSION_SIG_ALG" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_extensions_e.TO_TLS_EXTENSION_ECC">
+<span class="target" id="group__tls__constants_1gga01e6ef49fdef6d411fd24575a738e3f8aaf3f3754d0e2b4966d4e183fda293f2f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_EXTENSION_ECC</span></span></span><a class="headerlink" href="#c.TO_tls_extensions_e.TO_TLS_EXTENSION_ECC" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_extensions_e.TO_TLS_EXTENSION_ECC_POINT_FORMAT">
+<span class="target" id="group__tls__constants_1gga01e6ef49fdef6d411fd24575a738e3f8a69154c135f9163df6f1c17fe8ff12f21"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_EXTENSION_ECC_POINT_FORMAT</span></span></span><a class="headerlink" href="#c.TO_tls_extensions_e.TO_TLS_EXTENSION_ECC_POINT_FORMAT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_extensions_e.TO_TLS_EXTENSION_TRUNCATED_HMAC">
+<span class="target" id="group__tls__constants_1gga01e6ef49fdef6d411fd24575a738e3f8a44cfebbc17eb06f2f24b9976b4bdf231"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_EXTENSION_TRUNCATED_HMAC</span></span></span><a class="headerlink" href="#c.TO_tls_extensions_e.TO_TLS_EXTENSION_TRUNCATED_HMAC" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_extensions_e.TO_TLS_EXTENSION_CONNECTION_ID">
+<span class="target" id="group__tls__constants_1gga01e6ef49fdef6d411fd24575a738e3f8ae10e33e6e1c5dcc41606fe2653ff0c99"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_EXTENSION_CONNECTION_ID</span></span></span><a class="headerlink" href="#c.TO_tls_extensions_e.TO_TLS_EXTENSION_CONNECTION_ID" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="admin-constants">
+<h2>Admin constants<a class="headerlink" href="#admin-constants" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__admin__constants"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">admin_constants</span></span></dt>
+<dd><p>Admin constants </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_ADMIN_DIVERS_DATA_SIZE">
+<span class="target" id="group__admin__constants_1ga29f53c844695071c3487b5809b4a2e60"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_ADMIN_DIVERS_DATA_SIZE</span></span></span> <span class="pre">TO_SN_SIZE</span><a class="headerlink" href="#c.TO_ADMIN_DIVERS_DATA_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_ADMIN_PROTO_INFO_SIZE">
+<span class="target" id="group__admin__constants_1gab966b72c05765263a20b6a36c131a06d"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_ADMIN_PROTO_INFO_SIZE</span></span></span> <span class="pre">4UL</span><a class="headerlink" href="#c.TO_ADMIN_PROTO_INFO_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_ADMIN_OPTIONS_SIZE">
+<span class="target" id="group__admin__constants_1ga1551721dcefc830c47d69c791b33312e"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_ADMIN_OPTIONS_SIZE</span></span></span> <span class="pre">2UL</span><a class="headerlink" href="#c.TO_ADMIN_OPTIONS_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_ADMIN_CHALLENGE_SIZE">
+<span class="target" id="group__admin__constants_1gaf975a6eb1cb3c7510e0f4a8f67f9c592"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_ADMIN_CHALLENGE_SIZE</span></span></span> <span class="pre">8UL</span><a class="headerlink" href="#c.TO_ADMIN_CHALLENGE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_ADMIN_CRYPTOGRAM_SIZE">
+<span class="target" id="group__admin__constants_1gafe70086fa715211ff5aa0ea2d9e7b4b1"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_ADMIN_CRYPTOGRAM_SIZE</span></span></span> <span class="pre">8UL</span><a class="headerlink" href="#c.TO_ADMIN_CRYPTOGRAM_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_ADMIN_MAC_SIZE">
+<span class="target" id="group__admin__constants_1ga08e52e4af0d54c1502b30d5fdba31131"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_ADMIN_MAC_SIZE</span></span></span> <span class="pre">8UL</span><a class="headerlink" href="#c.TO_ADMIN_MAC_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_ADMIN_DATAIDX_SIZE">
+<span class="target" id="group__admin__constants_1gaf6ae1a23811138bd07eb9b08466f5986"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_ADMIN_DATAIDX_SIZE</span></span></span> <span class="pre">4</span><a class="headerlink" href="#c.TO_ADMIN_DATAIDX_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Trusted Objects.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
