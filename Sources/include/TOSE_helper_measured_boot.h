@@ -18,16 +18,6 @@
 #ifndef _TOSE_HELPER_MEASURED_BOOT_H_
 #define _TOSE_HELPER_MEASURED_BOOT_H_
 
-#ifndef TOSE_HELPER_MEASURED_BOOT_API
-#ifdef __linux__
-#define TOSE_HELPER_MEASURED_BOOT_API
-#elif _WIN32
-#define TOSE_HELPER_MEASURED_BOOT_API __declspec(dllexport)
-#else
-#define TOSE_HELPER_MEASURED_BOOT_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -48,7 +38,7 @@ extern "C" {
  *
  * @return TO_OK on success
  */
-TOSE_HELPER_MEASURED_BOOT_API TO_ret_t TOSE_helper_measured_boot( /* A8 */
+extern TO_ret_t TOSE_helper_measured_boot( /* A8 */
 		TOSE_ctx_t *hash_ctx, TOSE_ctx_t *hw_ctx,
 		const uint8_t* fw_addr, uint32_t fw_length);
 
@@ -62,7 +52,7 @@ TOSE_HELPER_MEASURED_BOOT_API TO_ret_t TOSE_helper_measured_boot( /* A8 */
  *
  * @return TO_OK on success
  */
-TOSE_HELPER_MEASURED_BOOT_API TO_ret_t TOSE_helper_validate_update_fw_hash( /* A3 */
+extern TO_ret_t TOSE_helper_validate_update_fw_hash( /* A3 */
 		TOSE_ctx_t *hash_ctx, TOSE_ctx_t *hw_ctx,
 		const uint8_t* fw_addr, uint32_t fw_length);
 

@@ -15,6 +15,9 @@
  * @brief
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_MEASURE_H_
 #define _TODRV_HSE_MEASURE_H_
 
@@ -67,3 +70,6 @@ TODRV_HSE_MEASURE_API TO_ret_t TODRV_HSE_invalidate_new_hash(TODRV_HSE_ctx_t *ct
 #endif
 
 #endif /* INCLUDE_TODRV_HSE_MEASURE_H_ */
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
+

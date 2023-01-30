@@ -15,6 +15,9 @@
  * @brief
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_TLS_H_
 #define _TODRV_HSE_TLS_H_
 
@@ -386,4 +389,6 @@ TODRV_HSE_TLS_API TO_ret_t TODRV_HSE_get_tls_master_secret_derived_keys(
 #endif
 
 #endif /* _TODRV_HSE_TLS_H_ */
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 

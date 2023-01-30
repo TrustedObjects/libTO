@@ -53,30 +53,12 @@
 % Tables
 %
 \usepackage{colortbl}
-\definecolor{TableHeadBgColor}{RGB}{242,144,71}
-\definecolor{TableOddRowBgColor}{RGB}{253,242,233}
-\definecolor{TableEvenRowBgColor}{RGB}{253,233,217}
-\definecolor{TableExtBorderColor}{RGB}{221,221,221}
 \protected\def\sphinxstyletheadfamily {
-	\cellcolor{TableHeadBgColor}\rmfamily
+	% Header background color
 	\leavevmode\color{white}
 	\bf
 }
 \setlength\arrayrulewidth{0pt}
-\usepackage[most]{tcolorbox}
-\tcbset{enhanced, breakable, colback=white, colframe=TableExtBorderColor,
-	sharpish corners, size=tight,
-	fuzzy shadow={0.5mm}{-0.5mm}{0mm}{0mm}TableExtBorderColor}
-
-%
-% Enums and defines lists spacing
-%
-\renewenvironment{fulllineitems}{%
-  \begin{list}{}{}%
-}{\end{list}}
-\renewcommand*{\pysigstartmultiline}{}
-\newcommand*{\pysigstopmultiline}{}
-\def\pysigline@preparevspace@i{}
 
 %
 % Sphinx specific

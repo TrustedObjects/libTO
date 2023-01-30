@@ -22,6 +22,8 @@
 #ifndef _TODRV_SSE_CFG_H_
 #define _TODRV_SSE_CFG_H_
 
+#include "TO_cfg.h"
+
 /*
  * -----------------------------
  * Global settings
@@ -35,7 +37,12 @@
 
 #ifndef TODRV_SSE_ENABLE_SELF_TESTS
 /* TO-Protect & NVM self tests */
-#define TODRV_SSE_ENABLE_SELF_TESTS 1
+/* #undef TODRV_SSE_ENABLE_SELF_TESTS */
+#endif
+
+#ifndef TODRV_SSE_NVM_SECTOR_SIZE
+/* NVM SECTOR SIZE */
+/* #undef TODRV_SSE_NVM_SECTOR_SIZE */
 #endif
 
 #endif /* _TODRV_SSE_CFG_H_ */

@@ -1,1 +1,13 @@
-First release of Trusted-Objects OpenSource libTO.
+2023-01-30 - 6.3.9
+- Better default driver configuration
+- It is now possible to disable HSE driver by defining TODRV_HSE_DRIVER_DISABLE
+- Doc: status PIO and power optimisation updates
+- Doc: add details about TOSE_init() and TOSE_fini() timings
+- Doc: broadcast loader PN: TOSF-LD1 -> TOSB-BC1
+- Add TO_MAC_ALG_NONE to TO_mac_alg_t
+
+2022-10-28 - 6.2.12
+- Minor update
+
+2022-03-16 - 6.1.2
+- First release of Trusted-Objects OpenSource libTO

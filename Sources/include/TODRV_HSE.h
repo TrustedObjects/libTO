@@ -13,6 +13,10 @@
 #ifndef _TODRV_HSE_H_
 #define _TODRV_HSE_H_
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
+#include "TODRV_HSE_cfg.h"
 #include "TO_defs.h"
 
 #ifndef TODRV_HSE_API
@@ -55,4 +59,6 @@ TODRV_HSE_API TOSE_ctx_t* TODRV_HSE_get_ctx(void);
 #endif
 
 #endif // _TODRV_HSE_H_
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 

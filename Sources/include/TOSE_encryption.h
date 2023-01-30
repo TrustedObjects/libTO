@@ -18,16 +18,6 @@
 #ifndef _TOSE_ENCRYPTION_H_
 #define _TOSE_ENCRYPTION_H_
 
-#ifndef TOSE_ENCRYPTION_API
-#ifdef __linux__
-#define TOSE_ENCRYPTION_API
-#elif _WIN32
-#define TOSE_ENCRYPTION_API __declspec(dllexport)
-#else
-#define TOSE_ENCRYPTION_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -62,7 +52,7 @@ extern "C" {
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128cbc_encrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_aes128cbc_encrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t* data, const uint16_t data_length,
 		uint8_t initial_vector[TO_INITIALVECTOR_SIZE],
 		uint8_t* cryptogram);
@@ -94,7 +84,7 @@ TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128cbc_encrypt(TOSE_ctx_t *ctx, const uint8
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128cbc_iv_encrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_aes128cbc_iv_encrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t initial_vector[TO_INITIALVECTOR_SIZE],
 		const uint8_t* data, const uint16_t data_length,
 		uint8_t* cryptogram);
@@ -124,7 +114,7 @@ TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128cbc_iv_encrypt(TOSE_ctx_t *ctx, const ui
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128cbc_decrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_aes128cbc_decrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t initial_vector[TO_INITIALVECTOR_SIZE],
 		const uint8_t* cryptogram, const uint16_t cryptogram_length,
 		uint8_t* data);
@@ -155,7 +145,7 @@ TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128cbc_decrypt(TOSE_ctx_t *ctx, const uint8
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128gcm_encrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_aes128gcm_encrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t* data, const uint16_t data_length,
 		const uint8_t* aad, const uint16_t aad_length,
 		uint8_t initial_vector[TO_AESGCM_INITIALVECTOR_SIZE],
@@ -187,7 +177,7 @@ TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128gcm_encrypt(TOSE_ctx_t *ctx, const uint8
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128gcm_decrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_aes128gcm_decrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t initial_vector[TO_AESGCM_INITIALVECTOR_SIZE],
 		const uint8_t* aad, const uint16_t aad_length,
 		const uint8_t* cryptogram, const uint16_t cryptogram_length,
@@ -219,7 +209,7 @@ TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128gcm_decrypt(TOSE_ctx_t *ctx, const uint8
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128ccm_encrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_aes128ccm_encrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t* data, const uint16_t data_length,
 		const uint8_t* aad, const uint16_t aad_length,
 		uint8_t nonce[TO_AESCCM_NONCE_SIZE],
@@ -251,7 +241,7 @@ TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128ccm_encrypt(TOSE_ctx_t *ctx, const uint8
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128ccm_decrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_aes128ccm_decrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t nonce[TO_AESCCM_NONCE_SIZE],
 		const uint8_t* aad, const uint16_t aad_length,
 		const uint8_t* cryptogram, const uint16_t cryptogram_length,
@@ -280,7 +270,7 @@ TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128ccm_decrypt(TOSE_ctx_t *ctx, const uint8
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128ecb_encrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_aes128ecb_encrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t* data, const uint16_t data_length,
 		uint8_t* cryptogram);
 
@@ -306,7 +296,7 @@ TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128ecb_encrypt(TOSE_ctx_t *ctx, const uint8
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_ENCRYPTION_API TO_ret_t TOSE_aes128ecb_decrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_aes128ecb_decrypt(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t* cryptogram, const uint16_t cryptogram_length,
 		uint8_t* data);
 

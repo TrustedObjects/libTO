@@ -42,6 +42,7 @@ extern "C" {
 #define TO_LOG_STRING		0x00
 #define TO_LOG_BUFFER		0x10
 #define TO_LOG_HEX_DISP		0x20
+#define TO_LOG_TRACE		0x30
 
 /**
  * @brief Different log levels that are available to the application.
@@ -61,6 +62,10 @@ typedef enum TO_log_level_e {
 	TO_LOG_HEX_DISP_WRN  = TO_LOG_LEVEL_WRN  | TO_LOG_HEX_DISP,	/**< Warning level */
 	TO_LOG_HEX_DISP_INF  = TO_LOG_LEVEL_INF  | TO_LOG_HEX_DISP,	/**< Info level */
 	TO_LOG_HEX_DISP_DBG  = TO_LOG_LEVEL_DBG  | TO_LOG_HEX_DISP,	/**< Debug level */
+	TO_LOG_ENTER         = TO_LOG_TRACE,
+	TO_LOG_EXIT          = 1 | TO_LOG_TRACE,
+	TO_LOG_RETURN        = 2 | TO_LOG_TRACE
+
 } __attribute__ ((packed)) TO_log_level_t;
 
 // Pre-definition of the context, we have to do this for defining both the context and the LOG function
@@ -93,7 +98,7 @@ typedef struct TO_log_ctx_s {
  * @param level Importance level of the message
  * @param log String to be displayed
  */
-extern void print_log_function(const TO_log_level_t level, const char *log);
+ extern void print_log_function(const TO_log_level_t level, const char *log);
 
 /**
  * @brief Default LOG "display" function
@@ -126,11 +131,12 @@ extern void TO_set_log_level(TO_log_ctx_t *log_ctx,
 extern TO_log_ctx_t* TO_log_get_ctx(void);
 
 /** @} */
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wvariadic-macros"
 #if TO_LOG_LEVEL_MAX >= TO_LOG_LEVEL_ERR
-#define TO_LOG_ERR(...) TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_STRING_ERR, (void *)__VA_ARGS__)
+#define TO_LOG_ERR(format, ...) TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_STRING_ERR, (void *)format, (void *)__func__, ##__VA_ARGS__)
 #define TO_LOG_ERR_HEX(...) { TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_HEX_DISP_ERR, (void *)__VA_ARGS__); }
-#define TO_LOG_ERR_BUF(...) { TO_log_get_ctx()->log_function(log_func, TO_LOG_BUFFER_ERR, (void *)__VA_ARGS__); }
+#define TO_LOG_ERR_BUF(...) { TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_BUFFER_ERR, (void *)__VA_ARGS__); }
 #else /* TO_LOG_LEVEL_MAX >= TO_LOG_LEVEL_ERR */
 #define TO_LOG_ERR(...)
 #define TO_LOG_ERR_HEX(...)
@@ -138,7 +144,7 @@ extern TO_log_ctx_t* TO_log_get_ctx(void);
 #endif /* TO_LOG_LEVEL_MAX >= TO_LOG_LEVEL_ERR */
 
 #if TO_LOG_LEVEL_MAX >= TO_LOG_LEVEL_WRN
-#define TO_LOG_WRN(...) TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_STRING_WRN, (void *)__VA_ARGS__)
+#define TO_LOG_WRN(format, ...) TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_STRING_WRN, (void *)format, (void *)__func__, ##__VA_ARGS__)
 #define TO_LOG_WRN_HEX(...) { TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_HEX_DISP_WRN, (void *)__VA_ARGS__); }
 #define TO_LOG_WRN_BUF(...) { TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_BUFFER_WRN, (void *)__VA_ARGS__); }
 #else
@@ -148,7 +154,7 @@ extern TO_log_ctx_t* TO_log_get_ctx(void);
 #endif
 
 #if TO_LOG_LEVEL_MAX >= TO_LOG_LEVEL_INF
-#define TO_LOG_INF(...) TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_STRING_INF, (void *)__VA_ARGS__)
+#define TO_LOG_INF(format, ...) TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_STRING_INF, (void *)format, (void *)__func__, ##__VA_ARGS__)
 #define TO_LOG_INF_HEX(...) { TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_HEX_DISP_INF, (void *)__VA_ARGS__); }
 #define TO_LOG_INF_BUF(...) { TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_BUFFER_INF, (void *)__VA_ARGS__); }
 #else
@@ -158,7 +164,7 @@ extern TO_log_ctx_t* TO_log_get_ctx(void);
 #endif
 
 #if TO_LOG_LEVEL_MAX >= TO_LOG_LEVEL_DBG
-#define TO_LOG_DBG(...) TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_STRING_DBG, (void *)__VA_ARGS__)
+#define TO_LOG_DBG(format, ...) TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_STRING_DBG, (void *)format, (void *)__func__, ##__VA_ARGS__)
 #define TO_LOG_DBG_HEX(...) { TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_HEX_DISP_DBG, (void *)__VA_ARGS__); }
 #define TO_LOG_DBG_BUF(...) { TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_BUFFER_DBG, (void *)__VA_ARGS__); }
 #else
@@ -166,6 +172,10 @@ extern TO_log_ctx_t* TO_log_get_ctx(void);
 #define TO_LOG_DBG_HEX(...)
 #define TO_LOG_DBG_BUF(...)
 #endif
+#pragma GCC diagnostic pop
+
+// Log context definition
+extern TO_log_ctx_t log_ctx;
 
 #ifdef __cplusplus
 }

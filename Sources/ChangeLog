@@ -1,3 +1,104 @@
+6.3.9 - 2023-01-27
+- Better default driver configuration
+- Helpers: handling TODRV_HSE_DRIVER_DISABLE
+
+6.3.7 - 2023-01-23
+- Update for new documentation generator version"
+
+6.3.6 - 2023-01-03
+- Doc: reformulation after review on TO136 reset while upgrading
+
+6.3.4 - 2023-01-02
+- Doc: broadcast loader PN: TOSF-LD1 -> TOSB-BC1
+- Doc: status PIO and power optimisation updates
+- Doc: add details about TOSE_init() and TOSE_fini() timings
+
+6.3.3 - 2022-11-30
+- Updated Makefile
+
+6.3.1 - 2022-11-30
+- Updated link constraints
+
+6.3.1 - 2022-11-29
+- Updated constraints
+
+6.3.0 - 2022-11-29
+- Added a supplemental version of the library enabling a "no-init" x86 version
+
+6.2.13 - 2022-11-10
+- Added stack measurement
+
+6.2.12 - 2022-10-28
+- Update TO-Protect HAL NVM examples to use new load/store API
+- Examples files cleanup
+
+6.2.11 - 2022-10-10
+- Python utils: fixed log level setting API after latest libTO changes
+- TOsh is initializing log level to -1 by default
+- Created TOSH_LIBTO_LOG_LEVEL env to be able to configure TOsh behavior before
+call
+
+6.2.10 - 2022-10-10
+- Updated selftests
+
+6.2.9 - 2022-09-20
+- Removed a useless parameter in selftests
+
+6.2.8 - 2022-09-20
+- Fixed constraints in configure.ac
+- Added comments in selftest example
+
+6.2.7 - 2022-08-26
+- secure_storage_fd.c example file removed
+- fix agressive find&replace done in 93d9c2a2
+
+6.2.6 - 2022-08-17
+- Renamed a constant to DTLS_xxx
+
+6.2.5 - 2022-08-12
+- Warnings fix
+
+6.2.4 - 2022-07-18
+- Just because a tiny mistake has been made, and we hate deleting tags
+
+6.2.2 - 2022-07-06
+- Doc: removed enums and defines lists spacing because it is no more required
+with Sphinx  5.0.2
+
+6.2.1 - 2022-06-29
+- Removed warnings about logs
+
+6.2.0 - 2022-06-17
+- Renamed all delivered files to be as TO_xxx
+
+6.1.14 - 2022-06-16
+- Change some prototypes for better clarity
+
+6.1.13 - 2022-06-08
+- Include TO_cfg.h from TOSE_cfg.h
+- TO_user_config.h is now included by TO_cfg.h
+
+6.1.9 - 2022-04-20
+- Update the documentation to reflect TOP_info.h and TOP_technical_info.h for
+TO-Protect
+- Enable helper_cert when not using HSE
+
+6.1.7 - 2022-04-06
+- CAPI: adjust CAPI max update size in link with the driver selected
+- CAPI feature shall not depend of driver HSE or SSE
+- TLS helper: split I/O buffer only in full duplex mode
+- fix function return code
+
+6.1.6 - 2022-03-31
+- Do not install/dist TOSE_loader.h if loader is disabled
+- Fixed header doc in TOSE_setup.h: removed reference to TO-Protect
+
+6.1.5 - 2022-03-22
+- Fix pyutils driver config detection
+
+6.1.3 - 2022-03-22
+- Fix loader helper enabling
+
 6.1.2 - 2022-03-16
 - updated footprints values, and fixed table of contents
 

@@ -18,16 +18,6 @@
 #ifndef _TOSE_STATUSPIO_H_
 #define _TOSE_STATUSPIO_H_
 
-#ifndef TOSE_STATUSPIO_API
-#ifdef __linux__
-#define TOSE_STATUSPIO_API
-#elif _WIN32
-#define TOSE_STATUSPIO_API __declspec(dllexport)
-#else
-#define TOSE_STATUSPIO_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -44,15 +34,14 @@ extern "C" {
  * @param[in] opendrain Set to 1 for open drain, 0 for push pull (default: 1)
  * @param[in] ready_level Set to 1 to signal readyness with high PIO level, 0 to
  * signal it with low PIO level (default: 1).
- * @param[in] idle_hz Set to 1 to have idle state signalled by PIO high impedance
- * signal it with a low level (default: 1)
+ * @param[in] idle_hz Set to 1 to have idle state signalled by PIO high
+ * impedance, else signal it with the same level as ready (default: 1)
  *
  * The configuration is stored permanently by the Secure Element, and then
  * persists across reboots.
  *
- * Note: this function do not have BUSY / READY states, the PIO remains in the
- * IDLE state when called. But if the pushed settings change the PIO levels or
- * signalling method, the PIO state can change when this function is called.
+ * Note: the status PIO state during this function call is not reliable, then
+ * you should ignore it at this step.
  *
  * @return
  * - TORSP_SUCCESS on success
@@ -61,7 +50,7 @@ extern "C" {
  * - TO_INVALID_RESPONSE_LENGTH: unexpected response length from device
  * - TO_ERROR: generic error
  */
-TOSE_STATUSPIO_API TO_ret_t TOSE_set_status_PIO_config(TOSE_ctx_t *ctx, int enable,
+extern TO_ret_t TOSE_set_status_PIO_config(TOSE_ctx_t *ctx, int enable,
 		int opendrain, int ready_level, int idle_hz);
 
 /**
@@ -84,7 +73,7 @@ TOSE_STATUSPIO_API TO_ret_t TOSE_set_status_PIO_config(TOSE_ctx_t *ctx, int enab
  * - TO_INVALID_RESPONSE_LENGTH: unexpected response length from device
  * - TO_ERROR: generic error
  */
-TOSE_STATUSPIO_API TO_ret_t TOSE_get_status_PIO_config(TOSE_ctx_t *ctx, int *enable,
+extern TO_ret_t TOSE_get_status_PIO_config(TOSE_ctx_t *ctx, int *enable,
 		int *opendrain, int *ready_level, int *idle_hz);
 
 /** @} */

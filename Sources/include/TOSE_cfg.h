@@ -22,6 +22,8 @@
 #ifndef _TOSE_CFG_H_
 #define _TOSE_CFG_H_
 
+#include "TO_cfg.h"
+
 /*
  * --------------
  * Driver options

@@ -23,7 +23,7 @@
 #define _DEFAULT_SOURCE
 #endif
 #include <endian.h>
-#else
+#endif
 
 #if defined(__BYTE_ORDER__) \
 	&& !defined(TO_BIG_ENDIAN) && !defined(TO_LITTLE_ENDIAN)
@@ -34,6 +34,8 @@
 	#else
 		#error "Unsupported byte order"
 	#endif
+#else
+	#error "Unspecified byte order"
 #endif
 
 #if HAVE_BYTESWAP_H
@@ -42,16 +44,22 @@
 #if defined(__GNUC__) && !defined(__ARMCC_VERSION)
 #include <sys/types.h>
 #endif
-#if defined(__bswap16) && defined(__bswap32) && defined(__bswap64)
+#if defined(__bswap16)
 	#define bswap_16 __bswap16
-	#define bswap_32 __bswap32
-	#define bswap_64 __bswap64
 #else
 	#define bswap_16(value) \
 		((((value) & 0xff) << 8) | ((value) >> 8))
+#endif
+#if defined(__bswap32)
+	#define bswap_32 __bswap32
+#else
 	#define bswap_32(value) \
 		(((uint32_t)bswap_16((uint16_t)((value) & 0xffff)) \
 		  << 16) | (uint32_t)bswap_16((uint16_t)((value) >> 16)))
+#endif
+#if defined(__bswap64)
+	#define bswap_64 __bswap64
+#else
 	#define bswap_64(value) \
 		(((uint64_t)bswap_32((uint32_t)((value) & 0xffffffff)) \
 		  << 32) | (uint64_t)bswap_32((uint32_t)((value) >> 32)))
@@ -151,8 +159,6 @@
 	#define le32toh(x) (TO_byte_order ? bswap_32(x) : x)
 	#define le64toh(x) (TO_byte_order ? bswap_64(x) : x)
 #endif
-
-#endif /* HAVE_ENDIAN_H */
 
 #endif /* _TO_ENDIAN_H_ */
 

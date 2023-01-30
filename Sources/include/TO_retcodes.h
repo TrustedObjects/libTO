@@ -59,51 +59,63 @@ COMPILE_ASSERT(sizeof(TO_lib_ret_t) == sizeof(uint16_t));
  * @details These return codes are common to all TO Secure elements, including
  * the TO-136 and TO-Protect. Therefore, some of these return values may have
  * a different meaning depending on the SE you are using, and the context you
- * are receiving it. Refer yourself to the called function to have a more 
+ * are receiving it. Refer yourself to the called function to have a more
  * precise information.
  */
 typedef enum TO_se_ret_e {
         /** Indicates that the SE does not know how to handle this command */
-    TORSP_UNKNOWN_CMD = 0x01,
+	TORSP_UNKNOWN_CMD = 0x01,
 
         /** The digital signature is wrong */
-    TORSP_BAD_SIGNATURE = 0x66,
+	TORSP_BAD_SIGNATURE = 0x66,
 
-        /** The provided length is wrong */
-    TORSP_INVALID_LEN = 0x67,
+	/** The provided length is wrong */
+	TORSP_INVALID_LEN = 0x67,
 
         /** The requested data cannot be retrieved */
-    TORSP_NOT_AVAILABLE = 0x68,
+	TORSP_NOT_AVAILABLE = 0x68,
 
         /** The expected padding is not respected */
-    TORSP_INVALID_PADDING = 0x69,
+	TORSP_INVALID_PADDING = 0x69,
 
         /** A communication error has occurred */
-    TORSP_COM_ERROR = 0x72,
+	TORSP_COM_ERROR = 0x72,
 
         /** Deprecated, use TORSP_COM_ERROR instead */
-    TO136RSP_COM_ERROR = TORSP_COM_ERROR,
+	TO136RSP_COM_ERROR = TORSP_COM_ERROR,
 
         /** An authentication process has to be conduced to pursue */
-    TORSP_NEED_AUTHENTICATION = 0x80,
+	TORSP_NEED_AUTHENTICATION = 0x80,
 
         /** This command cannot be used in this context */
-    TORSP_COND_OF_USE_NOT_SATISFIED = 0x85,
+	TORSP_COND_OF_USE_NOT_SATISFIED = 0x85,
 
         /** An argument is not in the expected range */
-    TORSP_ARG_OUT_OF_RANGE = 0x88,
+	TORSP_ARG_OUT_OF_RANGE = 0x88,
 
         /** The Command's execution has been conduced correctly */
-    TORSP_SUCCESS = 0x90,
+	TORSP_SUCCESS = 0x90,
+
+        /** No valid secure storage found */
+	TORSP_NO_VALID_SECURE_STORAGE_FOUND = 0xD0,
+
+        /** Inconsistent secure storages */
+	TORSP_INCONSISTENT_SECURE_STORAGES = 0xD1,
+
+        /** Secure Storage's version is wrong */
+	TORSP_WRONG_SECURE_STORAGE_VERSION = 0xD2,
+
+	/** Wrong code integrity */
+	TORSP_WRONG_INSTALLATION = 0xD3,
 
         /** The SecLink key has to be renewed */
-    TORSP_SECLINK_RENEW_KEY = 0xFD,
+	TORSP_SECLINK_RENEW_KEY = 0xFD,
 
         /** An internal error has occurred. It may be the proof that
          * something unexpected has happened (for instance, a fault has
          * been detected).
         */
-    TORSP_INTERNAL_ERROR = 0xFE,
+	TORSP_INTERNAL_ERROR = 0xFE,
 } PACKED TO_se_ret_t;
 
 /** @} */

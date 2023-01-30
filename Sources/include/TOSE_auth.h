@@ -18,16 +18,6 @@
 #ifndef _TOSE_AUTH_H_
 #define _TOSE_AUTH_H_
 
-#ifndef TOSE_AUTH_API
-#ifdef __linux__
-#define TOSE_AUTH_API
-#elif _WIN32
-#define TOSE_AUTH_API __declspec(dllexport)
-#else
-#define TOSE_AUTH_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -60,9 +50,9 @@ extern "C" {
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_sign(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_sign(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t* challenge, const uint16_t challenge_length,
-		uint8_t* signature);
+		uint8_t signature[TO_SIGNATURE_SIZE]);
 
 /**
  * @brief Verifies the given Elliptic Curve Digital Signature of the
@@ -86,9 +76,9 @@ TOSE_AUTH_API TO_ret_t TOSE_sign(TOSE_ctx_t *ctx, const uint8_t key_index,
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_verify(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t* data, const uint16_t data_length,
-		const uint8_t* signature);
+		const uint8_t signature[TO_SIGNATURE_SIZE]);
 
 /**
  * @brief Returns the Elliptic Curve Digital Signature of the given
@@ -110,8 +100,10 @@ TOSE_AUTH_API TO_ret_t TOSE_verify(TOSE_ctx_t *ctx, const uint8_t key_index,
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_sign_hash(TOSE_ctx_t *ctx, const uint8_t key_index,
-		const uint8_t hash[TO_HASH_SIZE], uint8_t* signature);
+extern TO_ret_t TOSE_sign_hash(TOSE_ctx_t *ctx,
+		const uint8_t key_index,
+		const uint8_t hash[TO_HASH_SIZE],
+		uint8_t signature[TO_SIGNATURE_SIZE]);
 
 /**
  * @brief Verifies the given Elliptic Curve Digital
@@ -134,8 +126,8 @@ TOSE_AUTH_API TO_ret_t TOSE_sign_hash(TOSE_ctx_t *ctx, const uint8_t key_index,
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify_hash_signature(TOSE_ctx_t *ctx, const uint8_t key_index,
-		const uint8_t hash[TO_HASH_SIZE], const uint8_t* signature);
+extern TO_ret_t TOSE_verify_hash_signature(TOSE_ctx_t *ctx, const uint8_t key_index,
+		const uint8_t hash[TO_HASH_SIZE], const uint8_t signature[TO_SIGNATURE_SIZE]);
 
 /**
  * @brief Returns subject common name of one of the Secure Element certificates
@@ -157,7 +149,7 @@ TOSE_AUTH_API TO_ret_t TOSE_verify_hash_signature(TOSE_ctx_t *ctx, const uint8_t
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_get_certificate_subject_cn(TOSE_ctx_t *ctx, const uint8_t certificate_index,
+extern TO_ret_t TOSE_get_certificate_subject_cn(TOSE_ctx_t *ctx, const uint8_t certificate_index,
 		char subject_cn[TO_CERT_SUBJECT_CN_MAXSIZE + 1]);
 
 /**
@@ -192,7 +184,7 @@ TOSE_AUTH_API TO_ret_t TOSE_get_certificate_subject_cn(TOSE_ctx_t *ctx, const ui
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_set_certificate_signing_request_dn(
+extern TO_ret_t TOSE_set_certificate_signing_request_dn(
 		TOSE_ctx_t *ctx, const uint8_t certificate_index,
 		const uint8_t csr_dn[TO_CERT_DN_MAXSIZE],
 		const uint16_t csr_dn_len);
@@ -220,7 +212,7 @@ TOSE_AUTH_API TO_ret_t TOSE_set_certificate_signing_request_dn(
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_get_certificate_signing_request(
+extern TO_ret_t TOSE_get_certificate_signing_request(
 		TOSE_ctx_t *ctx, const uint8_t certificate_index,
 		uint8_t* csr, uint16_t* size);
 
@@ -245,7 +237,7 @@ TOSE_AUTH_API TO_ret_t TOSE_get_certificate_signing_request(
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_set_certificate_x509(
+extern TO_ret_t TOSE_set_certificate_x509(
 		TOSE_ctx_t *ctx, const uint8_t certificate_index,
 		const uint8_t* certificate, const uint16_t size);
 
@@ -266,7 +258,7 @@ TOSE_AUTH_API TO_ret_t TOSE_set_certificate_x509(
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_set_certificate_x509_init(
+extern TO_ret_t TOSE_set_certificate_x509_init(
 		TOSE_ctx_t *ctx,
 		const uint8_t certificate_index);
 
@@ -288,7 +280,7 @@ TOSE_AUTH_API TO_ret_t TOSE_set_certificate_x509_init(
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_set_certificate_x509_update(
+extern TO_ret_t TOSE_set_certificate_x509_update(
 		TOSE_ctx_t *ctx,
 		const uint8_t* certificate,
 		const uint16_t size);
@@ -309,7 +301,7 @@ TOSE_AUTH_API TO_ret_t TOSE_set_certificate_x509_update(
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_set_certificate_x509_final(
+extern TO_ret_t TOSE_set_certificate_x509_final(
 		TOSE_ctx_t *ctx);
 
 /**
@@ -333,7 +325,7 @@ TOSE_AUTH_API TO_ret_t TOSE_set_certificate_x509_final(
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_get_certificate(TOSE_ctx_t *ctx, const uint8_t certificate_index,
+extern TO_ret_t TOSE_get_certificate(TOSE_ctx_t *ctx, const uint8_t certificate_index,
 		const TO_certificate_format_t format, uint8_t* certificate);
 
 /**
@@ -357,7 +349,7 @@ TOSE_AUTH_API TO_ret_t TOSE_get_certificate(TOSE_ctx_t *ctx, const uint8_t certi
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_get_certificate_x509(TOSE_ctx_t *ctx, const uint8_t certificate_index,
+extern TO_ret_t TOSE_get_certificate_x509(TOSE_ctx_t *ctx, const uint8_t certificate_index,
 		uint8_t* certificate, uint16_t* size);
 
 /**
@@ -381,7 +373,7 @@ TOSE_AUTH_API TO_ret_t TOSE_get_certificate_x509(TOSE_ctx_t *ctx, const uint8_t 
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify_ca_certificate_and_store(TOSE_ctx_t *ctx, const uint8_t ca_key_index,
+extern TO_ret_t TOSE_verify_ca_certificate_and_store(TOSE_ctx_t *ctx, const uint8_t ca_key_index,
 		const uint8_t subca_key_index, const uint8_t *certificate,
 		const uint16_t certificate_len);
 
@@ -401,7 +393,7 @@ TOSE_AUTH_API TO_ret_t TOSE_verify_ca_certificate_and_store(TOSE_ctx_t *ctx, con
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_get_challenge_and_store(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_challenge_and_store(TOSE_ctx_t *ctx,
 		uint8_t challenge[TO_CHALLENGE_SIZE]);
 
 /** @} */
@@ -434,7 +426,7 @@ TOSE_AUTH_API TO_ret_t TOSE_get_challenge_and_store(TOSE_ctx_t *ctx,
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_get_certificate_and_sign(TOSE_ctx_t *ctx, const uint8_t certificate_index,
+extern TO_ret_t TOSE_get_certificate_and_sign(TOSE_ctx_t *ctx, const uint8_t certificate_index,
 		const TO_certificate_format_t format,
 		const uint8_t* challenge, const uint16_t challenge_length,
 		uint8_t* certificate, uint8_t* signature);
@@ -464,7 +456,7 @@ TOSE_AUTH_API TO_ret_t TOSE_get_certificate_and_sign(TOSE_ctx_t *ctx, const uint
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_get_certificate_x509_and_sign(TOSE_ctx_t *ctx, const uint8_t certificate_index,
+extern TO_ret_t TOSE_get_certificate_x509_and_sign(TOSE_ctx_t *ctx, const uint8_t certificate_index,
 		const uint8_t* challenge, const uint16_t challenge_length,
 		uint8_t* certificate, uint16_t* size, uint8_t* signature);
 
@@ -482,7 +474,7 @@ TOSE_AUTH_API TO_ret_t TOSE_get_certificate_x509_and_sign(TOSE_ctx_t *ctx, const
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_get_certificate_x509_init(
+extern TO_ret_t TOSE_get_certificate_x509_init(
 		TOSE_ctx_t *ctx,
 		const uint8_t certificate_index
 );
@@ -503,7 +495,7 @@ TOSE_AUTH_API TO_ret_t TOSE_get_certificate_x509_init(
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_get_certificate_x509_update(
+extern TO_ret_t TOSE_get_certificate_x509_update(
 		TOSE_ctx_t *ctx,
 		uint8_t* certificate,
 		uint16_t* size
@@ -522,7 +514,7 @@ TOSE_AUTH_API TO_ret_t TOSE_get_certificate_x509_update(
  * response time.
  *
  * */
-TOSE_AUTH_API TO_ret_t TOSE_get_certificate_x509_final(
+extern TO_ret_t TOSE_get_certificate_x509_final(
 		TOSE_ctx_t *ctx,
 		const uint8_t* challenge,
 		const uint16_t challenge_length,
@@ -551,7 +543,7 @@ TOSE_AUTH_API TO_ret_t TOSE_get_certificate_x509_final(
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify_certificate_and_store(TOSE_ctx_t *ctx, const uint8_t ca_key_id,
+extern TO_ret_t TOSE_verify_certificate_and_store(TOSE_ctx_t *ctx, const uint8_t ca_key_id,
 		const TO_certificate_format_t format, const uint8_t* certificate);
 
 /**
@@ -577,7 +569,7 @@ TOSE_AUTH_API TO_ret_t TOSE_verify_certificate_and_store(TOSE_ctx_t *ctx, const 
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify_challenge_signature(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_verify_challenge_signature(TOSE_ctx_t *ctx,
 		const uint8_t signature[TO_SIGNATURE_SIZE]);
 
 /**
@@ -597,7 +589,7 @@ TOSE_AUTH_API TO_ret_t TOSE_verify_challenge_signature(TOSE_ctx_t *ctx,
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify_chain_certificate_and_store_init(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_verify_chain_certificate_and_store_init(TOSE_ctx_t *ctx,
 		const uint8_t ca_key_index);
 
 /**
@@ -629,7 +621,7 @@ TOSE_AUTH_API TO_ret_t TOSE_verify_chain_certificate_and_store_init(TOSE_ctx_t *
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify_chain_certificate_and_store_update(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_verify_chain_certificate_and_store_update(TOSE_ctx_t *ctx,
 		const uint8_t *chain_certificate,
 		const uint16_t chain_certificate_length);
 
@@ -650,7 +642,7 @@ TOSE_AUTH_API TO_ret_t TOSE_verify_chain_certificate_and_store_update(TOSE_ctx_t
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify_chain_certificate_and_store_final(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_verify_chain_certificate_and_store_final(TOSE_ctx_t *ctx);
 
 /**
  * @brief Initialize CA certificate chain verification
@@ -670,7 +662,7 @@ TOSE_AUTH_API TO_ret_t TOSE_verify_chain_certificate_and_store_final(TOSE_ctx_t 
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify_chain_ca_certificate_and_store_init(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_verify_chain_ca_certificate_and_store_init(TOSE_ctx_t *ctx,
 		const uint8_t ca_key_index, const uint8_t subca_key_index);
 
 /**
@@ -701,7 +693,7 @@ TOSE_AUTH_API TO_ret_t TOSE_verify_chain_ca_certificate_and_store_init(TOSE_ctx_
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify_chain_ca_certificate_and_store_update(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_verify_chain_ca_certificate_and_store_update(TOSE_ctx_t *ctx,
 		const uint8_t *chain_certificate,
 		const uint16_t chain_certificate_length);
 
@@ -722,7 +714,7 @@ TOSE_AUTH_API TO_ret_t TOSE_verify_chain_ca_certificate_and_store_update(TOSE_ct
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_AUTH_API TO_ret_t TOSE_verify_chain_ca_certificate_and_store_final(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_verify_chain_ca_certificate_and_store_final(TOSE_ctx_t *ctx);
 
 /** @} */
 

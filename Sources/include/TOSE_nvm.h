@@ -18,16 +18,6 @@
 #ifndef _TOSE_NVM_H_
 #define _TOSE_NVM_H_
 
-#ifndef TOSE_NVM_API
-#ifdef __linux__
-#define TOSE_NVM_API
-#elif _WIN32
-#define TOSE_NVM_API __declspec(dllexport)
-#else
-#define TOSE_NVM_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -50,7 +40,7 @@ extern "C" {
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR if an internal error has occurred
  */
-TOSE_NVM_API TO_ret_t TOSE_write_nvm(TOSE_ctx_t *ctx, const uint16_t offset, const void *data,
+extern TO_ret_t TOSE_write_nvm(TOSE_ctx_t *ctx, const uint16_t offset, const void *data,
 		unsigned int length, const uint8_t key[TO_AES_KEYSIZE]);
 
 /**
@@ -66,7 +56,7 @@ TOSE_NVM_API TO_ret_t TOSE_write_nvm(TOSE_ctx_t *ctx, const uint16_t offset, con
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR if an internal error has occurred
  */
-TOSE_NVM_API TO_ret_t TOSE_read_nvm(TOSE_ctx_t *ctx, const uint16_t offset, void *data,
+extern TO_ret_t TOSE_read_nvm(TOSE_ctx_t *ctx, const uint16_t offset, void *data,
 		unsigned int length, const uint8_t key[TO_AES_KEYSIZE]);
 
 /**
@@ -79,7 +69,7 @@ TOSE_NVM_API TO_ret_t TOSE_read_nvm(TOSE_ctx_t *ctx, const uint16_t offset, void
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR if an internal error has occurred
  */
-TOSE_NVM_API TO_ret_t TOSE_get_nvm_size(TOSE_ctx_t *ctx, uint16_t *size);
+extern TO_ret_t TOSE_get_nvm_size(TOSE_ctx_t *ctx, uint16_t *size);
 
 /** @} */
 

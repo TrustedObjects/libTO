@@ -19,16 +19,6 @@
 #ifndef _TOSE_MEASURED_BOOT_H_
 #define _TOSE_MEASURED_BOOT_H_
 
-#ifndef TOSE_MEASURED_BOOT_API
-#ifdef __linux__
-#define TOSE_MEASURED_BOOT_API
-#elif _WIN32
-#define TOSE_MEASURED_BOOT_API __declspec(dllexport)
-#else
-#define TOSE_MEASURED_BOOT_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -54,7 +44,7 @@ extern "C" {
  * - TO_INVALID_PARAM: invalid firmware hash length
  * - TO_ERROR: generic error
  */
-TOSE_MEASURED_BOOT_API TO_ret_t TOSE_measured_boot(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_measured_boot(TOSE_ctx_t *ctx,
 		const uint8_t *hash, uint16_t hash_length); /* A1 */
 
 /**
@@ -73,7 +63,7 @@ TOSE_MEASURED_BOOT_API TO_ret_t TOSE_measured_boot(TOSE_ctx_t *ctx,
  * - TO_INVALID_PARAM: invalid firmware hash length
  * - TO_ERROR: generic error, including invalid new MCU FW hash
  */
-TOSE_MEASURED_BOOT_API TO_ret_t TOSE_validate_new_fw_hash(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_validate_new_fw_hash(TOSE_ctx_t *ctx,
 		const uint8_t* hash, uint16_t hash_length); /* A4 */
 
 /**
@@ -100,7 +90,7 @@ TOSE_MEASURED_BOOT_API TO_ret_t TOSE_validate_new_fw_hash(TOSE_ctx_t *ctx,
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error, including invalid new MCU FW hash.
  */
-TOSE_MEASURED_BOOT_API TO_ret_t TOSE_commit_new_fw_hash(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_commit_new_fw_hash(TOSE_ctx_t *ctx,
 		const uint8_t signed_challenge[TO_HMAC_SIZE]); /* A9 */
 
 /**
@@ -125,7 +115,7 @@ TOSE_MEASURED_BOOT_API TO_ret_t TOSE_commit_new_fw_hash(TOSE_ctx_t *ctx,
  * - TO_INVALID_PARAM: invalid firmware hash length
  * - TO_ERROR: generic error, including invalid new MCU FW hash or challenge
  */
-TOSE_MEASURED_BOOT_API TO_ret_t TOSE_store_new_trusted_fw_hash(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_store_new_trusted_fw_hash(TOSE_ctx_t *ctx,
 		const uint8_t* fw_hash, const uint16_t fw_hash_length,
 		const uint8_t  mac[TO_HMAC_SIZE]); /* A5 */
 
@@ -165,7 +155,7 @@ TOSE_MEASURED_BOOT_API TO_ret_t TOSE_store_new_trusted_fw_hash(TOSE_ctx_t *ctx,
  * - TO_INVALID_PARAM: invalid hash length or challenge length
  * - TO_ERROR: generic error, including invalid new MCU FW hash
  */
-TOSE_MEASURED_BOOT_API TO_ret_t TOSE_get_boot_measurement(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_boot_measurement(TOSE_ctx_t *ctx,
 		uint8_t* fw_hash, uint16_t fw_hash_length,
 		const uint8_t* challenge, uint16_t challenge_length,
 		measure_outcome_t* outcome, uint8_t mac[TO_HMAC_SIZE]); /* A6 */
@@ -199,7 +189,7 @@ TOSE_MEASURED_BOOT_API TO_ret_t TOSE_get_boot_measurement(TOSE_ctx_t *ctx,
  * - TO_INVALID_PARAM: invalid hash length or challenge length
  * - TO_ERROR: generic error
  */
-TOSE_MEASURED_BOOT_API TO_ret_t TOSE_get_se_measurement(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_se_measurement(TOSE_ctx_t *ctx,
 		uint8_t* hash, uint16_t hash_length,
 		const uint8_t* challenge, uint16_t challenge_length,
 		measure_outcome_t* outcome, uint8_t mac[TO_HMAC_SIZE]); /* A6 */
@@ -225,7 +215,7 @@ TOSE_MEASURED_BOOT_API TO_ret_t TOSE_get_se_measurement(TOSE_ctx_t *ctx,
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error, including invalid new MCU FW hash
  */
-TOSE_MEASURED_BOOT_API TO_ret_t TOSE_invalidate_new_hash(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_invalidate_new_hash(TOSE_ctx_t *ctx,
 		const uint8_t password_challenge_hash[TO_SHA256_HASHSIZE]);
 
 /** @} */

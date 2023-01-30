@@ -17,17 +17,6 @@
 
 #ifndef _TOSE_ADMIN_H_
 #define _TOSE_ADMIN_H_
-
-#ifndef TOSE_ADMIN_API
-#ifdef __linux__
-#define TOSE_ADMIN_API
-#elif _WIN32
-#define TOSE_ADMIN_API __declspec(dllexport)
-#else
-#define TOSE_ADMIN_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -58,7 +47,7 @@ extern "C" {
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_ADMIN_API TO_ret_t TOSE_admin_session_init(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_admin_session_init(TOSE_ctx_t *ctx,
 		const uint8_t server_challenge[TO_ADMIN_CHALLENGE_SIZE],
 		uint8_t se_challenge[TO_ADMIN_CHALLENGE_SIZE],
 		uint8_t se_cryptogram[TO_ADMIN_CRYPTOGRAM_SIZE],
@@ -84,7 +73,7 @@ TOSE_ADMIN_API TO_ret_t TOSE_admin_session_init(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_ADMIN_API TO_ret_t TOSE_admin_session_auth_server(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_admin_session_auth_server(TOSE_ctx_t *ctx,
 		const uint8_t options[TO_ADMIN_OPTIONS_SIZE],
 		const uint8_t server_cryptogram[TO_ADMIN_CRYPTOGRAM_SIZE],
 		const uint8_t mac[TO_ADMIN_MAC_SIZE]);
@@ -112,7 +101,7 @@ TOSE_ADMIN_API TO_ret_t TOSE_admin_session_auth_server(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_ADMIN_API TO_ret_t TOSE_admin_command(TOSE_ctx_t *ctx, const uint8_t *command, uint16_t length);
+extern TO_ret_t TOSE_admin_command(TOSE_ctx_t *ctx, const uint8_t *command, uint16_t length);
 
 /**
  * @brief Administration command with response data.
@@ -135,7 +124,7 @@ TOSE_ADMIN_API TO_ret_t TOSE_admin_command(TOSE_ctx_t *ctx, const uint8_t *comma
  * @deprecated This function is deprecated and may disappear in future releases, use TOSE_admin_command_with_response2() instead.
 
  */
-TOSE_ADMIN_API TO_ret_t TOSE_admin_command_with_response(TOSE_ctx_t *ctx, const uint8_t *command, uint16_t length,
+extern TO_ret_t TOSE_admin_command_with_response(TOSE_ctx_t *ctx, const uint8_t *command, uint16_t length,
 		uint8_t *response, uint16_t response_length);
 
 /**
@@ -157,7 +146,7 @@ TOSE_ADMIN_API TO_ret_t TOSE_admin_command_with_response(TOSE_ctx_t *ctx, const 
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_ADMIN_API TO_ret_t TOSE_admin_command_with_response2(TOSE_ctx_t *ctx, const uint8_t *command, uint16_t length,
+extern TO_ret_t TOSE_admin_command_with_response2(TOSE_ctx_t *ctx, const uint8_t *command, uint16_t length,
 		uint8_t *response, uint16_t *response_length);
 
 /**
@@ -173,7 +162,7 @@ TOSE_ADMIN_API TO_ret_t TOSE_admin_command_with_response2(TOSE_ctx_t *ctx, const
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_ADMIN_API TO_ret_t TOSE_admin_session_fini(TOSE_ctx_t *ctx, uint8_t mac[TO_ADMIN_MAC_SIZE]);
+extern TO_ret_t TOSE_admin_session_fini(TOSE_ctx_t *ctx, uint8_t mac[TO_ADMIN_MAC_SIZE]);
 
 /**
  * @brief Set administration slot to use from now on.
@@ -188,7 +177,7 @@ TOSE_ADMIN_API TO_ret_t TOSE_admin_session_fini(TOSE_ctx_t *ctx, uint8_t mac[TO_
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_ADMIN_API TO_ret_t TOSE_admin_set_slot(TOSE_ctx_t *ctx, const uint8_t index);
+extern TO_ret_t TOSE_admin_set_slot(TOSE_ctx_t *ctx, const uint8_t index);
 
 /** @} */
 

@@ -15,6 +15,9 @@
  * @brief Hardware Secure Element constants
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_CMDS_H_
 #define _TODRV_HSE_CMDS_H_
 
@@ -43,6 +46,9 @@
 /** @addtogroup command_codes Hardware Secure Element command codes
  * Hardware Secure Element command codes
  * @{ */
+
+/* Init, special dedicace pour Matheu */
+#define TODRV_HSE_CMD_INIT ((unsigned short)0xFF10)
 
 /* System */
 #define TODRV_HSE_CMD_GET_SN ((unsigned short)0x0001)
@@ -277,4 +283,6 @@
 /** @} */
 
 #endif /* _TODRV_HSE_CMDS_H_ */
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 

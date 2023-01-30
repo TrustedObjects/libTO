@@ -1,17 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trusted-Objects Secure Element library documentation &#8212; libTO 6.1.2 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Trusted-Objects Secure Element library documentation &#8212; libTO 6.3.9 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/custom.js"></script>
     <script src="_static/custom.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -37,7 +40,7 @@
 
 
 
-<p class="blurb">release 6.1.2<br />doc</p>
+<p class="blurb">release 6.3.9<br />doc</p>
 
 
 
@@ -54,7 +57,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
   <div>
     <h3><a href="#">Table of Contents</a></h3>
     <ul>
@@ -85,8 +88,8 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="trusted-objects-secure-element-library-documentation">
-<h1>Trusted-Objects Secure Element library documentation<a class="headerlink" href="#trusted-objects-secure-element-library-documentation" title="Permalink to this headline">¶</a></h1>
+  <section id="trusted-objects-secure-element-library-documentation">
+<h1>Trusted-Objects Secure Element library documentation<a class="headerlink" href="#trusted-objects-secure-element-library-documentation" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
@@ -95,10 +98,10 @@
 <li class="toctree-l1"><a class="reference internal" href="legal.html#licensed-product">Licensed product</a></li>
 </ul>
 </div>
-<div class="section" id="to-protect-tls-overview">
-<h2>TO-Protect TLS overview<a class="headerlink" href="#to-protect-tls-overview" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="highlights">
-<h3>Highlights<a class="headerlink" href="#highlights" title="Permalink to this headline">¶</a></h3>
+<section id="to-protect-tls-overview">
+<h2>TO-Protect TLS overview<a class="headerlink" href="#to-protect-tls-overview" title="Permalink to this heading">¶</a></h2>
+<section id="highlights">
+<h3>Highlights<a class="headerlink" href="#highlights" title="Permalink to this heading">¶</a></h3>
 <p>TO-Protect is a family of lightweight secure software libraries developed by
 Trusted Objects for constrained applications such as industrial IoT or embedded
 application where strong security and limited code footprint are required.</p>
@@ -128,9 +131,9 @@ host MCU or RF SoC have FOTA capability)</p></li>
 </ul>
 </div></blockquote>
 <p>This document describes <strong>TO-Protect TLS</strong>.</p>
-</div>
-<div class="section" id="key-features">
-<h3>Key features<a class="headerlink" href="#key-features" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="key-features">
+<h3>Key features<a class="headerlink" href="#key-features" title="Permalink to this heading">¶</a></h3>
 <p>libTO and TO-Protect altogether implement a full TLS stack, including the
 following TLS security mechanisms:</p>
 <ul class="simple">
@@ -140,10 +143,10 @@ following TLS security mechanisms:</p>
 <li><p>integrity protection</p></li>
 <li><p>confidentiality</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="to-protect-tls-integration">
-<h2>TO-Protect TLS integration<a class="headerlink" href="#to-protect-tls-integration" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="to-protect-tls-integration">
+<h2>TO-Protect TLS integration<a class="headerlink" href="#to-protect-tls-integration" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="howtouse.html">How to use TO-Protect TLS</a></li>
@@ -154,9 +157,9 @@ following TLS security mechanisms:</p>
 <li class="toctree-l1"><a class="reference internal" href="overview.html#limitations">Limitations</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="to-protect-tls-setup-and-configuration">
-<h2>TO-Protect TLS setup and configuration<a class="headerlink" href="#to-protect-tls-setup-and-configuration" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="to-protect-tls-setup-and-configuration">
+<h2>TO-Protect TLS setup and configuration<a class="headerlink" href="#to-protect-tls-setup-and-configuration" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="mcu_env/setup.html">Use TO-Protect TLS in an MCU project</a></li>
@@ -164,9 +167,9 @@ following TLS security mechanisms:</p>
 <li class="toctree-l1"><a class="reference internal" href="mcu_env/flashing.html">Flashing TO-Protect TLS</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="to-protect-tls-usage-examples">
-<span id="usage-examples"></span><h2>TO-Protect TLS usage examples<a class="headerlink" href="#to-protect-tls-usage-examples" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="to-protect-tls-usage-examples">
+<span id="usage-examples"></span><h2>TO-Protect TLS usage examples<a class="headerlink" href="#to-protect-tls-usage-examples" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/examples.html">Configuration</a></li>
@@ -174,9 +177,9 @@ following TLS security mechanisms:</p>
 <li class="toctree-l1"><a class="reference internal" href="api/examples.html#uninitialization">Uninitialization</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="provided-api">
-<span id="apis"></span><h2>Provided API<a class="headerlink" href="#provided-api" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="provided-api">
+<span id="apis"></span><h2>Provided API<a class="headerlink" href="#provided-api" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/helper.html">Helper API</a></li>
@@ -185,9 +188,9 @@ following TLS security mechanisms:</p>
 <li class="toctree-l1"><a class="reference internal" href="api/defs.html">Types and definitions</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="miscellany-guides">
-<h2>Miscellany guides<a class="headerlink" href="#miscellany-guides" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="miscellany-guides">
+<h2>Miscellany guides<a class="headerlink" href="#miscellany-guides" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
@@ -195,8 +198,8 @@ following TLS security mechanisms:</p>
 <li class="toctree-l1"><a class="reference internal" href="misc/prod_optim.html">Production optimizations</a></li>
 </ul>
 </div>
-<div class="section" id="migration">
-<h3>Migration<a class="headerlink" href="#migration" title="Permalink to this headline">¶</a></h3>
+<section id="migration">
+<h3>Migration<a class="headerlink" href="#migration" title="Permalink to this heading">¶</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="migration/migration_from_5.7.x_to_5.8.x.html">TO library migration guide from 5.7.x to 5.8.x</a></li>
@@ -205,9 +208,9 @@ following TLS security mechanisms:</p>
 <li class="toctree-l1"><a class="reference internal" href="migration/migration_from_5.4.x_to_5.5.x.html">TO library migration guide from 5.4.x to 5.5.x</a></li>
 </ul>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
           </div>

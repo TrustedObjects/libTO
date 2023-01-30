@@ -15,6 +15,9 @@
  * @brief
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_ADMIN_H_
 #define _TODRV_HSE_ADMIN_H_
 
@@ -83,4 +86,6 @@ TODRV_HSE_ADMIN_API TO_ret_t TODRV_HSE_admin_set_slot(
 #endif
 
 #endif /* _TODRV_HSE_ADMIN_H_ */
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 

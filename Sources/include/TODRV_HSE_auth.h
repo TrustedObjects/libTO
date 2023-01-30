@@ -15,6 +15,9 @@
  * @brief
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_AUTH_H_
 #define _TODRV_HSE_AUTH_H_
 
@@ -193,3 +196,4 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_hash_signature(
 
 #endif /* _TODRV_HSE_AUTH_H_ */
 
+#endif /* TODRV_HSE_DRIVER_DISABLE */

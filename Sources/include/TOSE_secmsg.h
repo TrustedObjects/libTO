@@ -18,16 +18,6 @@
 #ifndef _TOSE_SECMSG_H_
 #define _TOSE_SECMSG_H_
 
-#ifndef TOSE_SECMSG_API
-#ifdef __linux__
-#define TOSE_SECMSG_API
-#elif _WIN32
-#define TOSE_SECMSG_API __declspec(dllexport)
-#else
-#define TOSE_SECMSG_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -77,7 +67,7 @@ extern "C" {
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_aes128cbc_hmac_secure_message(TOSE_ctx_t *ctx, const uint8_t aes_key_index,
+extern TO_ret_t TOSE_aes128cbc_hmac_secure_message(TOSE_ctx_t *ctx, const uint8_t aes_key_index,
 		const uint8_t hmac_key_index,
 		const uint8_t* data, const uint16_t data_length,
 		uint8_t initial_vector[TO_INITIALVECTOR_SIZE],
@@ -111,7 +101,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_aes128cbc_hmac_secure_message(TOSE_ctx_t *ctx, con
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_aes128cbc_hmac_unsecure_message(TOSE_ctx_t *ctx, const uint8_t aes_key_index,
+extern TO_ret_t TOSE_aes128cbc_hmac_unsecure_message(TOSE_ctx_t *ctx, const uint8_t aes_key_index,
 		const uint8_t hmac_key_index,
 		const uint8_t initial_vector[TO_INITIALVECTOR_SIZE],
 		const uint8_t* cryptogram, const uint16_t cryptogram_length,
@@ -159,7 +149,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_aes128cbc_hmac_unsecure_message(TOSE_ctx_t *ctx, c
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_aes128cbc_cmac_secure_message(TOSE_ctx_t *ctx, const uint8_t aes_key_index,
+extern TO_ret_t TOSE_aes128cbc_cmac_secure_message(TOSE_ctx_t *ctx, const uint8_t aes_key_index,
 		const uint8_t cmac_key_index,
 		const uint8_t* data, const uint16_t data_length,
 		uint8_t initial_vector[TO_INITIALVECTOR_SIZE],
@@ -193,7 +183,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_aes128cbc_cmac_secure_message(TOSE_ctx_t *ctx, con
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_aes128cbc_cmac_unsecure_message(TOSE_ctx_t *ctx, const uint8_t aes_key_index,
+extern TO_ret_t TOSE_aes128cbc_cmac_unsecure_message(TOSE_ctx_t *ctx, const uint8_t aes_key_index,
 		const uint8_t cmac_key_index,
 		const uint8_t initial_vector[TO_INITIALVECTOR_SIZE],
 		const uint8_t* cryptogram, const uint16_t cryptogram_length,
@@ -237,7 +227,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_aes128cbc_cmac_unsecure_message(TOSE_ctx_t *ctx, c
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_secure_payload(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_secure_payload(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const TO_enc_alg_t enc_alg, const TO_mac_alg_t mac_alg,
 		const uint8_t* data, const uint16_t data_len,
 		uint8_t* payload, uint16_t* payload_len);
@@ -270,7 +260,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_secure_payload(TOSE_ctx_t *ctx, const uint8_t key_
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_unsecure_payload(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_unsecure_payload(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const TO_enc_alg_t enc_alg, const TO_mac_alg_t mac_alg,
 		const uint8_t* payload, const uint16_t payload_len,
 		uint8_t* data, uint16_t* data_len);
@@ -307,7 +297,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_unsecure_payload(TOSE_ctx_t *ctx, const uint8_t ke
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_secure_payload_init(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_secure_payload_init(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const TO_enc_alg_t enc_alg, const TO_mac_alg_t mac_alg,
 		const uint16_t data_len, uint8_t sequence[TO_SEQUENCE_SIZE],
 		uint8_t *iv, uint16_t *iv_len);
@@ -329,7 +319,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_secure_payload_init(TOSE_ctx_t *ctx, const uint8_t
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_secure_payload_update(TOSE_ctx_t *ctx, const uint8_t* data,
+extern TO_ret_t TOSE_secure_payload_update(TOSE_ctx_t *ctx, const uint8_t* data,
 		const uint16_t data_len, uint8_t* cryptogram);
 
 /**
@@ -354,7 +344,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_secure_payload_update(TOSE_ctx_t *ctx, const uint8
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_secure_payload_final(TOSE_ctx_t *ctx, const uint8_t* data, const uint16_t data_len,
+extern TO_ret_t TOSE_secure_payload_final(TOSE_ctx_t *ctx, const uint8_t* data, const uint16_t data_len,
 		uint8_t* cryptogram, uint16_t* cryptogram_len);
 
 /**
@@ -381,7 +371,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_secure_payload_final(TOSE_ctx_t *ctx, const uint8_
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_unsecure_payload_init_cbc(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_unsecure_payload_init_cbc(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const TO_enc_alg_t enc_alg, const TO_mac_alg_t mac_alg,
 		const uint16_t cryptogram_len, const uint8_t sequence[TO_SEQUENCE_SIZE],
 		const uint8_t initial_vector[TO_INITIALVECTOR_SIZE],
@@ -410,7 +400,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_unsecure_payload_init_cbc(TOSE_ctx_t *ctx, const u
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_unsecure_payload_init_aead(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_unsecure_payload_init_aead(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const TO_enc_alg_t enc_alg, const TO_mac_alg_t mac_alg,
 		const uint16_t cryptogram_len,
 		const uint8_t sequence[TO_SEQUENCE_SIZE]);
@@ -435,7 +425,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_unsecure_payload_init_aead(TOSE_ctx_t *ctx, const 
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_unsecure_payload_update(TOSE_ctx_t *ctx, const uint8_t* cryptogram,
+extern TO_ret_t TOSE_unsecure_payload_update(TOSE_ctx_t *ctx, const uint8_t* cryptogram,
 		const uint16_t cryptogram_len, uint8_t* data, uint16_t* data_len);
 
 /**
@@ -454,7 +444,7 @@ TOSE_SECMSG_API TO_ret_t TOSE_unsecure_payload_update(TOSE_ctx_t *ctx, const uin
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_SECMSG_API TO_ret_t TOSE_unsecure_payload_final(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_unsecure_payload_final(TOSE_ctx_t *ctx);
 
 /** @} */
 

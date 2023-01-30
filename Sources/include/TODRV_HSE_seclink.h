@@ -15,6 +15,9 @@
  * @brief
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_SECLINK_H_
 #define _TODRV_HSE_SECLINK_H_
 
@@ -158,4 +161,6 @@ TO_SECLINKAPI int TODRV_HSE_seclink_bypass(int bypass);
 #endif
 
 #endif /* _TODRV_HSE_SECLINK_H_ */
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 

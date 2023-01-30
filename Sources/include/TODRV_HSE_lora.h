@@ -15,6 +15,9 @@
  * @brief
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_LORA_H_
 #define _TODRV_HSE_LORA_H_
 
@@ -140,4 +143,6 @@ TODRV_HSE_LORA_API TO_ret_t TODRV_HSE_lora_unsecure_phypayload(
 #endif
 
 #endif /* _TODRV_HSE_LORA_H_ */
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 

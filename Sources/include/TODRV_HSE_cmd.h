@@ -20,6 +20,9 @@
  * error.
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_CMD_H_
 #define _TODRV_HSE_CMD_H_
 
@@ -228,3 +231,4 @@ TODRV_HSE_CMD_API void TODRV_HSE_set_lib_hook_post_command(
 
 #endif
 
+#endif /* TODRV_HSE_DRIVER_DISABLE */

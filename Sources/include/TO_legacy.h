@@ -40,6 +40,7 @@
 #define TO_get_hardware_version(...) TOSE_get_hardware_version(DEFAULT_CTX, __VA_ARGS__)
 #define TO_get_software_version(...) TOSE_get_software_version(DEFAULT_CTX, __VA_ARGS__)
 #define TO_get_product_id(...) TOSE_get_product_id(DEFAULT_CTX, __VA_ARGS__)
+#define TO_access_dummy_data(...) TOSE_access_dummy_data(DEFAULT_CTX, __VA_ARGS__)
 #define TO_sha256(...) TOSE_sha256(DEFAULT_CTX, __VA_ARGS__)
 #define TO_sha256_init(...) TOSE_sha256_init(DEFAULT_CTX)
 #define TO_sha256_update(...) TOSE_sha256_update(DEFAULT_CTX, __VA_ARGS__)
@@ -234,6 +235,7 @@
 #define TO_write TODRV_HSE_trp_write
 #define TO_read TODRV_HSE_trp_read
 #define TO_last_command_duration TODRV_HSE_trp_last_command_duration
+#define TO_last_command_stack_usage TODRV_HSE_trp_last_command_stack_usage
 
 #endif // _TO_LEGACY_H_
 

@@ -23,6 +23,10 @@
  * only the ST HAL drivers.
  * @modified by Trusted Objects
  */
+
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #include "TODRV_HSE_i2c_wrapper.h"
 
 #if (defined(STM32L072xx) && !defined(STM32L0))
@@ -236,4 +240,6 @@ void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
 {
 	/* Implement own ErrorCallback */
 }
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 

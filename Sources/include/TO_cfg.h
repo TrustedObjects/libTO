@@ -22,6 +22,10 @@
 #ifndef _TO_CFG_H_
 #define _TO_CFG_H_
 
+#ifdef TO_USER_CONFIG
+#include "TO_user_config.h"
+#endif
+
 /*
  * ------------------------
  * Global settings
@@ -91,6 +95,11 @@
 #ifndef TO_DISABLE_HMAC
 /* disable HMAC APIs */
 #define TO_DISABLE_HMAC 1
+#endif
+
+#ifndef TO_DISABLE_GCM
+/* disable GCM */
+/* #undef TO_DISABLE_GCM */
 #endif
 
 #ifndef TO_DISABLE_KEYS_MGMT

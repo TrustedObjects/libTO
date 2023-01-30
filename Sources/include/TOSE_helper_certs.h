@@ -18,16 +18,6 @@
 #ifndef _TOSE_HELPER_CERTS_H_
 #define _TOSE_HELPER_CERTS_H_
 
-#ifndef TOSE_HELPER_CERTS_API
-#ifdef __linux__
-#define TOSE_HELPER_CERTS_API
-#elif _WIN32
-#define TOSE_HELPER_CERTS_API __declspec(dllexport)
-#else
-#define TOSE_HELPER_CERTS_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -57,7 +47,7 @@ extern "C" {
  *
  * @return TO_OK if data has been sent successfully, else TO_ERROR
  */
-TOSE_HELPER_CERTS_API TO_lib_ret_t TOSE_helper_verify_chain_certificate_and_store(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_verify_chain_certificate_and_store(TOSE_ctx_t *ctx,
 		const uint8_t ca_key_index,
 		const uint8_t *chain_certificate,
 		const uint16_t chain_certificate_length);
@@ -81,7 +71,7 @@ TOSE_HELPER_CERTS_API TO_lib_ret_t TOSE_helper_verify_chain_certificate_and_stor
  *
  * @return TO_OK if data has been sent successfully, else TO_ERROR
  */
-TOSE_HELPER_CERTS_API TO_lib_ret_t TOSE_helper_verify_chain_ca_certificate_and_store(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_verify_chain_ca_certificate_and_store(TOSE_ctx_t *ctx,
 		const uint8_t ca_key_index,
 		const uint8_t subca_key_index,
 		const uint8_t *chain_certificate,
@@ -101,7 +91,7 @@ TOSE_HELPER_CERTS_API TO_lib_ret_t TOSE_helper_verify_chain_ca_certificate_and_s
  *
  * @return TO_OK if certificate has been sent successfully, else TO_ERROR
  */
-TOSE_HELPER_CERTS_API TO_lib_ret_t TOSE_helper_set_certificate_x509(
+extern TO_lib_ret_t TOSE_helper_set_certificate_x509(
 		TOSE_ctx_t *ctx,
 		const uint8_t certificate_index,
 		const uint8_t* certificate,
@@ -129,7 +119,7 @@ TOSE_HELPER_CERTS_API TO_lib_ret_t TOSE_helper_set_certificate_x509(
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_HELPER_CERTS_API TO_lib_ret_t TOSE_helper_get_certificate_x509_and_sign(
+extern TO_lib_ret_t TOSE_helper_get_certificate_x509_and_sign(
 		TOSE_ctx_t *ctx, const uint8_t certificate_index,
 		const uint8_t *challenge, const uint16_t challenge_length,
 		uint8_t *certificate, uint16_t *size, uint8_t signature[TO_SIGNATURE_SIZE]);

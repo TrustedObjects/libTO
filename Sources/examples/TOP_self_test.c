@@ -32,17 +32,26 @@ int main(void)
 {
 	TO_lib_ret_t ret;
 
-	if ((ret = TODRV_SSE_nvm_self_test(TO_log_get_ctx())) != TO_OK) {
+#ifdef TODRV_SSE_ENABLE_SELF_TESTS
+	// This NVM self-tests is using the NVM.
+	// It should only be run for setting-up the nvm load and store
+	// functions. Once those are functionnal, this self test is of no use.
+	if ((ret = TODRV_SSE_nvm_self_test()) != TO_OK) {
 		printf("NVM self-test failed with error %04x\n", ret);
 		return 1;
 	}
 
-	if ((ret = TODRV_SSE_top_self_test(TO_log_get_ctx())) != TO_OK) {
+	// This self test function is non destructive and can be kept aven after
+	// the integration is over.
+	if ((ret = TODRV_SSE_top_self_test()) != TO_OK) {
 		printf("TO-Protect self-test failed with error %04x\n", ret);
 		return 1;
 	}
 
 	printf("Self-tests succeed\n");
+#else
+	printf("Self-tests not activated\n");
+#endif
 
 	return 0;
 }

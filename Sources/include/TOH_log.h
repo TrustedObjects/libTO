@@ -15,6 +15,9 @@
  * @brief TOH log definitions and functions.
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TOH_LOG_H_
 #define _TOH_LOG_H_
 
@@ -42,3 +45,6 @@ extern "C" {
 #endif
 
 #endif
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
+

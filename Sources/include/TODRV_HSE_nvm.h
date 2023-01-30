@@ -15,6 +15,9 @@
  * @brief
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_NVM_H_
 #define _TODRV_HSE_NVM_H_
 
@@ -59,4 +62,6 @@ TODRV_HSE_NVM_API TO_ret_t TODRV_HSE_get_nvm_size(
 #endif
 
 #endif /* _TODRV_HSE_NVM_H_ */
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 

@@ -18,16 +18,6 @@
 #ifndef _TOSE_KEYS_H_
 #define _TOSE_KEYS_H_
 
-#ifndef TOSE_KEYS_API
-#ifdef __linux__
-#define TOSE_KEYS_API
-#elif _WIN32
-#define TOSE_KEYS_API __declspec(dllexport)
-#else
-#define TOSE_KEYS_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -73,7 +63,7 @@ extern "C" {
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_KEYS_API TO_ret_t TOSE_set_remote_public_key(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_set_remote_public_key(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t public_key[TO_ECC_PUB_KEYSIZE],
 		const uint8_t signature[TO_SIGNATURE_SIZE]);
 
@@ -93,7 +83,7 @@ TOSE_KEYS_API TO_ret_t TOSE_set_remote_public_key(TOSE_ctx_t *ctx, const uint8_t
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_KEYS_API TO_ret_t TOSE_renew_ecc_keys(TOSE_ctx_t *ctx, const uint8_t key_index);
+extern TO_ret_t TOSE_renew_ecc_keys(TOSE_ctx_t *ctx, const uint8_t key_index);
 
 /**
  * @brief Get the public key corresponding to the given index, and the
@@ -123,7 +113,7 @@ TOSE_KEYS_API TO_ret_t TOSE_renew_ecc_keys(TOSE_ctx_t *ctx, const uint8_t key_in
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_KEYS_API TO_ret_t TOSE_get_public_key(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_get_public_key(TOSE_ctx_t *ctx, const uint8_t key_index,
 		uint8_t public_key[TO_ECC_PUB_KEYSIZE],
 		uint8_t signature[TO_SIGNATURE_SIZE]);
 
@@ -141,7 +131,7 @@ TOSE_KEYS_API TO_ret_t TOSE_get_public_key(TOSE_ctx_t *ctx, const uint8_t key_in
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_KEYS_API TO_ret_t TOSE_get_unsigned_public_key(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_get_unsigned_public_key(TOSE_ctx_t *ctx, const uint8_t key_index,
 		uint8_t public_key[TO_ECC_PUB_KEYSIZE]);
 
 /**
@@ -164,7 +154,7 @@ TOSE_KEYS_API TO_ret_t TOSE_get_unsigned_public_key(TOSE_ctx_t *ctx, const uint8
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_KEYS_API TO_ret_t TOSE_renew_shared_keys(TOSE_ctx_t *ctx, const uint8_t key_index,
+extern TO_ret_t TOSE_renew_shared_keys(TOSE_ctx_t *ctx, const uint8_t key_index,
 		const uint8_t public_key_index);
 
 /**
@@ -193,7 +183,7 @@ TOSE_KEYS_API TO_ret_t TOSE_renew_shared_keys(TOSE_ctx_t *ctx, const uint8_t key
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_KEYS_API TO_ret_t TOSE_get_key_fingerprint(TOSE_ctx_t *ctx, TO_key_type_t key_type,
+extern TO_ret_t TOSE_get_key_fingerprint(TOSE_ctx_t *ctx, TO_key_type_t key_type,
 		uint8_t key_index,
 		uint8_t* fingerprint[TO_KEY_FINGERPRINT_SIZE]);
 

@@ -1,17 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Types and definitions &#8212; libTO 6.1.2 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Types and definitions &#8212; libTO 6.3.9 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/custom.js"></script>
     <script src="../_static/custom.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -38,7 +41,7 @@
 
 
 
-<p class="blurb">release 6.1.2<br />doc</p>
+<p class="blurb">release 6.3.9<br />doc</p>
 
 
 
@@ -55,7 +58,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
@@ -82,14 +85,14 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="types-and-definitions">
-<span id="api-defs"></span><h1>Types and definitions<a class="headerlink" href="#types-and-definitions" title="Permalink to this headline">¶</a></h1>
+  <section id="types-and-definitions">
+<span id="api-defs"></span><h1>Types and definitions<a class="headerlink" href="#types-and-definitions" title="Permalink to this heading">¶</a></h1>
 <p>LibTO types and definitions.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TO_defs.h&quot;</span><span class="cp"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TO_defs.h&quot;</span>
 </pre></div>
 </div>
-<div class="section" id="library-error-codes">
-<h2>Library error codes<a class="headerlink" href="#library-error-codes" title="Permalink to this headline">¶</a></h2>
+<section id="library-error-codes">
+<h2>Library error codes<a class="headerlink" href="#library-error-codes" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__lib__codes"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">lib_codes</span></span></dt>
@@ -190,9 +193,9 @@ Secure Element error codes, then it is possible to return Secure Element and
 library error codes in one single variable. See
 <a class="reference internal" href="#secure-element-error-codes">Secure Element error codes</a>.</p>
 </div>
-</div>
-<div class="section" id="secure-element-error-codes">
-<h2>Secure Element error codes<a class="headerlink" href="#secure-element-error-codes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="secure-element-error-codes">
+<h2>Secure Element error codes<a class="headerlink" href="#secure-element-error-codes" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__se__codes"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">se_codes</span></span></dt>
@@ -281,6 +284,30 @@ library error codes in one single variable. See
 </dd></dl>
 
 <dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_NO_VALID_SECURE_STORAGE_FOUND">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109ea1b494b83d77e2be16f380a008699440c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_NO_VALID_SECURE_STORAGE_FOUND</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_NO_VALID_SECURE_STORAGE_FOUND" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>No valid secure storage found </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_INCONSISTENT_SECURE_STORAGES">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109ea52fc63e296d3cf8ce475bfcfe20dd8e1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_INCONSISTENT_SECURE_STORAGES</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_INCONSISTENT_SECURE_STORAGES" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inconsistent secure storages </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_WRONG_SECURE_STORAGE_VERSION">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109eacb88e7c8dd4f06af42508f50c0e5f300"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_WRONG_SECURE_STORAGE_VERSION</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_WRONG_SECURE_STORAGE_VERSION" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Secure Storage’s version is wrong </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_WRONG_INSTALLATION">
+<span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109eaae776e9d4e8958914984605252994c64"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_WRONG_INSTALLATION</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_WRONG_INSTALLATION" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Wrong code integrity </p>
+</dd></dl>
+
+<dl class="c enumerator">
 <dt class="sig sig-object c" id="c.TO_se_ret_e.TORSP_SECLINK_RENEW_KEY">
 <span class="target" id="group__se__codes_1gga736f8203688b8da2f2c1ac626716109ea7889c2073bc074ea3730137ccf296d1c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TORSP_SECLINK_RENEW_KEY</span></span></span><a class="headerlink" href="#c.TO_se_ret_e.TORSP_SECLINK_RENEW_KEY" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The SecLink key has to be renewed </p>
@@ -297,9 +324,9 @@ library error codes in one single variable. See
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="combined-error-codes">
-<h2>Combined error codes<a class="headerlink" href="#combined-error-codes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="combined-error-codes">
+<h2>Combined error codes<a class="headerlink" href="#combined-error-codes" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__error__codes"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">error_codes</span></span></dt>
@@ -328,9 +355,9 @@ library error codes in one single variable. See
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="generic-context">
-<h2>Generic context<a class="headerlink" href="#generic-context" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="generic-context">
+<h2>Generic context<a class="headerlink" href="#generic-context" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__tose__defs"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">tose_defs</span></span></dt>
@@ -409,9 +436,9 @@ library error codes in one single variable. See
 
 </dd></dl>
 
-</div>
-<div class="section" id="log-levels">
-<h2>Log levels<a class="headerlink" href="#log-levels" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="log-levels">
+<h2>Log levels<a class="headerlink" href="#log-levels" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__log__level"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">log_level</span></span></dt>
@@ -463,6 +490,11 @@ library error codes in one single variable. See
 <span class="target" id="group__log__level_1ga66b884e8493797d0d4d47234467a78ba"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_HEX_DISP</span></span></span> <span class="pre">0x20</span><a class="headerlink" href="#c.TO_LOG_HEX_DISP" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_LOG_TRACE">
+<span class="target" id="group__log__level_1ga64f40963dce87c4de1f4a3d2d91617ce"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_LOG_TRACE</span></span></span> <span class="pre">0x30</span><a class="headerlink" href="#c.TO_LOG_TRACE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
@@ -504,7 +536,7 @@ library error codes in one single variable. See
 <dd><p>Default print log function, potentialy to be customized per-target. </p>
 <p>Depending on your target and the way to send string messages out, you may have to rewrite it. In this case, just declare a function having the same names/parameters, printing-out the messages. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>level</strong> – Importance level of the message </p></li>
 <li><p><strong>log</strong> – String to be displayed </p></li>
@@ -518,7 +550,7 @@ library error codes in one single variable. See
 <span class="target" id="group__log__level_1ga51edfdec4dcfc08f47fc1beeaef8b8b9"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_log</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TO_log_ctx_t" title="TO_log_ctx_t"><span class="n"><span class="pre">TO_log_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">log_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">TO_log_level_t</span></span><span class="w"> </span><span class="n"><span class="pre">level</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ptr</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TO_log" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Default LOG “display” function. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>log_ctx</strong> – The LOG context </p></li>
 <li><p><strong>level</strong> – The desired log display level </p></li>
@@ -534,7 +566,7 @@ library error codes in one single variable. See
 <dd><p>Sets the Log function and log level. </p>
 <p>This function permits to change the log level and the log function. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>log_ctx</strong> – Current log context </p></li>
 <li><p><strong>level</strong> – Desired log level </p></li>
@@ -550,7 +582,7 @@ library error codes in one single variable. See
 <dd><p>Get the LOG context. </p>
 <p>This function is weak, and can be replaced by your own implementation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TO_log_ctx_t* </p>
 </dd>
 </dl>
@@ -582,9 +614,9 @@ library error codes in one single variable. See
 
 </dd></dl>
 
-</div>
-<div class="section" id="miscellaneous-constants">
-<h2>Miscellaneous constants<a class="headerlink" href="#miscellaneous-constants" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="miscellaneous-constants">
+<h2>Miscellaneous constants<a class="headerlink" href="#miscellaneous-constants" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__constants"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">constants</span></span></dt>
@@ -764,9 +796,9 @@ library error codes in one single variable. See
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="certificates-constants">
-<h2>Certificates constants<a class="headerlink" href="#certificates-constants" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="certificates-constants">
+<h2>Certificates constants<a class="headerlink" href="#certificates-constants" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__cert__constants"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">cert_constants</span></span></dt>
@@ -775,7 +807,7 @@ library error codes in one single variable. See
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TO_CERT_X509_MAXSIZE">
-<span class="target" id="group__cert__constants_1ga3b4792c3a31cd765255d69120593fbcb"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_X509_MAXSIZE</span></span></span> <span class="pre">512UL</span><a class="headerlink" href="#c.TO_CERT_X509_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__cert__constants_1ga3b4792c3a31cd765255d69120593fbcb"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_X509_MAXSIZE</span></span></span> <span class="pre">1024UL</span><a class="headerlink" href="#c.TO_CERT_X509_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
@@ -876,9 +908,9 @@ library error codes in one single variable. See
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="tls-constants">
-<h2>TLS constants<a class="headerlink" href="#tls-constants" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="tls-constants">
+<h2>TLS constants<a class="headerlink" href="#tls-constants" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__tls__constants"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">tls_constants</span></span></dt>
@@ -891,6 +923,16 @@ library error codes in one single variable. See
 <dd><p>maximum data overhead between a protected record and its plain text version </p>
 <p>The theorical maximum data overhead between a protected record and its plain text version is 1024 but in practice it should not exceed AES256 with SHA512 in CBC mode with max padding: (32 (IV) + 64 (hmac) + 256 (max padding)) =&gt; 352 This value is used when the real overhead is not known, to determine if a plain text record to send need to be fragmented before encryption </p>
 </dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_MAJOR">
+<span class="target" id="group__tls__constants_1gae0e1f4eb133168aa6df346a43d646726"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MAJOR</span></span></span> <span class="pre">3</span><a class="headerlink" href="#c.TO_TLS_MAJOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_MINOR">
+<span class="target" id="group__tls__constants_1ga7a7b0b33ac653488ed6c4d69329d72f7"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MINOR</span></span></span> <span class="pre">3</span><a class="headerlink" href="#c.TO_TLS_MINOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TO_TLS_RECORD_MAX_SIZE">
@@ -928,31 +970,6 @@ library error codes in one single variable. See
 <dd></dd></dl>
 
 <dl class="c macro">
-<dt class="sig sig-object c" id="c.TO_TLS_CONNECTION_ID_MAXSIZE">
-<span class="target" id="group__tls__constants_1gad614633ebb6ec041ea29d4643706052d"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_CONNECTION_ID_MAXSIZE</span></span></span> <span class="pre">8UL</span><a class="headerlink" href="#c.TO_TLS_CONNECTION_ID_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="c macro">
-<dt class="sig sig-object c" id="c.TO_DTLS_HEADER_SIZE">
-<span class="target" id="group__tls__constants_1ga987ff8fb6855dd31e393c89a40cfee92"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HEADER_SIZE</span></span></span> <span class="pre">13UL</span><a class="headerlink" href="#c.TO_DTLS_HEADER_SIZE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="c macro">
-<dt class="sig sig-object c" id="c.TO_DTLS_HEADER_MAXSIZE">
-<span class="target" id="group__tls__constants_1gaff2589354b9e53806cd63b15eabc1d74"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HEADER_MAXSIZE</span></span></span> <span class="pre">(TO_DTLS_HEADER_SIZE</span> <span class="pre">+</span> <span class="pre">TO_TLS_CONNECTION_ID_MAXSIZE)</span><a class="headerlink" href="#c.TO_DTLS_HEADER_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="c macro">
-<dt class="sig sig-object c" id="c.TO_DTLS_HANDSHAKE_HEADER_SIZE">
-<span class="target" id="group__tls__constants_1gafb84982b935ebb8937ace7c5b3c3fe13"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HANDSHAKE_HEADER_SIZE</span></span></span> <span class="pre">12UL</span><a class="headerlink" href="#c.TO_DTLS_HANDSHAKE_HEADER_SIZE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="c macro">
-<dt class="sig sig-object c" id="c.TO_DTLS_HANDSHAKE_HEADER_MAXSIZE">
-<span class="target" id="group__tls__constants_1gaf44a51741e1a2489b55f009f310015f2"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HANDSHAKE_HEADER_MAXSIZE</span></span></span> <span class="pre">(TO_DTLS_HANDSHAKE_HEADER_SIZE</span> <span class="pre">+</span> <span class="pre">TO_TLS_CONNECTION_ID_MAXSIZE)</span><a class="headerlink" href="#c.TO_DTLS_HANDSHAKE_HEADER_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="c macro">
 <dt class="sig sig-object c" id="c.TO_TLS_HEADER_SIZE">
 <span class="target" id="group__tls__constants_1ga0d9089402d4851cc10d8b04af606ac6a"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_HEADER_SIZE</span></span></span> <span class="pre">5UL</span><a class="headerlink" href="#c.TO_TLS_HEADER_SIZE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
@@ -973,6 +990,11 @@ library error codes in one single variable. See
 <dd></dd></dl>
 
 <dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_TLS_SNI_LENGTH_MAX">
+<span class="target" id="group__tls__constants_1gad3ca08416dd9e39d501eb655ef16d639"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_SNI_LENGTH_MAX</span></span></span> <span class="pre">253U</span><a class="headerlink" href="#c.TO_TLS_SNI_LENGTH_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
 <dt class="sig sig-object c" id="c.TO_DTLS_MAJOR">
 <span class="target" id="group__tls__constants_1gaff6a79fccdf7368b16da59276cdf8a80"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_MAJOR</span></span></span> <span class="pre">254</span><a class="headerlink" href="#c.TO_DTLS_MAJOR" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
@@ -983,18 +1005,28 @@ library error codes in one single variable. See
 <dd></dd></dl>
 
 <dl class="c macro">
-<dt class="sig sig-object c" id="c.TO_TLS_MAJOR">
-<span class="target" id="group__tls__constants_1gae0e1f4eb133168aa6df346a43d646726"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MAJOR</span></span></span> <span class="pre">3</span><a class="headerlink" href="#c.TO_TLS_MAJOR" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.TO_DTLS_CONNECTION_ID_MAXSIZE">
+<span class="target" id="group__tls__constants_1gaa0f8208142a9e5a842ec54cbfaeaaf66"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_CONNECTION_ID_MAXSIZE</span></span></span> <span class="pre">8UL</span><a class="headerlink" href="#c.TO_DTLS_CONNECTION_ID_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
-<dt class="sig sig-object c" id="c.TO_TLS_MINOR">
-<span class="target" id="group__tls__constants_1ga7a7b0b33ac653488ed6c4d69329d72f7"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_MINOR</span></span></span> <span class="pre">3</span><a class="headerlink" href="#c.TO_TLS_MINOR" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.TO_DTLS_HEADER_SIZE">
+<span class="target" id="group__tls__constants_1ga987ff8fb6855dd31e393c89a40cfee92"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HEADER_SIZE</span></span></span> <span class="pre">13UL</span><a class="headerlink" href="#c.TO_DTLS_HEADER_SIZE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
-<dt class="sig sig-object c" id="c.TO_TLS_SNI_LENGTH_MAX">
-<span class="target" id="group__tls__constants_1gad3ca08416dd9e39d501eb655ef16d639"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_SNI_LENGTH_MAX</span></span></span> <span class="pre">253U</span><a class="headerlink" href="#c.TO_TLS_SNI_LENGTH_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.TO_DTLS_HEADER_MAXSIZE">
+<span class="target" id="group__tls__constants_1gaff2589354b9e53806cd63b15eabc1d74"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HEADER_MAXSIZE</span></span></span> <span class="pre">(TO_DTLS_HEADER_SIZE</span> <span class="pre">+</span> <span class="pre">TO_DTLS_CONNECTION_ID_MAXSIZE)</span><a class="headerlink" href="#c.TO_DTLS_HEADER_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_DTLS_HANDSHAKE_HEADER_SIZE">
+<span class="target" id="group__tls__constants_1gafb84982b935ebb8937ace7c5b3c3fe13"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HANDSHAKE_HEADER_SIZE</span></span></span> <span class="pre">12UL</span><a class="headerlink" href="#c.TO_DTLS_HANDSHAKE_HEADER_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TO_DTLS_HANDSHAKE_HEADER_MAXSIZE">
+<span class="target" id="group__tls__constants_1gaf44a51741e1a2489b55f009f310015f2"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_DTLS_HANDSHAKE_HEADER_MAXSIZE</span></span></span> <span class="pre">(TO_DTLS_HANDSHAKE_HEADER_SIZE</span> <span class="pre">+</span> <span class="pre">TO_DTLS_CONNECTION_ID_MAXSIZE)</span><a class="headerlink" href="#c.TO_DTLS_HANDSHAKE_HEADER_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -1531,14 +1563,19 @@ library error codes in one single variable. See
 <span class="target" id="group__tls__constants_1gga01e6ef49fdef6d411fd24575a738e3f8ae10e33e6e1c5dcc41606fe2653ff0c99"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_EXTENSION_CONNECTION_ID</span></span></span><a class="headerlink" href="#c.TO_tls_extensions_e.TO_TLS_EXTENSION_CONNECTION_ID" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_tls_extensions_e.TO_TLS_EXTENSION_DUMMY_MAX">
+<span class="target" id="group__tls__constants_1gga01e6ef49fdef6d411fd24575a738e3f8ae7744903e5f3da5241a7f2ccdc0a28be"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_TLS_EXTENSION_DUMMY_MAX</span></span></span><a class="headerlink" href="#c.TO_tls_extensions_e.TO_TLS_EXTENSION_DUMMY_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
 </dd></dl>
 
-</div>
-<div class="section" id="admin-constants">
-<h2>Admin constants<a class="headerlink" href="#admin-constants" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="admin-constants">
+<h2>Admin constants<a class="headerlink" href="#admin-constants" title="Permalink to this heading">¶</a></h2>
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="group__admin__constants"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">admin_constants</span></span></dt>
@@ -1583,8 +1620,8 @@ library error codes in one single variable. See
 </div>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
           </div>

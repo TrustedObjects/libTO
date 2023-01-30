@@ -18,16 +18,6 @@
 #ifndef _TOSE_LORA_H_
 #define _TOSE_LORA_H_
 
-#ifndef TOSE_LORA_API
-#ifdef __linux__
-#define TOSE_LORA_API
-#elif _WIN32
-#define TOSE_LORA_API __declspec(dllexport)
-#else
-#define TOSE_LORA_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -54,7 +44,7 @@ extern "C" {
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_compute_mic(TOSE_ctx_t *ctx, const uint8_t *data, uint16_t data_length,
+extern TO_ret_t TOSE_lora_compute_mic(TOSE_ctx_t *ctx, const uint8_t *data, uint16_t data_length,
 		uint32_t address, uint8_t direction, uint32_t seq_counter,
 		uint8_t mic[TO_LORA_MIC_SIZE]);
 
@@ -76,7 +66,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_compute_mic(TOSE_ctx_t *ctx, const uint8_t *dat
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_encrypt_payload(TOSE_ctx_t *ctx, const uint8_t *data,
+extern TO_ret_t TOSE_lora_encrypt_payload(TOSE_ctx_t *ctx, const uint8_t *data,
 		uint16_t data_length, const uint8_t *fport,
 		uint32_t address, uint8_t direction, uint32_t seq_counter,
 		uint8_t *enc_buffer);
@@ -96,7 +86,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_encrypt_payload(TOSE_ctx_t *ctx, const uint8_t 
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_join_compute_mic(TOSE_ctx_t *ctx, const uint8_t *data,
+extern TO_ret_t TOSE_lora_join_compute_mic(TOSE_ctx_t *ctx, const uint8_t *data,
 		uint16_t data_length, uint8_t mic[TO_LORA_MIC_SIZE]);
 
 /**
@@ -114,7 +104,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_join_compute_mic(TOSE_ctx_t *ctx, const uint8_t
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_decrypt_join(TOSE_ctx_t *ctx, const uint8_t *data, uint16_t data_length,
+extern TO_ret_t TOSE_lora_decrypt_join(TOSE_ctx_t *ctx, const uint8_t *data, uint16_t data_length,
 		uint8_t *dec_buffer);
 
 /**
@@ -134,7 +124,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_decrypt_join(TOSE_ctx_t *ctx, const uint8_t *da
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_compute_shared_keys(TOSE_ctx_t *ctx, const uint8_t *app_nonce,
+extern TO_ret_t TOSE_lora_compute_shared_keys(TOSE_ctx_t *ctx, const uint8_t *app_nonce,
 		const uint8_t *net_id, uint16_t dev_nonce);
 
 /** @} */
@@ -154,7 +144,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_compute_shared_keys(TOSE_ctx_t *ctx, const uint
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_get_app_eui(TOSE_ctx_t *ctx, uint8_t app_eui[TO_LORA_APPEUI_SIZE]);
+extern TO_ret_t TOSE_lora_get_app_eui(TOSE_ctx_t *ctx, uint8_t app_eui[TO_LORA_APPEUI_SIZE]);
 
 /**
  * @brief Get DevEUI
@@ -168,7 +158,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_get_app_eui(TOSE_ctx_t *ctx, uint8_t app_eui[TO
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_get_dev_eui(TOSE_ctx_t *ctx, uint8_t dev_eui[TO_LORA_DEVEUI_SIZE]);
+extern TO_ret_t TOSE_lora_get_dev_eui(TOSE_ctx_t *ctx, uint8_t dev_eui[TO_LORA_DEVEUI_SIZE]);
 
 /**
  * @brief Get DevAddr
@@ -182,7 +172,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_get_dev_eui(TOSE_ctx_t *ctx, uint8_t dev_eui[TO
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_get_dev_addr(TOSE_ctx_t *ctx, uint8_t dev_addr[TO_LORA_DEVADDR_SIZE]);
+extern TO_ret_t TOSE_lora_get_dev_addr(TOSE_ctx_t *ctx, uint8_t dev_addr[TO_LORA_DEVADDR_SIZE]);
 
 /** @} */
 
@@ -204,7 +194,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_get_dev_addr(TOSE_ctx_t *ctx, uint8_t dev_addr[
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_get_join_request_phypayload(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_lora_get_join_request_phypayload(TOSE_ctx_t *ctx,
 		uint8_t data[TO_LORA_JOINREQUEST_SIZE]);
 
 /**
@@ -225,7 +215,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_get_join_request_phypayload(TOSE_ctx_t *ctx,
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_handle_join_accept_phypayload(TOSE_ctx_t *ctx, const uint8_t *data,
+extern TO_ret_t TOSE_lora_handle_join_accept_phypayload(TOSE_ctx_t *ctx, const uint8_t *data,
 		const uint16_t data_length,
 		uint8_t dec_buffer[TO_LORA_JOINACCEPT_CLEAR_MAXSIZE]);
 
@@ -251,7 +241,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_handle_join_accept_phypayload(TOSE_ctx_t *ctx, 
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_secure_phypayload(TOSE_ctx_t *ctx, const uint8_t mhdr,
+extern TO_ret_t TOSE_lora_secure_phypayload(TOSE_ctx_t *ctx, const uint8_t mhdr,
 		const uint8_t fctrl, const uint8_t *fopts, const uint8_t fport,
 		const uint8_t *payload, const int payload_size,
 		uint8_t *enc_buffer);
@@ -273,7 +263,7 @@ TOSE_LORA_API TO_ret_t TOSE_lora_secure_phypayload(TOSE_ctx_t *ctx, const uint8_
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_LORA_API TO_ret_t TOSE_lora_unsecure_phypayload(TOSE_ctx_t *ctx, const uint8_t *data,
+extern TO_ret_t TOSE_lora_unsecure_phypayload(TOSE_ctx_t *ctx, const uint8_t *data,
 		const uint16_t data_length, uint8_t *dec_buffer);
 
 /** @} */

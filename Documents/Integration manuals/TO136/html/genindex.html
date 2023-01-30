@@ -1,17 +1,19 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; libTO 6.1.2 documentation</title>
+    <title>Index &#8212; libTO 6.3.9 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/custom.js"></script>
     <script src="_static/custom.js"></script>
     <link rel="index" title="Index" href="#" />
@@ -36,7 +38,7 @@
 
 
 
-<p class="blurb">release 6.1.2<br />doc</p>
+<p class="blurb">release 6.3.9<br />doc</p>
 
 
 
@@ -53,7 +55,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="documentwrapper">
@@ -238,6 +240,8 @@
 </li>
       <li><a href="api/i2c_wrapper.html#c.TO_data_write">TO_data_write (C function)</a>
 </li>
+      <li><a href="api/defs.html#c.TO_DTLS_CONNECTION_ID_MAXSIZE">TO_DTLS_CONNECTION_ID_MAXSIZE (C macro)</a>
+</li>
       <li><a href="api/defs.html#c.TO_DTLS_HANDSHAKE_HEADER_MAXSIZE">TO_DTLS_HANDSHAKE_HEADER_MAXSIZE (C macro)</a>
 </li>
       <li><a href="api/defs.html#c.TO_DTLS_HANDSHAKE_HEADER_SIZE">TO_DTLS_HANDSHAKE_HEADER_SIZE (C macro)</a>
@@ -412,6 +416,8 @@
 </li>
       <li><a href="api/defs.html#c.TO_LOG_STRING">TO_LOG_STRING (C macro)</a>
 </li>
+      <li><a href="api/defs.html#c.TO_LOG_TRACE">TO_LOG_TRACE (C macro)</a>
+</li>
       <li><a href="api/defs.html#c.TO_LORA_APPEUI_SIZE">TO_LORA_APPEUI_SIZE (C macro)</a>
 </li>
       <li><a href="api/defs.html#c.TO_LORA_APPKEY_SIZE">TO_LORA_APPKEY_SIZE (C macro)</a>
@@ -460,6 +466,8 @@
 </li>
       <li><a href="api/defs.html#c.TO_mac_alg_e.TO_MAC_ALG_MAX">TO_mac_alg_e.TO_MAC_ALG_MAX (C enumerator)</a>
 </li>
+      <li><a href="api/defs.html#c.TO_mac_alg_e.TO_MAC_ALG_NONE">TO_mac_alg_e.TO_MAC_ALG_NONE (C enumerator)</a>
+</li>
       <li><a href="api/defs.html#c.TO_mac_alg_e.TO_MAC_ALG_UNDEFINED">TO_mac_alg_e.TO_MAC_ALG_UNDEFINED (C enumerator)</a>
 </li>
       <li><a href="api/defs.html#c.TO_mac_alg_t">TO_mac_alg_t (C type)</a>
@@ -498,6 +506,8 @@
 </li>
       <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_COND_OF_USE_NOT_SATISFIED">TO_se_ret_e.TORSP_COND_OF_USE_NOT_SATISFIED (C enumerator)</a>
 </li>
+      <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_INCONSISTENT_SECURE_STORAGES">TO_se_ret_e.TORSP_INCONSISTENT_SECURE_STORAGES (C enumerator)</a>
+</li>
       <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_INTERNAL_ERROR">TO_se_ret_e.TORSP_INTERNAL_ERROR (C enumerator)</a>
 </li>
       <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_INVALID_LEN">TO_se_ret_e.TORSP_INVALID_LEN (C enumerator)</a>
@@ -506,6 +516,8 @@
 </li>
       <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_NEED_AUTHENTICATION">TO_se_ret_e.TORSP_NEED_AUTHENTICATION (C enumerator)</a>
 </li>
+      <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_NO_VALID_SECURE_STORAGE_FOUND">TO_se_ret_e.TORSP_NO_VALID_SECURE_STORAGE_FOUND (C enumerator)</a>
+</li>
       <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_NOT_AVAILABLE">TO_se_ret_e.TORSP_NOT_AVAILABLE (C enumerator)</a>
 </li>
       <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_SECLINK_RENEW_KEY">TO_se_ret_e.TORSP_SECLINK_RENEW_KEY (C enumerator)</a>
@@ -513,6 +525,10 @@
       <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_SUCCESS">TO_se_ret_e.TORSP_SUCCESS (C enumerator)</a>
 </li>
       <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_UNKNOWN_CMD">TO_se_ret_e.TORSP_UNKNOWN_CMD (C enumerator)</a>
+</li>
+      <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_WRONG_INSTALLATION">TO_se_ret_e.TORSP_WRONG_INSTALLATION (C enumerator)</a>
+</li>
+      <li><a href="api/defs.html#c.TO_se_ret_e.TORSP_WRONG_SECURE_STORAGE_VERSION">TO_se_ret_e.TORSP_WRONG_SECURE_STORAGE_VERSION (C enumerator)</a>
 </li>
       <li><a href="api/defs.html#c.TO_se_ret_t">TO_se_ret_t (C type)</a>
 </li>
@@ -600,8 +616,6 @@
 </li>
       <li><a href="api/defs.html#c.TO_tls_config_id_t">TO_tls_config_id_t (C type)</a>
 </li>
-      <li><a href="api/defs.html#c.TO_TLS_CONNECTION_ID_MAXSIZE">TO_TLS_CONNECTION_ID_MAXSIZE (C macro)</a>
-</li>
       <li><a href="api/defs.html#c.TO_tls_encryption_type_e">TO_tls_encryption_type_e (C enum)</a>
 </li>
       <li><a href="api/defs.html#c.TO_tls_encryption_type_e.TO_TLS_ENCRYPTION_AES_CBC">TO_tls_encryption_type_e.TO_TLS_ENCRYPTION_AES_CBC (C enumerator)</a>
@@ -619,6 +633,8 @@
       <li><a href="api/defs.html#c.TO_tls_extensions_e">TO_tls_extensions_e (C enum)</a>
 </li>
       <li><a href="api/defs.html#c.TO_tls_extensions_e.TO_TLS_EXTENSION_CONNECTION_ID">TO_tls_extensions_e.TO_TLS_EXTENSION_CONNECTION_ID (C enumerator)</a>
+</li>
+      <li><a href="api/defs.html#c.TO_tls_extensions_e.TO_TLS_EXTENSION_DUMMY_MAX">TO_tls_extensions_e.TO_TLS_EXTENSION_DUMMY_MAX (C enumerator)</a>
 </li>
       <li><a href="api/defs.html#c.TO_tls_extensions_e.TO_TLS_EXTENSION_ECC">TO_tls_extensions_e.TO_TLS_EXTENSION_ECC (C enumerator)</a>
 </li>
@@ -798,12 +814,12 @@
 </li>
       <li><a href="api/defs.html#c.TODRV_HSE_CMD_ADMIN_COMMAND_WITH_RESPONSE">TODRV_HSE_CMD_ADMIN_COMMAND_WITH_RESPONSE (C macro)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/defs.html#c.TODRV_HSE_CMD_ADMIN_SET_SLOT">TODRV_HSE_CMD_ADMIN_SET_SLOT (C macro)</a>
 </li>
       <li><a href="api/defs.html#c.TODRV_HSE_CMD_AES128CBC_CMAC_SECURE_MESSAGE">TODRV_HSE_CMD_AES128CBC_CMAC_SECURE_MESSAGE (C macro)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/defs.html#c.TODRV_HSE_CMD_AES128CBC_CMAC_UNSECURE_MESSAGE">TODRV_HSE_CMD_AES128CBC_CMAC_UNSECURE_MESSAGE (C macro)</a>
 </li>
       <li><a href="api/defs.html#c.TODRV_HSE_CMD_AES128CBC_DECRYPT">TODRV_HSE_CMD_AES128CBC_DECRYPT (C macro)</a>
@@ -893,6 +909,8 @@
       <li><a href="api/defs.html#c.TODRV_HSE_CMD_GET_SW_VERSION">TODRV_HSE_CMD_GET_SW_VERSION (C macro)</a>
 </li>
       <li><a href="api/defs.html#c.TODRV_HSE_CMD_GET_UNSIGNED_PUBLIC_KEY">TODRV_HSE_CMD_GET_UNSIGNED_PUBLIC_KEY (C macro)</a>
+</li>
+      <li><a href="api/defs.html#c.TODRV_HSE_CMD_INIT">TODRV_HSE_CMD_INIT (C macro)</a>
 </li>
       <li><a href="api/defs.html#c.TODRV_HSE_CMD_INIT_ADMIN_SESSION">TODRV_HSE_CMD_INIT_ADMIN_SESSION (C macro)</a>
 </li>
@@ -1189,6 +1207,8 @@
       <li><a href="api/core.html#c.TODRV_HSE_trp_write">TODRV_HSE_trp_write (C function)</a>
 </li>
       <li><a href="api/core.html#c.TODRV_SSE_get_ctx">TODRV_SSE_get_ctx (C function)</a>
+</li>
+      <li><a href="api/core.html#c.TOSE_access_dummy_data">TOSE_access_dummy_data (C function)</a>
 </li>
       <li><a href="misc/admin_commands.html#c.TOSE_admin_command">TOSE_admin_command (C function)</a>
 </li>

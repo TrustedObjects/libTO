@@ -15,6 +15,9 @@
  * @brief
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_HASH_H_
 #define _TODRV_HSE_HASH_H_
 
@@ -59,4 +62,6 @@ TODRV_HSE_HASH_API TO_ret_t TODRV_HSE_sha256_final(
 #endif
 
 #endif /* _TODRV_HSE_HASH_H_ */
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 

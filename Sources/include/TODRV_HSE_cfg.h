@@ -22,6 +22,8 @@
 #ifndef _TODRV_HSE_CFG_H_
 #define _TODRV_HSE_CFG_H_
 
+#include "TO_cfg.h"
+
 /*
  * -----------------------------
  * Global settings
@@ -78,6 +80,11 @@
 /* #undef TODRV_HSE_ENABLE_I2C_PIPE */
 #endif
 
+#ifndef TODRV_HSE_ENABLE_I2C_SERIAL
+/* Fake I2C on serial port enabled */
+/* #undef TODRV_HSE_ENABLE_I2C_SERIAL */
+#endif
+
 /*
  * --------------
  * Expert options
@@ -101,7 +108,7 @@
 /* internal I/O buffer size */
 #define TODRV_HSE_LIB_INTERNAL_IO_BUFFER_SIZE 640
 #endif
-#if !defined(TODRV_HSE_ENABLE_I2C_PIPE) && TODRV_HSE_LIB_INTERNAL_IO_BUFFER_SIZE > 640
+#if (!defined(TODRV_HSE_ENABLE_I2C_PIPE) && !defined(TODRV_HSE_ENABLE_I2C_SERIAL)) && TODRV_HSE_LIB_INTERNAL_IO_BUFFER_SIZE > 640
 #error "Internal I/O buffer cannot exceed 640 bytes due to SE limitations"
 #endif
 

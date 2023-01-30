@@ -20,6 +20,7 @@
 
 #include "TO_endian.h"
 #include "TO_stdint.h"
+#include "TO_portability.h"
 
 #include <string.h>
 
@@ -59,11 +60,8 @@
  * @param[out] data Destination buffer
  * @param[in] offset Offset at which we will write the result
  */
-#define SET_BE16_NOINC(val, data, offset)                                      \
-{                                                                              \
-    uint16_t __tmp16 = htobe16(val);                                           \
-    memcpy((uint8_t*)(data) + (offset), (uint8_t*)&__tmp16, sizeof(uint16_t)); \
-}
+#define SET_BE16_NOINC(val, data, offset) \
+    TO_safewrite_beuint16((void*)((uint8_t *)(data) + (offset)),(val));
 
 /**
  * @brief Transforms a data from a host representation to Big-Endian (Most significant Byte First)
@@ -71,11 +69,8 @@
  * @param[out] data Destination buffer
  * @param[in] offset Offset at which we will write the result
  */
-#define SET_BE24_NOINC(val, data, offset)                                      \
-{                                                                              \
-    uint32_t __tmp32 = htobe32(val);                                           \
-    memcpy((uint8_t*)(data) + (offset), ((uint8_t*)&__tmp32) + 1, 3);          \
-}
+#define SET_BE24_NOINC(val, data, offset) \
+    TO_safewrite_beuint24((void*)((uint8_t *)(data) + (offset)),(val));
 
 /**
  * @brief Transforms a data from a host representation to Big-Endian (Most significant Byte First)
@@ -83,11 +78,8 @@
  * @param[out] data Destination buffer
  * @param[in] offset Offset at which we will write the result
  */
-#define SET_BE32_NOINC(val, data, offset)                                      \
-{                                                                              \
-    uint32_t __tmp32 = htobe32(val);                                           \
-    memcpy((uint8_t*)(data) + (offset), (uint8_t*)&__tmp32, sizeof(uint32_t)); \
-}
+#define SET_BE32_NOINC(val, data, offset) \
+    TO_safewrite_beuint32((void*)((uint8_t *)(data) + (offset)),(val));
 
 /**
  * @brief Transforms a data from a host representation to Big-Endian (Most significant Byte First)
@@ -95,11 +87,8 @@
  * @param[out] data Destination buffer
  * @param[in] offset Offset at which we will write the result
  */
-#define SET_BE48_NOINC(val, data, offset)                                      \
-{                                                                              \
-    uint64_t __tmp64 = htobe64(val);                                           \
-    memcpy((uint8_t*)(data) + (offset), ((uint8_t*)&__tmp64) + 2, 6);          \
-}
+#define SET_BE48_NOINC(val, data, offset) \
+    TO_safewrite_beuint48((void*)((uint8_t *)(data) + (offset)),(val));
 
 /**
  * @brief Transforms a data from a host representation to Big-Endian (Most significant Byte First)
@@ -107,11 +96,8 @@
  * @param[out] data Destination buffer
  * @param[in] offset Offset at which we will write the result
  */
-#define SET_BE64_NOINC(val, data, offset)                                      \
-{                                                                              \
-    uint64_t __tmp64 = htobe64(val);                                           \
-    memcpy((uint8_t*)(data) + (offset), (uint8_t*)&__tmp64, sizeof(uint64_t)); \
-}
+#define SET_BE64_NOINC(val, data, offset) \
+    TO_safewrite_beuint64((void*)((uint8_t *)(data) + (offset)),(val));
 
 /**
  * @brief Transforms a data from a Big-Endian (Most significant Byte First) to a host representation
@@ -119,12 +105,8 @@
  * @param[in] offset Offset at which we will read the data
  * @param[out] val Destination data
  */
-#define GET_BE16_NOINC(data, offset, val)                                      \
-{                                                                              \
-    uint16_t __tmp16;                                                          \
-    memcpy((uint8_t*)&__tmp16, (uint8_t*)(data) + (offset), sizeof(uint16_t)); \
-    val = be16toh(__tmp16);                                                    \
-}
+#define GET_BE16_NOINC(data, offset, val) \
+    (val) = TO_saferead_beuint16((void*)((uint8_t *)(data) + (offset)));
 
 /**
  * @brief Transforms a data from a Big-Endian (Most significant Byte First) to a host representation
@@ -132,12 +114,8 @@
  * @param[in] offset Offset at which we will read the data
  * @param[out] val Destination data
  */
-#define GET_BE24_NOINC(data, offset, val)                                      \
-{                                                                              \
-    uint32_t __tmp32 = 0;                                                      \
-    memcpy((uint8_t*)&__tmp32 + 1, (uint8_t*)(data) + (offset), 3);            \
-    val = be32toh(__tmp32) & 0xffffff;                                         \
-}
+#define GET_BE24_NOINC(data, offset, val) \
+    (val) = TO_saferead_beuint24((void*)((uint8_t *)(data) + (offset)));
 
 /**
  * @brief Transforms a data from a Big-Endian (Most significant Byte First) to a host representation
@@ -145,12 +123,8 @@
  * @param[in] offset Offset at which we will read the data
  * @param[out] val Destination data
  */
-#define GET_BE32_NOINC(data, offset, val)                                      \
-{                                                                              \
-    uint32_t __tmp32;                                                          \
-    memcpy((uint8_t*)&__tmp32, (uint8_t*)(data) + (offset), sizeof(uint32_t)); \
-    val = be32toh(__tmp32);                                                    \
-}
+#define GET_BE32_NOINC(data, offset, val) \
+    (val) = TO_saferead_beuint32((void*)((uint8_t *)(data) + (offset)));
 
 /**
  * @brief Transforms a data from a Big-Endian (Most significant Byte First) to a host representation
@@ -158,12 +132,8 @@
  * @param[in] offset Offset at which we will read the data
  * @param[out] val Destination data
  */
-#define GET_BE48_NOINC(data, offset, val)                                      \
-{                                                                              \
-    uint64_t __tmp64 = 0;                                                      \
-    memcpy((uint8_t*)&__tmp64 + 2, (uint8_t*)(data) + (offset), 6);            \
-    val = be64toh(__tmp64) & 0xffffffffffff;                                   \
-}
+#define GET_BE48_NOINC(data, offset, val) \
+    (val) = TO_saferead_beuint48((void*)((uint8_t *)(data) + (offset)));
 
 /**
  * @brief Transforms a data from a Big-Endian (Most significant Byte First) to a host representation
@@ -171,12 +141,8 @@
  * @param[in] offset Offset at which we will read the data
  * @param[out] val Destination data
  */
-#define GET_BE64_NOINC(data, offset, val)                                      \
-{                                                                              \
-    uint64_t __tmp64;                                                          \
-    memcpy((uint8_t*)&__tmp64, (uint8_t*)(data) + (offset), sizeof(uint64_t)); \
-    val = be64toh(__tmp64);                                                    \
-}
+#define GET_BE64_NOINC(data, offset, val) \
+    (val) = TO_saferead_beuint64((void*)((uint8_t *)(data) + (offset)));
 
 /**
  * @brief Transforms a data from a host representation to Big-Endian (Most significant Byte First).
@@ -314,11 +280,8 @@
  * @param[out] data Destination buffer
  * @param[in] offset Offset at which we will write the result
  */
-#define SET_LE16_NOINC(val, data, offset)                                      \
-{                                                                              \
-    uint16_t __tmp16 = htole16(val);                                           \
-    memcpy((uint8_t*)(data) + (offset), (uint8_t*)&__tmp16, sizeof(uint16_t)); \
-}
+#define SET_LE16_NOINC(val, data, offset) \
+    TO_safewrite_leuint16((void*)((uint8_t *)(data) + (offset)),(val));
 
 /**
  * @brief Transforms a data from a host representation to Little-Endian (Least significant Byte First)
@@ -326,11 +289,8 @@
  * @param[out] data Destination buffer
  * @param[in] offset Offset at which we will write the result
  */
-#define SET_LE24_NOINC(val, data, offset)                                      \
-{                                                                              \
-    uint32_t __tmp32 = htole32(val);                                           \
-    memcpy((uint8_t*)(data) + (offset), ((uint8_t*)&__tmp32) + 1, 3);          \
-}
+#define SET_LE24_NOINC(val, data, offset) \
+    TO_safewrite_leuint24((void*)((uint8_t *)(data) + (offset)),(val));
 
 /**
  * @brief Transforms a data from a host representation to Little-Endian (Least significant Byte First)
@@ -338,11 +298,8 @@
  * @param[out] data Destination buffer
  * @param[in] offset Offset at which we will write the result
  */
-#define SET_LE32_NOINC(val, data, offset)                                      \
-{                                                                              \
-    uint32_t __tmp32 = htole32(val);                                           \
-    memcpy((uint8_t*)(data) + (offset), (uint8_t*)&__tmp32, sizeof(uint32_t)); \
-}
+#define SET_LE32_NOINC(val, data, offset) \
+    TO_safewrite_leuint32((void*)((uint8_t *)(data) + (offset)),(val));
 
 /**
  * @brief Transforms a data from a host representation to Little-Endian (Least significant Byte First)
@@ -350,11 +307,8 @@
  * @param[out] data Destination buffer
  * @param[in] offset Offset at which we will write the result
  */
-#define SET_LE48_NOINC(val, data, offset)                                      \
-{                                                                              \
-    uint64_t __tmp64 = htole64(val);                                           \
-    memcpy((uint8_t*)(data) + (offset), ((uint8_t*)&__tmp64) + 2, 6);          \
-}
+#define SET_LE48_NOINC(val, data, offset) \
+    TO_safewrite_leuint48((void*)((uint8_t *)(data) + (offset)),(val));
 
 /**
  * @brief Transforms a data from a host representation to Little-Endian (Least significant Byte First)
@@ -362,11 +316,8 @@
  * @param[out] data Destination buffer
  * @param[in] offset Offset at which we will write the result
  */
-#define SET_LE64_NOINC(val, data, offset)                                      \
-{                                                                              \
-    uint64_t __tmp64 = htole64(val);                                           \
-    memcpy((uint8_t*)(data) + (offset), (uint8_t*)&__tmp64, sizeof(uint64_t)); \
-}
+#define SET_LE64_NOINC(val, data, offset) \
+    TO_safewrite_leuint64((void*)((uint8_t *)(data) + (offset)),(val));
 
 /**
  * @brief Transforms a data from a Little-Endian (Least significant Byte First) to a host representation
@@ -374,12 +325,8 @@
  * @param[in] offset Offset at which we will read the data
  * @param[out] val Destination data
  */
-#define GET_LE16_NOINC(data, offset, val)                                      \
-{                                                                              \
-    uint16_t __tmp16;                                                          \
-    memcpy((uint8_t*)&__tmp16, (uint8_t*)(data) + (offset), sizeof(uint16_t)); \
-    val = le16toh(__tmp16);                                                    \
-}
+#define GET_LE16_NOINC(data, offset, val) \
+    (val) = TO_saferead_leuint16((void*)((uint8_t *)(data) + (offset)));
 
 /**
  * @brief Transforms a data from a Little-Endian (Least significant Byte First) to a host representation
@@ -387,12 +334,8 @@
  * @param[in] offset Offset at which we will read the data
  * @param[out] val Destination data
  */
-#define GET_LE24_NOINC(data, offset, val)                                      \
-{                                                                              \
-    uint32_t __tmp32 = 0;                                                      \
-    memcpy((uint8_t*)&__tmp32 + 1, (uint8_t*)(data) + (offset), 3);            \
-    val = le32toh(__tmp32) & 0xffffff;                                         \
-}
+#define GET_LE24_NOINC(data, offset, val) \
+    (val) = TO_saferead_leuint24((void*)((uint8_t *)(data) + (offset)));
 
 /**
  * @brief Transforms a data from a Little-Endian (Least significant Byte First) to a host representation
@@ -400,12 +343,8 @@
  * @param[in] offset Offset at which we will read the data
  * @param[out] val Destination data
  */
-#define GET_LE32_NOINC(data, offset, val)                                      \
-{                                                                              \
-    uint32_t __tmp32;                                                          \
-    memcpy((uint8_t*)&__tmp32, (uint8_t*)(data) + (offset), sizeof(uint32_t)); \
-    val = le32toh(__tmp32);                                                    \
-}
+#define GET_LE32_NOINC(data, offset, val) \
+    (val) = TO_saferead_leuint32((void*)((uint8_t *)(data) + (offset)));
 
 /**
  * @brief Transforms a data from a Little-Endian (Least significant Byte First) to a host representation
@@ -413,12 +352,8 @@
  * @param[in] offset Offset at which we will read the data
  * @param[out] val Destination data
  */
-#define GET_LE48_NOINC(data, offset, val)                                      \
-{                                                                              \
-    uint64_t __tmp64 = 0;                                                      \
-    memcpy((uint8_t*)&__tmp64 + 2, (uint8_t*)(data) + (offset), 6);            \
-    val = le64toh(__tmp64) & 0xffffffffffff;                                   \
-}
+#define GET_LE48_NOINC(data, offset, val) \
+    (val) = TO_saferead_leuint48((void*)((uint8_t *)(data) + (offset)));
 
 /**
  * @brief Transforms a data from a Little-Endian (Least significant Byte First) to a host representation
@@ -426,12 +361,8 @@
  * @param[in] offset Offset at which we will read the data
  * @param[out] val Destination data
  */
-#define GET_LE64_NOINC(data, offset, val)                                      \
-{                                                                              \
-    uint64_t __tmp64;                                                          \
-    memcpy((uint8_t*)&__tmp64, (uint8_t*)(data) + (offset), sizeof(uint64_t)); \
-    val = le64toh(__tmp64);                                                    \
-}
+#define GET_LE64_NOINC(data, offset, val) \
+    (val) = TO_saferead_leuint64((void*)((uint8_t *)(data) + (offset)));
 
 /**
  * @brief Transforms a data from a host representation to Little-Endian (Least significant Byte First)
@@ -570,16 +501,6 @@
 #define GCC_PRAGMA(x)
 #endif
 
-#ifndef TO_UTILS_API
-#ifdef __linux__
-#define TO_UTILS_API
-#elif _WIN32
-#define TO_UTILS_API __declspec(dllexport)
-#else
-#define TO_UTILS_API
-#endif
-#endif
-
 /**
  * @brief Performs memory areas comparisons in constant time
  * @param[in] s1 First memory area
@@ -592,7 +513,7 @@
  * @return value is zero only if s1 and s2 bytes are matching. If n is zero
  * then zero is returned.
  */
-TO_UTILS_API int TO_secure_memcmp(const void *s1, const void *s2, unsigned int n);
+extern int TO_secure_memcmp(const void *s1, const void *s2, unsigned int n);
 
 /**
  * @brief Copy memory area into another safer than memcpy()
@@ -606,7 +527,7 @@ TO_UTILS_API int TO_secure_memcmp(const void *s1, const void *s2, unsigned int n
  *
  * @return a pointer to dest or NULL on error
  */
-TO_UTILS_API void *TO_secure_memcpy(void *dest, const void *src, unsigned int n);
+extern void *TO_secure_memcpy(void *dest, const void *src, unsigned int n);
 
 /**
  * @brief Move memory area into another safer than memmove()
@@ -620,7 +541,7 @@ TO_UTILS_API void *TO_secure_memcpy(void *dest, const void *src, unsigned int n)
  *
  * @return a pointer to dest or NULL on error
  */
-TO_UTILS_API void *TO_secure_memmove(void *dest, const void *src, unsigned int n);
+extern void *TO_secure_memmove(void *dest, const void *src, unsigned int n);
 
 /**
  * @brief Secure memory area set
@@ -634,7 +555,7 @@ TO_UTILS_API void *TO_secure_memmove(void *dest, const void *src, unsigned int n
  *
  * @return s
  */
-TO_UTILS_API void *TO_secure_memset(void *s, int c, unsigned int n);
+extern void *TO_secure_memset(void *s, int c, unsigned int n);
 
 /**
  * @brief initial value to give to TO_crc16_ccitt_29b1()
@@ -650,8 +571,7 @@ TO_UTILS_API void *TO_secure_memset(void *s, int c, unsigned int n);
  *
  * @return Computed CRC value.
  */
-TO_UTILS_API uint16_t TO_crc16_ccitt_29b1(uint16_t crc,
+extern uint16_t TO_crc16_ccitt_29b1(uint16_t crc,
 		const uint8_t *data, int len, int reflect);
 
 #endif /* _TO_UTILS_H_ */
-

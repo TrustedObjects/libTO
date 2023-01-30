@@ -219,13 +219,14 @@ typedef TO_ret_t (TODRV_get_hardware_serial_number_f)(void *priv_ctx, uint8_t ha
 typedef TO_ret_t (TODRV_get_software_version_f)(void *priv_ctx,uint8_t* major, uint8_t* minor,
 		uint8_t* revision);
 typedef TO_ret_t (TODRV_get_product_id_f)(void *priv_ctx,uint8_t product_id[TO_PRODUCT_ID_SIZE]);
+typedef TO_ret_t (TODRV_access_dummy_data_f)(void *ctx,	uint8_t write_data, uint32_t* dummy_data);
 #endif
 #if TODRV_API_CONFIG_SHA256 > 0
 typedef TO_ret_t (TODRV_sha256_f)(void *priv_ctx,const uint8_t* data, const uint16_t data_length,
-		uint8_t* sha256);
+		uint8_t sha256[TO_SHA256_HASHSIZE]);
 typedef TO_ret_t (TODRV_sha256_init_f)(void *priv_ctx);
 typedef TO_ret_t (TODRV_sha256_update_f)(void *priv_ctx,const uint8_t* data, const uint16_t length);
-typedef TO_ret_t (TODRV_sha256_final_f)(void *priv_ctx,uint8_t* sha256);
+typedef TO_ret_t (TODRV_sha256_final_f)(void *priv_ctx,uint8_t sha256[TO_SHA256_HASHSIZE]);
 #endif
 #if TODRV_API_CONFIG_KEYS_MGMT > 0
 typedef TO_ret_t (TODRV_set_remote_public_key_f)(void *priv_ctx,const uint8_t key_index,
@@ -299,7 +300,7 @@ typedef TO_ret_t (TODRV_verify_hmac_final_f)(void *priv_ctx,const uint8_t hmac[T
 typedef TO_ret_t (TODRV_compute_cmac_f)(void *priv_ctx,const uint8_t key_index, const uint8_t* data,
 		const uint16_t data_length, uint8_t cmac_data[TO_CMAC_SIZE]);
 typedef TO_ret_t (TODRV_verify_cmac_f)(void *priv_ctx,const uint8_t key_index, const uint8_t* data,
-		const uint16_t data_length, uint8_t cmac_data[TO_CMAC_SIZE]);
+		const uint16_t data_length, const uint8_t cmac_data[TO_CMAC_SIZE]);
 #endif
 #if TODRV_API_CONFIG_SEC_MSG > 0
 typedef TO_ret_t (TODRV_aes128cbc_hmac_secure_message_f)(void *priv_ctx, const uint8_t aes_key_index,
@@ -689,6 +690,7 @@ typedef struct TODRV_api_to_info_s {
 	TODRV_get_hardware_version_f *get_hardware_version;
 	TODRV_get_software_version_f *get_software_version;
 	TODRV_get_product_id_f *get_product_id;
+	TODRV_access_dummy_data_f *access_dummy_data;
 } TODRV_api_to_info_t;
 #endif
 #if TODRV_API_CONFIG_SHA256 > 0
@@ -975,10 +977,13 @@ typedef struct TODRV_api_features_s {
 } TODRV_api_features_t;
 
 typedef struct TODRV_api_s {
-	const TODRV_api_version_t api_version; /**< Driver API version */
-	uint32_t ctx_size; /**< Driver private context size */
-	TODRV_api_offsets_t offsets;
-	TODRV_api_features_t api;
+	uint32_t binary_size;			/**< Final size of the binary */
+	uint16_t binary_crc;			/**< Integrity of the binary */
+	uint16_t binary_offset;			/**< Indicates from which byte to start computing the integrity. */
+	TODRV_api_version_t api_version; 	/**< Driver API version */
+	uint32_t ctx_size; 			/**< Driver private context size */
+	TODRV_api_offsets_t offsets;		/**< Offsets to reach such or such API */
+	TODRV_api_features_t api;		/**< Pointers to each API entry point */
 } TODRV_api_t;
 
 /* Ensure that 1 byte is enough for offsets */

@@ -48,4 +48,44 @@
 #define TOP_DISABLE_MEASURES 1
 #endif
 
+#ifndef TOSEC_ADMIN_CNT
+/* Number of Adminstration key slots */
+#define TOSEC_ADMIN_CNT 5
+#endif
+
+#ifndef TOSEC_CA_CNT
+/* Number of CA public-key slots */
+#define TOSEC_CA_CNT 4
+#endif
+
+#ifndef TOSEC_CERT_CNT
+/* Number of certificates slots */
+#define TOSEC_CERT_CNT 3
+#endif
+
+#ifndef TOSEC_ECIES_CNT
+/* Number of ECIES key slots */
+#define TOSEC_ECIES_CNT 6
+#endif
+
+#ifndef TOSEC_PSK_CNT
+/* Number of PSK slots */
+#define TOSEC_PSK_CNT 3
+#endif
+
+#ifndef TOSEC_REMOTE_KPUB_CNT
+/* Number of remote public-key slots */
+#define TOSEC_REMOTE_KPUB_CNT 6
+#endif
+
+#ifndef TOSEC_TLS_CNT
+/* Number of TLS session slots */
+#define TOSEC_TLS_CNT 3
+#endif
+
+#ifndef TO_ENABLE_EVALUATION
+/* Evaluation version enabled */
+#define TO_ENABLE_EVALUATION 1
+#endif
+
 #endif /* _TOP_CFG_H_ */

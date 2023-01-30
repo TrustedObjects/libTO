@@ -18,16 +18,6 @@
 #ifndef _TOSE_SETUP_H_
 #define _TOSE_SETUP_H_
 
-#ifndef TOSE_SETUP_API
-#ifdef __linux__
-#define TOSE_SETUP_API
-#elif _WIN32
-#define TOSE_SETUP_API __declspec(dllexport)
-#else
-#define TOSE_SETUP_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -39,7 +29,7 @@ extern "C" {
  * @{ */
 
 /**
- * @brief Initialize TO-Protect.
+ * @brief Initialize Secure Element.
  * @param[in] ctx Pointer to the SE context
  * @cond libTO
  * If endianness is not explicitely defined through project settings macros,
@@ -49,10 +39,10 @@ extern "C" {
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_SETUP_API TO_ret_t TOSE_init(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_init(TOSE_ctx_t *ctx);
 
 /**
- * @brief Uninitialize TO-Protect.
+ * @brief Uninitialize Secure Element.
  * @param[in] ctx Pointer to the SE context
  * @cond libTO
  * @return
@@ -60,7 +50,7 @@ TOSE_SETUP_API TO_ret_t TOSE_init(TOSE_ctx_t *ctx);
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_SETUP_API TO_ret_t TOSE_fini(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_fini(TOSE_ctx_t *ctx);
 
 /** @} */
 

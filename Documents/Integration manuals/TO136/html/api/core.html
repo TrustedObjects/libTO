@@ -1,17 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Secure Element API &#8212; libTO 6.1.2 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Secure Element API &#8212; libTO 6.3.9 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/custom.js"></script>
     <script src="../_static/custom.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -38,7 +41,7 @@
 
 
 
-<p class="blurb">release 6.1.2<br />doc</p>
+<p class="blurb">release 6.3.9<br />doc</p>
 
 
 
@@ -55,7 +58,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
@@ -93,20 +96,20 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="secure-element-api">
-<span id="api-to"></span><h1>Secure Element API<a class="headerlink" href="#secure-element-api" title="Permalink to this headline">¶</a></h1>
+  <section id="secure-element-api">
+<span id="api-to"></span><h1>Secure Element API<a class="headerlink" href="#secure-element-api" title="Permalink to this heading">¶</a></h1>
 <img alt="location into library structure" class="align-right" src="../_images/lib_part_seapi.png" />
 <p>This API is used to setup I2C communication and then send basic commands to
 Secure Element.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TO.h&quot;</span><span class="cp"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TO.h&quot;</span>
 </pre></div>
 </div>
-<div class="section" id="i2c-communication">
-<h2>I2C communication<a class="headerlink" href="#i2c-communication" title="Permalink to this headline">¶</a></h2>
+<section id="i2c-communication">
+<h2>I2C communication<a class="headerlink" href="#i2c-communication" title="Permalink to this heading">¶</a></h2>
 <p>The following functions are used to deal with Secure Element I2C communication,
 they rely on the underlying I2C wrapper (see <a class="reference internal" href="../wrapper/overview.html#i2c-wrapper"><span class="std std-ref">I2C wrapper</span></a>).</p>
-<div class="section" id="i2c-setup">
-<h3>I2C setup<a class="headerlink" href="#i2c-setup" title="Permalink to this headline">¶</a></h3>
+<section id="i2c-setup">
+<h3>I2C setup<a class="headerlink" href="#i2c-setup" title="Permalink to this heading">¶</a></h3>
 <p>Functions to manage connection with Secure Element.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TODRV_HSE_trp_config">
@@ -115,21 +118,21 @@ they rely on the underlying I2C wrapper (see <a class="reference internal" href=
 <p>
 See TO_data_config() for more details.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i2c_addr</strong> – I2C address to use </p></li>
 <li><p><strong>misc_settings</strong> – Misc. settings byte. It has the following bit form (from MSB to LSB): RES, RES, RES, RES, RES, RES, RES, last byte NACKed. The <em>last byte NACKed</em> bit must be set to 1 if remote device NACKs last written byte.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if configuration was successful. </p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="basic-messaging">
-<h3>Basic messaging<a class="headerlink" href="#basic-messaging" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="basic-messaging">
+<h3>Basic messaging<a class="headerlink" href="#basic-messaging" title="Permalink to this heading">¶</a></h3>
 <p>Functions to read and write data to Secure Element. They should be used only
 for debug purposes, as every Secure Element API is supported by the library
 (see <a class="reference internal" href="#secure-element-functions">Secure Element functions</a>.</p>
@@ -144,13 +147,13 @@ for debug purposes, as every Secure Element API is supported by the library
 <p>
 This function uses the underlying TO_data_write() wrapper function. Refer to its documentation for more details.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> – Buffer containing data to send </p></li>
 <li><p><strong>length</strong> – Amount of data to send in bytes</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TO_OK if data has been written sucessfully</p></li>
 <li><p>TO_DEVICE_WRITE_ERROR: error writing data to Secure Element</p></li>
@@ -168,13 +171,13 @@ This function uses the underlying TO_data_write() wrapper function. Refer to its
 <p>
 This function uses the underlying TO_data_read() wrapper function. Refer to its documentation for more details.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> – Buffer to store received data </p></li>
 <li><p><strong>length</strong> – Amount of data to read in bytes</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TO_OK if data has been read sucessfully</p></li>
 <li><p>TO_DEVICE_READ_ERROR: error reading data from Secure Element</p></li>
@@ -193,12 +196,12 @@ This function uses the underlying TO_data_read() wrapper function. Refer to its 
 This function uses the underlying TO_data_last_command_duration() wrapper function. Refer to its documentation for more details.</p>
 <p>This function should only be called after a successful command or a successful TO_read() call. If it is called after a failed command or a failed TO_read(), or after a TO_write() call, the result is unspecified and may be irrelevant.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>duration</strong> – Pointer to store last command duration in microseconds</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TO_OK if data has been read sucessfully</p></li>
 <li><p>TO_ERROR if an internal error has occured </p></li>
@@ -208,18 +211,18 @@ This function uses the underlying TO_data_last_command_duration() wrapper functi
 </dl>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="secure-element-functions">
-<span id="api-to-functions"></span><h2>Secure Element functions<a class="headerlink" href="#secure-element-functions" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="secure-element-functions">
+<span id="api-to-functions"></span><h2>Secure Element functions<a class="headerlink" href="#secure-element-functions" title="Permalink to this heading">¶</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>To use every of these functions, I2C must be initialized, see
 <a class="reference internal" href="#c.TOSE_init" title="TOSE_init"><code class="xref c c-func docutils literal notranslate"><span class="pre">TOSE_init()</span></code></a>.</p>
 </div>
 <p>The following API is directly based on Secure Element API.</p>
-<div class="section" id="nvm">
-<h3>NVM<a class="headerlink" href="#nvm" title="Permalink to this headline">¶</a></h3>
+<section id="nvm">
+<h3>NVM<a class="headerlink" href="#nvm" title="Permalink to this heading">¶</a></h3>
 <p>Functions to use Secure Element secure data storage.</p>
 <p>This zone is reserved user non-volatile memory, to store any data. No control is
 performed by the secure element when manipulating this data through read and
@@ -239,7 +242,7 @@ Please refer to electrical characteristics for details. Please note that calling
 <span class="target" id="group__nvm_1ga11808ab701ba490cfa8b5b802ef9bbbb"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_write_nvm</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">offset</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">length</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_AES_KEYSIZE" title="TO_AES_KEYSIZE"><span class="n"><span class="pre">TO_AES_KEYSIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_write_nvm" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Write data to Secure Element NVM reserved zone. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>offset</strong> – <strong>[in]</strong> Offset in NVM reserved zone to write data </p></li>
@@ -248,7 +251,7 @@ Please refer to electrical characteristics for details. Please note that calling
 <li><p><strong>key</strong> – <strong>[in]</strong> Key used to write data</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if data has been written successfully<ul class="simple">
 <li><p>TO_DEVICE_WRITE_ERROR: error writing data to Secure Element</p></li>
 <li><p>TO_DEVICE_READ_ERROR: error reading data from Secure Element</p></li>
@@ -264,7 +267,7 @@ Please refer to electrical characteristics for details. Please note that calling
 <span class="target" id="group__nvm_1ga14b051cbe09dfc4f98cbbfc4dfdeea54"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_read_nvm</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">offset</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">length</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_AES_KEYSIZE" title="TO_AES_KEYSIZE"><span class="n"><span class="pre">TO_AES_KEYSIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_read_nvm" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Read data from Secure Element NVM reserved zone. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>offset</strong> – <strong>[in]</strong> Offset in NVM reserved zone to read data </p></li>
@@ -273,7 +276,7 @@ Please refer to electrical characteristics for details. Please note that calling
 <li><p><strong>key</strong> – <strong>[in]</strong> Key used to read data</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if data has been read successfully<ul class="simple">
 <li><p>TO_DEVICE_WRITE_ERROR: error writing data to Secure Element</p></li>
 <li><p>TO_DEVICE_READ_ERROR: error reading data from Secure Element</p></li>
@@ -289,13 +292,13 @@ Please refer to electrical characteristics for details. Please note that calling
 <span class="target" id="group__nvm_1gadeb19607d62e0e2a8b3e5a71068f24a1"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_get_nvm_size</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_get_nvm_size" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get NVM reserved zone available size. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>size</strong> – <strong>[in]</strong> NVM size</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if size has been retrieved successfully<ul class="simple">
 <li><p>TO_DEVICE_WRITE_ERROR: error writing data to Secure Element</p></li>
 <li><p>TO_DEVICE_READ_ERROR: error reading data from Secure Element</p></li>
@@ -306,9 +309,9 @@ Please refer to electrical characteristics for details. Please note that calling
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="initialization">
-<h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="initialization">
+<h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading">¶</a></h3>
 <p>The following functions are used to initialize the library with given driver
 configuration.</p>
 <dl class="c function">
@@ -316,7 +319,7 @@ configuration.</p>
 <span class="target" id="group__context__api_1ga5aaf4068e5152c624624471aca6c60d3"></span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_get_ctx</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TODRV_HSE_get_ctx" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get HSE context. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>HSE context pointer </p>
 </dd>
 </dl>
@@ -327,7 +330,7 @@ configuration.</p>
 <span class="target" id="group__context__api_1ga09df453da5dacc0c0394e343aa67a214"></span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_SSE_get_ctx</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TODRV_SSE_get_ctx" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get SSE context. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>SSE context pointer </p>
 </dd>
 </dl>
@@ -336,9 +339,9 @@ configuration.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_init">
 <span class="target" id="group__setup_1gaf560aa86300dc093f79ad8bf37dba757"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_init" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Initialize TO-Protect. </p>
+<dd><p>Initialize Secure Element. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 </ul>
@@ -349,9 +352,9 @@ configuration.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_fini">
 <span class="target" id="group__setup_1gace267d62bf78ff0f249ea9168c970af8"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_fini</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_fini" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Uninitialize TO-Protect. </p>
+<dd><p>Uninitialize Secure Element. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 </ul>
@@ -359,9 +362,9 @@ configuration.</p>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="system">
-<h3>System<a class="headerlink" href="#system" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="system">
+<h3>System<a class="headerlink" href="#system" title="Permalink to this heading">¶</a></h3>
 <p>Misc. system functions.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_get_serial_number">
@@ -374,7 +377,7 @@ The Serial Number is encoded on 8 bytes :<ul class="simple">
 </ul>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>serial_number</strong> – <strong>[out]</strong> Secure Element serial number</p></li>
@@ -388,7 +391,7 @@ The Serial Number is encoded on 8 bytes :<ul class="simple">
 <span class="target" id="group__system_1ga2d88427e0a7a8424506f9bb0da5c8418"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_get_hardware_serial_number</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">hardware_serial_number</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_HW_SN_SIZE" title="TO_HW_SN_SIZE"><span class="n"><span class="pre">TO_HW_SN_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_get_hardware_serial_number" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Returns the hardware serial number. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>hardware_serial_number</strong> – <strong>[out]</strong> Hardware serial number </p></li>
@@ -404,7 +407,7 @@ The Serial Number is encoded on 8 bytes :<ul class="simple">
 <p>
 Product Number is a text string encoded on 12 bytes, e.g: “TOSF-IS1-001” </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>product_number</strong> – <strong>[out]</strong> Secure Element product number</p></li>
@@ -424,7 +427,7 @@ Hardware version is encoded on 2 bytes. Available values are:<ul class="simple">
 </ul>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>hardware_version</strong> – <strong>[out]</strong> Secure Element hardware version</p></li>
@@ -438,7 +441,7 @@ Hardware version is encoded on 2 bytes. Available values are:<ul class="simple">
 <span class="target" id="group__system_1ga9ed5ce7ea97e1793e7606cb9ae62a0ac"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_get_software_version</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">major</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">minor</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">revision</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_get_software_version" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Returns the Secure Element software version. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>major</strong> – <strong>[out]</strong> Major number. When this byte changes, API changes have occurred, incompatibility issues may be met, depending on your application. </p></li>
@@ -456,7 +459,7 @@ Hardware version is encoded on 2 bytes. Available values are:<ul class="simple">
 <p>
 The product identifier is a text string, encoded on maximum 15 ASCII bytes. It identifies the personalization profile. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>product_id</strong> – <strong>[out]</strong> Secure Element product identifier</p></li>
@@ -472,7 +475,7 @@ The product identifier is a text string, encoded on maximum 15 ASCII bytes. It i
 <p>
 Request a random number to Secure Element random number generator. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>random_length</strong> – <strong>[in]</strong> Requested random length </p></li>
@@ -482,18 +485,33 @@ Request a random number to Secure Element random number generator. </p>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="hashes">
-<h3>Hashes<a class="headerlink" href="#hashes" title="Permalink to this headline">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.TOSE_access_dummy_data">
+<span class="target" id="group__system_1ga8ba48bea3d3926da5d3d7d71c73e55c2"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_access_dummy_data</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">write_data</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dummy_data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_access_dummy_data" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the dummy data. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
+<li><p><strong>write_data</strong> – <strong>[in]</strong> Indicates whether we have to write (1) it or only read (0) it. </p></li>
+<li><p><strong>dummy_data</strong> – <strong>[out]</strong> Pointer to the data to be read/written </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="hashes">
+<h3>Hashes<a class="headerlink" href="#hashes" title="Permalink to this heading">¶</a></h3>
 <p>Hashing functions.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_sha256">
-<span class="target" id="group__hashes_1ga5c2ac64874626b71470b163015f13cc1"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_sha256</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_length</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">sha256</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_sha256" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__hashes_1ga237ce5e33e99e7004415a41135fc33e0"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_sha256</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_length</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">sha256</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_SHA256_HASHSIZE" title="TO_SHA256_HASHSIZE"><span class="n"><span class="pre">TO_SHA256_HASHSIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_sha256" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>SHA256 computation. </p>
 <p>
 Compute SHA256 hash on the given data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>data</strong> – <strong>[in]</strong> Data to compute SHA256 on </p></li>
@@ -501,9 +519,11 @@ Compute SHA256 hash on the given data.</p>
 <li><p><strong>sha256</strong> – <strong>[out]</strong> returned computed SHA256</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
+<li><p>TORSP_INTERNAL_ERROR if a fault has been detected</p></li>
+<li><p>TORSP_INVALID_LEN if the data_length is too large (&gt; 512)</p></li>
 <li><p>TO_DEVICE_WRITE_ERROR: error writing data to Secure Element</p></li>
 <li><p>TO_DEVICE_READ_ERROR: error reading data from Secure Element</p></li>
 <li><p>TO_INVALID_RESPONSE_LENGTH: unexpected response length from device</p></li>
@@ -520,16 +540,17 @@ Compute SHA256 hash on the given data.</p>
 <span class="target" id="group__hashes_1ga5461e0c53b0a2575b9d931e3be10b5c1"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_sha256_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_sha256_init" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Compute SHA256 on more than 512 bytes of data. </p>
 <p>
-This function must be followed by calls to <a class="reference internal" href="#group__hashes_1gae73dec73e69d28a3456efafdddc310a4"><span class="std std-ref">TOSE_sha256_update()</span></a> and <a class="reference internal" href="#group__hashes_1ga0d3d724e3472b4a190171474371e3afc"><span class="std std-ref">TOSE_sha256_final()</span></a>.</p>
+This function must be followed by calls to <a class="reference internal" href="#group__hashes_1gae73dec73e69d28a3456efafdddc310a4"><span class="std std-ref">TOSE_sha256_update()</span></a> and <a class="reference internal" href="#group__hashes_1gaec4d0d7600bc3405e293cf1073440d4a"><span class="std std-ref">TOSE_sha256_final()</span></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
+<li><p>TORSP_INTERNAL_ERROR if a fault has been detected</p></li>
 <li><p>TO_DEVICE_WRITE_ERROR: error writing data to Secure Element</p></li>
 <li><p>TO_DEVICE_READ_ERROR: error reading data from Secure Element</p></li>
 <li><p>TO_INVALID_RESPONSE_LENGTH: unexpected response length from device</p></li>
@@ -549,16 +570,18 @@ This function must be followed by calls to <a class="reference internal" href="#
 This function can be called several times to provide data to compute SHA256 on, and must be called after <a class="reference internal" href="#group__hashes_1ga5461e0c53b0a2575b9d931e3be10b5c1"><span class="std std-ref">TOSE_sha256_init()</span></a>.</p>
 <p>This command is used to transmit data. It can be called several times, typically splitting the data into several blocks of 512 bytes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>data</strong> – <strong>[in]</strong> Data to compute SHA256 on </p></li>
 <li><p><strong>length</strong> – <strong>[in]</strong> Data length, max. 512 bytes</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
+<li><p>TORSP_INTERNAL_ERROR if a fault has been detected</p></li>
+<li><p>TORSP_INVALID_LEN if the data_length is too large (&gt; 512)</p></li>
 <li><p>TORSP_COND_OF_USE_NOT_SATISFIED if not called after <a class="reference internal" href="#group__hashes_1ga5461e0c53b0a2575b9d931e3be10b5c1"><span class="std std-ref">TOSE_sha256_init()</span></a> or <a class="reference internal" href="#group__hashes_1gae73dec73e69d28a3456efafdddc310a4"><span class="std std-ref">TOSE_sha256_update()</span></a></p></li>
 <li><p>TO_DEVICE_WRITE_ERROR: error writing data to Secure Element</p></li>
 <li><p>TO_DEVICE_READ_ERROR: error reading data from Secure Element</p></li>
@@ -573,21 +596,22 @@ This function can be called several times to provide data to compute SHA256 on, 
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_sha256_final">
-<span class="target" id="group__hashes_1ga0d3d724e3472b4a190171474371e3afc"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_sha256_final</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">sha256</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_sha256_final" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__hashes_1gaec4d0d7600bc3405e293cf1073440d4a"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_sha256_final</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">sha256</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_SHA256_HASHSIZE" title="TO_SHA256_HASHSIZE"><span class="n"><span class="pre">TO_SHA256_HASHSIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_sha256_final" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Returns the SHA256 hash of the data previously given. </p>
 <p>
 This function must be called after <a class="reference internal" href="#group__hashes_1ga5461e0c53b0a2575b9d931e3be10b5c1"><span class="std std-ref">TOSE_sha256_init()</span></a> and <a class="reference internal" href="#group__hashes_1gae73dec73e69d28a3456efafdddc310a4"><span class="std std-ref">TOSE_sha256_update()</span></a>.</p>
 <p>This command finalizes the process and returns the SHA256 hash of the given data. This command handles the padding computation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>sha256</strong> – <strong>[out]</strong> returned computed SHA256</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
+<li><p>TORSP_INTERNAL_ERROR if a fault has been detected</p></li>
 <li><p>TORSP_COND_OF_USE_NOT_SATISFIED: if not called after <a class="reference internal" href="#group__hashes_1gae73dec73e69d28a3456efafdddc310a4"><span class="std std-ref">TOSE_sha256_update()</span></a></p></li>
 <li><p>TO_DEVICE_WRITE_ERROR: error writing data to Secure Element</p></li>
 <li><p>TO_DEVICE_READ_ERROR: error reading data from Secure Element</p></li>
@@ -600,22 +624,22 @@ This function must be called after <a class="reference internal" href="#group__h
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="authentication">
-<h3>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="authentication">
+<h3>Authentication<a class="headerlink" href="#authentication" title="Permalink to this heading">¶</a></h3>
 <p>Certificates management and signature functions.</p>
 <p>Secure Element certificate index is starting from 0 (if the AVNET TO136 version
 supports several certificates).</p>
 <p>For details on Secure Element certificate formats see Secure Element Datasheet.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_sign">
-<span class="target" id="group__auth_1gaa535bfb4f13581c782c7eeca3159a96a"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_sign</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">challenge</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">challenge_length</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">signature</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_sign" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__auth_1gac62581568614ed6e9afd0be85dd8d455"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_sign</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">challenge</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">challenge_length</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_SIGNATURE_SIZE" title="TO_SIGNATURE_SIZE"><span class="n"><span class="pre">TO_SIGNATURE_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_sign" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Returns the Elliptic Curve Digital Signature of the given data. </p>
 <p>
-Note that calling this function is equivalent to calling <code class="docutils literal notranslate"><a class="reference internal" href="#group__hashes_1ga5c2ac64874626b71470b163015f13cc1"><span class="std std-ref"><span class="pre">TOSE_sha256()</span></span></a></code> followed by <code class="docutils literal notranslate"><a class="reference internal" href="#group__auth_1ga74216ef01f482387af52000268cd7646"><span class="std std-ref"><span class="pre">TOSE_sign_hash()</span></span></a></code>.</p>
+Note that calling this function is equivalent to calling <code class="docutils literal notranslate"><a class="reference internal" href="#group__hashes_1ga237ce5e33e99e7004415a41135fc33e0"><span class="std std-ref"><span class="pre">TOSE_sha256()</span></span></a></code> followed by <code class="docutils literal notranslate"><a class="reference internal" href="#group__auth_1gad50749c683a947b1cf3c9ba6c7176848"><span class="std std-ref"><span class="pre">TOSE_sign_hash()</span></span></a></code>.</p>
 <p>Signature Size is twice the size of the ECC key in bytes. With a 256 bits key, signature is 64 bytes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE contex </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Key index to use for signature </p></li>
@@ -624,7 +648,7 @@ Note that calling this function is equivalent to calling <code class="docutils l
 <li><p><strong>signature</strong> – <strong>[out]</strong> Returned challenge signature (64 bytes)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -641,12 +665,12 @@ Note that calling this function is equivalent to calling <code class="docutils l
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_verify">
-<span class="target" id="group__auth_1ga342c50eaff48f04e635c31e403a53b10"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_verify</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_length</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">signature</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_verify" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__auth_1gabecd7134901e78435477a0513bf574ac"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_verify</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_length</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_SIGNATURE_SIZE" title="TO_SIGNATURE_SIZE"><span class="n"><span class="pre">TO_SIGNATURE_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_verify" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Verifies the given Elliptic Curve Digital Signature of the given data. </p>
 <p>
 The public key used for the signature verification must be previously provided using the TOSE_set_remote_public_key() call.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Remote Public Key index to use for verification </p></li>
@@ -655,7 +679,7 @@ The public key used for the signature verification must be previously provided u
 <li><p><strong>signature</strong> – <strong>[in]</strong> Expected data signature (64 bytes)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -673,12 +697,12 @@ The public key used for the signature verification must be previously provided u
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_sign_hash">
-<span class="target" id="group__auth_1ga74216ef01f482387af52000268cd7646"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_sign_hash</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">hash</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_HASH_SIZE" title="TO_HASH_SIZE"><span class="n"><span class="pre">TO_HASH_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">signature</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_sign_hash" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__auth_1gad50749c683a947b1cf3c9ba6c7176848"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_sign_hash</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">hash</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_HASH_SIZE" title="TO_HASH_SIZE"><span class="n"><span class="pre">TO_HASH_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_SIGNATURE_SIZE" title="TO_SIGNATURE_SIZE"><span class="n"><span class="pre">TO_SIGNATURE_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_sign_hash" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Returns the Elliptic Curve Digital Signature of the given hash. </p>
 <p>
 Signature Size is twice the size of the ECC key in bytes. With a 256 bits key, signature is 64 bytes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Key index to use for signature </p></li>
@@ -686,7 +710,7 @@ Signature Size is twice the size of the ECC key in bytes. With a 256 bits key, s
 <li><p><strong>signature</strong> – <strong>[out]</strong> Returned hash signature</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -703,12 +727,12 @@ Signature Size is twice the size of the ECC key in bytes. With a 256 bits key, s
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_verify_hash_signature">
-<span class="target" id="group__auth_1ga56fd12ccf9944e419b53d2fa979279b5"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_verify_hash_signature</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">hash</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_HASH_SIZE" title="TO_HASH_SIZE"><span class="n"><span class="pre">TO_HASH_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">signature</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_verify_hash_signature" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__auth_1gad078d9cc94b29ece42c0ecd70bf945da"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_verify_hash_signature</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">hash</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_HASH_SIZE" title="TO_HASH_SIZE"><span class="n"><span class="pre">TO_HASH_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_SIGNATURE_SIZE" title="TO_SIGNATURE_SIZE"><span class="n"><span class="pre">TO_SIGNATURE_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_verify_hash_signature" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Verifies the given Elliptic Curve Digital Signature of the data that generates the given hash. </p>
 <p>
 The public key used for the signature verification must be previously provided using the TOSE_set_remote_public_key() call.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Remote Public Key index to use for verification </p></li>
@@ -716,7 +740,7 @@ The public key used for the signature verification must be previously provided u
 <li><p><strong>signature</strong> – <strong>[in]</strong> Expected hash signature (64 bytes)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -739,14 +763,14 @@ The public key used for the signature verification must be previously provided u
 <p>
 Request a certificate subject common name to Secure Element according to the given index.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_index</strong> – <strong>[in]</strong> Requested certificate index </p></li>
 <li><p><strong>subject_cn</strong> – <strong>[out]</strong> Returned certificate subject common name null terminated string</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_NOT_AVAILABLE: certificate Format not supported</p></li>
@@ -776,7 +800,7 @@ Set certificate distinguished name which will be used in next CSR.</p>
 </ul>
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_index</strong> – <strong>[in]</strong> Certificate index </p></li>
@@ -784,7 +808,7 @@ Set certificate distinguished name which will be used in next CSR.</p>
 <li><p><strong>csr_dn_len</strong> – <strong>[in]</strong> CSR distinguished name length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid Certificate Number</p></li>
@@ -806,7 +830,7 @@ Set certificate distinguished name which will be used in next CSR.</p>
 <p>
 Request a x509 DER formated certificate signing request according to the given index. CSR distinguished name can be set with <a class="reference internal" href="#group__auth_1gaecd896158629de5ae917371454e53762"><span class="std std-ref">TOSE_set_certificate_signing_request_dn()</span></a>, otherwise existing certificate DN will be used (if any). Secure Element CSR size will not exceed TO_CERT_X509_MAXSIZE.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_index</strong> – <strong>[in]</strong> Certificate index to renew </p></li>
@@ -814,7 +838,7 @@ Request a x509 DER formated certificate signing request according to the given i
 <li><p><strong>size</strong> – <strong>[out]</strong> Returned CSR real size</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid Certificate Number</p></li>
@@ -836,7 +860,7 @@ Request a x509 DER formated certificate signing request according to the given i
 <p>
 Set a x509 DER formated certificate according to the given index. The new certificate must be signed by a CA trusted by the Secure Element. Secure Element certificate size cannot exceed TO_CERT_X509_MAXSIZE.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_index</strong> – <strong>[in]</strong> Requested certificate index </p></li>
@@ -844,7 +868,7 @@ Set a x509 DER formated certificate according to the given index. The new certif
 <li><p><strong>size</strong> – <strong>[in]</strong> New certificate size</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_NOT_AVAILABLE: certificate Format not supported</p></li>
@@ -867,13 +891,13 @@ Set a x509 DER formated certificate according to the given index. The new certif
 <p>
 See TOSE_set_certificate_x509</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_index</strong> – <strong>[in]</strong> Requested certificate index</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_NOT_AVAILABLE: certificate Format not supported</p></li>
@@ -896,14 +920,14 @@ See TOSE_set_certificate_x509</p>
 <p>
 See TOSE_set_certificate_x509</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate</strong> – <strong>[in]</strong> New certificate partial data (from x509 DER formated) </p></li>
 <li><p><strong>size</strong> – <strong>[in]</strong> New certificate partial data size</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_NOT_AVAILABLE: certificate Format not supported</p></li>
@@ -926,12 +950,12 @@ See TOSE_set_certificate_x509</p>
 <p>
 See TOSE_set_certificate_x509</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_NOT_AVAILABLE: certificate Format not supported</p></li>
@@ -954,7 +978,7 @@ See TOSE_set_certificate_x509</p>
 <p>
 Request a certificate to Secure Element according to the given index and format.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_index</strong> – <strong>[in]</strong> Requested certificate index </p></li>
@@ -962,7 +986,7 @@ Request a certificate to Secure Element according to the given index and format.
 <li><p><strong>certificate</strong> – <strong>[out]</strong> Certificate, size depends on the certificate type (see TO_cert_*_t)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_NOT_AVAILABLE: certificate Format not supported</p></li>
@@ -985,7 +1009,7 @@ Request a certificate to Secure Element according to the given index and format.
 <p>
 Request a x509 DER formated certificate according to the given index. Secure Element certificate size will not exceed TO_CERT_X509_MAXSIZE.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_index</strong> – <strong>[in]</strong> Requested certificate index </p></li>
@@ -993,7 +1017,7 @@ Request a x509 DER formated certificate according to the given index. Secure Ele
 <li><p><strong>size</strong> – <strong>[out]</strong> Returned certificate real size</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_NOT_AVAILABLE: certificate Format not supported</p></li>
@@ -1016,7 +1040,7 @@ Request a x509 DER formated certificate according to the given index. Secure Ele
 <p>
 Note: the only supported certificate format for this command is DER X509.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>ca_key_index</strong> – <strong>[in]</strong> index of the CA slot used to verify subCA </p></li>
@@ -1025,7 +1049,7 @@ Note: the only supported certificate format for this command is DER X509.</p>
 <li><p><strong>certificate_len</strong> – <strong>[in]</strong> Certificate length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid CA Key index</p></li>
@@ -1047,13 +1071,13 @@ Note: the only supported certificate format for this command is DER X509.</p>
 <p>
 This command must be called before TOSE_verify_challenge_signature().</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>challenge</strong> – <strong>[out]</strong> Returned challenge</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TO_DEVICE_WRITE_ERROR: error writing data to Secure Element</p></li>
@@ -1067,9 +1091,9 @@ This command must be called before TOSE_verify_challenge_signature().</p>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="encryption">
-<h3>Encryption<a class="headerlink" href="#encryption" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="encryption">
+<h3>Encryption<a class="headerlink" href="#encryption" title="Permalink to this heading">¶</a></h3>
 <p>Ciphered messaging functions.</p>
 <p>The best way to encrypt more than the maximum size of data supported by
 TOSE_&lt;xxx&gt;_encrypt() command is to manually chain encryption.</p>
@@ -1087,7 +1111,7 @@ chaining:</p>
 <p>
 As padding is not handled by the Secure Element, you must ensure that data length is a multiple of 16 and is not greater than maximum length value (512 bytes). Initial vector is generated by the Secure Element.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for data encryption, starting from 0 </p></li>
@@ -1097,7 +1121,7 @@ As padding is not handled by the Secure Element, you must ensure that data lengt
 <li><p><strong>cryptogram</strong> – <strong>[out]</strong> Cryptogram, sent back by the Secure Element</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1124,7 +1148,7 @@ As padding is not handled by the Secure Element, you must ensure that data lengt
 <p>Using iv_encrypt() with a predictable Initial Vector can have security impact. Please let Secure Element generate Initial Vector by using encrypt() command when possible.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for data encryption, starting from 0 </p></li>
@@ -1134,7 +1158,7 @@ As padding is not handled by the Secure Element, you must ensure that data lengt
 <li><p><strong>cryptogram</strong> – <strong>[out]</strong> Returned encrypted data</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1157,7 +1181,7 @@ As padding is not handled by the Secure Element, you must ensure that data lengt
 Requires the initial vector provided by the encryption function.</p>
 <p>Padding is not handled by Secure Element firmware. It gives the possibility to avoid the case of a full padding block sometimes required by padding functions.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for data decryption, starting from 0 </p></li>
@@ -1167,7 +1191,7 @@ Requires the initial vector provided by the encryption function.</p>
 <li><p><strong>data</strong> – <strong>[out]</strong> returned decrypted data</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1189,7 +1213,7 @@ Requires the initial vector provided by the encryption function.</p>
 <p>
 Additional authentication data length and data length can not exceed driver IO buffer size (if applicable). Initial vector is generated by the Secure Element.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for data encryption, starting from 0 </p></li>
@@ -1202,7 +1226,7 @@ Additional authentication data length and data length can not exceed driver IO b
 <li><p><strong>tag</strong> – <strong>[out]</strong> Authentication tag</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1224,7 +1248,7 @@ Additional authentication data length and data length can not exceed driver IO b
 <p>
 Requires the initial vector provided by the encryption function. Additional authentication data length and cryptogram length can not exceed driver IO buffer size (if applicable).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for data decryption, starting from 0 </p></li>
@@ -1237,7 +1261,7 @@ Requires the initial vector provided by the encryption function. Additional auth
 <li><p><strong>data</strong> – <strong>[out]</strong> returned decrypted data</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1259,7 +1283,7 @@ Requires the initial vector provided by the encryption function. Additional auth
 <p>
 Additional authentication data length and data length can not exceed driver IO buffer size (if applicable). Nonce is generated by the Secure Element.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for data encryption, starting from 0 </p></li>
@@ -1272,7 +1296,7 @@ Additional authentication data length and data length can not exceed driver IO b
 <li><p><strong>tag</strong> – <strong>[out]</strong> Authentication tag</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1294,7 +1318,7 @@ Additional authentication data length and data length can not exceed driver IO b
 <p>
 Requires the nonce provided by the encryption function. Additional authentication data length and cryptogram length can not exceed driver IO buffer size (if applicable).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for data decryption, starting from 0 </p></li>
@@ -1307,7 +1331,7 @@ Requires the nonce provided by the encryption function. Additional authenticatio
 <li><p><strong>data</strong> – <strong>[out]</strong> returned decrypted data</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1329,7 +1353,7 @@ Requires the nonce provided by the encryption function. Additional authenticatio
 <p>
 As padding is not handled by the Secure Element, you must ensure that data length is a multiple of 16 and is not greater than maximum length value (512 bytes).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for data encryption, starting from 0 </p></li>
@@ -1338,7 +1362,7 @@ As padding is not handled by the Secure Element, you must ensure that data lengt
 <li><p><strong>cryptogram</strong> – <strong>[out]</strong> Cryptogram</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1360,7 +1384,7 @@ As padding is not handled by the Secure Element, you must ensure that data lengt
 <p>
 Padding is not handled by Secure Element firmware. It gives the possibility to avoid the case of a full padding block sometime required by padding functions.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for data decryption, starting from 0 </p></li>
@@ -1369,7 +1393,7 @@ Padding is not handled by Secure Element firmware. It gives the possibility to a
 <li><p><strong>data</strong> – <strong>[out]</strong> returned decrypted data</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1384,9 +1408,9 @@ Padding is not handled by Secure Element firmware. It gives the possibility to a
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="mac">
-<h3>MAC<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mac">
+<h3>MAC<a class="headerlink" href="#mac" title="Permalink to this heading">¶</a></h3>
 <p>Message Authentication Code functions (HMAC and CMAC).</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_compute_hmac">
@@ -1395,7 +1419,7 @@ Padding is not handled by Secure Element firmware. It gives the possibility to a
 <p>
 If you need to compute HMAC on more than 512 bytes, please use the sequence <a class="reference internal" href="#group__mac_1gab8894e45ec85f156c7fc7649c8e42b85"><span class="std std-ref">TOSE_compute_hmac_init()</span></a>, <a class="reference internal" href="#group__mac_1ga19bc86ad58de1581f793214d86aab31b"><span class="std std-ref">TOSE_compute_hmac_update()</span></a>, …, <a class="reference internal" href="#group__mac_1ga3f4b2485d86db6e5be4d5cc0729d2702"><span class="std std-ref">TOSE_compute_hmac_final()</span></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for HMAC calculation, starting from 0 </p></li>
@@ -1404,7 +1428,7 @@ If you need to compute HMAC on more than 512 bytes, please use the sequence <a c
 <li><p><strong>hmac_data</strong> – <strong>[out]</strong> Computed HMAC</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1426,13 +1450,13 @@ If you need to compute HMAC on more than 512 bytes, please use the sequence <a c
 <p>
 This is the first command of the sequence <a class="reference internal" href="#group__mac_1gab8894e45ec85f156c7fc7649c8e42b85"><span class="std std-ref">TOSE_compute_hmac_init()</span></a>, <a class="reference internal" href="#group__mac_1ga19bc86ad58de1581f793214d86aab31b"><span class="std std-ref">TOSE_compute_hmac_update()</span></a>, …, <a class="reference internal" href="#group__mac_1ga3f4b2485d86db6e5be4d5cc0729d2702"><span class="std std-ref">TOSE_compute_hmac_final()</span></a>. It is used to Secure Element send Key_index.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for HMAC calculation, starting from 0</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1454,14 +1478,14 @@ This is the first command of the sequence <a class="reference internal" href="#g
 <p>
 This command can be called several times, new data are added to the data previously sent.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>data</strong> – <strong>[in]</strong> Data to compute HMAC on </p></li>
 <li><p><strong>length</strong> – <strong>[in]</strong> Data length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_COND_OF_USE_NOT_SATISFIED: need to call <a class="reference internal" href="#group__mac_1gab8894e45ec85f156c7fc7649c8e42b85"><span class="std std-ref">TOSE_compute_hmac_init()</span></a> first</p></li>
@@ -1483,13 +1507,13 @@ This command can be called several times, new data are added to the data previou
 <p>
 This is the last command of the sequence <a class="reference internal" href="#group__mac_1gab8894e45ec85f156c7fc7649c8e42b85"><span class="std std-ref">TOSE_compute_hmac_init()</span></a>, <a class="reference internal" href="#group__mac_1ga19bc86ad58de1581f793214d86aab31b"><span class="std std-ref">TOSE_compute_hmac_update()</span></a>, …, <a class="reference internal" href="#group__mac_1ga3f4b2485d86db6e5be4d5cc0729d2702"><span class="std std-ref">TOSE_compute_hmac_final()</span></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>hmac</strong> – <strong>[out]</strong> Returned computed HMAC</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_COND_OF_USE_NOT_SATISFIED: need to call <a class="reference internal" href="#group__mac_1gab8894e45ec85f156c7fc7649c8e42b85"><span class="std std-ref">TOSE_compute_hmac_init()</span></a> and <a class="reference internal" href="#group__mac_1ga19bc86ad58de1581f793214d86aab31b"><span class="std std-ref">TOSE_compute_hmac_update()</span></a> first</p></li>
@@ -1511,7 +1535,7 @@ This is the last command of the sequence <a class="reference internal" href="#gr
 <p>
 If you need to verify HMAC of more than 512 bytes, please use the combination of <a class="reference internal" href="#group__mac_1ga3c301ec537c7d42c2abe8a42d42e9bbc"><span class="std std-ref">TOSE_verify_hmac_init()</span></a>, <a class="reference internal" href="#group__mac_1gacb399ee77ec8eb475495fe0c4fbe7ce0"><span class="std std-ref">TOSE_verify_hmac_update()</span></a>, …, <a class="reference internal" href="#group__mac_1ga66238d80fdcd64ac834f6fb7a182b2e2"><span class="std std-ref">TOSE_verify_hmac_final()</span></a></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for HMAC calculation, starting from 0 </p></li>
@@ -1520,7 +1544,7 @@ If you need to verify HMAC of more than 512 bytes, please use the combination of
 <li><p><strong>hmac_data</strong> – <strong>[in]</strong> expected HMAC value</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_BAD_SIGNATURE: verification failed</p></li>
@@ -1543,13 +1567,13 @@ If you need to verify HMAC of more than 512 bytes, please use the combination of
 <p>
 When you need to verify HMAC of more than 512 bytes you need to call this function first with the key index - as sent to verify_hmac(). Data will be sent with verify_hmac_update() and HMAC will be sent with verify_hmac_final().</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for HMAC calculation, starting from 0</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1571,14 +1595,14 @@ When you need to verify HMAC of more than 512 bytes you need to call this functi
 <p>
 After calling <a class="reference internal" href="#group__mac_1ga3c301ec537c7d42c2abe8a42d42e9bbc"><span class="std std-ref">TOSE_verify_hmac_init()</span></a> to provide key index, you can call <a class="reference internal" href="#group__mac_1gacb399ee77ec8eb475495fe0c4fbe7ce0"><span class="std std-ref">TOSE_verify_hmac_update()</span></a> to send the data to verify HMAC on. This command can be called several times, and new data are added to the previous one for HMAC verification. Last command to use is <a class="reference internal" href="#group__mac_1ga66238d80fdcd64ac834f6fb7a182b2e2"><span class="std std-ref">TOSE_verify_hmac_final()</span></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>data</strong> – <strong>[in]</strong> Data to verify HMAC on </p></li>
 <li><p><strong>length</strong> – <strong>[in]</strong> Data length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_COND_OF_USE_NOT_SATISFIED: need to call VERIFY_HMAC_INIT first</p></li>
@@ -1600,13 +1624,13 @@ After calling <a class="reference internal" href="#group__mac_1ga3c301ec537c7d42
 <p>
 Data was previously sent by the sequence <a class="reference internal" href="#group__mac_1ga3c301ec537c7d42c2abe8a42d42e9bbc"><span class="std std-ref">TOSE_verify_hmac_init()</span></a>, <a class="reference internal" href="#group__mac_1gacb399ee77ec8eb475495fe0c4fbe7ce0"><span class="std std-ref">TOSE_verify_hmac_update()</span></a>, …, <a class="reference internal" href="#group__mac_1ga66238d80fdcd64ac834f6fb7a182b2e2"><span class="std std-ref">TOSE_verify_hmac_final()</span></a>. This command succeeds if the HMAC is correct for the given data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>hmac</strong> – <strong>[in]</strong> HMAC to verify</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_BAD_SIGNATURE: verification failed</p></li>
@@ -1629,16 +1653,16 @@ Data was previously sent by the sequence <a class="reference internal" href="#gr
 <p>
 Compute a 128-bit CMAC tag based on AES128 algorithm.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use for CMAC calculation, starting from 0 </p></li>
 <li><p><strong>data</strong> – <strong>[in]</strong> Data to compute CMAC on </p></li>
-<li><p><strong>data_length</strong> – <strong>[in]</strong> </p></li>
+<li><p><strong>data_length</strong> – <strong>[in]</strong> Length of the data which signature has to be verified </p></li>
 <li><p><strong>cmac_data</strong> – <strong>[out]</strong> Returned computed CMAC</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1655,21 +1679,21 @@ Compute a 128-bit CMAC tag based on AES128 algorithm.</p>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_verify_cmac">
-<span class="target" id="group__mac_1ga64b8b11a876bd0a95a323019e10dc7b5"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_verify_cmac</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_length</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmac_data</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_CMAC_SIZE" title="TO_CMAC_SIZE"><span class="n"><span class="pre">TO_CMAC_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_verify_cmac" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Verify CMAC. </p>
+<span class="target" id="group__mac_1gaafe2ffedc6e9279811d7e02f3f7051de"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_verify_cmac</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_length</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmac_data</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_CMAC_SIZE" title="TO_CMAC_SIZE"><span class="n"><span class="pre">TO_CMAC_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_verify_cmac" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Verify the CMAC signature of a given block of data. </p>
 <p>
 Verify if the CMAC tag is correct for the given data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the key to use to compute the CMAC tag, starting from 0 </p></li>
 <li><p><strong>data</strong> – <strong>[in]</strong> Data to verify CMAC on </p></li>
-<li><p><strong>data_length</strong> – <strong>[in]</strong> </p></li>
+<li><p><strong>data_length</strong> – <strong>[in]</strong> Length of the data which signature has to be verified </p></li>
 <li><p><strong>cmac_data</strong> – <strong>[in]</strong> expected CMAC</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_BAD_SIGNATURE: verification failed</p></li>
@@ -1685,9 +1709,9 @@ Verify if the CMAC tag is correct for the given data.</p>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="secure-messaging-capi">
-<span id="api-secmsg-capi"></span><h3>Secure messaging CAPI<a class="headerlink" href="#secure-messaging-capi" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="secure-messaging-capi">
+<span id="api-secmsg-capi"></span><h3>Secure messaging CAPI<a class="headerlink" href="#secure-messaging-capi" title="Permalink to this heading">¶</a></h3>
 <p>Secure messaging functions.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_secure_payload_init">
@@ -1697,7 +1721,7 @@ Verify if the CMAC tag is correct for the given data.</p>
 Initial vector is generated by the Secure Element and not included in the data length</p>
 <p>Initial vector length is also given by <a class="reference internal" href="defs.html#group__payloads_1ga6e57363655b82cf8667b9ee7b8af5ed3"><span class="std std-ref">TO_PAYLOAD_IV_SIZE()</span></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the keys to use for data encryption and MAC, starting from 0 </p></li>
@@ -1709,7 +1733,7 @@ Initial vector is generated by the Secure Element and not included in the data l
 <li><p><strong>iv_len</strong> – <strong>[out]</strong> Initial vector length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1730,7 +1754,7 @@ Initial vector is generated by the Secure Element and not included in the data l
 <span class="target" id="group__secmsg__capi_1gaaca0a127dacb791fd127d5c01211f8f3"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_secure_payload_update</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_len</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cryptogram</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_secure_payload_update" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Updates transform of a message into a secured payload. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>data</strong> – <strong>[in]</strong> Message part to be secured </p></li>
@@ -1738,7 +1762,7 @@ Initial vector is generated by the Secure Element and not included in the data l
 <li><p><strong>cryptogram</strong> – <strong>[out]</strong> Message cryptogram (same length)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1761,7 +1785,7 @@ Initial vector is generated by the Secure Element and not included in the data l
 <p>
 The MAC tag is calculated on clear data, including sequence counter. This function will add padding after MAC if clear data size is not aligned. Padding scheme is PKCS7 with extra padding length byte (TLS like).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>data</strong> – <strong>[in]</strong> Final message part to be secured </p></li>
@@ -1770,7 +1794,7 @@ The MAC tag is calculated on clear data, including sequence counter. This functi
 <li><p><strong>cryptogram_len</strong> – <strong>[out]</strong> Final message cryptogram length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1791,7 +1815,7 @@ The MAC tag is calculated on clear data, including sequence counter. This functi
 <span class="target" id="group__secmsg__capi_1ga3cabcc530d4e337ee5357178e8af3a41"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_unsecure_payload_init_cbc</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">key_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="defs.html#c.TO_enc_alg_t" title="TO_enc_alg_t"><span class="n"><span class="pre">TO_enc_alg_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">enc_alg</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="defs.html#c.TO_mac_alg_t" title="TO_mac_alg_t"><span class="n"><span class="pre">TO_mac_alg_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">mac_alg</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">cryptogram_len</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">sequence</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_SEQUENCE_SIZE" title="TO_SEQUENCE_SIZE"><span class="n"><span class="pre">TO_SEQUENCE_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">initial_vector</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_INITIALVECTOR_SIZE" title="TO_INITIALVECTOR_SIZE"><span class="n"><span class="pre">TO_INITIALVECTOR_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">last_block_iv</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_INITIALVECTOR_SIZE" title="TO_INITIALVECTOR_SIZE"><span class="n"><span class="pre">TO_INITIALVECTOR_SIZE</span></span></a><span class="p"><span class="pre">]</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">last_block</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="defs.html#c.TO_AES_BLOCK_SIZE" title="TO_AES_BLOCK_SIZE"><span class="n"><span class="pre">TO_AES_BLOCK_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_unsecure_payload_init_cbc" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Initializes to get back a message from a secured payload (CBC). </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the keys to use for data encryption and MAC, starting from 0 </p></li>
@@ -1804,7 +1828,7 @@ The MAC tag is calculated on clear data, including sequence counter. This functi
 <li><p><strong>last_block</strong> – <strong>[in]</strong> Last AES block</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1827,7 +1851,7 @@ The MAC tag is calculated on clear data, including sequence counter. This functi
 <p>
 Do not use this function directly, use <a class="reference internal" href="helper.html#group__helper__secmsg_1ga3c946ab1093d20b3c570b7946220a319"><span class="std std-ref">TOSE_helper_unsecure_payload()</span></a> instead.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>key_index</strong> – <strong>[in]</strong> Index of the keys to use for data encryption and MAC, starting from 0 </p></li>
@@ -1837,7 +1861,7 @@ Do not use this function directly, use <a class="reference internal" href="helpe
 <li><p><strong>sequence</strong> – <strong>[in]</strong> Sequence counter to avoid replay attacks</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1860,7 +1884,7 @@ Do not use this function directly, use <a class="reference internal" href="helpe
 <p>
 Do not use this function directly, use <a class="reference internal" href="helper.html#group__helper__secmsg_1ga3c946ab1093d20b3c570b7946220a319"><span class="std std-ref">TOSE_helper_unsecure_payload()</span></a> instead.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>cryptogram</strong> – <strong>[in]</strong> Message cryptogram </p></li>
@@ -1869,7 +1893,7 @@ Do not use this function directly, use <a class="reference internal" href="helpe
 <li><p><strong>data_len</strong> – <strong>[out]</strong> Message length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1892,12 +1916,12 @@ Do not use this function directly, use <a class="reference internal" href="helpe
 <p>
 Do not use this function directly, use <a class="reference internal" href="helper.html#group__helper__secmsg_1ga3c946ab1093d20b3c570b7946220a319"><span class="std std-ref">TOSE_helper_unsecure_payload()</span></a> instead.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1913,8 +1937,8 @@ Do not use this function directly, use <a class="reference internal" href="helpe
 </dl>
 </dd></dl>
 
-<div class="section" id="old-api">
-<span id="api-secmsg-old"></span><h4>Old API<a class="headerlink" href="#old-api" title="Permalink to this headline">¶</a></h4>
+<section id="old-api">
+<span id="api-secmsg-old"></span><h4>Old API<a class="headerlink" href="#old-api" title="Permalink to this heading">¶</a></h4>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version 4.10.0: </span>Use new <a href="#id1"><span class="problematic" id="id2">`Secure messaging`_</span></a>.</p>
 </div>
@@ -1927,7 +1951,7 @@ It is equivalent to call <a class="reference internal" href="#group__encryption_
 <p>Note: As padding is not handled by the the Secure Element, you must ensure that data length is a multiple of 16 and is not greater than maximum length value (512 bytes). Initial vector is generated by the Secure Element and not included in the data length</p>
 <p>This API is deprecated, use TOSE_secure_payload() instead.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>aes_key_index</strong> – <strong>[in]</strong> Index of the key to use for data encryption, starting from 0 </p></li>
@@ -1939,7 +1963,7 @@ It is equivalent to call <a class="reference internal" href="#group__encryption_
 <li><p><strong>hmac</strong> – <strong>[out]</strong> Message HMAC</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1962,7 +1986,7 @@ It is equivalent to call <a class="reference internal" href="#group__encryption_
 Data are decrypted only if the HMAC tag is valid.</p>
 <p>This API is deprecated, use TOSE_unsecure_payload() instead.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>aes_key_index</strong> – <strong>[in]</strong> Index of the key to use for data decryption, starting from 0 </p></li>
@@ -1974,7 +1998,7 @@ Data are decrypted only if the HMAC tag is valid.</p>
 <li><p><strong>data</strong> – <strong>[out]</strong> Decrypted data</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -1998,7 +2022,7 @@ It is equivalent to call <a class="reference internal" href="#group__encryption_
 <p>Note: As padding is not handled by the Secure Element, you must ensure that data length is a multiple of 16 and is not greater than maximum length value (512 bytes). Initial vector is generated by the Secure Element and not included in the data length</p>
 <p>This API is deprecated, use TOSE_secure_payload() instead.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>aes_key_index</strong> – <strong>[in]</strong> Index of the key to use for data encryption, starting from 0 </p></li>
@@ -2010,7 +2034,7 @@ It is equivalent to call <a class="reference internal" href="#group__encryption_
 <li><p><strong>cmac</strong> – <strong>[out]</strong> Message CMAC</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -2033,7 +2057,7 @@ It is equivalent to call <a class="reference internal" href="#group__encryption_
 Data are decrypted only if the CMAC tag is valid.</p>
 <p>This API is deprecated, use TOSE_unsecure_payload() instead.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>aes_key_index</strong> – <strong>[in]</strong> Index of the key to use for data decryption, starting from 0 </p></li>
@@ -2045,7 +2069,7 @@ Data are decrypted only if the CMAC tag is valid.</p>
 <li><p><strong>data</strong> – <strong>[out]</strong> Decrypted data</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid key index</p></li>
@@ -2060,10 +2084,10 @@ Data are decrypted only if the CMAC tag is valid.</p>
 </dl>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="tls">
-<h3>TLS<a class="headerlink" href="#tls" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="tls">
+<h3>TLS<a class="headerlink" href="#tls" title="Permalink to this heading">¶</a></h3>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_tls_reset">
 <span class="target" id="group__tlsoptim_1gad852566ace9f4c8aeafa32f612a5058a"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_tls_reset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_tls_reset" title="Permalink to this definition">¶</a><br /></dt>
@@ -2075,7 +2099,7 @@ Data are decrypted only if the CMAC tag is valid.</p>
 </p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 </ul>
@@ -2094,7 +2118,7 @@ Data are decrypted only if the CMAC tag is valid.</p>
 
 </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>mode</strong> – <strong>[in]</strong> TLS mode. Currently only <a class="reference internal" href="defs.html#group__tls__constants_1ggaba7204d9e3bf554431db84cb24e636d8adc046f232b6b1161aff3e83e59f43501"><span class="std std-ref">TO_TLS_MODE_TLS_1_2</span></a> and <a class="reference internal" href="defs.html#group__tls__constants_1ggaba7204d9e3bf554431db84cb24e636d8adbd770bffc4f90b830d516c35a23e95e"><span class="std std-ref">TO_TLS_MODE_DTLS_1_2</span></a> are supported. </p></li>
@@ -2110,7 +2134,7 @@ Data are decrypted only if the CMAC tag is valid.</p>
 <p>
 Permits to switch to TLS or DTLS, to select a cipher suite for the handshake and resets the current session (if the configuration has changed). </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>config_id</strong> – <strong>[in]</strong> TLS configuration ID (either <a class="reference internal" href="defs.html#group__tls__constants_1ggaab1f1a448e9d71ebb0139704e2e93ebfae7a0bfdfaf72718ac1526acddf376dbf"><span class="std std-ref">TO_TLS_CONFIG_ID_MODE</span></a> or <a class="reference internal" href="defs.html#group__tls__constants_1ggaab1f1a448e9d71ebb0139704e2e93ebfa1c5970796fb78aa920e0c3f2243ad316"><span class="std std-ref">TO_TLS_CONFIG_ID_CIPHER_SUITES</span></a>) </p></li>
@@ -2130,7 +2154,7 @@ Permits to switch to TLS or DTLS, to select a cipher suite for the handshake and
 <p>There are several session slots available which can be connected to different servers. Depending on your application you may have to switch between those session slots. </p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>session</strong> – <strong>[in]</strong> TLS session ID </p></li>
@@ -2146,7 +2170,7 @@ Permits to switch to TLS or DTLS, to select a cipher suite for the handshake and
 <p>
 Currently, the ID corresponding to the connection ID is still part of a draft standard (dec. 2021). Until the moment the RFC standard is published, this entry-point is used to provide this information. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>cid_ext_id</strong> – <strong>[in]</strong> Connection ID extension ID</p></li>
@@ -2162,7 +2186,7 @@ Currently, the ID corresponding to the connection ID is still part of a draft st
 <p>
 When a client first connects to a server, it is required to send the ClientHello as its first message. The client can also send a ClientHello in response to a HelloRequest or on its own initiative in order to renegotiate the security parameters in an existing connection. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>timestamp</strong> – <strong>[in]</strong> Timestamp (seconds since epoch) </p></li>
@@ -2180,7 +2204,7 @@ When a client first connects to a server, it is required to send the ClientHello
 <p>
 Return the TLS handshake payload of the standard TLS “ClientHello” message. This payload must be encapsulated in a TLS record. The length of the response can be different depending on the use case.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[inout]</strong> SE context </p></li>
 <li><p><strong>timestamp</strong> – <strong>[in]</strong> Timestamp (seconds since epoch) </p></li>
@@ -2190,7 +2214,7 @@ Return the TLS handshake payload of the standard TLS “ClientHello” message. 
 <li><p><strong>client_hello_len</strong> – <strong>[out]</strong> ClientHello payload length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return values</dt>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TORSP_SUCCESS</strong> – on success </p></li>
 <li><p><strong>TO_DEVICE_WRITE_ERROR</strong> – error writing data to Secure Element </p></li>
@@ -2210,7 +2234,7 @@ Return the TLS handshake payload of the standard TLS “ClientHello” message. 
 <p>
 Initialize retrieval of the TLS handshake payload of the standard TLS “ClientHello” message. This payload must be encapsulated in a TLS record.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[inout]</strong> SE context </p></li>
 <li><p><strong>timestamp</strong> – <strong>[in]</strong> Timestamp (seconds since epoch) </p></li>
@@ -2220,7 +2244,7 @@ Initialize retrieval of the TLS handshake payload of the standard TLS “ClientH
 <li><p><strong>final_flag</strong> – <strong>[out]</strong> signal the final chunk of ClientHello to be received with <a class="reference internal" href="#group__tlsoptim_1ga9426588ee6d66c36e5eb56442ca16d88"><span class="std std-ref">TOSE_tls_get_client_hello_final()</span></a></p></li>
 </ul>
 </dd>
-<dt class="field-even">Return values</dt>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TORSP_SUCCESS</strong> – on success </p></li>
 <li><p><strong>TO_DEVICE_WRITE_ERROR</strong> – error writing data to Secure Element </p></li>
@@ -2240,7 +2264,7 @@ Initialize retrieval of the TLS handshake payload of the standard TLS “ClientH
 <p>
 Return a part of the TLS handshake payload of the standard TLS “ClientHello” message. This payload must be encapsulated in a TLS record.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[inout]</strong> SE context </p></li>
 <li><p><strong>data</strong> – <strong>[out]</strong> ClientHello payload part </p></li>
@@ -2248,7 +2272,7 @@ Return a part of the TLS handshake payload of the standard TLS “ClientHello”
 <li><p><strong>final_flag</strong> – <strong>[out]</strong> signal the final chunk of ClientHello to be received with <a class="reference internal" href="#group__tlsoptim_1ga9426588ee6d66c36e5eb56442ca16d88"><span class="std std-ref">TOSE_tls_get_client_hello_final()</span></a></p></li>
 </ul>
 </dd>
-<dt class="field-even">Return values</dt>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TORSP_SUCCESS</strong> – on success </p></li>
 <li><p><strong>TO_DEVICE_WRITE_ERROR</strong> – error writing data to Secure Element </p></li>
@@ -2268,13 +2292,13 @@ Return a part of the TLS handshake payload of the standard TLS “ClientHello”
 <p>
 Return the last part of the TLS handshake payload of the standard TLS “ClientHello” message. This payload must be encapsulated in a TLS record.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[inout]</strong> SE context </p></li>
 <li><p><strong>data</strong> – <strong>[out]</strong> last ClientHello payload part</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return values</dt>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TORSP_SUCCESS</strong> – on success </p></li>
 <li><p><strong>TO_DEVICE_WRITE_ERROR</strong> – error writing data to Secure Element </p></li>
@@ -2298,7 +2322,7 @@ When the client sends its ClientHello message to the server, the server MAY resp
 <p>This message processing is only needed in the case of DTLS</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>hello_verify_request</strong> – <strong>[in]</strong> HelloVerifyRequest message </p></li>
@@ -2315,7 +2339,7 @@ When the client sends its ClientHello message to the server, the server MAY resp
 <p>
 The server will send this message in response to a ClientHello message when it was able to find an acceptable set of algorithms. If it cannot find such a match, it will respond with a handshake failure alert. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>server_hello</strong> – <strong>[in]</strong> ServertHello payload </p></li>
@@ -2332,13 +2356,13 @@ The server will send this message in response to a ClientHello message when it w
 <p>
 Initialize handling of the TLS handshake payload of the standard TLS “ServerHello” message received during TLS handshake.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[inout]</strong> SE context </p></li>
 <li><p><strong>server_hello_len</strong> – <strong>[in]</strong> ServerHello payload length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return values</dt>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TORSP_SUCCESS</strong> – on success </p></li>
 <li><p><strong>TO_DEVICE_WRITE_ERROR</strong> – error writing data to Secure Element </p></li>
@@ -2358,14 +2382,14 @@ Initialize handling of the TLS handshake payload of the standard TLS “ServerHe
 <p>
 Handle a part of the TLS handshake payload of the standard TLS “ServerHello” message received during TLS handshake.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[inout]</strong> SE context </p></li>
 <li><p><strong>data</strong> – <strong>[in]</strong> part of ServerHello payload </p></li>
 <li><p><strong>part_len</strong> – <strong>[in]</strong> part length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return values</dt>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TORSP_SUCCESS</strong> – on success </p></li>
 <li><p><strong>TO_DEVICE_WRITE_ERROR</strong> – error writing data to Secure Element </p></li>
@@ -2385,14 +2409,14 @@ Handle a part of the TLS handshake payload of the standard TLS “ServerHello”
 <p>
 Handle the last part of the TLS handshake payload of the standard TLS “ServerHello” message received during TLS handshake.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[inout]</strong> SE context </p></li>
 <li><p><strong>data</strong> – <strong>[in]</strong> last part of ServerHello payload </p></li>
 <li><p><strong>last_len</strong> – <strong>[in]</strong> last part len</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return values</dt>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TORSP_SUCCESS</strong> – on success </p></li>
 <li><p><strong>TO_DEVICE_WRITE_ERROR</strong> – error writing data to Secure Element </p></li>
@@ -2412,7 +2436,7 @@ Handle the last part of the TLS handshake payload of the standard TLS “ServerH
 <p>
 The server MUST send a Certificate message whenever the agreed- upon key exchange method uses certificates for authentication (this includes all key exchange methods defined in this document except DH_anon). This message will always immediately follow the ServerHello message. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>server_certificate</strong> – <strong>[in]</strong> Certificate payload </p></li>
@@ -2429,7 +2453,7 @@ The server MUST send a Certificate message whenever the agreed- upon key exchang
 <p>
 Handle TLS Server Certificate header from TLS handshake payload of the standard TLS “ServerCertificate” message. The goal of TOSE_tls_handle_server_certificate_ init(), udate() and final(), is to validate a certificate chain, and to store the public key of the first certificate. You must decapsulate it from TLS record prior to use this command. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>server_certificate_init</strong> – <strong>[in]</strong> Certificate payload header (handshake header<ul>
@@ -2449,7 +2473,7 @@ Handle TLS Server Certificate header from TLS handshake payload of the standard 
 <p>
 Handle TLS Server Certificate partial payload from TLS handshake payload of the standard TLS “ServerCertificate” message, and if possible, verify the signature and memories the key of the current certificate of the certificates chain. You must decapsulate it from TLS record prior to use this command. This command can be called several times. <a class="reference internal" href="#group__tlsoptim_1gac8cdbb17174c884e950a91299732f4f8"><span class="std std-ref">TOSE_tls_handle_server_certificate_init()</span></a> must be called prior to this call. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>server_certificate_update</strong> – <strong>[in]</strong> Certificate partial payload </p></li>
@@ -2464,7 +2488,7 @@ Handle TLS Server Certificate partial payload from TLS handshake payload of the 
 <span class="target" id="group__tlsoptim_1gae4d57f25080bc6ae2e2f686d6343d222"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_tls_handle_server_certificate_final</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_tls_handle_server_certificate_final" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Finishes the TLS Server Certificate handling (server) </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context * Finish Server Certificate TLS handshake payload handling by verifying signature of last certificate and store the public key of the first certificate of the chain. You must decapsulate it from TLS record prior to use this command. Functions <a class="reference internal" href="#group__tlsoptim_1gac8cdbb17174c884e950a91299732f4f8"><span class="std std-ref">TOSE_tls_handle_server_certificate_init()</span></a>, and <a class="reference internal" href="#group__tlsoptim_1gad6b239c4c280d6d6c4d0d965b602856c"><span class="std std-ref">TOSE_tls_handle_server_certificate_update()</span></a> must be called prior to this call. </p></li>
 </ul>
@@ -2479,7 +2503,7 @@ Handle TLS Server Certificate partial payload from TLS handshake payload of the 
 <p>
 Handle TLS handshake payload of the standard TLS “ServerKeyExchange” message. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>server_key_exchange</strong> – <strong>[in]</strong> ServerKeyExchange payload </p></li>
@@ -2494,7 +2518,7 @@ Handle TLS handshake payload of the standard TLS “ServerKeyExchange” message
 <span class="target" id="group__tlsoptim_1ga47b9bca08e452a3feff58e87d5ae282f"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_tls_handle_server_key_exchange_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">server_key_exchange_init</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">server_key_exchange_init_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_tls_handle_server_key_exchange_init" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Handles the TLS Server ServerKeyExchange (server) header. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>server_key_exchange_init</strong> – <strong>[in]</strong> ServerKeyExchange payload header (handshake header<ul>
@@ -2512,7 +2536,7 @@ Handle TLS handshake payload of the standard TLS “ServerKeyExchange” message
 <span class="target" id="group__tlsoptim_1ga1244e09eac8c360768e90c78632c4138"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_tls_handle_server_key_exchange_update</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">server_key_exchange_update</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">server_key_exchange_update_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_tls_handle_server_key_exchange_update" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Handles the TLS Server ServerKeyExchange partial payload (server) </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>server_key_exchange_update</strong> – <strong>[in]</strong> ServerKeyExchange partial payload </p></li>
@@ -2527,7 +2551,7 @@ Handle TLS handshake payload of the standard TLS “ServerKeyExchange” message
 <span class="target" id="group__tlsoptim_1gaae33a835569db160595f487638b39d4b"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_tls_handle_server_key_exchange_final</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_tls_handle_server_key_exchange_final" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Finishes TLS Server ServerKeyExchange handling (server) </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 </ul>
@@ -2542,7 +2566,7 @@ Handle TLS handshake payload of the standard TLS “ServerKeyExchange” message
 <p>
 The server MUST send a Certificate message whenever the agreed- upon key exchange method uses certificates for authentication (this includes all key exchange methods defined in this document except DH_anon). This message will always immediately follow the ServerHello message. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_request</strong> – <strong>[in]</strong> CertificateRequest payload </p></li>
@@ -2557,7 +2581,7 @@ The server MUST send a Certificate message whenever the agreed- upon key exchang
 <span class="target" id="group__tlsoptim_1ga479d72db5f155e424992dbf3ca95a2a3"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_tls_handle_server_hello_done</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">server_hello_done</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">server_hello_done_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_tls_handle_server_hello_done" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Handles the DTLS ServerHelloDone (server) message. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>server_hello_done</strong> – <strong>[in]</strong> ServerHelloDone payload </p></li>
@@ -2574,7 +2598,7 @@ The server MUST send a Certificate message whenever the agreed- upon key exchang
 <p>
 This is the first message the client can send after receiving a ServerHelloDone message. This message is only sent if the server requests a certificate. If no suitable certificate is available, the client MUST send a certificate message containing no certificates. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate</strong> – <strong>[out]</strong> Certificate payload </p></li>
@@ -2591,7 +2615,7 @@ This is the first message the client can send after receiving a ServerHelloDone 
 <p>
 This function is used with <a class="reference internal" href="#group__tlsoptim_1gae5ed90b04b1e02c36fff4197dcedb321"><span class="std std-ref">TOSE_tls_get_certificate_update()</span></a> and <a class="reference internal" href="#group__tlsoptim_1gaf4be265597410e2989c26b705be8d912"><span class="std std-ref">TOSE_tls_get_certificate_final()</span></a> to get TLS Certificate of more than 512 bytes without limitation. This first command initiates the process. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate</strong> – <strong>[out]</strong> Certificate payload </p></li>
@@ -2608,7 +2632,7 @@ This function is used with <a class="reference internal" href="#group__tlsoptim_
 <p>
 This command can be called several times. Function <a class="reference internal" href="#group__tlsoptim_1gae8728cab4fdc4b20e569479ce0297c38"><span class="std std-ref">TOSE_tls_get_certificate_init()</span></a> must be called prior to this command. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate</strong> – <strong>[out]</strong> Certificate payload </p></li>
@@ -2623,7 +2647,7 @@ This command can be called several times. Function <a class="reference internal"
 <span class="target" id="group__tlsoptim_1gaf4be265597410e2989c26b705be8d912"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_tls_get_certificate_final</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_tls_get_certificate_final" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Gets the TLS Certificate finalize (client) </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 </ul>
@@ -2638,7 +2662,7 @@ This command can be called several times. Function <a class="reference internal"
 <p>
 Get TLS handshake payload of the standard TLS message “ClientKeyExchange”, containing internal Secure Element’s ephemeral public key if using ECDHE cipher suite. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>client_key_exchange</strong> – <strong>[out]</strong> ClientKeyExchange payload </p></li>
@@ -2655,7 +2679,7 @@ Get TLS handshake payload of the standard TLS message “ClientKeyExchange”, c
 <p>
 This message is used to provide explicit verification of a client certificate. This message is only sent following a client certificate that has signing capability (i.e., all certificates except those containing fixed Diffie-Hellman parameters). When sent, it MUST immediately follow the client key exchange message. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_verify</strong> – <strong>[out]</strong> CertificateVerify payload </p></li>
@@ -2672,7 +2696,7 @@ This message is used to provide explicit verification of a client certificate. T
 <p>
 The ChangeCipherSpec message is sent by both the client and the server to notify the receiving party that subsequent records will be protected under the newly negotiated CipherSpec and keys. This message is technically not part of the handshake. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>change_cipher_spec</strong> – <strong>[out]</strong> ChangeCipherSpec payload </p></li>
@@ -2689,7 +2713,7 @@ The ChangeCipherSpec message is sent by both the client and the server to notify
 <p>
 The Finished message is the first one protected with the just negotiated algorithms, keys, and secrets. Recipients of Finished messages MUST verify that the contents are correct. Once a side has sent its Finished message and received and validated the Finished message from its peer, it may begin to send and receive application data over the connection. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>finished</strong> – <strong>[out]</strong> Finish payload </p></li>
@@ -2706,7 +2730,7 @@ The Finished message is the first one protected with the just negotiated algorit
 <p>
 The change cipher spec protocol exists to signal transitions in ciphering strategies. The protocol consists of a single message, which is encrypted and compressed under the current (not the pending) connection state. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>change_cipher_spec</strong> – <strong>[in]</strong> ChangeCipherSpec payload </p></li>
@@ -2723,7 +2747,7 @@ The change cipher spec protocol exists to signal transitions in ciphering strate
 <p>
 The Finished message is the first one protected with the just negotiated algorithms, keys, and secrets. Recipients of Finished messages MUST verify that the contents are correct. Once a side has sent its Finished message and received and validated the Finished message from its peer, it may begin to send and receive application data over the connection. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>finished</strong> – <strong>[in]</strong> Finished payload </p></li>
@@ -2738,13 +2762,13 @@ The Finished message is the first one protected with the just negotiated algorit
 <span class="target" id="group__tlsoptim_1gac4847b3866c8300d0405d328ebc50bc9"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_tls_get_certificate_slot</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">slot</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_tls_get_certificate_slot" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Generates the TLS certificate slot used during handshake (client) message. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>slot</strong> – <strong>[out]</strong> Certificate slot </p></li>
 </ul>
 </dd>
-<dt class="field-even">Post</dt>
+<dt class="field-even">Post<span class="colon">:</span></dt>
 <dd class="field-even"><p>Handshake must have been proceeded before calling this function. </p>
 </dd>
 </dl>
@@ -2755,7 +2779,7 @@ The Finished message is the first one protected with the just negotiated algorit
 <span class="target" id="group__tlsoptim_1ga6a997ad9f5faa0ac9f5e0fcf10ba2403"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_tls_secure_payload</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">header</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">header_len</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_len</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">payload</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">payload_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_tls_secure_payload" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Secures a (client) message with TLS. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>header</strong> – <strong>[in]</strong> TLS header </p></li>
@@ -2766,7 +2790,7 @@ The Finished message is the first one protected with the just negotiated algorit
 <li><p><strong>payload_len</strong> – <strong>[out]</strong> Secured message (without header) length </p></li>
 </ul>
 </dd>
-<dt class="field-even">Post</dt>
+<dt class="field-even">Post<span class="colon">:</span></dt>
 <dd class="field-even"><p>Handshake must have been proceeded before calling this function. </p>
 </dd>
 </dl>
@@ -2779,7 +2803,7 @@ The Finished message is the first one protected with the just negotiated algorit
 <p>
 Decrypt data received from server through TLS. Take a TLS record as input with encrypted content and return a TLS record with clear content. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>header</strong> – <strong>[in]</strong> TLS header </p></li>
@@ -2790,7 +2814,7 @@ Decrypt data received from server through TLS. Take a TLS record as input with e
 <li><p><strong>data_len</strong> – <strong>[out]</strong> TLS data length </p></li>
 </ul>
 </dd>
-<dt class="field-even">Post</dt>
+<dt class="field-even">Post<span class="colon">:</span></dt>
 <dd class="field-even"><p>Handshake must have been proceeded before calling this function.</p>
 </dd>
 </dl>
@@ -2803,7 +2827,7 @@ Decrypt data received from server through TLS. Take a TLS record as input with e
 <p>
 This is a TO-specific message, used to handle the mediator certificate. This message is not part of any standard (TLS or DTLS). </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>mediator_certificate</strong> – <strong>[in]</strong> MediatorCertificate payload </p></li>
@@ -2813,9 +2837,9 @@ This is a TO-specific message, used to handle the mediator certificate. This mes
 </dl>
 </dd></dl>
 
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
           </div>

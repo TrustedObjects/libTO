@@ -19,17 +19,7 @@
 #ifndef _TO_H_
 #define _TO_H_
 
-#ifdef TO_USER_CONFIG
-#include "TO_user_config.h"
-#endif
-
 #include "TOSE_cfg.h"
-
-#if defined(TOSE_DRIVER_SSE) && !defined(TOSE_DRIVER_HSE)
-#define TO_DISABLE_CAPI
-#endif
-
-#include "TO_cfg.h"
 #include "TO_endian.h"
 #include "TO_stdint.h"
 #include "TO_defs.h"
@@ -58,7 +48,9 @@
 #include "TOSE_statuspio.h"
 #include "TOSE_system.h"
 #include "TOSE_tls.h"
+#ifndef TO_DISABLE_LOADER
 #include "TOSE_loader.h"
+#endif
 
 #if defined(TOSE_DRIVER_HSE)
 #include "TODRV_HSE.h"
@@ -67,9 +59,9 @@
 #if defined(TOSE_DRIVER_SSE)
 #include "TODRV_SSE.h"
 #endif
-#if defined(TOSE_DRIVER_HSE)
+#if defined(TOSE_DRIVER_HSE) && !defined (TODRV_HSE_DRIVER_DISABLE)
 #define DEFAULT_CTX (TODRV_HSE_get_ctx())
-#elif defined(TOSE_DRIVER_SSE)
+#elif defined(TOSE_DRIVER_SSE) && !defined (TODRV_SSE_DRIVER_DISABLE)
 #define DEFAULT_CTX (TODRV_SSE_get_ctx())
 #else
 #error "No default driver defined"

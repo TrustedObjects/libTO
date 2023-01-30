@@ -18,16 +18,6 @@
 #ifndef _TOSE_SYSTEM_H_
 #define _TOSE_SYSTEM_H_
 
-#ifndef TOSE_SYSTEM_API
-#ifdef __linux__
-#define TOSE_SYSTEM_API
-#elif _WIN32
-#define TOSE_SYSTEM_API __declspec(dllexport)
-#else
-#define TOSE_SYSTEM_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -56,7 +46,7 @@ extern "C" {
  * - TO_ERROR: generic error
  * @endcond
  */
-extern TOSE_SYSTEM_API TO_ret_t TOSE_get_serial_number(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_serial_number(TOSE_ctx_t *ctx,
 		uint8_t serial_number[TO_SN_SIZE]);
 
 /**
@@ -74,7 +64,7 @@ extern TOSE_SYSTEM_API TO_ret_t TOSE_get_serial_number(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-extern TOSE_SYSTEM_API TO_ret_t TOSE_get_hardware_serial_number(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_hardware_serial_number(TOSE_ctx_t *ctx,
 		uint8_t hardware_serial_number[TO_HW_SN_SIZE]);
 
 /**
@@ -95,7 +85,7 @@ extern TOSE_SYSTEM_API TO_ret_t TOSE_get_hardware_serial_number(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-extern TOSE_SYSTEM_API TO_ret_t TOSE_get_product_number(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_product_number(TOSE_ctx_t *ctx,
 		uint8_t product_number[TO_PN_SIZE]);
 
 /**
@@ -117,7 +107,7 @@ extern TOSE_SYSTEM_API TO_ret_t TOSE_get_product_number(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-extern TOSE_SYSTEM_API TO_ret_t TOSE_get_hardware_version(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_hardware_version(TOSE_ctx_t *ctx,
 		uint8_t hardware_version[TO_HW_VERSION_SIZE]);
 
 /**
@@ -137,7 +127,7 @@ extern TOSE_SYSTEM_API TO_ret_t TOSE_get_hardware_version(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-extern TOSE_SYSTEM_API TO_ret_t TOSE_get_software_version(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_software_version(TOSE_ctx_t *ctx,
 		uint8_t* major, uint8_t* minor, uint8_t* revision);
 
 /**
@@ -158,7 +148,7 @@ extern TOSE_SYSTEM_API TO_ret_t TOSE_get_software_version(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-extern TOSE_SYSTEM_API TO_ret_t TOSE_get_product_id(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_product_id(TOSE_ctx_t *ctx,
 		uint8_t product_id[TO_PRODUCT_ID_SIZE]);
 
 /**
@@ -180,9 +170,30 @@ extern TOSE_SYSTEM_API TO_ret_t TOSE_get_product_id(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-extern TOSE_SYSTEM_API TO_ret_t TOSE_get_random(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_random(TOSE_ctx_t *ctx,
 		const uint16_t random_length,
 		uint8_t* random);
+
+/**
+ * @brief Returns the dummy data
+ * @param[in] ctx Pointer to the SE context
+ * @param[in] write_data Indicates whether we have to write (1) it or only read (0) it.
+ * @param[out] dummy_data Pointer to the data to be read/written
+ *
+ * @cond libTO
+ * @return
+ * - TORSP_SUCCESS on success
+ * - TORSP_NOT_AVAILABLE: random length out of range
+ * - TO_DEVICE_WRITE_ERROR: error writing data to Secure Element
+ * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
+ * - TO_INVALID_RESPONSE_LENGTH: unexpected response length from device
+ * - TO_MEMORY_ERROR: internal I/O buffer overflow
+ * - TO_ERROR: generic error
+ * @endcond
+ */
+extern TO_ret_t TOSE_access_dummy_data(TOSE_ctx_t *ctx,
+		const uint8_t write_data,
+		uint32_t* dummy_data);
 
 /** @} */
 

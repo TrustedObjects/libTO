@@ -22,7 +22,7 @@
 
 #include "TOP_cfg.h"
 #include "TOP_info.h"
-#include "TOP_SecureStorage.h"
+#include "TOP_technical_info.h"
 #include "TOP_storage.h"
 
 /** @addtogroup log_defs
@@ -53,7 +53,7 @@ typedef struct TOP_ext_ctx_s {
 	TO_log_ctx_t		*log_ctx;							///< Logging context
 	void			*data;								///< TO-Protect RAM workspace
 	uint8_t			internal[TOP_INTERNAL_CTX_SIZE] __attribute__((aligned));	///< TO-Protect internal context
-	TOP_secure_storage_t	*secure_storage;						///< Secure storage contexts
+	TOP_secure_data_ctx_t   *secure_storage;							///< Storage context
 } TOP_ext_ctx_t;
 
 /**

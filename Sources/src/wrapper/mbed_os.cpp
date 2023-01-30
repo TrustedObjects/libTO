@@ -13,6 +13,9 @@
  * @brief I2C wrapper for MBED
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #include "TO.h"
 #include "mbed.h"
 
@@ -194,3 +197,6 @@ TO_lib_ret_t TO_data_last_command_duration(unsigned int *duration)
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
+

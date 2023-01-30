@@ -15,6 +15,9 @@
  * @brief Hardware Secure Element loader APIs
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_LOADER_H_
 #define _TODRV_HSE_LOADER_H_
 
@@ -68,3 +71,6 @@ TODRV_HSE_LOADER_API TO_ret_t TODRV_HSE_data_migration(TODRV_HSE_ctx_t *ctx);
 #endif
 
 #endif /* _TODRV_HSE_LOADER_H_ */
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
+

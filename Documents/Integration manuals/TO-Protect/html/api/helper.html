@@ -1,17 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Helper API &#8212; libTO 6.1.2 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Helper API &#8212; libTO 6.3.9 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/custom.js"></script>
     <script src="../_static/custom.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -38,7 +41,7 @@
 
 
 
-<p class="blurb">release 6.1.2<br />doc</p>
+<p class="blurb">release 6.3.9<br />doc</p>
 
 
 
@@ -55,7 +58,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
@@ -79,19 +82,19 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="helper-api">
-<span id="api-helper"></span><h1>Helper API<a class="headerlink" href="#helper-api" title="Permalink to this headline">¶</a></h1>
+  <section id="helper-api">
+<span id="api-helper"></span><h1>Helper API<a class="headerlink" href="#helper-api" title="Permalink to this heading">¶</a></h1>
 <img alt="location into library structure" class="align-right" src="../_images/lib_part_helper.png" />
 <p>Helper APIs are high level APIs designed to make integration easier.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TO_helper.h&quot;</span><span class="cp"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TO_helper.h&quot;</span>
 </pre></div>
 </div>
-<div class="section" id="tls-handshake">
-<span id="api-tls-helper"></span><h2>TLS handshake<a class="headerlink" href="#tls-handshake" title="Permalink to this headline">¶</a></h2>
+<section id="tls-handshake">
+<span id="api-tls-helper"></span><h2>TLS handshake<a class="headerlink" href="#tls-handshake" title="Permalink to this heading">¶</a></h2>
 <p>TLS Helper is a set of functions making TLS handshake easy to integrate.</p>
 <p>It only requires to provide 2 callbacks to physically send and receive data.</p>
-<div class="section" id="tls-callback-functions-to-define">
-<h3>TLS callback functions to define<a class="headerlink" href="#tls-callback-functions-to-define" title="Permalink to this headline">¶</a></h3>
+<section id="tls-callback-functions-to-define">
+<h3>TLS callback functions to define<a class="headerlink" href="#tls-callback-functions-to-define" title="Permalink to this heading">¶</a></h3>
 <p>These callbacks need to be implemented and passed to TLS helper APIs to be able
 to send / receive data to / from the server.</p>
 <dl class="c type">
@@ -101,16 +104,16 @@ to send / receive data to / from the server.</p>
 <p>
 This function is used by “TOSE_helper_tls_handshake” to send data on the network.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Param priv_ctx</dt>
+<dt class="field-odd">Param priv_ctx<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[in]</strong> Opaque context given to “TOSE_helper_tls_handshake” </p>
 </dd>
-<dt class="field-even">Param data</dt>
+<dt class="field-even">Param data<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[in]</strong> Data to send </p>
 </dd>
-<dt class="field-odd">Param len</dt>
+<dt class="field-odd">Param len<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[in]</strong> Length of data</p>
 </dd>
-<dt class="field-even">Return</dt>
+<dt class="field-even">Return<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if data has been sent successfully, else TO_ERROR </p>
 </dd>
 </dl>
@@ -124,34 +127,34 @@ This function is used by “TOSE_helper_tls_handshake” to send data on the net
 This function is used by “TOSE_helper_tls_handshake” to receive data from the network.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>#TO_AGAIN may be returned for example when this callback is implemented with POSIX’ recv(), and recv() returns #EINTR </p>
+<p>TO_AGAIN may be returned for example when this callback is implemented with POSIX’ recv(), and recv() returns #EINTR </p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Param priv_ctx</dt>
+<dt class="field-odd">Param priv_ctx<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[in]</strong> Opaque context given to “TOSE_helper_tls_handshake” </p>
 </dd>
-<dt class="field-even">Param data</dt>
+<dt class="field-even">Param data<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[in]</strong> Data output </p>
 </dd>
-<dt class="field-odd">Param len</dt>
+<dt class="field-odd">Param len<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[in]</strong> Length of data to read </p>
 </dd>
-<dt class="field-even">Param read_len</dt>
+<dt class="field-even">Param read_len<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[out]</strong> Length of data read </p>
 </dd>
-<dt class="field-odd">Param timeout</dt>
+<dt class="field-odd">Param timeout<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[in]</strong> Receive timeout in milliseconds (-1 for no timeout)</p>
 </dd>
-<dt class="field-even">Retval TO_OK</dt>
+<dt class="field-even">Retval TO_OK<span class="colon">:</span></dt>
 <dd class="field-even"><p>if some data has been received successfully, read_len is updated and &gt;0 </p>
 </dd>
-<dt class="field-odd">Retval TO_TIMEOUT</dt>
+<dt class="field-odd">Retval TO_TIMEOUT<span class="colon">:</span></dt>
 <dd class="field-odd"><p>timed out elapsed before any data was available </p>
 </dd>
-<dt class="field-even">Retval TO_AGAIN</dt>
+<dt class="field-even">Retval TO_AGAIN<span class="colon">:</span></dt>
 <dd class="field-even"><p>the function has been interrupted before receiving any data </p>
 </dd>
-<dt class="field-odd">Retval TO_ERROR</dt>
+<dt class="field-odd">Retval TO_ERROR<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Other error</p>
 </dd>
 </dl>
@@ -166,28 +169,28 @@ This function is used by “TOSE_helper_tls_handshake” to receive data from th
 <p>The in parameter isn’t const because the callback can reuse it to unsecure in place provided it doesn’t write above in_length. For example if it uses hardware decryption with constraints on memory regions used by the DMA. </p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Param ctx</dt>
+<dt class="field-odd">Param ctx<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[inout]</strong> cipher context </p>
 </dd>
-<dt class="field-even">Param header_length</dt>
+<dt class="field-even">Param header_length<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[in]</strong> length of the record’s header </p>
 </dd>
-<dt class="field-odd">Param in</dt>
+<dt class="field-odd">Param in<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[in]</strong> input buffer containing the entire protected record (e.g. with the header) </p>
 </dd>
-<dt class="field-even">Param in_length</dt>
+<dt class="field-even">Param in_length<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[in]</strong> length of the protected record in the input buffer </p>
 </dd>
-<dt class="field-odd">Param out</dt>
+<dt class="field-odd">Param out<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[out]</strong> buffer with the plain text content of the record (e.g. without the header) </p>
 </dd>
-<dt class="field-even">Param out_length</dt>
+<dt class="field-even">Param out_length<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[out]</strong> length of the plain text content</p>
 </dd>
-<dt class="field-odd">Retval TO_OK</dt>
+<dt class="field-odd">Retval TO_OK<span class="colon">:</span></dt>
 <dd class="field-odd"><p>if the record is authenticated and decrypted </p>
 </dd>
-<dt class="field-even">Retval TO_ERROR</dt>
+<dt class="field-even">Retval TO_ERROR<span class="colon">:</span></dt>
 <dd class="field-even"><p>Otherwise</p>
 </dd>
 </dl>
@@ -202,28 +205,28 @@ This function is used by “TOSE_helper_tls_handshake” to receive data from th
 <p>input and output buffers provided by the caller may overlap with a gap of at least 1 AES block (*out + hdr_length + AES_BLOCK_LEN &lt;= in). </p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Param ctx</dt>
+<dt class="field-odd">Param ctx<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[inout]</strong> cipher context </p>
 </dd>
-<dt class="field-even">Param hdr</dt>
+<dt class="field-even">Param hdr<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[in]</strong> plain text record header buffer </p>
 </dd>
-<dt class="field-odd">Param hdr_length</dt>
+<dt class="field-odd">Param hdr_length<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[in]</strong> plain text record header length </p>
 </dd>
-<dt class="field-even">Param in</dt>
+<dt class="field-even">Param in<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[in]</strong> input buffer with the plain text record’s content data (e.g. withot header) </p>
 </dd>
-<dt class="field-odd">Param in_length</dt>
+<dt class="field-odd">Param in_length<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[in]</strong> length of the plain text record’s content data </p>
 </dd>
-<dt class="field-even">Param out</dt>
+<dt class="field-even">Param out<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[inout]</strong> output buffer with the ciphered content of the protected record</p>
 </dd>
-<dt class="field-odd">Retval TO_OK</dt>
+<dt class="field-odd">Retval TO_OK<span class="colon">:</span></dt>
 <dd class="field-odd"><p>if the record cannot be encrypted </p>
 </dd>
-<dt class="field-even">Retval TO_ERROR</dt>
+<dt class="field-even">Retval TO_ERROR<span class="colon">:</span></dt>
 <dd class="field-even"><p>Otherwise</p>
 </dd>
 </dl>
@@ -238,31 +241,31 @@ This function is used by “TOSE_helper_tls_handshake” to receive data from th
 <p>This callback is called during the handshake after the cipher suite is negotiated with the server and before extracting the derived key from the Secure Element.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Param ctx</dt>
+<dt class="field-odd">Param ctx<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[inout]</strong> cipher context </p>
 </dd>
-<dt class="field-even">Param cipher_suite</dt>
+<dt class="field-even">Param cipher_suite<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[in]</strong> the negociated cipher_suite identifier (as specified in TLS RFCs) </p>
 </dd>
-<dt class="field-odd">Param key_block</dt>
+<dt class="field-odd">Param key_block<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[out]</strong> pointer on the key block where key derivation from master secret is stored </p>
 </dd>
-<dt class="field-even">Param key_block_length</dt>
+<dt class="field-even">Param key_block_length<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[out]</strong> length of the key block, depends upon the negociated cipher suite </p>
 </dd>
-<dt class="field-odd">Param cipher_overhead_length</dt>
+<dt class="field-odd">Param cipher_overhead_length<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[inout]</strong> the maximum difference of length between the plain text content and the ciphered text content. The caller provides its own value if possible, the callee can lower it to 0 if it provides its own buffer to store protected records. </p>
 </dd>
-<dt class="field-even">Param unsecure_record</dt>
+<dt class="field-even">Param unsecure_record<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>[out]</strong> callback used to authenticate and decrypt incoming records </p>
 </dd>
-<dt class="field-odd">Param secure_record</dt>
+<dt class="field-odd">Param secure_record<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>[out]</strong> callback used to encrypt data to the outcoming records</p>
 </dd>
-<dt class="field-even">Retval TO_OK</dt>
+<dt class="field-even">Retval TO_OK<span class="colon">:</span></dt>
 <dd class="field-even"><p>if setup completed correctly </p>
 </dd>
-<dt class="field-odd">Retval TO_ERROR</dt>
+<dt class="field-odd">Retval TO_ERROR<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Otherwise </p>
 </dd>
 </dl>
@@ -274,9 +277,9 @@ This function is used by “TOSE_helper_tls_handshake” to receive data from th
 <dd><p>Opaque TLS helper context </p>
 </dd></dl>
 
-</div>
-<div class="section" id="handshake-api">
-<h3>Handshake API<a class="headerlink" href="#handshake-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="handshake-api">
+<h3>Handshake API<a class="headerlink" href="#handshake-api" title="Permalink to this heading">¶</a></h3>
 <p>Calling one function will do all the steps of the TLS handshake.</p>
 <dl class="c var">
 <dt class="sig sig-object c" id="c.default_cipher_ctx">
@@ -298,7 +301,7 @@ This function is used by “TOSE_helper_tls_handshake” to receive data from th
 This function initialize TLS handshake. It configures the Secure Element and initialize static envrionment.</p>
 <p>Each initialized session must be cleaned with <a class="reference internal" href="#group__helper__tls__handshake_1gaa7967d6bef25fdd3c71005ef7ca5b40d"><span class="std std-ref">TOSE_helper_tls_cleanup()</span></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context assigned </p></li>
@@ -308,7 +311,7 @@ This function initialize TLS handshake. It configures the Secure Element and ini
 <li><p><strong>receive_func</strong> – <strong>[in]</strong> Function to receive from network</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if initialization succeed, else TO_ERROR </p>
 </dd>
 </dl>
@@ -321,12 +324,12 @@ This function initialize TLS handshake. It configures the Secure Element and ini
 <p>
 This function closes TLS handshake by sending a close notify alert to the TLS server. Given context must not be used anymore. In TCP, the socket used by this session might not be usable anymore due to close notify alert.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if close succeed, else TO_ERROR </p>
 </dd>
 </dl>
@@ -339,12 +342,12 @@ This function closes TLS handshake by sending a close notify alert to the TLS se
 <p>
 It is needed to call this function if TCP socket closed for any reason.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if finalize succeed, else TO_ERROR </p>
 </dd>
 </dl>
@@ -357,12 +360,12 @@ It is needed to call this function if TCP socket closed for any reason.</p>
 <p>
 This function closes and finalizes TLS handshake and session using TOSE_helper_tls_close and TOSE_helper_tls_fini.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if cleanup succeed, else TO_ERROR </p>
 </dd>
 </dl>
@@ -373,14 +376,14 @@ This function closes and finalizes TLS handshake and session using TOSE_helper_t
 <span class="target" id="group__helper__tls__handshake_1gab147ba9523f98dc407830dab72e2c80f"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_set_retransmission_timeout</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">min_timeout</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">max_timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_set_retransmission_timeout" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set DTLS retransmission timeout min/max values. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
 <li><p><strong>min_timeout</strong> – <strong>[in]</strong> Minimal (initial) retransmission timeout, in milliseconds </p></li>
 <li><p><strong>max_timeout</strong> – <strong>[in]</strong> Maximal retransmission timeout, in milliseconds</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if cleanup succeed, else TO_ERROR </p>
 </dd>
 </dl>
@@ -393,13 +396,13 @@ This function closes and finalizes TLS handshake and session using TOSE_helper_t
 <p>
 Retransmission counter is reset in case of successful receive.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
 <li><p><strong>max_retransmissions</strong> – <strong>[in]</strong> Maximal retransmissions count</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if cleanup succeed, else TO_ERROR </p>
 </dd>
 </dl>
@@ -410,13 +413,13 @@ Retransmission counter is reset in case of successful receive.</p>
 <span class="target" id="group__helper__tls__handshake_1ga715acc9b89625bb123defc464ef11532"></span><a class="reference internal" href="defs.html#c.TO_lib_ret_t" title="TO_lib_ret_t"><span class="n"><span class="pre">TO_lib_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_helper_tls_set_fragment_max_size</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.TOSE_helper_tls_ctx_t" title="TOSE_helper_tls_ctx_t"><span class="n"><span class="pre">TOSE_helper_tls_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tls_ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">max_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_helper_tls_set_fragment_max_size" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set DTLS fragment maximum size. </p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
 <li><p><strong>max_size</strong> – <strong>[in]</strong> Maximum fragment size in bytes (record &amp; handshake headers excluded)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if cleanup succeed, else TO_ERROR </p>
 </dd>
 </dl>
@@ -429,14 +432,14 @@ Retransmission counter is reset in case of successful receive.</p>
 <p>
 cipher_suites values must be values defined in helper header (TO_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, etc)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
 <li><p><strong>cipher_suites</strong> – <strong>[in]</strong> Array of cipher suites (array of 16-bits integer values. See TO_tls_cipher_suite_e.) </p></li>
 <li><p><strong>cipher_suites_cnt</strong> – <strong>[in]</strong> Cipher suites count</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK in case of success, else TO_ERROR </p>
 </dd>
 </dl>
@@ -451,13 +454,13 @@ cipher_suites values must be values defined in helper header (TO_TLS_ECDHE_RSA_W
 <p>updating the mode is persistent across reboot.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
 <li><p><strong>mode</strong> – <strong>[in]</strong> configuration mode (see TO_tls_mode_e)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK in case of success, else TO_ERROR </p>
 </dd>
 </dl>
@@ -472,13 +475,13 @@ cipher_suites values must be values defined in helper header (TO_TLS_ECDHE_RSA_W
 <p>updating the certificate slot is persistent across reboot.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
 <li><p><strong>mode</strong> – <strong>[in]</strong> client certificate mode</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK in case of success, else TO_ERROR </p>
 </dd>
 </dl>
@@ -494,13 +497,13 @@ cipher_suites values must be values defined in helper header (TO_TLS_ECDHE_RSA_W
 <p>server_name may be NULL or empty, in that case the TLS context is configured to not use the SNI extension.</p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[inout]</strong> context of the TLS session </p></li>
 <li><p><strong>server_name</strong> – <strong>[in]</strong> a string with the server’s domain name</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return values</dt>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TO_OK</strong> – the server name is configured inside the TLS context </p></li>
 <li><p><strong>TO_ERROR</strong> – the server name configuration failed </p></li>
@@ -556,14 +559,14 @@ cipher_suites values must be values defined in helper header (TO_TLS_ECDHE_RSA_W
 </p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[inout]</strong> context of the TLS session </p></li>
 <li><p><strong>cipher_ctx</strong> – <strong>[in]</strong> private cipher context given to the callbacks </p></li>
 <li><p><strong>setup_cipher_ctx</strong> – <strong>[in]</strong> callback used to setup the cipher context, call during the TLS handshake after cipher suite have been negotiated.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return values</dt>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TO_OK</strong> – the TLS session switched to HANDSHAKE_ONLY_MODE </p></li>
 <li><p><strong>TO_ERROR</strong> – the TLS session didn’t switch to HANDSHAKE_ONLY_MODE </p></li>
@@ -579,12 +582,12 @@ cipher_suites values must be values defined in helper header (TO_TLS_ECDHE_RSA_W
 <p>
 This function does one step of a TLS handshake. It encapsulates Secure Element payloads from optimized API in a TLS record, and sends it on the network through given function. It decapsulates TLS records received from the network and sends it to the Secure Element.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_AGAIN if intermediate step suceed, TO_OK if last step succeed, else TO_ERROR </p>
 </dd>
 </dl>
@@ -597,12 +600,12 @@ This function does one step of a TLS handshake. It encapsulates Secure Element p
 <p>
 This function does all the steps of a TLS handshake except initialization and cleanup. It encapsulates the Secure Element payloads from optimized API in a TLS record, and sends it on the network through given function. It decapsulates TLS records received from the network and sends it to the Secure Element. This function uses TOSE_helper_tls_handshake_init() and TOSE_helper_tls_handshake_step().</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if data has been sent successfully, else TO_ERROR </p>
 </dd>
 </dl>
@@ -615,21 +618,21 @@ This function does all the steps of a TLS handshake except initialization and cl
 <p>
 This function must be called after handshake.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
 <li><p><strong>slot</strong> – <strong>[out]</strong> Certificate slot</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if slot has been retrieved successfully, else TO_ERROR </p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="messaging-api">
-<h3>Messaging API<a class="headerlink" href="#messaging-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="messaging-api">
+<h3>Messaging API<a class="headerlink" href="#messaging-api" title="Permalink to this heading">¶</a></h3>
 <p>Once handshake is done, these 2 functions will allow to send and receive with
 TLS encryption using just negociated session.</p>
 <dl class="c function">
@@ -639,14 +642,14 @@ TLS encryption using just negociated session.</p>
 <p>
 This function uses TLS handshake keys to encrypt and send a message on the network through given function.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
 <li><p><strong>msg</strong> – <strong>[in]</strong> Message </p></li>
 <li><p><strong>msg_len</strong> – <strong>[in]</strong> Message length</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if message has been sent successfully, else TO_ERROR </p>
 </dd>
 </dl>
@@ -659,7 +662,7 @@ This function uses TLS handshake keys to encrypt and send a message on the netwo
 <p>
 This function uses given function to receive a message from the network and decrypts it with TLS handshake keys.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[in]</strong> TLS context </p></li>
 <li><p><strong>msg</strong> – <strong>[out]</strong> Message output buffer </p></li>
@@ -668,7 +671,7 @@ This function uses given function to receive a message from the network and decr
 <li><p><strong>timeout</strong> – <strong>[in]</strong> Receive timeout in milliseconds (-1 for no timeout)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>TO_OK if message has been received successfully, TO_TIMEOUT if given timeout has been exceeded, else TO_ERROR </p>
 </dd>
 </dl>
@@ -681,10 +684,10 @@ This function uses given function to receive a message from the network and decr
 <p>More precisely, receives at most a plain text record of type application data, less if the receiving buffer is too short or if a record has been partially received previously.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>the parameter timeout_ms is given to the receive_func() callback provided to <a class="reference internal" href="#group__helper__tls__handshake_1ga3adbd84cbe7c2212b5556172da040ac4"><span class="std std-ref">TOSE_helper_tls_init_session()</span></a>. To ensure to not block more than timeout_ms, the recv() callback is called just once, thus the #TO_AGAIN retval if partial data has been received. </p>
+<p>the parameter timeout_ms is given to the receive_func() callback provided to <a class="reference internal" href="#group__helper__tls__handshake_1ga3adbd84cbe7c2212b5556172da040ac4"><span class="std std-ref">TOSE_helper_tls_init_session()</span></a>. To ensure to not block more than timeout_ms, the recv() callback is called just once, thus the TO_AGAIN retval if partial data has been received. </p>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tls_ctx</strong> – <strong>[inout]</strong> the TLS context </p></li>
 <li><p><strong>msg</strong> – <strong>[out]</strong> received data </p></li>
@@ -693,7 +696,7 @@ This function uses given function to receive a message from the network and decr
 <li><p><strong>timeout_ms</strong> – <strong>[in]</strong> the maximum time to wait data in milliseconds</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return values</dt>
+<dt class="field-even">Return values<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>TO_OK</strong> – application data received with success, msg is updated and *msg_len is greater than 0 </p></li>
 <li><p><strong>TO_AGAIN</strong> – some data has been received but not enough to receive a complete record, or it was not application data (see note above) </p></li>
@@ -704,9 +707,9 @@ This function uses given function to receive a message from the network and decr
 </dl>
 </dd></dl>
 
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
           </div>

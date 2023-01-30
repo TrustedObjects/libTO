@@ -18,16 +18,6 @@
 #ifndef _TOSE_MISC_H_
 #define _TOSE_MISC_H_
 
-#ifndef TOSE_MISC_API
-#ifdef __linux__
-#define TOSE_MISC_API
-#elif _WIN32
-#define TOSE_MISC_API __declspec(dllexport)
-#else
-#define TOSE_MISC_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -46,7 +36,7 @@ extern "C" {
  *
  * @return TO_OK on success.
  */
-TOSE_MISC_API TO_ret_t TOSE_flush(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_flush(TOSE_ctx_t *ctx);
 
 /** @} */
 

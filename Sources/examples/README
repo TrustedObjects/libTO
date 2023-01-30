@@ -1,0 +1,93 @@
+This folder contains source code examples on how to use libTO and Trusted Objects
+Secure Element.
+
+Examples
+========
+
+System
+------
+
+get_sn.c:
+	example to print Secure Element's serial number in Hexadecimal format
+
+lora_get_app_dev_eui.c:
+	example to print Secure Element's LoRaWAN AppEUI and DevEUI in
+	Hexadecimal format
+
+hook.c:
+	show how to use libTO hooks to add user function call before/after a
+	Secure Element command
+
+multi_driver.c:
+	example on how to use both TO136 (Hardware Secure Element) and TO-Protect
+	(Software Secure Element) at the same time
+
+TOP_self_test.c:
+	provide a simple way to validate integration of libTO and Secure Element
+	by running a self-test
+
+seclink.c:
+	example on how to secure communication between MCU and TO136 using
+	secure link
+
+export_cert_x509.c:
+	example to print certificate from Secure Element in Hexadecimal format
+	and to store it to a file in DER format.
+
+hooks.c:
+	example for TO136 only
+	example to insert hooks around I2C commands.
+
+ECIES
+-----
+
+ecies.c, ecies.h:
+	example of secure messaging using ECIES standard, consisting on sending
+	and receiving encrypted and authenticated messages
+	Build 2 executables by defining TO_ECIES_CLIENT for the client, and
+	TO_ECIES_SERVER to emulate remote server
+
+ecies_fd.c:
+	ECIES through regular files.
+
+
+ecies_mbed.c:
+	You can also use mbed UART to send and receive the messages.
+
+TLS
+---
+
+tls_handshake.c:
+	example using TLS (handshake, send and reveive)
+
+tls_handshake_mbed.c:
+	example using TLS (handshake, send and reveive) for mbed
+
+tls_multiple_handshake.c:
+ 	example doing 2 tls sessions in the same time
+
+tls_multiple_handshake_mbed.c:
+	example doing 2 tls sessions in the same time for mbed
+
+
+TO-Protect HAL NVM implementation
+---------------------------------
+
+hal_nvm_lx6.c:
+	Example of HAL NVM implementation using ESP-IDF for LX6.
+	(Espressif IoT Development Framework)
+
+hal_nvm_mbed.cpp:
+	Example of HAL NVM implementation using mbed-os' FlashIAP interface.
+
+hal_nvm_stm32l4xx.cpp:
+	Example of HAL NVM implementation using STM32L4xx HAL.
+
+hal_nvm_emulation_ram.c
+	Example of "fake" HAL NVM implementation using RAM.
+	For debug/test purposes only, as by definition, there can be no
+	persistence here.
+
+test_hal_nvm/test_hal_nvm.c:
+	Testing of HAL Secure Storage example on MBed OS
+

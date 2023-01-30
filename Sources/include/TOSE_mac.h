@@ -18,16 +18,6 @@
 #ifndef _TOSE_MAC_H_
 #define _TOSE_MAC_H_
 
-#ifndef TOSE_MAC_API
-#ifdef __linux__
-#define TOSE_MAC_API
-#elif _WIN32
-#define TOSE_MAC_API __declspec(dllexport)
-#else
-#define TOSE_MAC_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -60,7 +50,7 @@ extern "C" {
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_MAC_API TO_ret_t TOSE_compute_hmac(TOSE_ctx_t *ctx, const uint8_t key_index, const uint8_t* data,
+extern TO_ret_t TOSE_compute_hmac(TOSE_ctx_t *ctx, const uint8_t key_index, const uint8_t* data,
 		const uint16_t data_length, uint8_t hmac_data[TO_HMAC_SIZE]);
 
 /**
@@ -82,7 +72,7 @@ TOSE_MAC_API TO_ret_t TOSE_compute_hmac(TOSE_ctx_t *ctx, const uint8_t key_index
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_MAC_API TO_ret_t TOSE_compute_hmac_init(TOSE_ctx_t *ctx, uint8_t key_index);
+extern TO_ret_t TOSE_compute_hmac_init(TOSE_ctx_t *ctx, uint8_t key_index);
 
 /**
  * @brief Used to send data to compute HMAC on.
@@ -102,7 +92,7 @@ TOSE_MAC_API TO_ret_t TOSE_compute_hmac_init(TOSE_ctx_t *ctx, uint8_t key_index)
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_MAC_API TO_ret_t TOSE_compute_hmac_update(TOSE_ctx_t *ctx, const uint8_t* data, uint16_t length);
+extern TO_ret_t TOSE_compute_hmac_update(TOSE_ctx_t *ctx, const uint8_t* data, uint16_t length);
 
 /**
  * @brief Returns computed HMAC
@@ -122,7 +112,7 @@ TOSE_MAC_API TO_ret_t TOSE_compute_hmac_update(TOSE_ctx_t *ctx, const uint8_t* d
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_MAC_API TO_ret_t TOSE_compute_hmac_final(TOSE_ctx_t *ctx, uint8_t hmac[TO_HMAC_SIZE]);
+extern TO_ret_t TOSE_compute_hmac_final(TOSE_ctx_t *ctx, uint8_t hmac[TO_HMAC_SIZE]);
 
 /**
  * @brief Verifies if the HMAC tag is correct for the given data
@@ -147,7 +137,7 @@ TOSE_MAC_API TO_ret_t TOSE_compute_hmac_final(TOSE_ctx_t *ctx, uint8_t hmac[TO_H
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_MAC_API TO_ret_t TOSE_verify_hmac(TOSE_ctx_t *ctx, const uint8_t key_index, const uint8_t* data,
+extern TO_ret_t TOSE_verify_hmac(TOSE_ctx_t *ctx, const uint8_t key_index, const uint8_t* data,
 		const uint16_t data_length, const uint8_t hmac_data[TO_HMAC_SIZE]);
 
 /**
@@ -170,7 +160,7 @@ TOSE_MAC_API TO_ret_t TOSE_verify_hmac(TOSE_ctx_t *ctx, const uint8_t key_index,
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_MAC_API TO_ret_t TOSE_verify_hmac_init(TOSE_ctx_t *ctx, uint8_t key_index);
+extern TO_ret_t TOSE_verify_hmac_init(TOSE_ctx_t *ctx, uint8_t key_index);
 
 /**
  * @brief Used to send data to verify HMAC on.
@@ -193,7 +183,7 @@ TOSE_MAC_API TO_ret_t TOSE_verify_hmac_init(TOSE_ctx_t *ctx, uint8_t key_index);
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_MAC_API TO_ret_t TOSE_verify_hmac_update(TOSE_ctx_t *ctx, const uint8_t* data, uint16_t length);
+extern TO_ret_t TOSE_verify_hmac_update(TOSE_ctx_t *ctx, const uint8_t* data, uint16_t length);
 
 /**
  * @brief This command is used to send HMAC to verify
@@ -215,7 +205,7 @@ TOSE_MAC_API TO_ret_t TOSE_verify_hmac_update(TOSE_ctx_t *ctx, const uint8_t* da
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_MAC_API TO_ret_t TOSE_verify_hmac_final(TOSE_ctx_t *ctx, const uint8_t hmac[TO_HMAC_SIZE]);
+extern TO_ret_t TOSE_verify_hmac_final(TOSE_ctx_t *ctx, const uint8_t hmac[TO_HMAC_SIZE]);
 
 /**
  * @brief Compute CMAC
@@ -223,7 +213,7 @@ TOSE_MAC_API TO_ret_t TOSE_verify_hmac_final(TOSE_ctx_t *ctx, const uint8_t hmac
  * @param[in] key_index Index of the key to use for CMAC calculation, starting
  * from 0
  * @param[in] data Data to compute CMAC on
- * @param[in] data_length
+ * @param[in] data_length Length of the data which signature has to be verified
  * @param[out] cmac_data Returned computed CMAC
  *
  * Compute a 128-bit CMAC tag based on AES128 algorithm.
@@ -237,16 +227,19 @@ TOSE_MAC_API TO_ret_t TOSE_verify_hmac_final(TOSE_ctx_t *ctx, const uint8_t hmac
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_MAC_API TO_ret_t TOSE_compute_cmac(TOSE_ctx_t *ctx, const uint8_t key_index, const uint8_t* data,
-		const uint16_t data_length, uint8_t cmac_data[TO_CMAC_SIZE]);
+extern TO_ret_t TOSE_compute_cmac(TOSE_ctx_t *ctx,
+		const uint8_t key_index,
+		const uint8_t* data,
+		const uint16_t data_length,
+		uint8_t cmac_data[TO_CMAC_SIZE]);
 
 /**
- * @brief Verify CMAC
+ * @brief Verify the CMAC signature of a given block of data
  * @param[in] ctx Pointer to the SE context
  * @param[in] key_index Index of the key to use to compute the CMAC tag, starting
  * from 0
  * @param[in] data Data to verify CMAC on
- * @param[in] data_length
+ * @param[in] data_length Length of the data which signature has to be verified
  * @param[in] cmac_data expected CMAC
  *
  * Verify if the CMAC tag is correct for the given data.
@@ -261,8 +254,11 @@ TOSE_MAC_API TO_ret_t TOSE_compute_cmac(TOSE_ctx_t *ctx, const uint8_t key_index
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_MAC_API TO_ret_t TOSE_verify_cmac(TOSE_ctx_t *ctx, const uint8_t key_index, const uint8_t* data,
-		const uint16_t data_length, uint8_t cmac_data[TO_CMAC_SIZE]);
+extern TO_ret_t TOSE_verify_cmac(TOSE_ctx_t *ctx,
+		const uint8_t key_index,
+		const uint8_t* data,
+		const uint16_t data_length,
+		const uint8_t cmac_data[TO_CMAC_SIZE]);
 
 /** @} */
 

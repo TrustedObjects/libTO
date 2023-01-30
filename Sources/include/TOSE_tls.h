@@ -18,17 +18,6 @@
 #ifndef _TOSE_TLS_H_
 #define _TOSE_TLS_H_
 
-#ifndef TOSE_TLS_API
-#ifdef __linux__
-#define TOSE_TLS_API
-#elif _WIN32
-#define TOSE_TLS_API __declspec(dllexport)
-#else
-#define TOSE_TLS_API
-#endif /* __LINUX__ * @endcond
- */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -53,7 +42,7 @@ extern "C" {
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_set_tls_server_random(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_set_tls_server_random(TOSE_ctx_t *ctx,
 		uint8_t random[TO_TLS_RANDOM_SIZE]);
 
 /**
@@ -79,7 +68,7 @@ TOSE_TLS_API TO_ret_t TOSE_set_tls_server_random(TOSE_ctx_t *ctx,
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_set_tls_server_eph_pub_key(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_set_tls_server_eph_pub_key(TOSE_ctx_t *ctx,
 		uint8_t key_index,
 		uint8_t ecc_params[TO_TLS_SERVER_PARAMS_SIZE],
 		uint8_t signature[TO_SIGNATURE_SIZE]);
@@ -100,7 +89,7 @@ TOSE_TLS_API TO_ret_t TOSE_set_tls_server_eph_pub_key(TOSE_ctx_t *ctx,
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_get_tls_random_and_store(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_tls_random_and_store(TOSE_ctx_t *ctx,
 		uint8_t timestamp[TO_TIMESTAMP_SIZE],
 		uint8_t random[TO_TLS_RANDOM_SIZE]);
 
@@ -118,7 +107,7 @@ TOSE_TLS_API TO_ret_t TOSE_get_tls_random_and_store(TOSE_ctx_t *ctx,
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_get_tls_master_secret(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_tls_master_secret(TOSE_ctx_t *ctx,
 		uint8_t master_secret[TO_TLS_MASTER_SECRET_SIZE]);
 
 /**
@@ -137,7 +126,7 @@ TOSE_TLS_API TO_ret_t TOSE_get_tls_master_secret(TOSE_ctx_t *ctx,
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_get_tls_master_secret_derived_keys(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_get_tls_master_secret_derived_keys(TOSE_ctx_t *ctx,
 		uint8_t key_block_length,
 		uint8_t key_block[]);
 
@@ -164,7 +153,7 @@ TOSE_TLS_API TO_ret_t TOSE_get_tls_master_secret_derived_keys(TOSE_ctx_t *ctx,
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_renew_tls_keys_ecdhe(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_renew_tls_keys_ecdhe(TOSE_ctx_t *ctx,
 		const uint8_t kpriv_index,
 		const uint8_t kpub_index,
 		const uint8_t enc_key_index,
@@ -185,7 +174,7 @@ TOSE_TLS_API TO_ret_t TOSE_renew_tls_keys_ecdhe(TOSE_ctx_t *ctx,
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element136
  * - TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_calculate_finished(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_calculate_finished(TOSE_ctx_t *ctx,
 		const int from,
 		const uint8_t handshake_hash[TO_HASH_SIZE],
 		uint8_t finished[TO_TLS_FINISHED_SIZE]);
@@ -211,7 +200,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_calculate_finished(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_reset(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_tls_reset(TOSE_ctx_t *ctx);
 
 /**
  * @brief Selects between TLS and DTLS mode and resets the session for the current selected slot.
@@ -226,7 +215,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_reset(TOSE_ctx_t *ctx);
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_set_mode(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_set_mode(TOSE_ctx_t *ctx,
 		const TO_tls_mode_t mode
 ) TO_DEPRECATED;
 
@@ -245,7 +234,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_set_mode(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_set_config(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_set_config(TOSE_ctx_t *ctx,
 		const TO_tls_config_id_t config_id,
 		const uint8_t *config,
 		const uint16_t config_len);
@@ -265,7 +254,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_set_config(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_set_session(TOSE_ctx_t *ctx, const uint8_t session);
+extern TO_ret_t TOSE_tls_set_session(TOSE_ctx_t *ctx, const uint8_t session);
 
 /**
  * @brief Set sets the type of the extension ID corresponding to the connection ID
@@ -280,7 +269,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_set_session(TOSE_ctx_t *ctx, const uint8_t sessio
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_set_cid_ext_id(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_set_cid_ext_id(TOSE_ctx_t *ctx,
 		const TO_tls_extension_t cid_ext_id);
 
 /**
@@ -305,7 +294,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_set_cid_ext_id(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_client_hello(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_client_hello(TOSE_ctx_t *ctx,
 		const uint8_t timestamp[TO_TIMESTAMP_SIZE],
 		uint8_t *client_hello,
 		uint16_t *client_hello_len);
@@ -331,7 +320,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_client_hello(TOSE_ctx_t *ctx,
  * @retval TO_MEMORY_ERROR: internal I/O buffer overflow
  * @retval TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_client_hello_ext(TOSE_ctx_t *ctx, const uint8_t timestamp[TO_TIMESTAMP_SIZE],
+extern TO_ret_t TOSE_tls_get_client_hello_ext(TOSE_ctx_t *ctx, const uint8_t timestamp[TO_TIMESTAMP_SIZE],
 		const uint8_t *ext_data, uint16_t ext_length,
 		uint8_t *client_hello, uint16_t *client_hello_len);
 
@@ -354,7 +343,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_client_hello_ext(TOSE_ctx_t *ctx, const uint8
  * @retval TO_MEMORY_ERROR: internal I/O buffer overflow
  * @retval TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_client_hello_init(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_client_hello_init(TOSE_ctx_t *ctx,
 		const uint8_t timestamp[TO_TIMESTAMP_SIZE],
 		const uint8_t *ext_data, uint16_t ext_length,
 		uint16_t *client_hello_len, uint8_t *final_flag);
@@ -376,7 +365,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_client_hello_init(TOSE_ctx_t *ctx,
  * @retval TO_MEMORY_ERROR: internal I/O buffer overflow
  * @retval TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_client_hello_update(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_client_hello_update(TOSE_ctx_t *ctx,
 		uint8_t *data,
 		uint16_t *part_len, uint8_t *final_flag);
 
@@ -395,7 +384,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_client_hello_update(TOSE_ctx_t *ctx,
  * @retval TO_MEMORY_ERROR: internal I/O buffer overflow
  * @retval TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_client_hello_final(TOSE_ctx_t *ctx, uint8_t *data);
+extern TO_ret_t TOSE_tls_get_client_hello_final(TOSE_ctx_t *ctx, uint8_t *data);
 
 /**
  * @brief Handles the DTLS HelloVerifyRequest (server) message
@@ -417,7 +406,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_client_hello_final(TOSE_ctx_t *ctx, uint8_t *
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_hello_verify_request(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_hello_verify_request(TOSE_ctx_t *ctx,
 		const uint8_t *hello_verify_request,
 		const uint32_t hello_verify_request_len);
 
@@ -441,7 +430,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_hello_verify_request(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_hello(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_hello(TOSE_ctx_t *ctx,
 		const uint8_t *server_hello,
 		const uint32_t server_hello_len);
 
@@ -460,7 +449,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_hello(TOSE_ctx_t *ctx,
  * @retval TO_MEMORY_ERROR: internal I/O buffer overflow
  * @retval TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_hello_init(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_hello_init(TOSE_ctx_t *ctx,
 		const uint32_t server_hello_len);
 
 /**
@@ -479,7 +468,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_hello_init(TOSE_ctx_t *ctx,
  * @retval TO_MEMORY_ERROR: internal I/O buffer overflow
  * @retval TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_hello_update(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_hello_update(TOSE_ctx_t *ctx,
 		const uint8_t *data,
 		const uint32_t part_len);
 
@@ -499,7 +488,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_hello_update(TOSE_ctx_t *ctx,
  * @retval TO_MEMORY_ERROR: internal I/O buffer overflow
  * @retval TO_ERROR: generic error
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_hello_final(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_hello_final(TOSE_ctx_t *ctx,
 		const uint8_t *data,
 		const uint32_t last_len);
 
@@ -523,7 +512,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_hello_final(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_certificate(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_certificate(TOSE_ctx_t *ctx,
 		const uint8_t *server_certificate,
 		const uint32_t server_certificate_len);
 
@@ -550,7 +539,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_certificate(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_certificate_init(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_certificate_init(TOSE_ctx_t *ctx,
 		const uint8_t *server_certificate_init,
 		const uint32_t server_certificate_init_len);
 
@@ -578,7 +567,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_certificate_init(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_certificate_update(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_certificate_update(TOSE_ctx_t *ctx,
 		const uint8_t *server_certificate_update,
 		const uint32_t server_certificate_update_len);
 
@@ -602,7 +591,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_certificate_update(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_certificate_final(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_tls_handle_server_certificate_final(TOSE_ctx_t *ctx);
 
 /**
  * @brief Handle the TLS ServerKeyExchange (server) message
@@ -621,7 +610,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_certificate_final(TOSE_ctx_t *ctx);
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_key_exchange(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_key_exchange(TOSE_ctx_t *ctx,
 		const uint8_t *server_key_exchange,
 		const uint32_t server_key_exchange_len);
 
@@ -641,7 +630,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_key_exchange(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_key_exchange_init(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_key_exchange_init(TOSE_ctx_t *ctx,
 		const uint8_t *server_key_exchange_init,
 		const uint32_t server_key_exchange_init_len);
 
@@ -660,7 +649,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_key_exchange_init(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_key_exchange_update(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_key_exchange_update(TOSE_ctx_t *ctx,
 		const uint8_t *server_key_exchange_update,
 		const uint32_t server_key_exchange_update_len);
 
@@ -677,7 +666,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_key_exchange_update(TOSE_ctx_t *ctx
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_key_exchange_final(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_tls_handle_server_key_exchange_final(TOSE_ctx_t *ctx);
 
 /**
  * @brief Handles the TLS CertificateRequest (server) message
@@ -700,7 +689,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_key_exchange_final(TOSE_ctx_t *ctx)
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_certificate_request(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_certificate_request(TOSE_ctx_t *ctx,
 		const uint8_t *certificate_request,
 		const uint32_t certificate_request_len);
 
@@ -720,7 +709,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_certificate_request(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_hello_done(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_server_hello_done(TOSE_ctx_t *ctx,
 		const uint8_t *server_hello_done,
 		const uint32_t server_hello_done_len);
 
@@ -744,7 +733,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_server_hello_done(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_certificate(TOSE_ctx_t *ctx,
 		uint8_t *certificate,
 		uint16_t *certificate_len);
 
@@ -768,7 +757,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate_init(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_certificate_init(TOSE_ctx_t *ctx,
 		uint8_t *certificate,
 		uint16_t *certificate_len);
 
@@ -790,7 +779,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate_init(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate_update(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_certificate_update(TOSE_ctx_t *ctx,
 		uint8_t *certificate,
 		uint16_t *certificate_len);
 
@@ -807,7 +796,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate_update(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate_final(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_tls_get_certificate_final(TOSE_ctx_t *ctx);
 
 /**
  * @brief Gets the TLS ClientKeyExchange (client) message
@@ -827,7 +816,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate_final(TOSE_ctx_t *ctx);
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_client_key_exchange(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_client_key_exchange(TOSE_ctx_t *ctx,
 		uint8_t *client_key_exchange,
 		uint16_t *client_key_exchange_len);
 
@@ -851,7 +840,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_client_key_exchange(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate_verify(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_certificate_verify(TOSE_ctx_t *ctx,
 		uint8_t *certificate_verify,
 		uint16_t *certificate_verify_len);
 
@@ -874,7 +863,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate_verify(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_change_cipher_spec(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_change_cipher_spec(TOSE_ctx_t *ctx,
 		uint8_t *change_cipher_spec,
 		uint16_t *change_cipher_spec_len);
 
@@ -899,7 +888,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_change_cipher_spec(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_finished(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_finished(TOSE_ctx_t *ctx,
 		uint8_t *finished,
 		uint16_t *finished_len);
 
@@ -924,7 +913,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_finished(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_change_cipher_spec(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_change_cipher_spec(TOSE_ctx_t *ctx,
 		const uint8_t *change_cipher_spec,
 		const uint32_t change_cipher_spec_len);
 
@@ -951,7 +940,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_change_cipher_spec(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_finished(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_finished(TOSE_ctx_t *ctx,
 		const uint8_t *finished,
 		const uint32_t finished_len);
 
@@ -970,7 +959,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_finished(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate_slot(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_get_certificate_slot(TOSE_ctx_t *ctx,
 		uint8_t *slot);
 
 /**
@@ -995,7 +984,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_get_certificate_slot(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_secure_payload(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_secure_payload(TOSE_ctx_t *ctx,
 		const uint8_t *header,
 		const uint16_t header_len,
 		const uint8_t *data,
@@ -1026,7 +1015,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_secure_payload(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_unsecure_payload(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_unsecure_payload(TOSE_ctx_t *ctx,
 		const uint8_t *header,
 		const uint16_t header_len,
 		const uint8_t *payload,
@@ -1053,7 +1042,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_unsecure_payload(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_handle_mediator_certificate(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_handle_mediator_certificate(TOSE_ctx_t *ctx,
 		const uint8_t *mediator_certificate,
 		const uint32_t mediator_certificate_len);
 
@@ -1078,7 +1067,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_handle_mediator_certificate(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_secure_payload_init_cbc(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_secure_payload_init_cbc(TOSE_ctx_t *ctx,
 		const uint8_t *header,
 		const uint16_t header_len,
 		uint8_t initial_vector[TO_INITIALVECTOR_SIZE]);
@@ -1100,7 +1089,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_secure_payload_init_cbc(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_secure_payload_init_aead(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_secure_payload_init_aead(TOSE_ctx_t *ctx,
 		const uint8_t *header,
 		const uint16_t header_len,
 		uint8_t initial_vector[TO_TLS_AEAD_EXPLICIT_NONCE_SIZE]);
@@ -1123,7 +1112,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_secure_payload_init_aead(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_secure_payload_update(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_secure_payload_update(TOSE_ctx_t *ctx,
 		const uint8_t *data,
 		const uint16_t data_len,
 		uint8_t *cryptogram);
@@ -1146,7 +1135,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_secure_payload_update(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_secure_payload_final(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_secure_payload_final(TOSE_ctx_t *ctx,
 		const uint8_t *data,
 		const uint16_t data_len,
 		uint8_t *cryptogram,
@@ -1173,7 +1162,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_secure_payload_final(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_unsecure_payload_init_cbc(TOSE_ctx_t *ctx, const uint16_t cryptogram_len,
+extern TO_ret_t TOSE_tls_unsecure_payload_init_cbc(TOSE_ctx_t *ctx, const uint16_t cryptogram_len,
 		const uint8_t *header, const uint16_t header_len,
 		const uint8_t initial_vector[TO_INITIALVECTOR_SIZE],
 		const uint8_t last_block_iv[TO_INITIALVECTOR_SIZE],
@@ -1199,7 +1188,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_unsecure_payload_init_cbc(TOSE_ctx_t *ctx, const 
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_unsecure_payload_init_aead(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_unsecure_payload_init_aead(TOSE_ctx_t *ctx,
 		const uint16_t cryptogram_len,
 		const uint8_t *header,
 		const uint16_t header_len,
@@ -1226,7 +1215,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_unsecure_payload_init_aead(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_unsecure_payload_update(TOSE_ctx_t *ctx,
+extern TO_ret_t TOSE_tls_unsecure_payload_update(TOSE_ctx_t *ctx,
 		const uint8_t *cryptogram,
 		const uint16_t cryptogram_len,
 		uint8_t *data,
@@ -1249,7 +1238,7 @@ TOSE_TLS_API TO_ret_t TOSE_tls_unsecure_payload_update(TOSE_ctx_t *ctx,
  * - TO_ERROR: generic error
  * @endcond
  */
-TOSE_TLS_API TO_ret_t TOSE_tls_unsecure_payload_final(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_tls_unsecure_payload_final(TOSE_ctx_t *ctx);
 
 
 #ifdef __cplusplus

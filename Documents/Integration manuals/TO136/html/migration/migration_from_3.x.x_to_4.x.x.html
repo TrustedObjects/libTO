@@ -1,17 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TO library migration guide from 3.x.x to 4.x.x &#8212; libTO 6.1.2 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>TO library migration guide from 3.x.x to 4.x.x &#8212; libTO 6.3.9 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/custom.js"></script>
     <script src="../_static/custom.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -38,7 +41,7 @@
 
 
 
-<p class="blurb">release 6.1.2<br />doc</p>
+<p class="blurb">release 6.3.9<br />doc</p>
 
 
 
@@ -55,7 +58,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
@@ -76,12 +79,12 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="to-library-migration-guide-from-3-x-x-to-4-x-x">
-<h1>TO library migration guide from 3.x.x to 4.x.x<a class="headerlink" href="#to-library-migration-guide-from-3-x-x-to-4-x-x" title="Permalink to this headline">¶</a></h1>
+  <section id="to-library-migration-guide-from-3-x-x-to-4-x-x">
+<h1>TO library migration guide from 3.x.x to 4.x.x<a class="headerlink" href="#to-library-migration-guide-from-3-x-x-to-4-x-x" title="Permalink to this heading">¶</a></h1>
 <p>The following changes are to be taken into account to update from 3.x.x to
 4.x.x.</p>
-<div class="section" id="renamed-apis">
-<h2>Renamed APIs<a class="headerlink" href="#renamed-apis" title="Permalink to this headline">¶</a></h2>
+<section id="renamed-apis">
+<h2>Renamed APIs<a class="headerlink" href="#renamed-apis" title="Permalink to this heading">¶</a></h2>
 <p>The following header files have been renamed:</p>
 <ul class="simple">
 <li><p><strong>include/to136.h</strong> to <strong>include/TO.h</strong></p></li>
@@ -92,22 +95,22 @@
 <p><strong>TO136_…()</strong> functions have been renamed to <strong>TO_…()</strong>.</p>
 <p><strong>TO136_…</strong> definitions have been renamed to <strong>TO_…</strong>.</p>
 <p><strong>to136_…</strong> structures, types and enums have been renamed to <strong>TO_…</strong>.</p>
-</div>
-<div class="section" id="preprocessor-flags">
-<h2>Preprocessor flags<a class="headerlink" href="#preprocessor-flags" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="preprocessor-flags">
+<h2>Preprocessor flags<a class="headerlink" href="#preprocessor-flags" title="Permalink to this heading">¶</a></h2>
 <p><strong>ENABLE_…/DISABLE_…</strong> flags have been renamed to
 <strong>TO_ENABLE_…/TO_DISABLE_…</strong>.</p>
 <p><em>TO_USE_…*</em> flags have been renamed to <strong>TO_ENABLE_…</strong>.</p>
 <p>Removed <strong>USE_ECIES_…_SIGNATURE</strong> flags.</p>
-</div>
-<div class="section" id="error-codes">
-<h2>Error codes<a class="headerlink" href="#error-codes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="error-codes">
+<h2>Error codes<a class="headerlink" href="#error-codes" title="Permalink to this heading">¶</a></h2>
 <p><strong>TO_OK</strong> (previously TO136_OK) have its value changed from <strong>1</strong> to
 <strong>0x0000</strong>.
 This change was motivated to always keep LSB free to code Secure Element error
 codes.</p>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>

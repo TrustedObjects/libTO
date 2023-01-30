@@ -18,16 +18,6 @@
 #ifndef _TOSE_HAHSHES_H_
 #define _TOSE_HAHSHES_H_
 
-#ifndef TOSE_HASHES_API
-#ifdef __linux__
-#define TOSE_HASHES_API
-#elif _WIN32
-#define TOSE_HASHES_API __declspec(dllexport)
-#else
-#define TOSE_HASHES_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -48,14 +38,16 @@ extern "C" {
  *
  * @return
  * - TORSP_SUCCESS on success
+ * - TORSP_INTERNAL_ERROR if a fault has been detected
+ * - TORSP_INVALID_LEN if the data_length is too large (> 512)
  * - TO_DEVICE_WRITE_ERROR: error writing data to Secure Element
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_INVALID_RESPONSE_LENGTH: unexpected response length from device
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_HASHES_API TO_ret_t TOSE_sha256(TOSE_ctx_t *ctx, const uint8_t* data, const uint16_t data_length,
-		uint8_t* sha256);
+extern TO_ret_t TOSE_sha256(TOSE_ctx_t *ctx, const uint8_t* data, const uint16_t data_length,
+		uint8_t sha256[TO_SHA256_HASHSIZE]);
 
 /**
  * @brief Compute SHA256 on more than 512 bytes of data
@@ -66,13 +58,14 @@ TOSE_HASHES_API TO_ret_t TOSE_sha256(TOSE_ctx_t *ctx, const uint8_t* data, const
  *
  * @return
  * - TORSP_SUCCESS on success
+ * - TORSP_INTERNAL_ERROR if a fault has been detected
  * - TO_DEVICE_WRITE_ERROR: error writing data to Secure Element
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
  * - TO_INVALID_RESPONSE_LENGTH: unexpected response length from device
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_HASHES_API TO_ret_t TOSE_sha256_init(TOSE_ctx_t *ctx);
+extern TO_ret_t TOSE_sha256_init(TOSE_ctx_t *ctx);
 
 /**
  * @brief Update SHA256 computation with new data
@@ -88,6 +81,8 @@ TOSE_HASHES_API TO_ret_t TOSE_sha256_init(TOSE_ctx_t *ctx);
  *
  * @return
  * - TORSP_SUCCESS on success
+ * - TORSP_INTERNAL_ERROR if a fault has been detected
+ * - TORSP_INVALID_LEN if the data_length is too large (> 512)
  * - TORSP_COND_OF_USE_NOT_SATISFIED if not called after TOSE_sha256_init()
  * or TOSE_sha256_update()
  * - TO_DEVICE_WRITE_ERROR: error writing data to Secure Element
@@ -96,7 +91,7 @@ TOSE_HASHES_API TO_ret_t TOSE_sha256_init(TOSE_ctx_t *ctx);
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_HASHES_API TO_ret_t TOSE_sha256_update(TOSE_ctx_t *ctx, const uint8_t* data, const uint16_t length);
+extern TO_ret_t TOSE_sha256_update(TOSE_ctx_t *ctx, const uint8_t* data, const uint16_t length);
 
 /**
  * @brief Returns the SHA256 hash of the data previously given
@@ -112,6 +107,7 @@ TOSE_HASHES_API TO_ret_t TOSE_sha256_update(TOSE_ctx_t *ctx, const uint8_t* data
  *
  * @return
  * - TORSP_SUCCESS on success
+ * - TORSP_INTERNAL_ERROR if a fault has been detected
  * - TORSP_COND_OF_USE_NOT_SATISFIED: if not called after TOSE_sha256_update()
  * - TO_DEVICE_WRITE_ERROR: error writing data to Secure Element
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
@@ -119,7 +115,8 @@ TOSE_HASHES_API TO_ret_t TOSE_sha256_update(TOSE_ctx_t *ctx, const uint8_t* data
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_HASHES_API TO_ret_t TOSE_sha256_final(TOSE_ctx_t *ctx, uint8_t* sha256);
+extern TO_ret_t TOSE_sha256_final(TOSE_ctx_t *ctx,
+		uint8_t sha256[TO_SHA256_HASHSIZE]);
 
 /** @} */
 

@@ -15,9 +15,13 @@
  * @brief
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_I2C_H_
 #define _TODRV_HSE_I2C_H_
 
+#include "TODRV_HSE_cfg.h"
 #include "TO_defs.h"
 #include "TO_retcodes.h"
 
@@ -112,4 +116,6 @@ TODRV_HSE_I2C_API TO_ret_t TODRV_HSE_trp_last_command_duration(unsigned int *dur
 #endif
 
 #endif /* _TODRV_HSE_I2C_H_ */
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 

@@ -18,16 +18,6 @@
 #ifndef _TOSE_HELPER_TLS_H_
 #define _TOSE_HELPER_TLS_H_
 
-#ifndef TOSE_HELPER_TLS_API
-#ifdef __linux__
-#define TOSE_HELPER_TLS_API
-#elif _WIN32
-#define TOSE_HELPER_TLS_API __declspec(dllexport)
-#else
-#define TOSE_HELPER_TLS_API
-#endif /* __LINUX__ */
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -58,7 +48,7 @@ extern "C" {
  * @retval TO_MEMORY_ERROR: internal I/O buffer overflow
  * @retval TO_ERROR: generic error
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_get_client_hello_ext(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_tls_get_client_hello_ext(TOSE_ctx_t *ctx,
 		const uint8_t timestamp[TO_TIMESTAMP_SIZE],
 		const uint8_t *ext_data, uint16_t ext_length,
 		uint8_t *client_hello, uint16_t *client_hello_len);
@@ -80,7 +70,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_get_client_hello_ext(TOSE_ctx_t
  * @retval TO_MEMORY_ERROR: internal I/O buffer overflow
  * @retval TO_ERROR: generic error
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_handle_server_hello(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_tls_handle_server_hello(TOSE_ctx_t *ctx,
 		const uint8_t *server_hello,
 		const uint16_t server_hello_len);
 
@@ -95,7 +85,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_handle_server_hello(TOSE_ctx_t 
  *
  * @return TO_OK if data has been sent successfully, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_handle_server_certificate(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_tls_handle_server_certificate(TOSE_ctx_t *ctx,
 		const uint8_t *server_certificate,
 		const uint32_t server_certificate_len);
 
@@ -110,7 +100,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_handle_server_certificate(TOSE_
  *
  * @return TO_OK if data has been sent successfully, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_handle_server_key_exchange(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_tls_handle_server_key_exchange(TOSE_ctx_t *ctx,
 		const uint8_t *server_key_exchange,
 		const uint32_t server_key_exchange_len);
 
@@ -125,7 +115,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_handle_server_key_exchange(TOSE
  *
  * @return TO_OK if data has been received successfully, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_get_certificate(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_tls_get_certificate(TOSE_ctx_t *ctx,
 		uint8_t *certificate,
 		uint16_t *certificate_len);
 
@@ -266,7 +256,7 @@ typedef struct TOSE_helper_tls_ctx_s TOSE_helper_tls_ctx_t;
  *
  * @return TO_OK if initialization succeed, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_init_session(
+extern TO_lib_ret_t TOSE_helper_tls_init_session(
 		TOSE_ctx_t *ctx,
 		TOSE_helper_tls_ctx_t **tls_ctx,
 		const uint8_t session,
@@ -287,7 +277,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_init_session(
  *
  * @return TO_OK if close succeed, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_close(
+extern TO_lib_ret_t TOSE_helper_tls_close(
 		TOSE_helper_tls_ctx_t *tls_ctx
 );
 
@@ -299,7 +289,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_close(
  *
  * @return TO_OK if finalize succeed, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_fini(
+extern TO_lib_ret_t TOSE_helper_tls_fini(
 		TOSE_helper_tls_ctx_t *tls_ctx
 );
 
@@ -312,7 +302,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_fini(
  *
  * @return TO_OK if cleanup succeed, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_cleanup(
+extern TO_lib_ret_t TOSE_helper_tls_cleanup(
 		TOSE_helper_tls_ctx_t *tls_ctx
 );
 
@@ -325,7 +315,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_cleanup(
  *
  * @return TO_OK if cleanup succeed, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_retransmission_timeout(
+extern TO_lib_ret_t TOSE_helper_tls_set_retransmission_timeout(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		const uint32_t min_timeout,
 		const uint32_t max_timeout
@@ -340,7 +330,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_retransmission_timeout(
  *
  * @return TO_OK if cleanup succeed, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_retransmission_max(
+extern TO_lib_ret_t TOSE_helper_tls_set_retransmission_max(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		const uint32_t max_retransmissions
 );
@@ -353,7 +343,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_retransmission_max(
  *
  * @return TO_OK if cleanup succeed, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_fragment_max_size(
+extern TO_lib_ret_t TOSE_helper_tls_set_fragment_max_size(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		const uint16_t max_size
 );
@@ -370,7 +360,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_fragment_max_size(
  *
  * @return TO_OK in case of success, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_cipher_suites(
+extern TO_lib_ret_t TOSE_helper_tls_set_cipher_suites(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		const uint16_t *cipher_suites,
 		const uint16_t cipher_suites_cnt);
@@ -384,7 +374,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_cipher_suites(
  *
  * @return TO_OK in case of success, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_config_mode(
+extern TO_lib_ret_t TOSE_helper_tls_set_config_mode(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		TO_tls_mode_t mode);
 
@@ -397,7 +387,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_config_mode(
  *
  * @return TO_OK in case of success, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_config_certificate_slot(
+extern TO_lib_ret_t TOSE_helper_tls_set_config_certificate_slot(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		uint8_t certificate_slot);
 
@@ -416,7 +406,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_config_certificate_slot(
  * @retval TO_OK the server name is configured inside the TLS context
  * @retval TO_ERROR the server name configuration failed
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_server_name(
+extern TO_lib_ret_t TOSE_helper_tls_set_server_name(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		const char *server_name);
 
@@ -478,7 +468,7 @@ TOSE_helper_tls_do_handshake(tls_ctx);
  * @retval TO_OK the TLS session switched to HANDSHAKE_ONLY_MODE
  * @retval TO_ERROR the TLS session didn't switch to HANDSHAKE_ONLY_MODE
  **/
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_mode_handshake_only(
+extern TO_lib_ret_t TOSE_helper_tls_set_mode_handshake_only(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		void *cipher_ctx,
 		TOSE_helper_tls_setup_cipher_ctx setup_cipher_ctx);
@@ -508,7 +498,7 @@ extern TOSE_helper_tls_setup_cipher_ctx default_setup_cipher_ctx;
  * @return TO_AGAIN if intermediate step suceed, TO_OK if last step succeed,
  * else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_do_handshake_step(
+extern TO_lib_ret_t TOSE_helper_tls_do_handshake_step(
 		TOSE_helper_tls_ctx_t *tls_ctx
 );
 
@@ -527,7 +517,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_do_handshake_step(
  *
  * @return TO_OK if data has been sent successfully, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_do_handshake(
+extern TO_lib_ret_t TOSE_helper_tls_do_handshake(
 		TOSE_helper_tls_ctx_t *tls_ctx
 );
 
@@ -540,7 +530,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_do_handshake(
  *
  * @return TO_OK if slot has been retrieved successfully, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_get_certificate_slot(
+extern TO_lib_ret_t TOSE_helper_tls_get_certificate_slot(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		uint8_t *slot
 );
@@ -561,7 +551,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_get_certificate_slot(
  *
  * @return TO_OK if message has been sent successfully, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_send(
+extern TO_lib_ret_t TOSE_helper_tls_send(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		const uint8_t *msg,
 		const uint32_t msg_len
@@ -582,7 +572,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_send(
  * given timeout has been exceeded, else TO_ERROR
  *
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_receive(
+extern TO_lib_ret_t TOSE_helper_tls_receive(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		uint8_t *msg,
 		uint32_t max_msg_len,
@@ -652,7 +642,7 @@ TO_lib_ret_t TOSE_helper_tls_recv(
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_secure_payload_cbc(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_tls_secure_payload_cbc(TOSE_ctx_t *ctx,
 		const uint8_t *header,
 		const uint16_t header_len,
 		const uint8_t* data,
@@ -691,7 +681,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_secure_payload_cbc(TOSE_ctx_t *
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_secure_payload_aead(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_tls_secure_payload_aead(TOSE_ctx_t *ctx,
 		const uint8_t *header,
 		const uint16_t header_len,
 		const uint8_t* data,
@@ -719,7 +709,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_secure_payload_aead(TOSE_ctx_t 
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_unsecure_payload_cbc(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_tls_unsecure_payload_cbc(TOSE_ctx_t *ctx,
 		const uint8_t *header,
 		const uint16_t header_len,
 		const uint8_t initial_vector[TO_INITIALVECTOR_SIZE],
@@ -752,7 +742,7 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_unsecure_payload_cbc(TOSE_ctx_t
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_unsecure_payload_aead(TOSE_ctx_t *ctx,
+extern TO_lib_ret_t TOSE_helper_tls_unsecure_payload_aead(TOSE_ctx_t *ctx,
 		const uint8_t *header,
 		const uint16_t header_len,
 		const uint8_t initial_vector[TO_TLS_AEAD_EXPLICIT_NONCE_SIZE],
@@ -781,12 +771,12 @@ TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_unsecure_payload_aead(TOSE_ctx_
  *
  * @return TO_OK in case of success, else TO_ERROR
  */
-TOSE_HELPER_TLS_API TO_lib_ret_t TOSE_helper_tls_set_config(
+extern TO_lib_ret_t TOSE_helper_tls_set_config(
 		TOSE_helper_tls_ctx_t *tls_ctx,
 		const TO_tls_config_id_t config_id,
 		const uint8_t *config,
 		const uint16_t config_len
-)TO_DEPRECATED;
+);
 
 #ifdef __cplusplus
 }

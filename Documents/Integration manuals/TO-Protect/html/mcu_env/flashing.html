@@ -1,17 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flashing TO-Protect TLS &#8212; libTO 6.1.2 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Flashing TO-Protect TLS &#8212; libTO 6.3.9 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/custom.js"></script>
     <script src="../_static/custom.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -38,7 +41,7 @@
 
 
 
-<p class="blurb">release 6.1.2<br />doc</p>
+<p class="blurb">release 6.3.9<br />doc</p>
 
 
 
@@ -55,7 +58,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
@@ -80,10 +83,10 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="flashing-to-protect-tls">
-<span id="flashing-mcu"></span><h1>Flashing TO-Protect TLS<a class="headerlink" href="#flashing-to-protect-tls" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="commands-to-convert-toolchain-generated-binary">
-<h2>Commands to convert toolchain generated binary<a class="headerlink" href="#commands-to-convert-toolchain-generated-binary" title="Permalink to this headline">¶</a></h2>
+  <section id="flashing-to-protect-tls">
+<span id="flashing-mcu"></span><h1>Flashing TO-Protect TLS<a class="headerlink" href="#flashing-to-protect-tls" title="Permalink to this heading">¶</a></h1>
+<section id="commands-to-convert-toolchain-generated-binary">
+<h2>Commands to convert toolchain generated binary<a class="headerlink" href="#commands-to-convert-toolchain-generated-binary" title="Permalink to this heading">¶</a></h2>
 <p>Depending on your toolchain, your tools can generate and handle output files
 with format ELF, bin, hex or S-REC.</p>
 <p>TO-Protect is delivered as a binary file. Below are some commands that you can
@@ -127,9 +130,9 @@ use to perform the conversions required to generate the file to flash.</p>
 </li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="typical-flash-memory-mapping">
-<h2>Typical Flash memory mapping<a class="headerlink" href="#typical-flash-memory-mapping" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="typical-flash-memory-mapping">
+<h2>Typical Flash memory mapping<a class="headerlink" href="#typical-flash-memory-mapping" title="Permalink to this heading">¶</a></h2>
 <p>Use the commands above to combine your firmware with TO-Protect
 Secure Core (delivered as a binary file).</p>
 <p>Below an example for a Cortex-M0+ with 192K of Flash.
@@ -141,8 +144,8 @@ In this example, we suppose that:</p>
 <li><p>you place the Application at the beginning of the Flash space.</p></li>
 </ul>
 </div></blockquote>
-<div class="figure align-default">
-<img alt="../_images/TO-Protect_map_NVM_in_Flash.svg" src="../_images/TO-Protect_map_NVM_in_Flash.svg" /></div>
+<figure class="align-default">
+<img alt="../_images/TO-Protect_map_NVM_in_Flash.svg" src="../_images/TO-Protect_map_NVM_in_Flash.svg" /></figure>
 <p>Below an example for a Cortex-M0+ with 192K of Flash and 3K of E²PROM:
 In this example, we suppose that:</p>
 <blockquote>
@@ -152,11 +155,11 @@ In this example, we suppose that:</p>
 <li><p>you place the Application at the beginning of the Flash space.</p></li>
 </ul>
 </div></blockquote>
-<div class="figure align-default">
-<img alt="../_images/TO-Protect_map_NVM_in_Eeprom.svg" src="../_images/TO-Protect_map_NVM_in_Eeprom.svg" /></div>
-</div>
-<div class="section" id="how-to-flash">
-<h2>How to Flash<a class="headerlink" href="#how-to-flash" title="Permalink to this headline">¶</a></h2>
+<figure class="align-default">
+<img alt="../_images/TO-Protect_map_NVM_in_Eeprom.svg" src="../_images/TO-Protect_map_NVM_in_Eeprom.svg" /></figure>
+</section>
+<section id="how-to-flash">
+<h2>How to Flash<a class="headerlink" href="#how-to-flash" title="Permalink to this heading">¶</a></h2>
 <p>There are two ways to Flash a device:</p>
 <blockquote>
 <div><ul class="simple">
@@ -173,8 +176,8 @@ application firmware and TO-Protect.</p>
 separately. Or if you prefer, you can combine the application and TO-Protect
 into a single file. Both options are valid.</p>
 <p>These two options are described below.</p>
-<div class="section" id="flashing-firmware-and-to-protect-separately">
-<h3>Flashing Firmware and TO-Protect separately<a class="headerlink" href="#flashing-firmware-and-to-protect-separately" title="Permalink to this headline">¶</a></h3>
+<section id="flashing-firmware-and-to-protect-separately">
+<h3>Flashing Firmware and TO-Protect separately<a class="headerlink" href="#flashing-firmware-and-to-protect-separately" title="Permalink to this heading">¶</a></h3>
 <p>This method supposes that you have a tool capable to Flash a file at a given
 address in memory. An example is having an ST-Link probe (already soldered on
 Nucleo development boards), and the ‘STM32 ST-Link Utility’ software.</p>
@@ -187,9 +190,9 @@ Nucleo development boards), and the ‘STM32 ST-Link Utility’ software.</p>
 </div></blockquote>
 <p>Depending on your flashing tool, you can use the commands above to convert your
 firmware into the file format required by your flashingtool.</p>
-</div>
-<div class="section" id="flashing-a-single-file-combining-firmware-and-to-protect">
-<h3>Flashing a single file combining Firmware and TO-Protect<a class="headerlink" href="#flashing-a-single-file-combining-firmware-and-to-protect" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="flashing-a-single-file-combining-firmware-and-to-protect">
+<h3>Flashing a single file combining Firmware and TO-Protect<a class="headerlink" href="#flashing-a-single-file-combining-firmware-and-to-protect" title="Permalink to this heading">¶</a></h3>
 <p>This method is required if you have to Flash:</p>
 <blockquote>
 <div><ul class="simple">
@@ -207,9 +210,9 @@ firmware into the file format required by your flashingtool.</p>
 <p>NOTE: for a KEIL application firmware, arm-none-eabi-objcopy cannot be used
 to manipulate .axf files produced by KEIL. You must configure KEIL to generate
 a .hex file.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
           </div>

@@ -22,6 +22,9 @@
  * implemented.
  */
 
+#include "TO_cfg.h"
+#ifndef TODRV_HSE_DRIVER_DISABLE
+
 #ifndef _TODRV_HSE_I2C_WRAPPER_H_
 #define _TODRV_HSE_I2C_WRAPPER_H_
 
@@ -149,4 +152,6 @@ TODRV_HSE_I2C_WRAPPER_API TO_lib_ret_t TO_data_write(const void *data, unsigned 
 TODRV_HSE_I2C_WRAPPER_API TO_lib_ret_t TO_data_last_command_duration(unsigned int *duration);
 
 #endif
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */
 
