@@ -151,6 +151,24 @@ TODRV_HSE_I2C_WRAPPER_API TO_lib_ret_t TO_data_write(const void *data, unsigned 
  */
 TODRV_HSE_I2C_WRAPPER_API TO_lib_ret_t TO_data_last_command_duration(unsigned int *duration);
 
+/**
+ * @brief Get last command's stack usage
+ * @param stack_usage Pointer to store last command's stack usage in bytes
+ *
+ * Measure the amouht of data allocated and used on stack by a given function
+ * This function is optional, if implemented you have to define
+ * TODRV_HSE_I2C_WRAPPER_LAST_COMMAND_STACK_USAGE in your project in order to use it
+ * through TO_last_command_stack_usage() API.
+ *
+ * This function should only be called after a successful TO_read() call.
+ * If it is called after a failed TO_read(), or after a TO_write() call, the
+ * result is unspecified and may be irrelevant.
+ *
+ * @return TO_OK if last command stack usage is available
+ * TO_ERROR if an internal error has occured
+ */
+TODRV_HSE_I2C_WRAPPER_API TO_lib_ret_t TO_data_last_command_stack_usage(unsigned int *stack_usage);
+
 #endif
 
 #endif /* TODRV_HSE_DRIVER_DISABLE */

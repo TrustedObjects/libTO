@@ -193,7 +193,7 @@ extern TO_ret_t TOSE_set_certificate_signing_request_dn(
  * @brief Get new certificate signing request
  * @param[in] ctx Pointer to the SE context
  * @param[in] certificate_index Certificate index to renew
- * @param[out] csr Returned CSR data (can be NULL to determine needed buffer size)
+ * @param[out] csr Returned CSR data 
  * @param[out] size Returned CSR real size
  *
  * Request a x509 DER formated certificate signing request according to the
@@ -201,7 +201,6 @@ extern TO_ret_t TOSE_set_certificate_signing_request_dn(
  * CSR distinguished name can be set with
  * TOSE_set_certificate_signing_request_dn(), otherwise existing certificate DN
  * will be used (if any).
- * Secure Element CSR size will not exceed TO_CERT_X509_MAXSIZE.
  *
  * @return
  * - TORSP_SUCCESS on success
@@ -225,7 +224,6 @@ extern TO_ret_t TOSE_get_certificate_signing_request(
  *
  * Set a x509 DER formated certificate according to the given index.
  * The new certificate must be signed by a CA trusted by the Secure Element.
- * Secure Element certificate size cannot exceed TO_CERT_X509_MAXSIZE.
  *
  * @return
  * - TORSP_SUCCESS on success
@@ -308,10 +306,10 @@ extern TO_ret_t TOSE_set_certificate_x509_final(
  * @brief Returns one of the Secure Element certificates
  * @param[in] ctx Pointer to the SE context
  * @param[in] certificate_index Requested certificate index
- * @param[in] format Requested certificate format
- * @param[out] certificate Certificate, size depends on the certificate type (see
- * TO_cert_*_t)
- *
+ * @param[out] certificate Pointer to a buffer, which will receive the
+ * Certificate under the desired format.
+ * @param[out] size Size of the transfered data, is returned in output.
+ * @details
  * Request a certificate to Secure Element according to the given index and
  * format.
  *
@@ -325,23 +323,23 @@ extern TO_ret_t TOSE_set_certificate_x509_final(
  * - TO_MEMORY_ERROR: internal I/O buffer overflow
  * - TO_ERROR: generic error
  */
-extern TO_ret_t TOSE_get_certificate(TOSE_ctx_t *ctx, const uint8_t certificate_index,
-		const TO_certificate_format_t format, uint8_t* certificate);
+extern TO_ret_t TOSE_get_certificate(TOSE_ctx_t *ctx,
+		const uint8_t certificate_index,
+		const TO_certificate_format_t certificate_format,
+		uint8_t* certificate);
 
 /**
- * @brief Returns one of the certificates, x509 DER formated
+ * @brief Returns one of the certificates, x509 DER formatted
  * @param[in] ctx Pointer to the SE context
  * @param[in] certificate_index Requested certificate index
- * @param[out] certificate Returned certificate data (can be NULL to determine needed
- *                    buffer size)
- * @param[out] size Returned certificate real size
- *
+ * @param[out] certificate Returned certificate data
+ * @param[out] size Size of the transfered certificate, 
+ * is returned in output.
+ * @details
  * Request a x509 DER formated certificate according to the given index.
- * Secure Element certificate size will not exceed TO_CERT_X509_MAXSIZE.
  *
  * @return
  * - TORSP_SUCCESS on success
- * - TORSP_NOT_AVAILABLE: certificate Format not supported
  * - TORSP_ARG_OUT_OF_RANGE: invalid Certificate Number
  * - TO_DEVICE_WRITE_ERROR: error writing data to Secure Element
  * - TO_DEVICE_READ_ERROR: error reading data from Secure Element
@@ -438,12 +436,11 @@ extern TO_ret_t TOSE_get_certificate_and_sign(TOSE_ctx_t *ctx, const uint8_t cer
  * @param[in] certificate_index Index of the certificate to return, starting from 0
  * @param[in] challenge Challenge to be signed
  * @param[in] challenge_length Length of the challenge to be signed
- * @param[out] certificate Returned certificate data, this buffer must be at least
- * TO_CERT_X509_MAXSIZE
- * @param[out] size Returned certificate real size (which is less or equal to 512
- * bytes)
+ * @param[out] certificate Returned certificate data
+ * @param[out] size Returned certificate real size.
  * @param[out] signature Returned signature
- *
+ * @warning The TO_CERT_X509_MAXSIZE constant
+ * @details
  * This command is equivalent to TOSE_get_certificate() and TOSE_sign() commands
  * in only 1 call.
  *

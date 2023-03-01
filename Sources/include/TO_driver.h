@@ -370,9 +370,11 @@ typedef TO_ret_t (TODRV_get_certificate_x509_f)(void *priv_ctx,const uint8_t cer
 		uint8_t* certificate, uint16_t* size);
 typedef TO_ret_t (TODRV_set_certificate_x509_f)(void *priv_ctx,const uint8_t certificate_index,
 		const uint8_t* certificate, const uint16_t size);
+
 typedef TO_ret_t (TODRV_set_certificate_x509_init_f)(void *priv_ctx, const uint8_t certificate_index);
 typedef TO_ret_t (TODRV_set_certificate_x509_update_f)(void *priv_ctx,
 		const uint8_t* certificate, const uint16_t size);
+
 typedef TO_ret_t (TODRV_set_certificate_x509_final_f)(void *priv_ctx);
 typedef TO_ret_t (TODRV_get_certificate_and_sign_f)(void *priv_ctx,const uint8_t certificate_index,
 		const TO_certificate_format_t format,

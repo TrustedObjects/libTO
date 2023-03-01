@@ -1,3 +1,14 @@
+/*
+ * THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ * Copyright (C) 2016-2023 Trusted Objects. All rights reserved.
+ */
 
 #include "TO_cfg.h"
 #include "TO_defs.h"
@@ -9,29 +20,59 @@
 #include <stdio.h>
 
 #define HEX_DISP_NB_COL 16
-#define MAX_LOG_SIZE 500
+#define MAX_LOG_SIZE 200
 #define MAX_LOG_FORMAT_SIZE 100
 #define MAX_LOG_FUNC_NAME_SIZE 100
 
+/**
+ * @brief Print log function.
+ * @details This function will have to be implemented using the correct method to send
+ * the logs away.
+ * This default implementation simply writes the log message to stdout. It may be
+ * enough for most applications, but feel free to re-implement it to fit your particular
+ * needs.
+ * @param[in] level This is the log level (Error, Warning, Info, Debug)
+ * @param[in] log This is the log string to be sent.
+ */
 __attribute__ ((weak)) void print_log_function(const TO_log_level_t level, const char *log)
 {
 	(void)level;
 	puts(log);
 }
 
+/**
+ * @brief Process a standard log output with formatting
+ * @details This function expects a variable arguments list, including :
+ *  - A mandatory function name (already provided by the invoking macro)
+ *  - Parameters required by the formatting.
+ * @param[in] level Log level (Error, Warning ...)
+ * @param[in] format Display format to be used (printf)
+ * @param[in] args Variable arguments list
+ */
 static void TO_log_string(const TO_log_level_t level,
 		char* format,
 		va_list args)
 {
-	char log[MAX_LOG_SIZE];
+#ifdef __XTENSA__
 	char str_format[MAX_LOG_FORMAT_SIZE];
+#else
+	char *str_format;
+#endif
 	char *func_name;
+	char log[MAX_LOG_SIZE];
 	size_t len;
 
 	// Search for the next args and convert the strings
 	func_name = va_arg(args,char *);
+
+#ifdef __XTENSA__
+	// Copy those constants supposingly coming from the code to the RAM data space
 	TO_safe_strcpy(log,func_name);
 	TO_safe_strcpy(str_format,format);
+#else
+	strcpy(log, func_name);
+	str_format = format;
+#endif
 
 	// Concat the ":"
 	strcat(log,": ");
@@ -42,6 +83,15 @@ static void TO_log_string(const TO_log_level_t level,
 	print_log_function(level, log);
 }
 
+/**
+ * @brief Log function used to dump a buffer in hexadecimal
+ * @details This function does not requires the buffer to be in the data memory space.
+ * In Xtensa architecture, it takes care of accessing the data the correct way.
+ * The result is an hexadecimal dump, without the ascii correspondance.
+ * @param[in] level Log level (Error, Warning ...)
+ * @param[in] _data Pointer to the data to be dumped
+ * @param[in] size Size of the data area to be dumped (bytes)
+ */
 static void TO_log_hex_disp(const TO_log_level_t level,
 		void *_data,
 		unsigned int size)
@@ -49,36 +99,53 @@ static void TO_log_hex_disp(const TO_log_level_t level,
 	char log[HEX_DISP_NB_COL * 3 + 2];
 	uint16_t log_len = 0;
 	unsigned int i;
-	uint8_t the_data[size];
-
-	// Recopy the data from Code to data using the right method
-	TO_safe_memcpy(the_data,(uint8_t *)_data,size);
+#ifdef __XTENSA__
+	uint8_t the_data[HEX_DISP_NB_COL];
+#else
+	uint8_t *the_data;
+#endif
 
 	// Looping over data
 	for(i = 0; i < size; i++) {
-		if ((i) && (!(i%HEX_DISP_NB_COL))) {
+		if ((i) && (!(i % HEX_DISP_NB_COL))) {
 			log[log_len++] = '\0';
 			print_log_function(level, log);
 			log_len = 0;
 		}
-		log_len += snprintf(log + log_len, sizeof(log) - log_len, "%02X ", the_data[i]);
+		if (i % HEX_DISP_NB_COL == 0) {
+#ifdef __XTENSA__
+
+			// Recopy the data from Code to data using the right method
+			TO_safe_memcpy(the_data,((uint8_t *)_data) + i, HEX_DISP_NB_COL);
+#else
+			the_data = ((uint8_t *)_data) + i;
+#endif
+		}
+		log_len += snprintf(log + log_len, sizeof(log) - log_len, "%02X ", the_data[i % HEX_DISP_NB_COL]);
 	}
 	log[log_len++] = '\0';
 	print_log_function(level, log);
 }
 
+/**
+ * @brief Log function used to dump a buffer in hexadecimal
+ * @details This function does not requires the buffer to be in the data memory space.
+ * In Xtensa architecture, it takes care of accessing the data the correct way.
+ * The result is an hexadecimal dump, with the ascii correspondance.
+ * @param[in] level Log level (Error, Warning ...)
+ * @param[in] _data Pointer to the data to be dumped
+ * @param[in] size Size of the data area to be dumped (bytes)
+ */
 static void TO_log_dump_buffer(const TO_log_level_t level,
-		void *_buf,
+		void *_data,
 		unsigned int size)
 {
 	char log[20 + HEX_DISP_NB_COL * 3 + 2 + HEX_DISP_NB_COL + 3];
 	char ascii[HEX_DISP_NB_COL + 1];
 	uint16_t log_len = 0;
 	unsigned int i;
-	uint8_t the_buf[size];
+	uint8_t the_data[HEX_DISP_NB_COL];
 
-	// Recopy the data from Code to data using the right method
-	TO_safe_memcpy(the_buf,(uint8_t *)_buf,size);
 	memset(ascii, 0, HEX_DISP_NB_COL + 1);
 
 	// Looping over data
@@ -94,11 +161,16 @@ static void TO_log_dump_buffer(const TO_log_level_t level,
 				memset(ascii, 0, HEX_DISP_NB_COL + 1);
 				log_len = 0;
 			}
+			if (i % HEX_DISP_NB_COL == 0) {
+
+				// Recopy the data from Code to data using the right method
+				TO_safe_memcpy(the_data,((uint8_t *)_data) + i, HEX_DISP_NB_COL);
+			}
 			log_len += snprintf(log + log_len, sizeof(log) - log_len, "%04x: ", (unsigned int)i);
 		}
-		log_len += snprintf(log + log_len, sizeof(log) - log_len, "%02x ", the_buf[i]);
-		if ((the_buf[i] >= 32) && (the_buf[i] < 127)) {
-			ascii[i % HEX_DISP_NB_COL] = the_buf[i];
+		log_len += snprintf(log + log_len, sizeof(log) - log_len, "%02x ", the_data[i % HEX_DISP_NB_COL]);
+		if ((the_data[i % HEX_DISP_NB_COL] >= 32) && (the_data[i % HEX_DISP_NB_COL] < 127)) {
+			ascii[i % HEX_DISP_NB_COL] = the_data[i % HEX_DISP_NB_COL];
 		} else {
 			ascii[i % HEX_DISP_NB_COL] = '.';
 		}
@@ -117,34 +189,52 @@ static void TO_log_dump_buffer(const TO_log_level_t level,
 	}
 }
 
+/**
+ * @brief Generates a log message when entering a function
+ *
+ * @param[in] fct Function's name
+ */
 static void TO_log_enter(char * fct)
 {
-	char log[110];
-	char fct_name[100];
+	char log[MAX_LOG_SIZE];
+	char fct_name[MAX_LOG_FUNC_NAME_SIZE];
 
-	TO_safe_strncpy(fct_name,fct,sizeof(fct_name));
-	sprintf(log,">>> %s",fct_name);
-	print_log_function(TO_LOG_LEVEL_DBG,log);
+	TO_safe_strncpy(fct_name, fct, sizeof(fct_name));
+	sprintf(log, ">>> %s", fct_name);
+	print_log_function(TO_LOG_LEVEL_DBG, log);
 }
 
+/**
+ * @brief Generates a log message when exiting a function
+ *
+ * @param[in] fct Function's name
+ */
 static void TO_log_exit(char * fct)
 {
-	char log[110];
-	char fct_name[100];
+	char log[MAX_LOG_SIZE];
+	char fct_name[MAX_LOG_FUNC_NAME_SIZE];
 
-	TO_safe_strncpy(fct_name,fct,sizeof(fct_name));
-	sprintf(log,"<<< %s",fct_name);
-	print_log_function(TO_LOG_LEVEL_DBG,log);
+	TO_safe_strncpy(fct_name, fct, sizeof(fct_name));
+	sprintf(log,"<<< %s", fct_name);
+	print_log_function(TO_LOG_LEVEL_DBG, log);
 }
 
-static void TO_log_return(char * fct,unsigned short ret,int line)
+/**
+ * @brief Generates a log message when returning a value from a function
+ *
+ * @param[in] fct Function's name
+ * @param[in] ret Returned value
+ * @param[in] line Line number
+ *
+ */
+static void TO_log_return(char * fct, unsigned short ret, int line)
 {
-	char log[130];
-	char fct_name[100];
+	char log[MAX_LOG_SIZE];
+	char fct_name[MAX_LOG_FUNC_NAME_SIZE];
 
-	TO_safe_strncpy(fct_name,fct,sizeof(fct_name));
-	sprintf(log,"<<< %s (%04X) @(%d)",fct_name,ret,line);
-	print_log_function(TO_LOG_LEVEL_DBG,log);
+	TO_safe_strncpy(fct_name, fct, sizeof(fct_name));
+	sprintf(log, "<<< %s (%04X) @(%d)", fct_name, ret, line);
+	print_log_function(TO_LOG_LEVEL_DBG, log);
 }
 
 void TO_set_log_level(TO_log_ctx_t *log_ctx,
@@ -161,8 +251,6 @@ void TO_log(TO_log_ctx_t *log_ctx, const TO_log_level_t level, void * ptr, ...)
 	unsigned int size;
 	unsigned short ret;
 	int line;
-
-	(void)log_ctx;
 
 	// Filter the requested level
 	if ((level & TO_LOG_LEVEL_MASK) > log_ctx->log_level) {
@@ -224,12 +312,16 @@ void TO_log(TO_log_ctx_t *log_ctx, const TO_log_level_t level, void * ptr, ...)
 	va_end(vl);
 }
 
+/**
+ * @brief Default log context
+ *
+ */
 TO_log_ctx_t log_ctx = {
-	.log_function = &TO_log,   		// By default
+	.log_function = &TO_log,   	// By default
 	.log_level = TO_LOG_LEVEL_MAX,	// By default, no LOGs (as we ignore the log function)
 };
 
 TO_log_ctx_t* TO_log_get_ctx(void)
-{ 
+{
 	return (TO_log_ctx_t*)&log_ctx;
 }

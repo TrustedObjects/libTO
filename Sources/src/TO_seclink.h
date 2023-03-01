@@ -18,10 +18,10 @@
  * implemented.
  */
 
-#ifndef _TO_SECLINK_H_
-
 #include "TO_cfg.h"
 #ifndef TODRV_HSE_DRIVER_DISABLE
+
+#ifndef _TO_SECLINK_H_
 
 #ifndef TO_SECLINK
 #ifdef __linux__
@@ -111,7 +111,7 @@ uint16_t TODRV_HSE_seclink_compute_cmd_size(uint16_t encaps_len);
  */
 uint16_t TODRV_HSE_seclink_compute_rsp_size(uint16_t encaps_len);
 
-#endif
-
 #endif /* TODRV_HSE_DRIVER_DISABLE */
+
+#endif
 

@@ -20,7 +20,6 @@
 #include "TO_endian.h"
 #include "TO_retcodes.h"
 
-#include "TOP_cfg.h"
 #include "TOP_info.h"
 #include "TOP_technical_info.h"
 #include "TOP_storage.h"

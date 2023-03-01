@@ -18,7 +18,6 @@
 #include "TO_cfg.h"
 #ifndef TODRV_HSE_DRIVER_DISABLE
 
-#include "TO_cfg.h"
 #include "TO_defs.h"
 #include "TO_retcodes.h"
 #include "TO_endian.h"
@@ -127,6 +126,41 @@ TODRV_HSE_SYSTEM_API TO_ret_t TODRV_HSE_get_software_version(TODRV_HSE_ctx_t *ct
 	*major = TODRV_HSE_response_data[0];
 	*minor = TODRV_HSE_response_data[1];
 	*revision = TODRV_HSE_response_data[2];
+	return resp_status;
+}
+#endif
+
+#ifndef TO_DISABLE_API_ACCESS_DUMMY_DATA
+TODRV_HSE_SYSTEM_API TO_ret_t TODRV_HSE_access_dummy_data(TODRV_HSE_ctx_t *ctx,
+		uint8_t write_data,
+		uint32_t* dummy_data)
+{
+	TO_lib_ret_t ret;
+	uint16_t resp_data_len;
+	TO_se_ret_t resp_status;
+	int len;
+
+	(void)ctx;
+
+	ret = TODRV_HSE_prepare_command_data_byte(0, write_data);
+	if (write_data == 1) {
+		ret = TODRV_HSE_prepare_command_data(1, (uint8_t *)dummy_data, sizeof(uint32_t));
+		len = sizeof(uint32_t) + 1;
+		resp_data_len = 0;
+	} else {
+		len = 1;
+		resp_data_len = sizeof(uint32_t);
+	}
+	ret = TODRV_HSE_send_command(TODRV_HSE_CMD_ACCESS_DUMMY_DATA,
+			len,
+			&resp_data_len, &resp_status);
+	if (TO_OK != ret || TORSP_SUCCESS != resp_status)
+		return ret | resp_status;
+
+	if (write_data == 0) {
+		TO_secure_memcpy(dummy_data, &TODRV_HSE_response_data[0], sizeof(uint32_t));
+	}
+
 	return resp_status;
 }
 #endif

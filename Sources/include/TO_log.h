@@ -7,7 +7,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  *
- * Copyright (C) 2016-2022 Trusted Objects. All rights reserved.
+ * Copyright (C) 2016-2023 Trusted Objects. All rights reserved.
  */
 
 /**
@@ -131,6 +131,9 @@ extern void TO_set_log_level(TO_log_ctx_t *log_ctx,
 extern TO_log_ctx_t* TO_log_get_ctx(void);
 
 /** @} */
+/** These exceptions to the warnings are mandatory until the C2023 standard is deployed.
+ * Until then, there is no 'official' way to process correctly variable arguments macros.
+*/
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wvariadic-macros"
 #if TO_LOG_LEVEL_MAX >= TO_LOG_LEVEL_ERR
@@ -171,6 +174,16 @@ extern TO_log_ctx_t* TO_log_get_ctx(void);
 #define TO_LOG_DBG(...)
 #define TO_LOG_DBG_HEX(...)
 #define TO_LOG_DBG_BUF(...)
+#endif
+
+#if TO_LOG_LEVEL_MAX >= TO_LOG_LEVEL_DBG
+#define TO_LOG_ENTER(...) TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_ENTER, (void *)__func__)
+#define TO_LOG_RETURN(_ret) { typeof(_ret) __ret = (_ret); TO_log_get_ctx()->log_function(v, TO_LOG_RETURN, (void *)__func__, __ret, __LINE__); return __ret;}
+#define TO_LOG_EXIT(...) TO_log_get_ctx()->log_function(TO_log_get_ctx(), TO_LOG_EXIT, (void *)__func__)
+#else
+#define TO_LOG_ENTER(...)
+#define TO_LOG_RETURN(_ret) { return (_ret); }
+#define TO_LOG_EXIT(...)
 #endif
 #pragma GCC diagnostic pop
 

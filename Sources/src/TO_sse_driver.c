@@ -79,7 +79,11 @@ TOP_secure_data_ctx_t TOP_data = {
 	.load_func = TOP_data_load,
 	.store_func = TOP_data_store,
 	.current_version = 0xffffffff,
-	.ram_buffer = (uint8_t *)secure_storage_rambuff
+	.storage = {
+		.raw_ram_buffer = (uint8_t *)secure_storage_rambuff,
+	        .raw_ram_buffer_size = sizeof(secure_storage_rambuff),
+		.log_ctx = &log_ctx
+	}
 };
 
 static uint8_t ram_workspace[TOP_RAM_DATA_SIZE];

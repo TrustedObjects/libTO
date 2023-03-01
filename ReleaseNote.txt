@@ -1,3 +1,6 @@
+2023-02-28 - 6.3.10
+- Update to libTO-6.3.10
+
 2023-01-30 - 6.3.9
 - Better default driver configuration
 - It is now possible to disable HSE driver by defining TODRV_HSE_DRIVER_DISABLE

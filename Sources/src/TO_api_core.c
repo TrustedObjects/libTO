@@ -20,7 +20,6 @@
 #ifndef TODRV_HSE_DRIVER_DISABLE
 
 #include <stdbool.h>
-#include "TO_cfg.h"
 #include "TO_defs.h"
 #include "TO_retcodes.h"
 #include "TO_log.h"
@@ -102,7 +101,6 @@ TODRV_HSE_CORE_API TO_ret_t TODRV_HSE_fini(TODRV_HSE_ctx_t *ctx)
 
 TO_lib_ret_t TODRV_HSE_trp_write(const void *data, unsigned int length)
 {
-	TOH_LOG_DBG("");
 	TOH_LOG_DBG_HEX((const unsigned char*)data, length);
 
 	return TO_data_write(data, length);
@@ -112,7 +110,6 @@ TO_lib_ret_t TODRV_HSE_trp_read(void *data, unsigned int length)
 {
 	TO_lib_ret_t ret;
 	ret = TO_data_read(data, length);
-	TOH_LOG_DBG("");
 	TOH_LOG_DBG_HEX((const unsigned char*)data, length);
 
 	return ret;
@@ -121,14 +118,33 @@ TO_lib_ret_t TODRV_HSE_trp_read(void *data, unsigned int length)
 TO_lib_ret_t TODRV_HSE_trp_last_command_duration(unsigned int *duration)
 {
 #ifdef TODRV_HSE_I2C_WRAPPER_LAST_COMMAND_DURATION
-	TO_lib_ret_t ret;
+	TO_lib_ret_t ret = 0x9999;
 	ret = TO_data_last_command_duration(duration);
 	if (ret == TO_OK) {
 		TOH_LOG_DBG("%d µs", *duration);
+	} else {
+		TOH_LOG_DBG("%x ", ret);
 	}
 	return ret;
 #else
 	*duration = 0;
+	return TO_NOT_IMPLEMENTED;
+#endif
+}
+
+TO_lib_ret_t TODRV_HSE_trp_last_command_stack_usage(unsigned int *stack_depth)
+{
+#ifdef TODRV_HSE_I2C_WRAPPER_LAST_COMMAND_STACK_USAGE
+	TO_lib_ret_t ret = 0x9999;
+	ret = TO_data_last_command_stack_usage(stack_depth);
+	if (ret == TO_OK) {
+		TOH_LOG_DBG("%d bytes", *stack_depth);
+	} else {
+		TOH_LOG_DBG("%x ", ret);
+	}
+	return ret;
+#else
+	*stack_depth = 0;
 	return TO_NOT_IMPLEMENTED;
 #endif
 }
@@ -171,7 +187,7 @@ void TODRV_HSE_reset_command_data(void)
 static int _check_cmd_param_index(void)
 {
 	if (_cmd_param_index >= TODRV_HSE_CMD_MAX_PARAMS) {
-		TOH_LOG_ERR("error: command max parameters exceeded");
+		TOH_LOG_ERR("error: command max parameters exceeded", 0);
 		TODRV_HSE_reset_command_data();
 		return TO_MEMORY_ERROR;
 	}
@@ -187,7 +203,7 @@ TO_lib_ret_t TODRV_HSE_prepare_command_data(uint16_t offset,
 	if (TODRV_HSE_CMDHEAD_SIZE + offset + len
 			> TODRV_HSE_LIB_INTERNAL_IO_BUFFER_SIZE) {
 		TOH_LOG_ERR("error: command data length exceeds internal"
-			       " I/O buffer size");
+			       " I/O buffer size", 0);
 		TODRV_HSE_reset_command_data();
 		return TO_MEMORY_ERROR;
 	}
@@ -212,7 +228,7 @@ TO_lib_ret_t TODRV_HSE_prepare_command_data_byte(uint16_t offset, const char byt
 	if (TODRV_HSE_CMDHEAD_SIZE + offset
 			> TODRV_HSE_LIB_INTERNAL_IO_BUFFER_SIZE) {
 		TOH_LOG_ERR("error: command data byte exceeds internal"
-				" I/O buffer size");
+				" I/O buffer size", 0);
 		TODRV_HSE_reset_command_data();
 		return TO_MEMORY_ERROR;
 	}
@@ -236,7 +252,7 @@ TO_lib_ret_t TODRV_HSE_set_command_data(uint16_t offset, const char byte, uint16
 	if (TODRV_HSE_CMDHEAD_SIZE + offset + len
 			> TODRV_HSE_LIB_INTERNAL_IO_BUFFER_SIZE) {
 		TOH_LOG_ERR("error: command data range exceeds internal"
-				" I/O buffer size");
+				" I/O buffer size", 0);
 		TODRV_HSE_reset_command_data();
 		return TO_MEMORY_ERROR;
 	}
@@ -322,7 +338,7 @@ static TO_lib_ret_t _read_response(uint16_t len)
 	else
 		fullrsp_size = len;
 	if (fullrsp_size < len) {
-		TOH_LOG_ERR("data length overflow");
+		TOH_LOG_ERR("data length overflow", 0);
 
 		return TO_MEMORY_ERROR;
 	}
@@ -377,9 +393,10 @@ static void _prepare_command_data_buffer(void)
 	}
 }
 
-static TO_lib_ret_t _send_command(
-		const uint16_t cmd, uint16_t cmd_data_len,
-		uint16_t *resp_data_len, TO_se_ret_t *resp_status)
+static TO_lib_ret_t _send_command(const uint16_t cmd,
+		uint16_t cmd_data_len,
+		uint16_t *resp_data_len,
+		TO_se_ret_t *resp_status)
 {
 	uint16_t data_len;
 	unsigned int status;
@@ -411,7 +428,7 @@ static TO_lib_ret_t _send_command(
 	TO_secure_memcpy(TODRV_HSE_io_buffer + 2, (uint8_t*)&_cmd_data_len,
 			sizeof(_cmd_data_len));
 	TODRV_HSE_io_buffer[4] = 0x0; /* RESERVED */
-	TOH_LOG_DBG("write:");
+	TOH_LOG_DBG("write:", 0);
 	TOH_LOG_DBG_BUF(TODRV_HSE_io_buffer, data_len);
 
 	/* Write command and data */
@@ -450,13 +467,6 @@ static TO_lib_ret_t _send_command(
 	/* Receive response */
 	status = _read_response(data_len);
 
-	/* If read error, it may have occured after status transmission */
-	*resp_status = (TO_se_ret_t)TODRV_HSE_io_buffer[2];
-	_resp_data_len = (uint16_t*)TODRV_HSE_io_buffer;
-	*resp_data_len = be16toh(*_resp_data_len);
-	TOH_LOG_DBG("read:");
-	TOH_LOG_DBG_BUF(TODRV_HSE_io_buffer, (*resp_data_len) + TODRV_HSE_RSPHEAD_SIZE);
-
 	if (TO_OK != status) {
 		TOH_LOG_ERR("(cmd=%04X) read error %04X\n",
 				cmd, status);
@@ -466,13 +476,21 @@ static TO_lib_ret_t _send_command(
 			return TO_DEVICE_READ_ERROR;
 	}
 
+	/* If read error, it may have occured after status transmission */
+	*resp_status = (TO_se_ret_t)TODRV_HSE_io_buffer[2];
+	_resp_data_len = (uint16_t*)TODRV_HSE_io_buffer;
+	*resp_data_len = be16toh(*_resp_data_len);
+	TOH_LOG_DBG("read: %d bytes expected", *resp_data_len);
+	TOH_LOG_DBG_BUF(TODRV_HSE_io_buffer, (*resp_data_len) + TODRV_HSE_RSPHEAD_SIZE);
+
 	/* On command success, check size validity */
-	if (*resp_status == TORSP_SUCCESS
-			&& *resp_data_len > data_len - TODRV_HSE_RSPHEAD_SIZE) {
+	if ((*resp_status == TORSP_SUCCESS) &&
+			(*resp_data_len > data_len - TODRV_HSE_RSPHEAD_SIZE)) {
 		TOH_LOG_ERR("(cmd=%04X) read error, response length "
-				"(%uB) overflows buffer (%luB)",
+				"(%u bytes) overflows buffer (%lu bytes)",
 				cmd,
-				*resp_data_len, data_len - TODRV_HSE_RSPHEAD_SIZE);
+				*resp_data_len,
+				data_len - TODRV_HSE_RSPHEAD_SIZE);
 		return TO_INVALID_RESPONSE_LENGTH;
 	}
 
@@ -500,7 +518,7 @@ TO_lib_ret_t TODRV_HSE_send_command(const uint16_t cmd,
 
 			/* Retrying, just in case a communication error occured
 			 * while getting the new key */
-			TOH_LOG_ERR("retry secure link key renewal");
+			TOH_LOG_ERR("retry secure link key renewal", 0);
 			if (++renew_retries >= 3) {
 				TOH_LOG_ERR("secure link key renewal "
 						"failed %d retries, abort",
@@ -533,7 +551,7 @@ uint16_t TODRV_HSE_get_msg_data_size_max(enum msg_type type)
 					: TODRV_HSE_RSPHEAD_SIZE;
 
 	overhead_size = TODRV_HSE_seclink_compute_cmd_size(header_size);
-	
+
 	return buffer_size - overhead_size;
 }
 
@@ -552,5 +570,734 @@ void TODRV_HSE_set_lib_hook_post_command(TODRV_HSE_post_command_hook hook)
 	_post_command_hook = hook;
 }
 
-#endif /* TODRV_HSE_DRIVER_DISABLE */
+void TODRV_HSE_cmd_name_from_number(int number, char *name)
+{
+	switch (number) {
+		case TODRV_HSE_CMD_INIT:
+			strcpy(name, "INIT");
+			break;
 
+		case TODRV_HSE_CMD_ACCESS_DUMMY_DATA:
+			strcpy(name, "ACCESS_DUMMY_DATA");
+			break;
+
+		case TODRV_HSE_CMD_GET_SN:
+			strcpy(name, "GET_SN");
+			break;
+
+		case TODRV_HSE_CMD_GET_HW_SN:
+			strcpy(name, "GET_HW_SN");
+			break;
+
+		case TODRV_HSE_CMD_RES:
+			strcpy(name, "RES");
+			break;
+
+		case TODRV_HSE_CMD_GET_PN:
+			strcpy(name, "GET_PN");
+			break;
+
+		case TODRV_HSE_CMD_GET_HW_VERSION:
+			strcpy(name, "GET_HW_VERSION");
+			break;
+
+		case TODRV_HSE_CMD_GET_SW_VERSION:
+			strcpy(name, "GET_SW_VERSION");
+			break;
+
+		case TODRV_HSE_CMD_GET_PRODUCT_ID:
+			strcpy(name, "GET_PRODUCT_ID");
+			break;
+
+		case TODRV_HSE_CMD_GET_RANDOM:
+			strcpy(name, "GET_RANDOM");
+			break;
+
+		case TODRV_HSE_CMD_ECHO:
+			strcpy(name, "ECHO");
+			break;
+
+		case TODRV_HSE_CMD_SLEEP:
+			strcpy(name, "SLEEP");
+			break;
+
+		case TODRV_HSE_CMD_READ_NVM:
+			strcpy(name, "READ_NVM");
+			break;
+
+		case TODRV_HSE_CMD_WRITE_NVM:
+			strcpy(name, "WRITE_NVM");
+			break;
+
+		case TODRV_HSE_CMD_GET_NVM_SIZE:
+			strcpy(name, "GET_NVM_SIZE");
+			break;
+
+		case TODRV_HSE_CMD_SET_STATUS_PIO_CONFIG:
+			strcpy(name, "SET_STATUS_PIO_CONFIG");
+			break;
+
+		case TODRV_HSE_CMD_GET_STATUS_PIO_CONFIG:
+			strcpy(name, "GET_STATUS_PIO_CONFIG");
+			break;
+
+		case TODRV_HSE_CMD_SET_CERTIFICATE_SIGNING_REQUEST_DN:
+			strcpy(name, "SET_CERTIFICATE_SIGNING_REQUEST_DN");
+			break;
+
+		case TODRV_HSE_CMD_GET_CERTIFICATE_SIGNING_REQUEST:
+			strcpy(name, "GET_CERTIFICATE_SIGNING_REQUEST");
+			break;
+
+		case TODRV_HSE_CMD_GET_CERTIFICATE_SUBJECT_CN:
+			strcpy(name, "GET_CERTIFICATE_SUBJECT_CN");
+			break;
+
+		case TODRV_HSE_CMD_GET_CERTIFICATE:
+			strcpy(name, "GET_CERTIFICATE");
+			break;
+
+		case TODRV_HSE_CMD_SET_CERTIFICATE:
+			strcpy(name, "SET_CERTIFICATE");
+			break;
+
+		case TODRV_HSE_CMD_SET_CERTIFICATE_INIT:
+			strcpy(name, "SET_CERTIFICATE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_SET_CERTIFICATE_UPDATE:
+			strcpy(name, "SET_CERTIFICATE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_SET_CERTIFICATE_FINAL:
+			strcpy(name, "SET_CERTIFICATE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_GET_CERTIFICATE_INIT:
+			strcpy(name, "GET_CERTIFICATE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_GET_CERTIFICATE_UPDATE:
+			strcpy(name, "GET_CERTIFICATE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_GET_CERTIFICATE_FINAL:
+			strcpy(name, "GET_CERTIFICATE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_SIGN:
+			strcpy(name, "SIGN");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY:
+			strcpy(name, "VERIFY");
+			break;
+
+		case TODRV_HSE_CMD_SIGN_HASH:
+			strcpy(name, "SIGN_HASH");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_HASH_SIGNATURE:
+			strcpy(name, "VERIFY_HASH_SIGNATURE");
+			break;
+
+		case TODRV_HSE_CMD_GET_CERTIFICATE_AND_SIGN:
+			strcpy(name, "GET_CERTIFICATE_AND_SIGN");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_CERTIFICATE_AND_STORE:
+			strcpy(name, "VERIFY_CERTIFICATE_AND_STORE");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_CA_CERTIFICATE_AND_STORE:
+			strcpy(name, "VERIFY_CA_CERTIFICATE_AND_STORE");
+			break;
+
+		case TODRV_HSE_CMD_GET_CHALLENGE_AND_STORE:
+			strcpy(name, "GET_CHALLENGE_AND_STORE");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_CHALLENGE_SIGNATURE:
+			strcpy(name, "VERIFY_CHALLENGE_SIGNATURE");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_INIT:
+			strcpy(name, "VERIFY_CHAIN_CERTIFICATE_AND_STORE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_UPDATE:
+			strcpy(name, "VERIFY_CHAIN_CERTIFICATE_AND_STORE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_FINAL:
+			strcpy(name, "VERIFY_CHAIN_CERTIFICATE_AND_STORE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_INIT:
+			strcpy(name, "VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_UPDATE:
+			strcpy(name, "VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_FINAL:
+			strcpy(name, "VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_COMPUTE_HMAC:
+			strcpy(name, "COMPUTE_HMAC");
+			break;
+
+		case TODRV_HSE_CMD_COMPUTE_HMAC_INIT:
+			strcpy(name, "COMPUTE_HMAC_INIT");
+			break;
+
+		case TODRV_HSE_CMD_COMPUTE_HMAC_UPDATE:
+			strcpy(name, "COMPUTE_HMAC_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_COMPUTE_HMAC_FINAL:
+			strcpy(name, "COMPUTE_HMAC_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_HMAC:
+			strcpy(name, "VERIFY_HMAC");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_HMAC_INIT:
+			strcpy(name, "VERIFY_HMAC_INIT");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_HMAC_UPDATE:
+			strcpy(name, "VERIFY_HMAC_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_HMAC_FINAL:
+			strcpy(name, "VERIFY_HMAC_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_AES128CBC_ENCRYPT:
+			strcpy(name, "AES128CBC_ENCRYPT");
+			break;
+
+		case TODRV_HSE_CMD_AES128CBC_DECRYPT:
+			strcpy(name, "AES128CBC_DECRYPT");
+			break;
+
+		case TODRV_HSE_CMD_AES128CBC_IV_ENCRYPT:
+			strcpy(name, "AES128CBC_IV_ENCRYPT");
+			break;
+
+		case TODRV_HSE_CMD_AES128GCM_ENCRYPT:
+			strcpy(name, "AES128GCM_ENCRYPT");
+			break;
+
+		case TODRV_HSE_CMD_AES128GCM_DECRYPT:
+			strcpy(name, "AES128GCM_DECRYPT");
+			break;
+
+		case TODRV_HSE_CMD_AES128CCM_ENCRYPT:
+			strcpy(name, "AES128CCM_ENCRYPT");
+			break;
+
+		case TODRV_HSE_CMD_AES128CCM_DECRYPT:
+			strcpy(name, "AES128CCM_DECRYPT");
+			break;
+
+		case TODRV_HSE_CMD_AES128ECB_ENCRYPT:
+			strcpy(name, "AES128ECB_ENCRYPT");
+			break;
+
+		case TODRV_HSE_CMD_AES128ECB_DECRYPT:
+			strcpy(name, "AES128ECB_DECRYPT");
+			break;
+
+		case TODRV_HSE_CMD_COMPUTE_CMAC:
+			strcpy(name, "COMPUTE_CMAC");
+			break;
+
+		case TODRV_HSE_CMD_VERIFY_CMAC:
+			strcpy(name, "VERIFY_CMAC");
+			break;
+
+		case TODRV_HSE_CMD_SHA256:
+			strcpy(name, "SHA256");
+			break;
+
+		case TODRV_HSE_CMD_SHA256_INIT:
+			strcpy(name, "SHA256_INIT");
+			break;
+
+		case TODRV_HSE_CMD_SHA256_UPDATE:
+			strcpy(name, "SHA256_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_SHA256_FINAL:
+			strcpy(name, "SHA256_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_AES128CBC_HMAC_SECURE_MESSAGE:
+			strcpy(name, "AES128CBC_HMAC_SECURE_MESSAGE");
+			break;
+
+		case TODRV_HSE_CMD_AES128CBC_HMAC_UNSECURE_MESSAGE:
+			strcpy(name, "AES128CBC_HMAC_UNSECURE_MESSAGE");
+			break;
+
+		case TODRV_HSE_CMD_AES128CBC_CMAC_SECURE_MESSAGE:
+			strcpy(name, "AES128CBC_CMAC_SECURE_MESSAGE");
+			break;
+
+		case TODRV_HSE_CMD_AES128CBC_CMAC_UNSECURE_MESSAGE:
+			strcpy(name, "AES128CBC_CMAC_UNSECURE_MESSAGE");
+			break;
+
+		case TODRV_HSE_CMD_SET_REMOTE_PUBLIC_KEY:
+			strcpy(name, "SET_REMOTE_PUBLIC_KEY");
+			break;
+
+		case TODRV_HSE_CMD_RENEW_ECC_KEYS:
+			strcpy(name, "RENEW_ECC_KEYS");
+			break;
+
+		case TODRV_HSE_CMD_GET_PUBLIC_KEY:
+			strcpy(name, "GET_PUBLIC_KEY");
+			break;
+
+		case TODRV_HSE_CMD_GET_UNSIGNED_PUBLIC_KEY:
+			strcpy(name, "GET_UNSIGNED_PUBLIC_KEY");
+			break;
+
+		case TODRV_HSE_CMD_RENEW_SHARED_KEYS:
+			strcpy(name, "RENEW_SHARED_KEYS");
+			break;
+
+		case TODRV_HSE_CMD_GET_KEY_FINGERPRINT:
+			strcpy(name, "GET_KEY_FINGERPRINT");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_RANDOM_AND_STORE:
+			strcpy(name, "TLS_GET_RANDOM_AND_STORE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_RENEW_KEYS:
+			strcpy(name, "TLS_RENEW_KEYS");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_MASTER_SECRET:
+			strcpy(name, "TLS_GET_MASTER_SECRET");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_MASTER_SECRET_DERIVED_KEYS:
+			strcpy(name, "TLS_GET_MASTER_SECRET_DERIVED_KEYS");
+			break;
+
+		case TODRV_HSE_CMD_TLS_SET_SERVER_RANDOM:
+			strcpy(name, "TLS_SET_SERVER_RANDOM");
+			break;
+
+		case TODRV_HSE_CMD_TLS_SET_SERVER_EPUBLIC_KEY:
+			strcpy(name, "TLS_SET_SERVER_EPUBLIC_KEY");
+			break;
+
+		case TODRV_HSE_CMD_TLS_RENEW_KEYS_ECDHE:
+			strcpy(name, "TLS_RENEW_KEYS_ECDHE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_CALCULATE_FINISHED:
+			strcpy(name, "TLS_CALCULATE_FINISHED");
+			break;
+
+		case TODRV_HSE_CMD_TLS_RESET:
+			strcpy(name, "TLS_RESET");
+			break;
+
+		case TODRV_HSE_CMD_TLS_SET_MODE:
+			strcpy(name, "TLS_SET_MODE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_SET_CONFIG:
+			strcpy(name, "TLS_SET_CONFIG");
+			break;
+
+		case TODRV_HSE_CMD_TLS_SET_SESSION:
+			strcpy(name, "TLS_SET_SESSION");
+			break;
+
+		case TODRV_HSE_CMD_TLS_SET_CONNECTION_ID_EXT_ID:
+			strcpy(name, "TLS_SET_CONNECTION_ID_EXT_ID");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO:
+			strcpy(name, "TLS_GET_CLIENT_HELLO");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_INIT:
+			strcpy(name, "TLS_GET_CLIENT_HELLO_INIT");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_UPDATE:
+			strcpy(name, "TLS_GET_CLIENT_HELLO_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_FINAL:
+			strcpy(name, "TLS_GET_CLIENT_HELLO_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_HELLO_VERIFY_REQUEST:
+			strcpy(name, "TLS_HANDLE_HELLO_VERIFY_REQUEST");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO:
+			strcpy(name, "TLS_HANDLE_SERVER_HELLO");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_INIT:
+			strcpy(name, "TLS_HANDLE_SERVER_HELLO_INIT");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_UPDATE:
+			strcpy(name, "TLS_HANDLE_SERVER_HELLO_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_FINAL:
+			strcpy(name, "TLS_HANDLE_SERVER_HELLO_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE:
+			strcpy(name, "TLS_HANDLE_SERVER_CERTIFICATE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_INIT:
+			strcpy(name, "TLS_HANDLE_SERVER_CERTIFICATE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_UPDATE:
+			strcpy(name, "TLS_HANDLE_SERVER_CERTIFICATE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_FINAL:
+			strcpy(name, "TLS_HANDLE_SERVER_CERTIFICATE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE:
+			strcpy(name, "TLS_HANDLE_SERVER_KEY_EXCHANGE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_INIT:
+			strcpy(name, "TLS_HANDLE_SERVER_KEY_EXCHANGE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_UPDATE:
+			strcpy(name, "TLS_HANDLE_SERVER_KEY_EXCHANGE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_FINAL:
+			strcpy(name, "TLS_HANDLE_SERVER_KEY_EXCHANGE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_CERTIFICATE_REQUEST:
+			strcpy(name, "TLS_HANDLE_CERTIFICATE_REQUEST");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_DONE:
+			strcpy(name, "TLS_HANDLE_SERVER_HELLO_DONE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_MEDIATOR_CERTIFICATE:
+			strcpy(name, "TLS_HANDLE_MEDIATOR_CERTIFICATE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CERTIFICATE:
+			strcpy(name, "TLS_GET_CERTIFICATE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CERTIFICATE_INIT:
+			strcpy(name, "TLS_GET_CERTIFICATE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CERTIFICATE_UPDATE:
+			strcpy(name, "TLS_GET_CERTIFICATE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CERTIFICATE_FINAL:
+			strcpy(name, "TLS_GET_CERTIFICATE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CLIENT_KEY_EXCHANGE:
+			strcpy(name, "TLS_GET_CLIENT_KEY_EXCHANGE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CERTIFICATE_VERIFY:
+			strcpy(name, "TLS_GET_CERTIFICATE_VERIFY");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CHANGE_CIPHER_SPEC:
+			strcpy(name, "TLS_GET_CHANGE_CIPHER_SPEC");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_FINISHED:
+			strcpy(name, "TLS_GET_FINISHED");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_CHANGE_CIPHER_SPEC:
+			strcpy(name, "TLS_HANDLE_CHANGE_CIPHER_SPEC");
+			break;
+
+		case TODRV_HSE_CMD_TLS_HANDLE_FINISHED:
+			strcpy(name, "TLS_HANDLE_FINISHED");
+			break;
+
+		case TODRV_HSE_CMD_TLS_GET_CERTIFICATE_SLOT:
+			strcpy(name, "TLS_GET_CERTIFICATE_SLOT");
+			break;
+
+		case TODRV_HSE_CMD_TLS_SECURE_MESSAGE:
+			strcpy(name, "TLS_SECURE_MESSAGE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_SECURE_MESSAGE_INIT:
+			strcpy(name, "TLS_SECURE_MESSAGE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_TLS_SECURE_MESSAGE_UPDATE:
+			strcpy(name, "TLS_SECURE_MESSAGE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_SECURE_MESSAGE_FINAL:
+			strcpy(name, "TLS_SECURE_MESSAGE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE:
+			strcpy(name, "TLS_UNSECURE_MESSAGE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_INIT:
+			strcpy(name, "TLS_UNSECURE_MESSAGE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_UPDATE:
+			strcpy(name, "TLS_UNSECURE_MESSAGE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_FINAL:
+			strcpy(name, "TLS_UNSECURE_MESSAGE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_SECURE_MESSAGE:
+			strcpy(name, "SECURE_MESSAGE");
+			break;
+
+		case TODRV_HSE_CMD_SECURE_MESSAGE_INIT:
+			strcpy(name, "SECURE_MESSAGE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_SECURE_MESSAGE_UPDATE:
+			strcpy(name, "SECURE_MESSAGE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_SECURE_MESSAGE_FINAL:
+			strcpy(name, "SECURE_MESSAGE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_UNSECURE_MESSAGE:
+			strcpy(name, "UNSECURE_MESSAGE");
+			break;
+
+		case TODRV_HSE_CMD_UNSECURE_MESSAGE_INIT:
+			strcpy(name, "UNSECURE_MESSAGE_INIT");
+			break;
+
+		case TODRV_HSE_CMD_UNSECURE_MESSAGE_UPDATE:
+			strcpy(name, "UNSECURE_MESSAGE_UPDATE");
+			break;
+
+		case TODRV_HSE_CMD_UNSECURE_MESSAGE_FINAL:
+			strcpy(name, "UNSECURE_MESSAGE_FINAL");
+			break;
+
+		case TODRV_HSE_CMD_LORA_GET_APPEUI:
+			strcpy(name, "LORA_GET_APPEUI");
+			break;
+
+		case TODRV_HSE_CMD_LORA_GET_DEVEUI:
+			strcpy(name, "LORA_GET_DEVEUI");
+			break;
+
+		case TODRV_HSE_CMD_LORA_COMPUTE_MIC:
+			strcpy(name, "LORA_COMPUTE_MIC");
+			break;
+
+		case TODRV_HSE_CMD_LORA_ENCRYPT_PAYLOAD:
+			strcpy(name, "LORA_ENCRYPT_PAYLOAD");
+			break;
+
+		case TODRV_HSE_CMD_LORA_DECRYPT_JOIN:
+			strcpy(name, "LORA_DECRYPT_JOIN");
+			break;
+
+		case TODRV_HSE_CMD_LORA_COMPUTE_SHARED_KEYS:
+			strcpy(name, "LORA_COMPUTE_SHARED_KEYS");
+			break;
+
+		case TODRV_HSE_CMD_LORA_GET_DEVADDR:
+			strcpy(name, "LORA_GET_DEVADDR");
+			break;
+
+		case TODRV_HSE_CMD_LORA_GET_JOIN_REQUEST:
+			strcpy(name, "LORA_GET_JOIN_REQUEST");
+			break;
+
+		case TODRV_HSE_CMD_LORA_HANDLE_JOIN_ACCEPT:
+			strcpy(name, "LORA_HANDLE_JOIN_ACCEPT");
+			break;
+
+		case TODRV_HSE_CMD_LORA_SECURE_PHYPAYLOAD:
+			strcpy(name, "LORA_SECURE_PHYPAYLOAD");
+			break;
+
+		case TODRV_HSE_CMD_LORA_UNSECURE_PHYPAYLOAD:
+			strcpy(name, "LORA_UNSECURE_PHYPAYLOAD");
+			break;
+
+		case TODRV_HSE_CMD_SET_PRE_PERSONALIZATION_DATA:
+			strcpy(name, "SET_PRE_PERSONALIZATION_DATA");
+			break;
+
+		case TODRV_HSE_CMD_SET_NEXT_STATE:
+			strcpy(name, "SET_NEXT_STATE");
+			break;
+
+		case TODRV_HSE_CMD_GET_STATE:
+			strcpy(name, "GET_STATE");
+			break;
+
+		case TODRV_HSE_CMD_ADMIN_SET_SLOT:
+			strcpy(name, "ADMIN_SET_SLOT");
+			break;
+
+		case TODRV_HSE_CMD_INIT_ADMIN_SESSION:
+			strcpy(name, "INIT_ADMIN_SESSION");
+			break;
+
+		case TODRV_HSE_CMD_AUTH_ADMIN_SESSION:
+			strcpy(name, "AUTH_ADMIN_SESSION");
+			break;
+
+		case TODRV_HSE_CMD_FINI_ADMIN_SESSION:
+			strcpy(name, "FINI_ADMIN_SESSION");
+			break;
+
+		case TODRV_HSE_CMD_ADMIN_COMMAND:
+			strcpy(name, "ADMIN_COMMAND");
+			break;
+
+		case TODRV_HSE_CMD_ADMIN_COMMAND_WITH_RESPONSE:
+			strcpy(name, "ADMIN_COMMAND_WITH_RESPONSE");
+			break;
+
+		case TODRV_HSE_CMD_LOCK:
+			strcpy(name, "LOCK");
+			break;
+
+		case TODRV_HSE_CMD_UNLOCK:
+			strcpy(name, "UNLOCK");
+			break;
+
+		case TODRV_HSE_CMD_SET_AES_KEY:
+			strcpy(name, "SET_AES_KEY");
+			break;
+
+		case TODRV_HSE_CMD_SET_HMAC_KEY:
+			strcpy(name, "SET_HMAC_KEY");
+			break;
+
+		case TODRV_HSE_CMD_SET_CMAC_KEY:
+			strcpy(name, "SET_CMAC_KEY");
+			break;
+
+		case TODRV_HSE_CMD_SECLINK_ARC4:
+			strcpy(name, "SECLINK_ARC4");
+			break;
+
+		case TODRV_HSE_CMD_SECLINK_ARC4_GET_IV:
+			strcpy(name, "SECLINK_ARC4_GET_IV");
+			break;
+
+		case TODRV_HSE_CMD_SECLINK_ARC4_GET_NEW_KEY:
+			strcpy(name, "SECLINK_ARC4_GET_NEW_KEY");
+			break;
+
+		case TODRV_HSE_CMD_SECLINK_AESHMAC:
+			strcpy(name, "SECLINK_AESHMAC");
+			break;
+
+		case TODRV_HSE_CMD_SECLINK_AESHMAC_GET_IV:
+			strcpy(name, "SECLINK_AESHMAC_GET_IV");
+			break;
+
+		case TODRV_HSE_CMD_SECLINK_AESHMAC_GET_NEW_KEYS:
+			strcpy(name, "SECLINK_AESHMAC_GET_NEW_KEYS");
+			break;
+
+		case TODRV_HSE_CMD_LOADER_BCAST_GET_INFO:
+			strcpy(name, "LOADER_BCAST_GET_INFO");
+			break;
+
+		case TODRV_HSE_CMD_LOADER_BCAST_RESTORE:
+			strcpy(name, "LOADER_BCAST_RESTORE");
+			break;
+
+		case TODRV_HSE_CMD_LOADER_BCAST_INITIALIZE_UPGRADE:
+			strcpy(name, "LOADER_BCAST_INITIALIZE_UPGRADE");
+			break;
+
+		case TODRV_HSE_CMD_LOADER_BCAST_WRITE_DATA:
+			strcpy(name, "LOADER_BCAST_WRITE_DATA");
+			break;
+
+		case TODRV_HSE_CMD_LOADER_BCAST_COMMIT_RELEASE:
+			strcpy(name, "LOADER_BCAST_COMMIT_RELEASE");
+			break;
+
+		case TODRV_HSE_CMD_DATA_MIGRATION:
+			strcpy(name, "DATA_MIGRATION");
+			break;
+
+		case TODRV_HSE_CMD_SET_MEASURE_BOOT         :
+			strcpy(name, "SET_MEASURE_BOOT         ");
+			break;
+
+		case TODRV_HSE_CMD_VALIDATE_NEW_FW_HASH     :
+			strcpy(name, "VALIDATE_NEW_FW_HASH     ");
+			break;
+
+		case TODRV_HSE_CMD_COMMIT_NEW_FW_HASH       :
+			strcpy(name, "COMMIT_NEW_FW_HASH       ");
+			break;
+
+		case TODRV_HSE_CMD_STORE_NEW_TRUSTED_FW_HASH:
+			strcpy(name, "STORE_NEW_TRUSTED_FW_HASH");
+			break;
+
+		case TODRV_HSE_CMD_GET_BOOT_MEASUREMENT     :
+			strcpy(name, "GET_BOOT_MEASUREMENT     ");
+			break;
+
+		case TODRV_HSE_CMD_GET_SE_MEASUREMENT     :
+			strcpy(name, "GET_SE_MEASUREMENT     ");
+			break;
+
+		case TODRV_HSE_CMD_INVALIDATE_NEW_HASH      :
+			strcpy(name, "INVALIDATE_NEW_HASH      ");
+			break;
+
+		default:
+			strcpy(name,"**UNK**");
+			break;
+	}
+
+}
+
+#endif /* TODRV_HSE_DRIVER_DISABLE */

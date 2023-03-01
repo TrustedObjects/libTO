@@ -328,7 +328,7 @@ TO_lib_ret_t TODRV_SSE_nvm_self_test(void)
 	// Getting the TO-Protect's context
 	TOSE_ctx_t *ctx = TODRV_SSE_get_ctx();
 	TO_lib_ret_t ret;
-	uint8_t *ram_buffer = (uint8_t *)(((TOP_ext_ctx_t*)ctx->drv->priv_ctx)->secure_storage->ram_buffer);
+	uint8_t *ram_buffer = (uint8_t *)(((TOP_ext_ctx_t*)ctx->drv->priv_ctx)->secure_storage->storage.raw_ram_buffer);
 	int stage;
 	int reason_code;
 

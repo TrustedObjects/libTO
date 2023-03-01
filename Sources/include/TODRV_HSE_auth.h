@@ -57,8 +57,7 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate_signing_request(
 		uint8_t* csr,
 		uint16_t* size);
 
-TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate(
-		TODRV_HSE_ctx_t *ctx,
+TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate(TODRV_HSE_ctx_t *ctx,
 		const uint8_t certificate_index,
 		const TO_certificate_format_t format,
 		uint8_t* certificate);

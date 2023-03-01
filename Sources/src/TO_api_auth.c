@@ -18,7 +18,6 @@
 #include "TO_cfg.h"
 #ifndef TODRV_HSE_DRIVER_DISABLE
 
-#include "TO_cfg.h"
 #include "TO_defs.h"
 #include "TO_retcodes.h"
 #include "TO_log.h"
@@ -105,7 +104,7 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate_signing_request(
 		return ret;
 	ret = TODRV_HSE_send_command(TODRV_HSE_CMD_GET_CERTIFICATE_SIGNING_REQUEST,
 			1, &resp_data_len, &resp_status);
-	if (TO_OK != ret || TORSP_SUCCESS != resp_status)
+	if ((ret != TO_OK) || (resp_status != TORSP_SUCCESS))
 		return ret | resp_status;
 
 	if (csr != NULL) {
@@ -117,8 +116,10 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate_signing_request(
 #endif
 
 #ifndef TO_DISABLE_API_GET_CERTIFICATE
-TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate(TODRV_HSE_ctx_t *ctx, const uint8_t certificate_index,
-		const TO_certificate_format_t format, uint8_t* certificate)
+TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate(TODRV_HSE_ctx_t *ctx,
+		const uint8_t certificate_index,
+		const TO_certificate_format_t format,
+		uint8_t* certificate)
 {
 	TO_lib_ret_t ret;
 	TO_se_ret_t resp_status;
@@ -127,17 +128,25 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate(TODRV_HSE_ctx_t *ctx, cons
 	(void)ctx;
 
 	switch (format) {
-	case TO_CERTIFICATE_STANDALONE:
-		resp_data_len = sizeof(TO_cert_standalone_t);
-		break;
-	case TO_CERTIFICATE_SHORT:
-		resp_data_len = sizeof(TO_cert_short_t);
-		break;
-	case TO_CERTIFICATE_X509:
-	default:
-		TOH_LOG_ERR("unsupported certificate format 0x%02X\n",
-				format);
-		return TO_INVALID_CERTIFICATE_FORMAT;
+		case TO_CERTIFICATE_STANDALONE:
+			resp_data_len = sizeof(TO_cert_standalone_t);
+			break;
+
+		case TO_CERTIFICATE_SHORT:
+			resp_data_len = sizeof(TO_cert_short_t);
+			break;
+
+		case TO_CERTIFICATE_X509:
+			resp_data_len = 1024;
+			break;
+
+		case TO_CERTIFICATE_SHORT_V2:
+			resp_data_len = sizeof(TO_cert_short_v2_t);
+			break;
+
+		default:
+			resp_data_len = 0;
+			break;
 	}
 
 	ret = TODRV_HSE_prepare_command_data_byte(0, certificate_index);
@@ -146,7 +155,7 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate(TODRV_HSE_ctx_t *ctx, cons
 		return ret;
 	ret = TODRV_HSE_send_command(TODRV_HSE_CMD_GET_CERTIFICATE, 2,
 			&resp_data_len, &resp_status);
-	if (TO_OK != ret || TORSP_SUCCESS != resp_status)
+	if ((TO_OK != ret) || (TORSP_SUCCESS != resp_status))
 		return ret | resp_status;
 
 	TO_secure_memcpy(certificate, TODRV_HSE_response_data, resp_data_len);
@@ -155,8 +164,10 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate(TODRV_HSE_ctx_t *ctx, cons
 #endif
 
 #ifndef TO_DISABLE_API_GET_CERTIFICATE_X509
-TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate_x509(TODRV_HSE_ctx_t *ctx, const uint8_t certificate_index,
-		uint8_t* certificate, uint16_t* size)
+TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate_x509(TODRV_HSE_ctx_t *ctx,
+		const uint8_t certificate_index,
+		uint8_t* certificate,
+		uint16_t* size)
 {
 	TO_lib_ret_t ret;
 	TO_se_ret_t resp_status;
@@ -167,16 +178,18 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate_x509(TODRV_HSE_ctx_t *ctx,
 	resp_data_len = TODRV_HSE_RSP_MAXSIZE;
 	ret = TODRV_HSE_prepare_command_data_byte(0, certificate_index);
 	ret |= TODRV_HSE_prepare_command_data_byte(1, TOCERTF_X509);
-	if (TO_OK != ret)
+	if (TO_OK != ret) {
 		return ret;
-	ret = TODRV_HSE_send_command(TODRV_HSE_CMD_GET_CERTIFICATE, 2,
+	}
+	ret = TODRV_HSE_send_command(TODRV_HSE_CMD_GET_CERTIFICATE_X509, 2,
 			&resp_data_len, &resp_status);
-	if (TO_OK != ret || TORSP_SUCCESS != resp_status)
+	if ((ret != TO_OK) || (resp_status != TORSP_SUCCESS))
 		return ret | resp_status;
 
 	if (certificate != NULL) {
 		TO_secure_memcpy(certificate, TODRV_HSE_response_data, resp_data_len);
 	}
+	TOH_LOG_INF("LENGTH %d %x\n", resp_data_len, resp_status);
 	*size = resp_data_len;
 	return resp_status;
 }
@@ -204,7 +217,7 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_set_certificate_x509(
 	if (TO_OK != ret)
 		return ret;
 
-	ret = TODRV_HSE_send_command(TODRV_HSE_CMD_SET_CERTIFICATE,
+	ret = TODRV_HSE_send_command(TODRV_HSE_CMD_SET_CERTIFICATE_X509,
 			len, &resp_data_len, &resp_status);
 
 	return ret | resp_status;
@@ -273,10 +286,13 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_set_certificate_x509_final(
 #endif
 
 #ifndef TO_DISABLE_API_GET_CERTIFICATE_AND_SIGN
-TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate_and_sign(TODRV_HSE_ctx_t *ctx, const uint8_t certificate_index,
+TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate_and_sign(TODRV_HSE_ctx_t *ctx,
+		const uint8_t certificate_index,
 		const TO_certificate_format_t format,
-		const uint8_t* challenge, const uint16_t challenge_length,
-		uint8_t* certificate, uint8_t* signature)
+		const uint8_t* challenge,
+		const uint16_t challenge_length,
+		uint8_t* certificate,
+		uint8_t* signature)
 {
 	TO_lib_ret_t ret;
 	TO_se_ret_t resp_status;
@@ -286,16 +302,17 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_certificate_and_sign(TODRV_HSE_ctx_t *
 	(void)ctx;
 
 	switch (format) {
-	case TO_CERTIFICATE_STANDALONE:
-		resp_data_len = sizeof(TO_cert_standalone_t);
-	break;
-	case TO_CERTIFICATE_SHORT:
-		resp_data_len = sizeof(TO_cert_short_t);
-	break;
-	case TO_CERTIFICATE_X509:
-	default:
-		TOH_LOG_ERR("unsupported certificate format",0);
-		return TO_INVALID_CERTIFICATE_FORMAT;
+		case TO_CERTIFICATE_STANDALONE:
+			resp_data_len = sizeof(TO_cert_standalone_t);
+			break;
+
+		case TO_CERTIFICATE_SHORT:
+			resp_data_len = sizeof(TO_cert_short_t);
+			break;
+
+		case TO_CERTIFICATE_X509:
+		default:
+			break;
 	}
 	resp_data_len += TO_SIGNATURE_SIZE;
 
@@ -451,9 +468,8 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_certificate_and_store(TODRV_HSE_ctx
 			break;
 		}
 		default:
-			TOH_LOG_ERR("unsupported certificate format "
-					"0x%02X\n", format);
-			return TO_INVALID_CERTIFICATE_FORMAT;
+			cert_size = 0;
+			break;
 	}
 	cmd_len += cert_size;
 
@@ -513,7 +529,7 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_get_challenge_and_store(TODRV_HSE_ctx_t *c
 #endif
 
 #ifndef TO_DISABLE_API_VERIFY_CHALLENGE_SIGNATURE
-TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_challenge_signature(TODRV_HSE_ctx_t *ctx, 
+TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_challenge_signature(TODRV_HSE_ctx_t *ctx,
 		const uint8_t signature[TO_SIGNATURE_SIZE])
 {
 	TO_lib_ret_t ret;
@@ -535,7 +551,7 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_challenge_signature(TODRV_HSE_ctx_t
 #endif
 
 #ifndef TO_DISABLE_API_VERIFY_CHAIN_CERTIFICATE_AND_STORE
-TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_certificate_and_store_init(TODRV_HSE_ctx_t *ctx, 
+TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_certificate_and_store_init(TODRV_HSE_ctx_t *ctx,
 		const uint8_t ca_key_index)
 {
 	TO_lib_ret_t ret;
@@ -553,7 +569,7 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_certificate_and_store_init(TO
 	return ret | resp_status;
 }
 
-TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_certificate_and_store_update(TODRV_HSE_ctx_t *ctx, 
+TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_certificate_and_store_update(TODRV_HSE_ctx_t *ctx,
 		const uint8_t *chain_certificate,
 		const uint16_t chain_certificate_length)
 {
@@ -589,7 +605,7 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_certificate_and_store_final(T
 #endif
 
 #ifndef TO_DISABLE_API_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE
-TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_ca_certificate_and_store_init(TODRV_HSE_ctx_t *ctx, 
+TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_ca_certificate_and_store_init(TODRV_HSE_ctx_t *ctx,
 		const uint8_t ca_key_index, const uint8_t subca_key_index)
 {
 	TO_lib_ret_t ret;
@@ -608,7 +624,7 @@ TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_ca_certificate_and_store_init
 	return ret | resp_status;
 }
 
-TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_ca_certificate_and_store_update(TODRV_HSE_ctx_t *ctx, 
+TODRV_HSE_AUTH_API TO_ret_t TODRV_HSE_verify_chain_ca_certificate_and_store_update(TODRV_HSE_ctx_t *ctx,
 		const uint8_t *chain_certificate,
 		const uint16_t chain_certificate_length)
 {

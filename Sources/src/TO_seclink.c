@@ -18,7 +18,6 @@
 #include "TO_cfg.h"
 #ifndef TODRV_HSE_DRIVER_DISABLE
 
-#include "TO_cfg.h"
 #include "TO_stdint.h"
 #include "TO_retcodes.h"
 

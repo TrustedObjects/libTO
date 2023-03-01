@@ -26,7 +26,7 @@ extern "C" {
 #endif
 
 // Defines the number of bytes lost at the end of a secure storage bank
-#define SECTOR_LOST_BYTES (TODRV_SSE_NVM_SECTOR_SIZE - (TOP_SECURE_STORAGE_NVM_FOOTPRINT % TODRV_SSE_NVM_SECTOR_SIZE))
+#define SECTOR_LOST_BYTES (TOP_SECURE_STORAGE_NVM_FOOTPRINT - ((TOP_SECURE_STORAGE_NVM_FOOTPRINT / TODRV_SSE_NVM_SECTOR_SIZE) * TODRV_SSE_NVM_SECTOR_SIZE))
 
 // Defines the total Size of the secure storage (including the 2 tearing zones)
 #define TOP_SECURE_TOTAL_NVM_SIZE (2 * (TOP_SECURE_STORAGE_NVM_FOOTPRINT) + SECTOR_LOST_BYTES)

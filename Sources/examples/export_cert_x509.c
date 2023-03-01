@@ -21,6 +21,9 @@
 #include <errno.h>
 #include <string.h>
 #include "TO.h"
+#ifdef TOSE_DRIVER_SSE
+#include "TOP.h"
+#endif
 
 void print_usage(char *bin_name)
 {
@@ -33,7 +36,7 @@ int main(int argc, char *argv[])
 	unsigned int i;
 	int ret;
 	uint8_t index;
-	uint8_t certificate[TO_CERT_X509_MAXSIZE];
+	uint8_t certificate[TOP_CERT_X509_MAXSIZE];
 	uint16_t size;
 	char *output_file;
 	FILE *f;

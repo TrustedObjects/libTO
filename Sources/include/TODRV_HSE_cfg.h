@@ -70,6 +70,11 @@
 #define TODRV_HSE_I2C_WRAPPER_LAST_COMMAND_DURATION 1
 #endif
 
+#ifndef TODRV_HSE_I2C_WRAPPER_LAST_COMMAND_STACK_USAGE
+/* wrapper accepts I2C last stack depth */
+/* #undef TODRV_HSE_I2C_WRAPPER_LAST_COMMAND_STACK_USAGE */
+#endif
+
 #ifndef TODRV_HSE_ENABLE_I2C_NET_BRIDGE_TLS
 /* I2C net_bridge TLS enabled */
 #define TODRV_HSE_ENABLE_I2C_NET_BRIDGE_TLS 1
@@ -83,6 +88,11 @@
 #ifndef TODRV_HSE_ENABLE_I2C_SERIAL
 /* Fake I2C on serial port enabled */
 /* #undef TODRV_HSE_ENABLE_I2C_SERIAL */
+#endif
+
+#ifndef TODRV_HSE_INTERFACE_TO_SSE
+/* Interface to the SSE */
+/* #undef TODRV_HSE_INTERFACE_TO_SSE */
 #endif
 
 /*

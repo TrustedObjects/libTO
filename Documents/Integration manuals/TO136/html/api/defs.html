@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Types and definitions &#8212; libTO 6.3.9 documentation</title>
+    <title>Types and definitions &#8212; libTO 6.3.10 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -41,7 +41,7 @@
 
 
 
-<p class="blurb">release 6.3.9<br />doc</p>
+<p class="blurb">release 6.3.10<br />doc</p>
 
 
 
@@ -480,6 +480,16 @@ library error codes in one single variable. See
 <dd></dd></dl>
 
 <dl class="c macro">
+<dt class="sig sig-object c" id="c.TOCERTF_NONE">
+<span class="target" id="group__certificates_1ga880b0e375e551183d4be170a151f45b4"></span><span class="sig-name descname"><span class="n"><span class="pre">TOCERTF_NONE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">char)0xFF)</span><a class="headerlink" href="#c.TOCERTF_NONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TOCERTF_UNKNOWN">
+<span class="target" id="group__certificates_1ga0fb7a3f908bcd46b223964f8206e875f"></span><span class="sig-name descname"><span class="n"><span class="pre">TOCERTF_UNKNOWN</span></span></span> <span class="pre">((unsigned</span> <span class="pre">char)0xFE)</span><a class="headerlink" href="#c.TOCERTF_UNKNOWN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
 <dt class="sig sig-object c" id="c.TOCERTF_VALIDITY_DATE_SIZE">
 <span class="target" id="group__certificates_1ga692a83aa3e60fac219ef54c38863ed9b"></span><span class="sig-name descname"><span class="n"><span class="pre">TOCERTF_VALIDITY_DATE_SIZE</span></span></span> <span class="pre">7UL</span><a class="headerlink" href="#c.TOCERTF_VALIDITY_DATE_SIZE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
@@ -574,6 +584,16 @@ library error codes in one single variable. See
 <dl class="c enumerator">
 <dt class="sig sig-object c" id="c.TO_certificate_format_e.TO_CERTIFICATE_SHORT_V2">
 <span class="target" id="group__certificates_1ggae1ee08b7bc0a71de36fefa7c01997772aed931768a9cf87e64fc5c59e82fe2114"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERTIFICATE_SHORT_V2</span></span></span><a class="headerlink" href="#c.TO_certificate_format_e.TO_CERTIFICATE_SHORT_V2" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_certificate_format_e.TO_CERTIFICATE_NONE">
+<span class="target" id="group__certificates_1ggae1ee08b7bc0a71de36fefa7c01997772ad297ac84de2748ab73673290003f08b8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERTIFICATE_NONE</span></span></span><a class="headerlink" href="#c.TO_certificate_format_e.TO_CERTIFICATE_NONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c enumerator">
+<dt class="sig sig-object c" id="c.TO_certificate_format_e.TO_CERTIFICATE_UNKNOWN">
+<span class="target" id="group__certificates_1ggae1ee08b7bc0a71de36fefa7c01997772a3d5eb6a6e8c660fc26ed1ee0a3d107eb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERTIFICATE_UNKNOWN</span></span></span><a class="headerlink" href="#c.TO_certificate_format_e.TO_CERTIFICATE_UNKNOWN" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -696,7 +716,7 @@ library error codes in one single variable. See
 <dl class="c var">
 <dt class="sig sig-object c" id="c.TO_cert_short_v2_s.date">
 <span class="target" id="structTO__cert__short__v2__s_1abbda60161e87e56c931f8b9fc73ff35a"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">date</span></span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#c.TOCERTF_VALIDITY_DATE_SIZE" title="TOCERTF_VALIDITY_DATE_SIZE"><span class="n"><span class="pre">TOCERTF_VALIDITY_DATE_SIZE</span></span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#c.TO_cert_short_v2_s.date" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Validity date (Zulu date (UTC)) </p>
+<dd><p>Validity date (not to be used after xxx) (Zulu date (UTC)) </p>
 </dd></dl>
 
 <dl class="c var">
@@ -859,897 +879,912 @@ library error codes in one single variable. See
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_INIT">
-<span class="target" id="group__command__codes_1gac61c0e69ee91af477740851524fe5560"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFF10)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gac61c0e69ee91af477740851524fe5560"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_INIT</span></span></span> <span class="pre">TO_SE_CMD_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_SN">
-<span class="target" id="group__command__codes_1gaaa628157e7cbddf7e8f13b62c13b15dc"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_SN</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0001)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_SN" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaaa628157e7cbddf7e8f13b62c13b15dc"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_SN</span></span></span> <span class="pre">TO_SE_CMD_GET_SN</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_SN" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_HW_SN">
-<span class="target" id="group__command__codes_1ga8fd37d58760c70b53c4ecf1126623386"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_HW_SN</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00B0)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_HW_SN" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga8fd37d58760c70b53c4ecf1126623386"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_HW_SN</span></span></span> <span class="pre">TO_SE_CMD_GET_HW_SN</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_HW_SN" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_RES">
-<span class="target" id="group__command__codes_1ga2272ff8c09f4f5c152c0ba73d48d9bb4"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_RES</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0000)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_RES" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2272ff8c09f4f5c152c0ba73d48d9bb4"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_RES</span></span></span> <span class="pre">TO_SE_CMD_RES</span><a class="headerlink" href="#c.TODRV_HSE_CMD_RES" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_PN">
-<span class="target" id="group__command__codes_1ga7b8f735a906ce0c9093c1e306c3915d0"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_PN</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0002)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_PN" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga7b8f735a906ce0c9093c1e306c3915d0"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_PN</span></span></span> <span class="pre">TO_SE_CMD_GET_PN</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_PN" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_HW_VERSION">
-<span class="target" id="group__command__codes_1gadd865b88728c630394b712383351123e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_HW_VERSION</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0003)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_HW_VERSION" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gadd865b88728c630394b712383351123e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_HW_VERSION</span></span></span> <span class="pre">TO_SE_CMD_GET_HW_VERSION</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_HW_VERSION" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_SW_VERSION">
-<span class="target" id="group__command__codes_1ga0710a76338dd41e68745c15b5b5b44dc"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_SW_VERSION</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0004)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_SW_VERSION" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga0710a76338dd41e68745c15b5b5b44dc"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_SW_VERSION</span></span></span> <span class="pre">TO_SE_CMD_GET_SW_VERSION</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_SW_VERSION" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_PRODUCT_ID">
-<span class="target" id="group__command__codes_1gadc888b5c95ff898e306d6e34c94e5128"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_PRODUCT_ID</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0048)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_PRODUCT_ID" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gadc888b5c95ff898e306d6e34c94e5128"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_PRODUCT_ID</span></span></span> <span class="pre">TO_SE_CMD_GET_PRODUCT_ID</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_PRODUCT_ID" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TODRV_HSE_CMD_ACCESS_DUMMY_DATA">
+<span class="target" id="group__command__codes_1ga3f1c35529d4f3d73d0fe356bd75f6ec8"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_ACCESS_DUMMY_DATA</span></span></span> <span class="pre">TO_SE_CMD_ACCESS_DUMMY_DATA</span><a class="headerlink" href="#c.TODRV_HSE_CMD_ACCESS_DUMMY_DATA" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_RANDOM">
-<span class="target" id="group__command__codes_1gaa84e7412318034f9fdfa520d6429cb26"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_RANDOM</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0005)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_RANDOM" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaa84e7412318034f9fdfa520d6429cb26"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_RANDOM</span></span></span> <span class="pre">TO_SE_CMD_GET_RANDOM</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_RANDOM" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_ECHO">
-<span class="target" id="group__command__codes_1gacaac12ee9207b4b8312ba82fbd8f528b"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_ECHO</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0010)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_ECHO" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gacaac12ee9207b4b8312ba82fbd8f528b"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_ECHO</span></span></span> <span class="pre">TO_SE_CMD_ECHO</span><a class="headerlink" href="#c.TODRV_HSE_CMD_ECHO" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SLEEP">
-<span class="target" id="group__command__codes_1ga79d31c2d9b0e5d3a9c7d80bb0dc68435"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SLEEP</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0011)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SLEEP" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga79d31c2d9b0e5d3a9c7d80bb0dc68435"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SLEEP</span></span></span> <span class="pre">TO_SE_CMD_SLEEP</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SLEEP" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_READ_NVM">
-<span class="target" id="group__command__codes_1gab67d7c632b297caea095e0ac694c0f2b"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_READ_NVM</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0021)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_READ_NVM" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gab67d7c632b297caea095e0ac694c0f2b"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_READ_NVM</span></span></span> <span class="pre">TO_SE_CMD_READ_NVM</span><a class="headerlink" href="#c.TODRV_HSE_CMD_READ_NVM" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_WRITE_NVM">
-<span class="target" id="group__command__codes_1ga4505b8646c11b1f8146c1e13628ce959"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_WRITE_NVM</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0022)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_WRITE_NVM" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga4505b8646c11b1f8146c1e13628ce959"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_WRITE_NVM</span></span></span> <span class="pre">TO_SE_CMD_WRITE_NVM</span><a class="headerlink" href="#c.TODRV_HSE_CMD_WRITE_NVM" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_NVM_SIZE">
-<span class="target" id="group__command__codes_1gac85ca1dfb1b968296b5335055109c4c1"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_NVM_SIZE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0050)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_NVM_SIZE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gac85ca1dfb1b968296b5335055109c4c1"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_NVM_SIZE</span></span></span> <span class="pre">TO_SE_CMD_GET_NVM_SIZE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_NVM_SIZE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_STATUS_PIO_CONFIG">
-<span class="target" id="group__command__codes_1gaa35a839a9bf4952a880ae202d63dec1d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_STATUS_PIO_CONFIG</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00B1)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_STATUS_PIO_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaa35a839a9bf4952a880ae202d63dec1d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_STATUS_PIO_CONFIG</span></span></span> <span class="pre">TO_SE_CMD_SET_STATUS_PIO_CONFIG</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_STATUS_PIO_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_STATUS_PIO_CONFIG">
-<span class="target" id="group__command__codes_1gaed21c4c98bceb715d6bd8c939ff37528"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_STATUS_PIO_CONFIG</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00B2)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_STATUS_PIO_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaed21c4c98bceb715d6bd8c939ff37528"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_STATUS_PIO_CONFIG</span></span></span> <span class="pre">TO_SE_CMD_GET_STATUS_PIO_CONFIG</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_STATUS_PIO_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_CERTIFICATE_SIGNING_REQUEST_DN">
-<span class="target" id="group__command__codes_1gaf42f29362af4ee2c44497af2fd71aa71"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE_SIGNING_REQUEST_DN</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0055)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE_SIGNING_REQUEST_DN" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaf42f29362af4ee2c44497af2fd71aa71"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE_SIGNING_REQUEST_DN</span></span></span> <span class="pre">TO_SE_CMD_SET_CERTIFICATE_SIGNING_REQUEST_DN</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE_SIGNING_REQUEST_DN" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_CERTIFICATE_SIGNING_REQUEST">
-<span class="target" id="group__command__codes_1ga28c602506e2426f61a714f22bb50c64c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_SIGNING_REQUEST</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0056)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_SIGNING_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga28c602506e2426f61a714f22bb50c64c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_SIGNING_REQUEST</span></span></span> <span class="pre">TO_SE_CMD_GET_CERTIFICATE_SIGNING_REQUEST</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_SIGNING_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_CERTIFICATE_SUBJECT_CN">
-<span class="target" id="group__command__codes_1gae896ca3b1079a0c441ebb95483a5041f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_SUBJECT_CN</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0046)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_SUBJECT_CN" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gae896ca3b1079a0c441ebb95483a5041f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_SUBJECT_CN</span></span></span> <span class="pre">TO_SE_CMD_GET_CERTIFICATE_SUBJECT_CN</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_SUBJECT_CN" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_CERTIFICATE">
-<span class="target" id="group__command__codes_1gaa217178f9ec72566f13cd463bd19d2bd"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0006)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaa217178f9ec72566f13cd463bd19d2bd"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE</span></span></span> <span class="pre">TO_SE_CMD_GET_CERTIFICATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_CERTIFICATE">
-<span class="target" id="group__command__codes_1ga5decca92b397227f730e784f0ca4b841"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0057)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga5decca92b397227f730e784f0ca4b841"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE</span></span></span> <span class="pre">TO_SE_CMD_SET_CERTIFICATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_CERTIFICATE_INIT">
-<span class="target" id="group__command__codes_1ga5eeb5568a3313e26b976b5e886956ab0"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x005D)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga5eeb5568a3313e26b976b5e886956ab0"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE_INIT</span></span></span> <span class="pre">TO_SE_CMD_SET_CERTIFICATE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_CERTIFICATE_UPDATE">
-<span class="target" id="group__command__codes_1ga83d986d7eaf2ea67457e1ff430b2927d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x005E)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga83d986d7eaf2ea67457e1ff430b2927d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_SET_CERTIFICATE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_CERTIFICATE_FINAL">
-<span class="target" id="group__command__codes_1ga0fd8f4972743ff52a986e3319df0e5a2"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x005F)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga0fd8f4972743ff52a986e3319df0e5a2"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_SET_CERTIFICATE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_CERTIFICATE_INIT">
-<span class="target" id="group__command__codes_1ga3b90684037420ab079c9d4037fd8d232"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0060)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga3b90684037420ab079c9d4037fd8d232"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_INIT</span></span></span> <span class="pre">TO_SE_CMD_GET_CERTIFICATE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_CERTIFICATE_UPDATE">
-<span class="target" id="group__command__codes_1ga75d64d3d59d3e650657b40d6f3bd7d09"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0061)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga75d64d3d59d3e650657b40d6f3bd7d09"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_GET_CERTIFICATE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_CERTIFICATE_FINAL">
-<span class="target" id="group__command__codes_1gae228c358ff998d3c24dd41ce1d9345a5"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0062)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gae228c358ff998d3c24dd41ce1d9345a5"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_GET_CERTIFICATE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SIGN">
-<span class="target" id="group__command__codes_1ga2ee6056a3d67c9a5ec600ae3c177a7f4"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SIGN</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0007)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SIGN" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2ee6056a3d67c9a5ec600ae3c177a7f4"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SIGN</span></span></span> <span class="pre">TO_SE_CMD_SIGN</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SIGN" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY">
-<span class="target" id="group__command__codes_1ga2baa7d89668ee21d5cdf86f1b2891e81"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0012)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2baa7d89668ee21d5cdf86f1b2891e81"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY</span></span></span> <span class="pre">TO_SE_CMD_VERIFY</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SIGN_HASH">
-<span class="target" id="group__command__codes_1ga795b82de8e93a07f6018a50e5fc8d301"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SIGN_HASH</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x001E)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SIGN_HASH" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga795b82de8e93a07f6018a50e5fc8d301"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SIGN_HASH</span></span></span> <span class="pre">TO_SE_CMD_SIGN_HASH</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SIGN_HASH" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_HASH_SIGNATURE">
-<span class="target" id="group__command__codes_1ga88b8fd63d5c704eb2b56d81d3b3f237e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_HASH_SIGNATURE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x001F)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_HASH_SIGNATURE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga88b8fd63d5c704eb2b56d81d3b3f237e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_HASH_SIGNATURE</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_HASH_SIGNATURE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_HASH_SIGNATURE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_CERTIFICATE_AND_SIGN">
-<span class="target" id="group__command__codes_1gae217087b3e70bdc7167524165aef60ea"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_AND_SIGN</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0008)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_AND_SIGN" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gae217087b3e70bdc7167524165aef60ea"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_AND_SIGN</span></span></span> <span class="pre">TO_SE_CMD_GET_CERTIFICATE_AND_SIGN</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_AND_SIGN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_CERTIFICATE_X509">
+<span class="target" id="group__command__codes_1ga16d25a377aa5f841c26be6935725fdee"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CERTIFICATE_X509</span></span></span> <span class="pre">TO_SE_CMD_GET_CERTIFICATE_X509</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CERTIFICATE_X509" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_CERTIFICATE_X509">
+<span class="target" id="group__command__codes_1ga7e7ce3f752b6cd3ade72fe6dbc55bc4e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CERTIFICATE_X509</span></span></span> <span class="pre">TO_SE_CMD_SET_CERTIFICATE_X509</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CERTIFICATE_X509" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_CERTIFICATE_AND_STORE">
-<span class="target" id="group__command__codes_1ga718b9c77b14ee65807c53720bef3003a"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CERTIFICATE_AND_STORE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0009)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CERTIFICATE_AND_STORE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga718b9c77b14ee65807c53720bef3003a"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CERTIFICATE_AND_STORE</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_CERTIFICATE_AND_STORE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CERTIFICATE_AND_STORE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_CA_CERTIFICATE_AND_STORE">
-<span class="target" id="group__command__codes_1gae41d734e3956f86ec297d0847d963256"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CA_CERTIFICATE_AND_STORE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0047)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CA_CERTIFICATE_AND_STORE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gae41d734e3956f86ec297d0847d963256"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CA_CERTIFICATE_AND_STORE</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_CA_CERTIFICATE_AND_STORE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CA_CERTIFICATE_AND_STORE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_CHALLENGE_AND_STORE">
-<span class="target" id="group__command__codes_1gad2a803a9ff6af02572856747594e97ef"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CHALLENGE_AND_STORE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x000A)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CHALLENGE_AND_STORE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gad2a803a9ff6af02572856747594e97ef"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_CHALLENGE_AND_STORE</span></span></span> <span class="pre">TO_SE_CMD_GET_CHALLENGE_AND_STORE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_CHALLENGE_AND_STORE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_CHALLENGE_SIGNATURE">
-<span class="target" id="group__command__codes_1ga2d459cad2dc2695bb452390094e622b7"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHALLENGE_SIGNATURE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x000B)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHALLENGE_SIGNATURE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2d459cad2dc2695bb452390094e622b7"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHALLENGE_SIGNATURE</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_CHALLENGE_SIGNATURE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHALLENGE_SIGNATURE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_INIT">
-<span class="target" id="group__command__codes_1ga2ebd741b064367b96231aee333195aa6"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00AD)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2ebd741b064367b96231aee333195aa6"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_INIT</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_UPDATE">
-<span class="target" id="group__command__codes_1ga8d90a29fc7378789f67c3fb02c6e542c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00AE)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga8d90a29fc7378789f67c3fb02c6e542c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_FINAL">
-<span class="target" id="group__command__codes_1gae71961cfaf50c76da5cbe4f8a24e740a"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00AF)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gae71961cfaf50c76da5cbe4f8a24e740a"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CERTIFICATE_AND_STORE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_INIT">
-<span class="target" id="group__command__codes_1gad53a2f4e4d37d893506ac9e98f66db7d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00B3)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gad53a2f4e4d37d893506ac9e98f66db7d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_INIT</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_UPDATE">
-<span class="target" id="group__command__codes_1ga80bab10d1fcb5f11f16fc8986d006222"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00B4)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga80bab10d1fcb5f11f16fc8986d006222"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_FINAL">
-<span class="target" id="group__command__codes_1ga481020f4d9c792325ef5eb99c74d4b4f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00B5)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga481020f4d9c792325ef5eb99c74d4b4f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CHAIN_CA_CERTIFICATE_AND_STORE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_COMPUTE_HMAC">
-<span class="target" id="group__command__codes_1ga20b4638fba8dd8bfa86d0543ae5bae79"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMPUTE_HMAC</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x000C)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMPUTE_HMAC" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga20b4638fba8dd8bfa86d0543ae5bae79"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMPUTE_HMAC</span></span></span> <span class="pre">TO_SE_CMD_COMPUTE_HMAC</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMPUTE_HMAC" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_COMPUTE_HMAC_INIT">
-<span class="target" id="group__command__codes_1gac468ad14a571824f5df1972815cf0017"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMPUTE_HMAC_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0023)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMPUTE_HMAC_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gac468ad14a571824f5df1972815cf0017"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMPUTE_HMAC_INIT</span></span></span> <span class="pre">TO_SE_CMD_COMPUTE_HMAC_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMPUTE_HMAC_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_COMPUTE_HMAC_UPDATE">
-<span class="target" id="group__command__codes_1ga57434a9a1b5ba24954da71e0ddbfb1c9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMPUTE_HMAC_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0024)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMPUTE_HMAC_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga57434a9a1b5ba24954da71e0ddbfb1c9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMPUTE_HMAC_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_COMPUTE_HMAC_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMPUTE_HMAC_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_COMPUTE_HMAC_FINAL">
-<span class="target" id="group__command__codes_1gaabbed67861cb3ee8a9f3590722cc0255"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMPUTE_HMAC_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0025)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMPUTE_HMAC_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaabbed67861cb3ee8a9f3590722cc0255"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMPUTE_HMAC_FINAL</span></span></span> <span class="pre">TO_SE_CMD_COMPUTE_HMAC_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMPUTE_HMAC_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_HMAC">
-<span class="target" id="group__command__codes_1ga0605ce90c4fe0081326466c05b1efa0c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_HMAC</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x000D)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_HMAC" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga0605ce90c4fe0081326466c05b1efa0c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_HMAC</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_HMAC</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_HMAC" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_HMAC_INIT">
-<span class="target" id="group__command__codes_1gacd2f0d50e4b1aab125aac270e4cb055c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_HMAC_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0026)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_HMAC_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gacd2f0d50e4b1aab125aac270e4cb055c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_HMAC_INIT</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_HMAC_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_HMAC_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_HMAC_UPDATE">
-<span class="target" id="group__command__codes_1gaec8a22c5c6683dfca9e3496f7e54dfd2"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_HMAC_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0027)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_HMAC_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaec8a22c5c6683dfca9e3496f7e54dfd2"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_HMAC_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_HMAC_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_HMAC_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_HMAC_FINAL">
-<span class="target" id="group__command__codes_1ga7d2d166258387bb22101bc04657a7806"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_HMAC_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0028)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_HMAC_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga7d2d166258387bb22101bc04657a7806"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_HMAC_FINAL</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_HMAC_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_HMAC_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128CBC_ENCRYPT">
-<span class="target" id="group__command__codes_1ga853a435520ac0edec803c20508600232"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_ENCRYPT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x000E)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_ENCRYPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga853a435520ac0edec803c20508600232"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_ENCRYPT</span></span></span> <span class="pre">TO_SE_CMD_AES128CBC_ENCRYPT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_ENCRYPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128CBC_DECRYPT">
-<span class="target" id="group__command__codes_1ga18a8b6f2a9dfb04064c8a57f90ca0ef0"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_DECRYPT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x000F)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_DECRYPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga18a8b6f2a9dfb04064c8a57f90ca0ef0"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_DECRYPT</span></span></span> <span class="pre">TO_SE_CMD_AES128CBC_DECRYPT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_DECRYPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128CBC_IV_ENCRYPT">
-<span class="target" id="group__command__codes_1gaa23c176a46d75c38ac68f56a80fe16cf"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_IV_ENCRYPT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0020)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_IV_ENCRYPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaa23c176a46d75c38ac68f56a80fe16cf"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_IV_ENCRYPT</span></span></span> <span class="pre">TO_SE_CMD_AES128CBC_IV_ENCRYPT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_IV_ENCRYPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128GCM_ENCRYPT">
-<span class="target" id="group__command__codes_1ga5bb8ea4f6b21c89dc1835ba8270e2c0a"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128GCM_ENCRYPT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0030)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128GCM_ENCRYPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga5bb8ea4f6b21c89dc1835ba8270e2c0a"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128GCM_ENCRYPT</span></span></span> <span class="pre">TO_SE_CMD_AES128GCM_ENCRYPT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128GCM_ENCRYPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128GCM_DECRYPT">
-<span class="target" id="group__command__codes_1ga1833afac9da753be30c83db88054f474"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128GCM_DECRYPT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0034)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128GCM_DECRYPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga1833afac9da753be30c83db88054f474"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128GCM_DECRYPT</span></span></span> <span class="pre">TO_SE_CMD_AES128GCM_DECRYPT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128GCM_DECRYPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128CCM_ENCRYPT">
-<span class="target" id="group__command__codes_1ga9b545777ce4a37815463e59f45ea0347"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CCM_ENCRYPT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x004C)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CCM_ENCRYPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga9b545777ce4a37815463e59f45ea0347"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CCM_ENCRYPT</span></span></span> <span class="pre">TO_SE_CMD_AES128CCM_ENCRYPT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CCM_ENCRYPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128CCM_DECRYPT">
-<span class="target" id="group__command__codes_1ga1d624bc5b6bf991e88ce2eba3ef22563"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CCM_DECRYPT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x004D)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CCM_DECRYPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga1d624bc5b6bf991e88ce2eba3ef22563"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CCM_DECRYPT</span></span></span> <span class="pre">TO_SE_CMD_AES128CCM_DECRYPT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CCM_DECRYPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128ECB_ENCRYPT">
-<span class="target" id="group__command__codes_1ga27a3fabd0cc7ea70eae2aace95d267d4"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128ECB_ENCRYPT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x004E)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128ECB_ENCRYPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga27a3fabd0cc7ea70eae2aace95d267d4"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128ECB_ENCRYPT</span></span></span> <span class="pre">TO_SE_CMD_AES128ECB_ENCRYPT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128ECB_ENCRYPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128ECB_DECRYPT">
-<span class="target" id="group__command__codes_1ga8bd057da60e8b6f9b4d9b879e6c25ba3"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128ECB_DECRYPT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x004F)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128ECB_DECRYPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga8bd057da60e8b6f9b4d9b879e6c25ba3"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128ECB_DECRYPT</span></span></span> <span class="pre">TO_SE_CMD_AES128ECB_DECRYPT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128ECB_DECRYPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_COMPUTE_CMAC">
-<span class="target" id="group__command__codes_1ga28fa59230900a1acf762f88e7029fa7c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMPUTE_CMAC</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x001C)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMPUTE_CMAC" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga28fa59230900a1acf762f88e7029fa7c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMPUTE_CMAC</span></span></span> <span class="pre">TO_SE_CMD_COMPUTE_CMAC</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMPUTE_CMAC" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VERIFY_CMAC">
-<span class="target" id="group__command__codes_1ga53580c827c444da2b28cd3bb7ab35470"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CMAC</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x001D)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CMAC" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga53580c827c444da2b28cd3bb7ab35470"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VERIFY_CMAC</span></span></span> <span class="pre">TO_SE_CMD_VERIFY_CMAC</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VERIFY_CMAC" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SHA256">
-<span class="target" id="group__command__codes_1gac26a879199990d14d8bdc117edbe665d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SHA256</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00A2)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SHA256" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gac26a879199990d14d8bdc117edbe665d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SHA256</span></span></span> <span class="pre">TO_SE_CMD_SHA256</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SHA256" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SHA256_INIT">
-<span class="target" id="group__command__codes_1ga04c1f684816e3f86942b0f930f8eaf42"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SHA256_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00AA)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SHA256_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga04c1f684816e3f86942b0f930f8eaf42"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SHA256_INIT</span></span></span> <span class="pre">TO_SE_CMD_SHA256_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SHA256_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SHA256_UPDATE">
-<span class="target" id="group__command__codes_1ga33a533f3454ee486aab9f4846467ac79"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SHA256_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00AB)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SHA256_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga33a533f3454ee486aab9f4846467ac79"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SHA256_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_SHA256_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SHA256_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SHA256_FINAL">
-<span class="target" id="group__command__codes_1ga8b132be9745a7f02d7f7f53a0b38ded6"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SHA256_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00AC)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SHA256_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga8b132be9745a7f02d7f7f53a0b38ded6"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SHA256_FINAL</span></span></span> <span class="pre">TO_SE_CMD_SHA256_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SHA256_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128CBC_HMAC_SECURE_MESSAGE">
-<span class="target" id="group__command__codes_1ga484c427d08b4512ef1394f1cd6f8b81e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_HMAC_SECURE_MESSAGE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00A0)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_HMAC_SECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga484c427d08b4512ef1394f1cd6f8b81e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_HMAC_SECURE_MESSAGE</span></span></span> <span class="pre">TO_SE_CMD_AES128CBC_HMAC_SECURE_MESSAGE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_HMAC_SECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128CBC_HMAC_UNSECURE_MESSAGE">
-<span class="target" id="group__command__codes_1ga4b3f661e4af9d2dc32c4d2082e598d49"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_HMAC_UNSECURE_MESSAGE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00A1)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_HMAC_UNSECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga4b3f661e4af9d2dc32c4d2082e598d49"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_HMAC_UNSECURE_MESSAGE</span></span></span> <span class="pre">TO_SE_CMD_AES128CBC_HMAC_UNSECURE_MESSAGE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_HMAC_UNSECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128CBC_CMAC_SECURE_MESSAGE">
-<span class="target" id="group__command__codes_1ga181c9e11c502a92d6706fc78bd6d6c8a"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_CMAC_SECURE_MESSAGE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00C1)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_CMAC_SECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga181c9e11c502a92d6706fc78bd6d6c8a"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_CMAC_SECURE_MESSAGE</span></span></span> <span class="pre">TO_SE_CMD_AES128CBC_CMAC_SECURE_MESSAGE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_CMAC_SECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AES128CBC_CMAC_UNSECURE_MESSAGE">
-<span class="target" id="group__command__codes_1ga22b08585c03631f2a6cb55db28b8ce98"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_CMAC_UNSECURE_MESSAGE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00C2)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_CMAC_UNSECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga22b08585c03631f2a6cb55db28b8ce98"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AES128CBC_CMAC_UNSECURE_MESSAGE</span></span></span> <span class="pre">TO_SE_CMD_AES128CBC_CMAC_UNSECURE_MESSAGE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AES128CBC_CMAC_UNSECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_REMOTE_PUBLIC_KEY">
-<span class="target" id="group__command__codes_1ga9b6d5e86585b9aae3413230b92fe5755"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_REMOTE_PUBLIC_KEY</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00A3)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_REMOTE_PUBLIC_KEY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga9b6d5e86585b9aae3413230b92fe5755"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_REMOTE_PUBLIC_KEY</span></span></span> <span class="pre">TO_SE_CMD_SET_REMOTE_PUBLIC_KEY</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_REMOTE_PUBLIC_KEY" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_RENEW_ECC_KEYS">
-<span class="target" id="group__command__codes_1ga10cc37f6290a4b3d329a104878ecde4c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_RENEW_ECC_KEYS</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00A4)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_RENEW_ECC_KEYS" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga10cc37f6290a4b3d329a104878ecde4c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_RENEW_ECC_KEYS</span></span></span> <span class="pre">TO_SE_CMD_RENEW_ECC_KEYS</span><a class="headerlink" href="#c.TODRV_HSE_CMD_RENEW_ECC_KEYS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_PUBLIC_KEY">
-<span class="target" id="group__command__codes_1gaee55dd7faa6fac8dfbdb03bcd8881deb"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_PUBLIC_KEY</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00A5)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_PUBLIC_KEY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaee55dd7faa6fac8dfbdb03bcd8881deb"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_PUBLIC_KEY</span></span></span> <span class="pre">TO_SE_CMD_GET_PUBLIC_KEY</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_PUBLIC_KEY" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_UNSIGNED_PUBLIC_KEY">
-<span class="target" id="group__command__codes_1ga6f453e51f0e5da8a473f730f0b44f5f5"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_UNSIGNED_PUBLIC_KEY</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x002E)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_UNSIGNED_PUBLIC_KEY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga6f453e51f0e5da8a473f730f0b44f5f5"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_UNSIGNED_PUBLIC_KEY</span></span></span> <span class="pre">TO_SE_CMD_GET_UNSIGNED_PUBLIC_KEY</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_UNSIGNED_PUBLIC_KEY" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_RENEW_SHARED_KEYS">
-<span class="target" id="group__command__codes_1ga924e8d201696604308f6790addcbc3d3"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_RENEW_SHARED_KEYS</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00A6)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_RENEW_SHARED_KEYS" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga924e8d201696604308f6790addcbc3d3"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_RENEW_SHARED_KEYS</span></span></span> <span class="pre">TO_SE_CMD_RENEW_SHARED_KEYS</span><a class="headerlink" href="#c.TODRV_HSE_CMD_RENEW_SHARED_KEYS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_KEY_FINGERPRINT">
-<span class="target" id="group__command__codes_1ga2dfb0b765e7d3781e44c63bca5597fb4"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_KEY_FINGERPRINT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0019)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_KEY_FINGERPRINT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2dfb0b765e7d3781e44c63bca5597fb4"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_KEY_FINGERPRINT</span></span></span> <span class="pre">TO_SE_CMD_GET_KEY_FINGERPRINT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_KEY_FINGERPRINT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_RANDOM_AND_STORE">
-<span class="target" id="group__command__codes_1ga090829daf5a73d1fad60ec5c22b751ad"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_RANDOM_AND_STORE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0029)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_RANDOM_AND_STORE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga090829daf5a73d1fad60ec5c22b751ad"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_RANDOM_AND_STORE</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_RANDOM_AND_STORE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_RANDOM_AND_STORE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_RENEW_KEYS">
-<span class="target" id="group__command__codes_1gaf7a9850efbd823a1ccfaac9133b78ee1"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_RENEW_KEYS</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x002A)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_RENEW_KEYS" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaf7a9850efbd823a1ccfaac9133b78ee1"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_RENEW_KEYS</span></span></span> <span class="pre">TO_SE_CMD_TLS_RENEW_KEYS</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_RENEW_KEYS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_MASTER_SECRET">
-<span class="target" id="group__command__codes_1gab7cf52a66bd6e7b7d381b762e9542635"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_MASTER_SECRET</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x002B)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_MASTER_SECRET" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gab7cf52a66bd6e7b7d381b762e9542635"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_MASTER_SECRET</span></span></span> <span class="pre">TO_CMD_ID_GET_TLS_MASTER_SECRET</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_MASTER_SECRET" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_MASTER_SECRET_DERIVED_KEYS">
-<span class="target" id="group__command__codes_1ga37e089ab281ed4f783c2225419005147"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_MASTER_SECRET_DERIVED_KEYS</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x006B)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_MASTER_SECRET_DERIVED_KEYS" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga37e089ab281ed4f783c2225419005147"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_MASTER_SECRET_DERIVED_KEYS</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_MASTER_SECRET_DERIVED_KEYS</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_MASTER_SECRET_DERIVED_KEYS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_SET_SERVER_RANDOM">
-<span class="target" id="group__command__codes_1ga19aadaa21ef23d2b9312251b67e301c3"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_SERVER_RANDOM</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x002F)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_SERVER_RANDOM" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga19aadaa21ef23d2b9312251b67e301c3"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_SERVER_RANDOM</span></span></span> <span class="pre">TO_SE_CMD_TLS_SET_SERVER_RANDOM</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_SERVER_RANDOM" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_SET_SERVER_EPUBLIC_KEY">
-<span class="target" id="group__command__codes_1gaedfb5284e06eeda3eea5dffc40f66a72"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_SERVER_EPUBLIC_KEY</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)</span> <span class="pre">0x002C)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_SERVER_EPUBLIC_KEY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaedfb5284e06eeda3eea5dffc40f66a72"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_SERVER_EPUBLIC_KEY</span></span></span> <span class="pre">TO_SE_CMD_TLS_SET_SERVER_EPUBLIC_KEY</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_SERVER_EPUBLIC_KEY" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_RENEW_KEYS_ECDHE">
-<span class="target" id="group__command__codes_1ga646a35da41a6c697b67f8fe4fad17bb9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_RENEW_KEYS_ECDHE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)</span> <span class="pre">0x002D)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_RENEW_KEYS_ECDHE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga646a35da41a6c697b67f8fe4fad17bb9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_RENEW_KEYS_ECDHE</span></span></span> <span class="pre">TO_SE_CMD_TLS_RENEW_KEYS_ECDHE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_RENEW_KEYS_ECDHE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_CALCULATE_FINISHED">
-<span class="target" id="group__command__codes_1ga8b6e7cd833c6abb23f5669d7076af4f0"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_CALCULATE_FINISHED</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0031)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_CALCULATE_FINISHED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga8b6e7cd833c6abb23f5669d7076af4f0"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_CALCULATE_FINISHED</span></span></span> <span class="pre">TO_SE_CMD_TLS_CALCULATE_FINISHED</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_CALCULATE_FINISHED" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_RESET">
-<span class="target" id="group__command__codes_1ga3bb8204ee65bde6663b405a0423c5379"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_RESET</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00B6)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_RESET" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga3bb8204ee65bde6663b405a0423c5379"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_RESET</span></span></span> <span class="pre">TO_SE_CMD_TLS_RESET</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_RESET" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_SET_MODE">
-<span class="target" id="group__command__codes_1ga1eb879a87ff640d4e6cc6de51f8fc94e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_MODE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0042)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_MODE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga1eb879a87ff640d4e6cc6de51f8fc94e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_MODE</span></span></span> <span class="pre">TO_SE_CMD_TLS_SET_MODE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_MODE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_SET_CONFIG">
-<span class="target" id="group__command__codes_1ga03dc26c0e020d4d777d7e9be2c7aecb6"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_CONFIG</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0051)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga03dc26c0e020d4d777d7e9be2c7aecb6"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_CONFIG</span></span></span> <span class="pre">TO_SE_CMD_TLS_SET_CONFIG</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_CONFIG" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_SET_SESSION">
-<span class="target" id="group__command__codes_1ga2d6f105775eb60c049707eff63180b23"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_SESSION</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00C0)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_SESSION" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2d6f105775eb60c049707eff63180b23"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_SESSION</span></span></span> <span class="pre">TO_SE_CMD_TLS_SET_SESSION</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_SESSION" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_SET_CONNECTION_ID_EXT_ID">
-<span class="target" id="group__command__codes_1ga652ae022b9f89dfff46af435c2912696"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_CONNECTION_ID_EXT_ID</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00CB)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_CONNECTION_ID_EXT_ID" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga652ae022b9f89dfff46af435c2912696"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SET_CONNECTION_ID_EXT_ID</span></span></span> <span class="pre">TO_SE_CMD_TLS_SET_CONNECTION_ID_EXT_ID</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SET_CONNECTION_ID_EXT_ID" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO">
-<span class="target" id="group__command__codes_1ga7c2fdeaf89d353ddb2d9f37016a434f8"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0032)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga7c2fdeaf89d353ddb2d9f37016a434f8"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CLIENT_HELLO</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_INIT">
-<span class="target" id="group__command__codes_1gae7549af7c04dbd04679eac4c082cafc9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0063)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gae7549af7c04dbd04679eac4c082cafc9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_INIT</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CLIENT_HELLO_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_UPDATE">
-<span class="target" id="group__command__codes_1gaf352b6eacda6425f109ef764d6139cd2"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0064)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaf352b6eacda6425f109ef764d6139cd2"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CLIENT_HELLO_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_FINAL">
-<span class="target" id="group__command__codes_1gac7b8c27b46cfbdb8cf5a2de5f358f0ec"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0065)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gac7b8c27b46cfbdb8cf5a2de5f358f0ec"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_FINAL</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CLIENT_HELLO_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CLIENT_HELLO_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_HELLO_VERIFY_REQUEST">
-<span class="target" id="group__command__codes_1gab833f2650e3b9e5fba0338818adc2f33"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_HELLO_VERIFY_REQUEST</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0041)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_HELLO_VERIFY_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gab833f2650e3b9e5fba0338818adc2f33"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_HELLO_VERIFY_REQUEST</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_HELLO_VERIFY_REQUEST</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_HELLO_VERIFY_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO">
-<span class="target" id="group__command__codes_1ga94f9d0e390d29150a643174cb0d81529"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0033)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga94f9d0e390d29150a643174cb0d81529"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_HELLO</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_INIT">
-<span class="target" id="group__command__codes_1gac1b14be7f40b8438918198ff0a2e5663"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0066)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gac1b14be7f40b8438918198ff0a2e5663"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_INIT</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_HELLO_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_UPDATE">
-<span class="target" id="group__command__codes_1gafdfe4d0a4aac919b03c916417aa02895"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0067)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gafdfe4d0a4aac919b03c916417aa02895"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_HELLO_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_FINAL">
-<span class="target" id="group__command__codes_1ga8a85b03f744866092eb75ac0ad6dbda8"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0068)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga8a85b03f744866092eb75ac0ad6dbda8"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_FINAL</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_HELLO_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE">
-<span class="target" id="group__command__codes_1gaf0e25a1be4260b066bf243a24a4e65db"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0054)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaf0e25a1be4260b066bf243a24a4e65db"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_CERTIFICATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_INIT">
-<span class="target" id="group__command__codes_1ga3e567c6fca336d389ede53d51f700326"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0043)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga3e567c6fca336d389ede53d51f700326"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_INIT</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_UPDATE">
-<span class="target" id="group__command__codes_1ga0dc0e76a94b483150419e1c8259718b7"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0044)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga0dc0e76a94b483150419e1c8259718b7"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_FINAL">
-<span class="target" id="group__command__codes_1ga8a20dbb5a7c7d55a273cf50d1f2297b7"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0045)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga8a20dbb5a7c7d55a273cf50d1f2297b7"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_CERTIFICATE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE">
-<span class="target" id="group__command__codes_1ga9addbe979d9f76f98c2ff5c93e483898"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0035)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga9addbe979d9f76f98c2ff5c93e483898"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_INIT">
-<span class="target" id="group__command__codes_1gaa7cfb736971621fe9858e2a9472fae2f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x005A)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaa7cfb736971621fe9858e2a9472fae2f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_INIT</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_UPDATE">
-<span class="target" id="group__command__codes_1ga20bb4d5a64261b3d713c9213b0512f67"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x005B)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga20bb4d5a64261b3d713c9213b0512f67"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_FINAL">
-<span class="target" id="group__command__codes_1gaff1ef3c66238d932b8c0a4c7ca0d3b31"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x005C)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaff1ef3c66238d932b8c0a4c7ca0d3b31"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_KEY_EXCHANGE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_CERTIFICATE_REQUEST">
-<span class="target" id="group__command__codes_1ga9a8f4dc0f3d4b7e2c192581078519883"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_CERTIFICATE_REQUEST</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0036)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_CERTIFICATE_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga9a8f4dc0f3d4b7e2c192581078519883"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_CERTIFICATE_REQUEST</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_CERTIFICATE_REQUEST</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_CERTIFICATE_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_DONE">
-<span class="target" id="group__command__codes_1ga12a0579f37b55986b54ad7c3b5e183af"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_DONE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0037)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_DONE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga12a0579f37b55986b54ad7c3b5e183af"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_DONE</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_SERVER_HELLO_DONE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_SERVER_HELLO_DONE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_MEDIATOR_CERTIFICATE">
-<span class="target" id="group__command__codes_1ga2d592816ac8caf56cf6b1b1ce767ae9e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_MEDIATOR_CERTIFICATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0058)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_MEDIATOR_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2d592816ac8caf56cf6b1b1ce767ae9e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_MEDIATOR_CERTIFICATE</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_MEDIATOR_CERTIFICATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_MEDIATOR_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE">
-<span class="target" id="group__command__codes_1ga78ac8f38f580290e643193f4fd853fbd"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0038)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga78ac8f38f580290e643193f4fd853fbd"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CERTIFICATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_INIT">
-<span class="target" id="group__command__codes_1ga2597e45fa0556f911f278cc4850c1355"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00BD)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2597e45fa0556f911f278cc4850c1355"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE_INIT</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CERTIFICATE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_UPDATE">
-<span class="target" id="group__command__codes_1gab12fad3a1340abc480dbb6418395ba24"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00BE)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gab12fad3a1340abc480dbb6418395ba24"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CERTIFICATE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_FINAL">
-<span class="target" id="group__command__codes_1ga75104473844ae1b2ff6da46a0ea411f2"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00BF)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga75104473844ae1b2ff6da46a0ea411f2"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CERTIFICATE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CLIENT_KEY_EXCHANGE">
-<span class="target" id="group__command__codes_1gaf816269f62a3170068d029d4a80a1b79"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CLIENT_KEY_EXCHANGE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0039)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CLIENT_KEY_EXCHANGE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaf816269f62a3170068d029d4a80a1b79"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CLIENT_KEY_EXCHANGE</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CLIENT_KEY_EXCHANGE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CLIENT_KEY_EXCHANGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_VERIFY">
-<span class="target" id="group__command__codes_1ga3a5171c88cf775b3a84cedda614b919b"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE_VERIFY</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x003A)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_VERIFY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga3a5171c88cf775b3a84cedda614b919b"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE_VERIFY</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CERTIFICATE_VERIFY</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_VERIFY" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CHANGE_CIPHER_SPEC">
-<span class="target" id="group__command__codes_1gab913713d7ef6202a57651945edf7ad76"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CHANGE_CIPHER_SPEC</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x003B)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CHANGE_CIPHER_SPEC" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gab913713d7ef6202a57651945edf7ad76"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CHANGE_CIPHER_SPEC</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CHANGE_CIPHER_SPEC</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CHANGE_CIPHER_SPEC" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_FINISHED">
-<span class="target" id="group__command__codes_1gaa59ed64719d42ba2f860592fe626ac48"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_FINISHED</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x003C)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_FINISHED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaa59ed64719d42ba2f860592fe626ac48"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_FINISHED</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_FINISHED</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_FINISHED" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_CHANGE_CIPHER_SPEC">
-<span class="target" id="group__command__codes_1ga6b58e407a0feed297b7d54b06db67349"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_CHANGE_CIPHER_SPEC</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x003D)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_CHANGE_CIPHER_SPEC" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga6b58e407a0feed297b7d54b06db67349"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_CHANGE_CIPHER_SPEC</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_CHANGE_CIPHER_SPEC</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_CHANGE_CIPHER_SPEC" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_HANDLE_FINISHED">
-<span class="target" id="group__command__codes_1ga8405955811b865cd6ab1e9681fcbf63d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_FINISHED</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x003E)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_FINISHED" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga8405955811b865cd6ab1e9681fcbf63d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_HANDLE_FINISHED</span></span></span> <span class="pre">TO_SE_CMD_TLS_HANDLE_FINISHED</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_HANDLE_FINISHED" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_SLOT">
-<span class="target" id="group__command__codes_1ga58a955a38baea5c4c049955b6841ec23"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE_SLOT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0059)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_SLOT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga58a955a38baea5c4c049955b6841ec23"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_GET_CERTIFICATE_SLOT</span></span></span> <span class="pre">TO_SE_CMD_TLS_GET_CERTIFICATE_SLOT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_GET_CERTIFICATE_SLOT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE">
-<span class="target" id="group__command__codes_1gac771ce936e25d2f543fbce93473badb5"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SECURE_MESSAGE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x003F)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gac771ce936e25d2f543fbce93473badb5"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SECURE_MESSAGE</span></span></span> <span class="pre">TO_SE_CMD_TLS_SECURE_MESSAGE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE_INIT">
-<span class="target" id="group__command__codes_1ga70b7e5cae6c8300e205bf8bdfe6afb3c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SECURE_MESSAGE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00B7)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga70b7e5cae6c8300e205bf8bdfe6afb3c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SECURE_MESSAGE_INIT</span></span></span> <span class="pre">TO_SE_CMD_TLS_SECURE_MESSAGE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE_UPDATE">
-<span class="target" id="group__command__codes_1ga008fe5d776fba45479954a98d789d04c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SECURE_MESSAGE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00B8)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga008fe5d776fba45479954a98d789d04c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SECURE_MESSAGE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_TLS_SECURE_MESSAGE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE_FINAL">
-<span class="target" id="group__command__codes_1gab7c919a5195cb90692041bd7958b4305"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SECURE_MESSAGE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00B9)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gab7c919a5195cb90692041bd7958b4305"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_SECURE_MESSAGE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_TLS_SECURE_MESSAGE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_SECURE_MESSAGE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE">
-<span class="target" id="group__command__codes_1gaa97cb8c717275d468139636a4967c84f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0040)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaa97cb8c717275d468139636a4967c84f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE</span></span></span> <span class="pre">TO_SE_CMD_TLS_UNSECURE_MESSAGE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_INIT">
-<span class="target" id="group__command__codes_1gacf6afd0c6a8b6966eed1d644570b36e9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00BA)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gacf6afd0c6a8b6966eed1d644570b36e9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_INIT</span></span></span> <span class="pre">TO_SE_CMD_TLS_UNSECURE_MESSAGE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_UPDATE">
-<span class="target" id="group__command__codes_1ga820fe62072dea2b8c1bd8b11c6845c59"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00BB)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga820fe62072dea2b8c1bd8b11c6845c59"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_TLS_UNSECURE_MESSAGE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_FINAL">
-<span class="target" id="group__command__codes_1ga2bf655902aa0afe2302e7390d4de1964"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00BC)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2bf655902aa0afe2302e7390d4de1964"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_TLS_UNSECURE_MESSAGE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_TLS_UNSECURE_MESSAGE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SECURE_MESSAGE">
-<span class="target" id="group__command__codes_1ga9b581395d90c993a59c0f9d52287ea0d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECURE_MESSAGE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00C3)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga9b581395d90c993a59c0f9d52287ea0d"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECURE_MESSAGE</span></span></span> <span class="pre">TO_SE_CMD_SECURE_MESSAGE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SECURE_MESSAGE_INIT">
-<span class="target" id="group__command__codes_1ga94554b2df94351502c584df7a84766db"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECURE_MESSAGE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00C4)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECURE_MESSAGE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga94554b2df94351502c584df7a84766db"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECURE_MESSAGE_INIT</span></span></span> <span class="pre">TO_SE_CMD_SECURE_MESSAGE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECURE_MESSAGE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SECURE_MESSAGE_UPDATE">
-<span class="target" id="group__command__codes_1ga343c7423eb91efbce83fbf267c82511a"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECURE_MESSAGE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00C5)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECURE_MESSAGE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga343c7423eb91efbce83fbf267c82511a"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECURE_MESSAGE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_SECURE_MESSAGE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECURE_MESSAGE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SECURE_MESSAGE_FINAL">
-<span class="target" id="group__command__codes_1gaeabeefbf5fc947d429492fb38d2c29db"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECURE_MESSAGE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00C6)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECURE_MESSAGE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaeabeefbf5fc947d429492fb38d2c29db"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECURE_MESSAGE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_SECURE_MESSAGE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECURE_MESSAGE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_UNSECURE_MESSAGE">
-<span class="target" id="group__command__codes_1gaf3a765bb45fadea7aea58cd73e01f4f1"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_UNSECURE_MESSAGE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00C7)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_UNSECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaf3a765bb45fadea7aea58cd73e01f4f1"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_UNSECURE_MESSAGE</span></span></span> <span class="pre">TO_SE_CMD_UNSECURE_MESSAGE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_UNSECURE_MESSAGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_UNSECURE_MESSAGE_INIT">
-<span class="target" id="group__command__codes_1ga2a35109bd62e1d55652354d9b5a52080"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_UNSECURE_MESSAGE_INIT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00C8)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_UNSECURE_MESSAGE_INIT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2a35109bd62e1d55652354d9b5a52080"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_UNSECURE_MESSAGE_INIT</span></span></span> <span class="pre">TO_SE_CMD_UNSECURE_MESSAGE_INIT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_UNSECURE_MESSAGE_INIT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_UNSECURE_MESSAGE_UPDATE">
-<span class="target" id="group__command__codes_1ga231f606ecc8e134a3cf930cd58a2d53f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_UNSECURE_MESSAGE_UPDATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00C9)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_UNSECURE_MESSAGE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga231f606ecc8e134a3cf930cd58a2d53f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_UNSECURE_MESSAGE_UPDATE</span></span></span> <span class="pre">TO_SE_CMD_UNSECURE_MESSAGE_UPDATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_UNSECURE_MESSAGE_UPDATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_UNSECURE_MESSAGE_FINAL">
-<span class="target" id="group__command__codes_1ga6dee0a31c08eabf8cfc2042205afa1df"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_UNSECURE_MESSAGE_FINAL</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00CA)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_UNSECURE_MESSAGE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga6dee0a31c08eabf8cfc2042205afa1df"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_UNSECURE_MESSAGE_FINAL</span></span></span> <span class="pre">TO_SE_CMD_UNSECURE_MESSAGE_FINAL</span><a class="headerlink" href="#c.TODRV_HSE_CMD_UNSECURE_MESSAGE_FINAL" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_GET_APPEUI">
-<span class="target" id="group__command__codes_1ga16ce615bde75b9c82c3bec6fb08d04f2"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_GET_APPEUI</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0108)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_GET_APPEUI" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga16ce615bde75b9c82c3bec6fb08d04f2"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_GET_APPEUI</span></span></span> <span class="pre">TO_SE_CMD_LORA_GET_APPEUI</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_GET_APPEUI" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_GET_DEVEUI">
-<span class="target" id="group__command__codes_1ga9843de0b40b81b50c505ad8ecb6ffc64"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_GET_DEVEUI</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0109)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_GET_DEVEUI" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga9843de0b40b81b50c505ad8ecb6ffc64"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_GET_DEVEUI</span></span></span> <span class="pre">TO_SE_CMD_LORA_GET_DEVEUI</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_GET_DEVEUI" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_COMPUTE_MIC">
-<span class="target" id="group__command__codes_1ga0d5c34273a257883a82e9e823914c199"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_COMPUTE_MIC</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x010A)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_COMPUTE_MIC" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga0d5c34273a257883a82e9e823914c199"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_COMPUTE_MIC</span></span></span> <span class="pre">TO_SE_CMD_LORA_COMPUTE_MIC</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_COMPUTE_MIC" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_ENCRYPT_PAYLOAD">
-<span class="target" id="group__command__codes_1ga49a098820ac7dc50b0177c90cdd9417f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_ENCRYPT_PAYLOAD</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x010B)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_ENCRYPT_PAYLOAD" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga49a098820ac7dc50b0177c90cdd9417f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_ENCRYPT_PAYLOAD</span></span></span> <span class="pre">TO_SE_CMD_LORA_ENCRYPT_PAYLOAD</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_ENCRYPT_PAYLOAD" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_DECRYPT_JOIN">
-<span class="target" id="group__command__codes_1ga27cfb178ce2dfcb6042176b76b4f99d1"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_DECRYPT_JOIN</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x010C)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_DECRYPT_JOIN" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga27cfb178ce2dfcb6042176b76b4f99d1"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_DECRYPT_JOIN</span></span></span> <span class="pre">TO_SE_CMD_LORA_DECRYPT_JOIN</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_DECRYPT_JOIN" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_COMPUTE_SHARED_KEYS">
-<span class="target" id="group__command__codes_1ga8eb73cb7016d4b0e9af2c613e1eb5a4e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_COMPUTE_SHARED_KEYS</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x010D)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_COMPUTE_SHARED_KEYS" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga8eb73cb7016d4b0e9af2c613e1eb5a4e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_COMPUTE_SHARED_KEYS</span></span></span> <span class="pre">TO_SE_CMD_LORA_COMPUTE_SHARED_KEYS</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_COMPUTE_SHARED_KEYS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_GET_DEVADDR">
-<span class="target" id="group__command__codes_1ga79c2b40c32b256a84c6f9a0c8abeebc9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_GET_DEVADDR</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0110)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_GET_DEVADDR" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga79c2b40c32b256a84c6f9a0c8abeebc9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_GET_DEVADDR</span></span></span> <span class="pre">TO_SE_CMD_LORA_GET_DEVADDR</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_GET_DEVADDR" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_GET_JOIN_REQUEST">
-<span class="target" id="group__command__codes_1ga4929abceaf103ccb7287d32bf4297e51"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_GET_JOIN_REQUEST</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0100)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_GET_JOIN_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga4929abceaf103ccb7287d32bf4297e51"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_GET_JOIN_REQUEST</span></span></span> <span class="pre">TO_SE_CMD_LORA_GET_JOIN_REQUEST</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_GET_JOIN_REQUEST" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_HANDLE_JOIN_ACCEPT">
-<span class="target" id="group__command__codes_1ga99206cd1fda26e9898e31236dd22df3e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_HANDLE_JOIN_ACCEPT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0101)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_HANDLE_JOIN_ACCEPT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga99206cd1fda26e9898e31236dd22df3e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_HANDLE_JOIN_ACCEPT</span></span></span> <span class="pre">TO_SE_CMD_LORA_HANDLE_JOIN_ACCEPT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_HANDLE_JOIN_ACCEPT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_SECURE_PHYPAYLOAD">
-<span class="target" id="group__command__codes_1ga59f690ff362702e0ca7f4608e1c59030"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_SECURE_PHYPAYLOAD</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0102)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_SECURE_PHYPAYLOAD" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga59f690ff362702e0ca7f4608e1c59030"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_SECURE_PHYPAYLOAD</span></span></span> <span class="pre">TO_SE_CMD_LORA_SECURE_PHYPAYLOAD</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_SECURE_PHYPAYLOAD" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LORA_UNSECURE_PHYPAYLOAD">
-<span class="target" id="group__command__codes_1ga605ba8c3a64cb92be8d808c43e76b186"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_UNSECURE_PHYPAYLOAD</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0103)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_UNSECURE_PHYPAYLOAD" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga605ba8c3a64cb92be8d808c43e76b186"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LORA_UNSECURE_PHYPAYLOAD</span></span></span> <span class="pre">TO_SE_CMD_LORA_UNSECURE_PHYPAYLOAD</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LORA_UNSECURE_PHYPAYLOAD" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_PRE_PERSONALIZATION_DATA">
-<span class="target" id="group__command__codes_1ga9a98c19e10f889363c91a72e60af5c3f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_PRE_PERSONALIZATION_DATA</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0013)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_PRE_PERSONALIZATION_DATA" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga9a98c19e10f889363c91a72e60af5c3f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_PRE_PERSONALIZATION_DATA</span></span></span> <span class="pre">TO_SE_CMD_SET_PRE_PERSONALIZATION_DATA</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_PRE_PERSONALIZATION_DATA" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_NEXT_STATE">
-<span class="target" id="group__command__codes_1ga22433fa0af554b3663685f3eddd593c7"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_NEXT_STATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0015)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_NEXT_STATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga22433fa0af554b3663685f3eddd593c7"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_NEXT_STATE</span></span></span> <span class="pre">TO_SE_CMD_SET_NEXT_STATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_NEXT_STATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_STATE">
-<span class="target" id="group__command__codes_1gadfe0b48fab7f74e79239493001d5a6b6"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_STATE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0016)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_STATE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gadfe0b48fab7f74e79239493001d5a6b6"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_STATE</span></span></span> <span class="pre">TO_SE_CMD_GET_STATE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_STATE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_ADMIN_SET_SLOT">
-<span class="target" id="group__command__codes_1ga2ebb456eea56fd259fe44064beb7f5e5"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_ADMIN_SET_SLOT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0053)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_ADMIN_SET_SLOT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga2ebb456eea56fd259fe44064beb7f5e5"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_ADMIN_SET_SLOT</span></span></span> <span class="pre">TO_SE_CMD_ADMIN_SET_SLOT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_ADMIN_SET_SLOT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_INIT_ADMIN_SESSION">
-<span class="target" id="group__command__codes_1ga81bd6acb5ca8203af724445aa960daf3"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_INIT_ADMIN_SESSION</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0049)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_INIT_ADMIN_SESSION" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga81bd6acb5ca8203af724445aa960daf3"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_INIT_ADMIN_SESSION</span></span></span> <span class="pre">TO_SE_CMD_INIT_ADMIN_SESSION</span><a class="headerlink" href="#c.TODRV_HSE_CMD_INIT_ADMIN_SESSION" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_AUTH_ADMIN_SESSION">
-<span class="target" id="group__command__codes_1ga19c4e17fb7ce690b5bed27fcdf9c0608"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AUTH_ADMIN_SESSION</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x004A)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AUTH_ADMIN_SESSION" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga19c4e17fb7ce690b5bed27fcdf9c0608"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_AUTH_ADMIN_SESSION</span></span></span> <span class="pre">TO_SE_CMD_AUTH_ADMIN_SESSION</span><a class="headerlink" href="#c.TODRV_HSE_CMD_AUTH_ADMIN_SESSION" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_FINI_ADMIN_SESSION">
-<span class="target" id="group__command__codes_1gaa270bd35b75ec8b3fe730b9395ebda18"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_FINI_ADMIN_SESSION</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x004B)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_FINI_ADMIN_SESSION" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaa270bd35b75ec8b3fe730b9395ebda18"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_FINI_ADMIN_SESSION</span></span></span> <span class="pre">TO_SE_CMD_FINI_ADMIN_SESSION</span><a class="headerlink" href="#c.TODRV_HSE_CMD_FINI_ADMIN_SESSION" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_ADMIN_COMMAND">
-<span class="target" id="group__command__codes_1gac881454fe792c5c787277c02f4a1de66"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_ADMIN_COMMAND</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0014)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_ADMIN_COMMAND" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gac881454fe792c5c787277c02f4a1de66"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_ADMIN_COMMAND</span></span></span> <span class="pre">TO_SE_CMD_ADMIN_COMMAND</span><a class="headerlink" href="#c.TODRV_HSE_CMD_ADMIN_COMMAND" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_ADMIN_COMMAND_WITH_RESPONSE">
-<span class="target" id="group__command__codes_1gaf1f0f9493645305c69384af75ef54d6e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_ADMIN_COMMAND_WITH_RESPONSE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0052)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_ADMIN_COMMAND_WITH_RESPONSE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaf1f0f9493645305c69384af75ef54d6e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_ADMIN_COMMAND_WITH_RESPONSE</span></span></span> <span class="pre">TO_SE_CMD_ADMIN_COMMAND_WITH_RESPONSE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_ADMIN_COMMAND_WITH_RESPONSE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LOCK">
-<span class="target" id="group__command__codes_1ga258c670b85bbe392138c4f89d2c95815"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOCK</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0017)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOCK" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga258c670b85bbe392138c4f89d2c95815"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOCK</span></span></span> <span class="pre">TO_SE_CMD_LOCK</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOCK" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_UNLOCK">
-<span class="target" id="group__command__codes_1gaec4168363472588d5203436f4edce359"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_UNLOCK</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x0018)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_UNLOCK" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaec4168363472588d5203436f4edce359"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_UNLOCK</span></span></span> <span class="pre">TO_SE_CMD_UNLOCK</span><a class="headerlink" href="#c.TODRV_HSE_CMD_UNLOCK" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_AES_KEY">
-<span class="target" id="group__command__codes_1ga862d336e449217c1d1f3542d535f260e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_AES_KEY</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00A7)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_AES_KEY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga862d336e449217c1d1f3542d535f260e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_AES_KEY</span></span></span> <span class="pre">TO_SE_CMD_SET_AES_KEY</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_AES_KEY" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_HMAC_KEY">
-<span class="target" id="group__command__codes_1ga9fb9efc04375f4b0e724c5d8ceef329e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_HMAC_KEY</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00A8)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_HMAC_KEY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga9fb9efc04375f4b0e724c5d8ceef329e"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_HMAC_KEY</span></span></span> <span class="pre">TO_SE_CMD_SET_HMAC_KEY</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_HMAC_KEY" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_CMAC_KEY">
-<span class="target" id="group__command__codes_1gaf690486d1c5ebdcd61a3ddf5460960dc"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CMAC_KEY</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00A9)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CMAC_KEY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaf690486d1c5ebdcd61a3ddf5460960dc"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_CMAC_KEY</span></span></span> <span class="pre">TO_SE_CMD_SET_CMAC_KEY</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_CMAC_KEY" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SECLINK_ARC4">
-<span class="target" id="group__command__codes_1gac83dfa31a8d54463826b307efc7cdff9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_ARC4</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFF00)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_ARC4" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gac83dfa31a8d54463826b307efc7cdff9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_ARC4</span></span></span> <span class="pre">TO_SE_CMD_SECLINK_ARC4</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_ARC4" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SECLINK_ARC4_GET_IV">
-<span class="target" id="group__command__codes_1ga0afb1a34e4b287cd1beefc6dcf60b088"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_ARC4_GET_IV</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFF01)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_ARC4_GET_IV" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga0afb1a34e4b287cd1beefc6dcf60b088"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_ARC4_GET_IV</span></span></span> <span class="pre">TO_SE_CMD_SECLINK_ARC4_GET_IV</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_ARC4_GET_IV" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SECLINK_ARC4_GET_NEW_KEY">
-<span class="target" id="group__command__codes_1ga76bf84481b541e9a787b6525e450feca"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_ARC4_GET_NEW_KEY</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFF04)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_ARC4_GET_NEW_KEY" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga76bf84481b541e9a787b6525e450feca"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_ARC4_GET_NEW_KEY</span></span></span> <span class="pre">TO_SE_CMD_SECLINK_ARC4_GET_NEW_KEY</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_ARC4_GET_NEW_KEY" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SECLINK_AESHMAC">
-<span class="target" id="group__command__codes_1ga79c144a83a5af60ad7b320f97124d434"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_AESHMAC</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFF02)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_AESHMAC" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga79c144a83a5af60ad7b320f97124d434"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_AESHMAC</span></span></span> <span class="pre">TO_SE_CMD_SECLINK_AESHMAC</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_AESHMAC" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SECLINK_AESHMAC_GET_IV">
-<span class="target" id="group__command__codes_1ga9967227552bdcd1f405b7cd353cf9082"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_AESHMAC_GET_IV</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFF03)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_AESHMAC_GET_IV" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga9967227552bdcd1f405b7cd353cf9082"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_AESHMAC_GET_IV</span></span></span> <span class="pre">TO_SE_CMD_SECLINK_AESHMAC_GET_IV</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_AESHMAC_GET_IV" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SECLINK_AESHMAC_GET_NEW_KEYS">
-<span class="target" id="group__command__codes_1gaa3d84ed68a9515d721bd2cff3fb68916"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_AESHMAC_GET_NEW_KEYS</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFF05)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_AESHMAC_GET_NEW_KEYS" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaa3d84ed68a9515d721bd2cff3fb68916"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SECLINK_AESHMAC_GET_NEW_KEYS</span></span></span> <span class="pre">TO_SE_CMD_SECLINK_AESHMAC_GET_NEW_KEYS</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SECLINK_AESHMAC_GET_NEW_KEYS" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LOADER_BCAST_GET_INFO">
-<span class="target" id="group__command__codes_1ga51745d5c77cadde76e6f281cdd06d93b"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOADER_BCAST_GET_INFO</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFFFF)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOADER_BCAST_GET_INFO" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga51745d5c77cadde76e6f281cdd06d93b"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOADER_BCAST_GET_INFO</span></span></span> <span class="pre">TO_SE_CMD_LOADER_BCAST_GET_INFO</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOADER_BCAST_GET_INFO" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LOADER_BCAST_RESTORE">
-<span class="target" id="group__command__codes_1ga41a2e2e660f57219a222318380116083"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOADER_BCAST_RESTORE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00D7)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOADER_BCAST_RESTORE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga41a2e2e660f57219a222318380116083"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOADER_BCAST_RESTORE</span></span></span> <span class="pre">TO_SE_CMD_LOADER_BCAST_RESTORE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOADER_BCAST_RESTORE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LOADER_BCAST_INITIALIZE_UPGRADE">
-<span class="target" id="group__command__codes_1ga9d435a66f7116f68a96b1aa961a27133"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOADER_BCAST_INITIALIZE_UPGRADE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFFF2)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOADER_BCAST_INITIALIZE_UPGRADE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga9d435a66f7116f68a96b1aa961a27133"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOADER_BCAST_INITIALIZE_UPGRADE</span></span></span> <span class="pre">TO_SE_CMD_LOADER_BCAST_INITIALIZE_UPGRADE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOADER_BCAST_INITIALIZE_UPGRADE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LOADER_BCAST_WRITE_DATA">
-<span class="target" id="group__command__codes_1ga122b3a740db58aa4e183523e5311abf9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOADER_BCAST_WRITE_DATA</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFFF3)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOADER_BCAST_WRITE_DATA" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga122b3a740db58aa4e183523e5311abf9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOADER_BCAST_WRITE_DATA</span></span></span> <span class="pre">TO_SE_CMD_LOADER_BCAST_WRITE_DATA</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOADER_BCAST_WRITE_DATA" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_LOADER_BCAST_COMMIT_RELEASE">
-<span class="target" id="group__command__codes_1ga64a716821fd6ad8067ea45a525276e37"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOADER_BCAST_COMMIT_RELEASE</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0xFFF4)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOADER_BCAST_COMMIT_RELEASE" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga64a716821fd6ad8067ea45a525276e37"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_LOADER_BCAST_COMMIT_RELEASE</span></span></span> <span class="pre">TO_SE_CMD_LOADER_BCAST_COMMIT_RELEASE</span><a class="headerlink" href="#c.TODRV_HSE_CMD_LOADER_BCAST_COMMIT_RELEASE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_DATA_MIGRATION">
-<span class="target" id="group__command__codes_1gaa517d76cd86060cefb46e9d7f51bd38b"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_DATA_MIGRATION</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00D6)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_DATA_MIGRATION" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gaa517d76cd86060cefb46e9d7f51bd38b"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_DATA_MIGRATION</span></span></span> <span class="pre">TO_SE_CMD_DATA_MIGRATION</span><a class="headerlink" href="#c.TODRV_HSE_CMD_DATA_MIGRATION" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_SET_MEASURE_BOOT">
-<span class="target" id="group__command__codes_1ga92771d814072a2f0d38e4ca4cb4a8b3c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_MEASURE_BOOT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00E0)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_MEASURE_BOOT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga92771d814072a2f0d38e4ca4cb4a8b3c"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_SET_MEASURE_BOOT</span></span></span> <span class="pre">TO_SE_CMD_SET_MEASURE_BOOT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_SET_MEASURE_BOOT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_VALIDATE_NEW_FW_HASH">
-<span class="target" id="group__command__codes_1gabf30b36ea3392cffe1fbede0cfc6935f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VALIDATE_NEW_FW_HASH</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00E1)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VALIDATE_NEW_FW_HASH" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gabf30b36ea3392cffe1fbede0cfc6935f"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_VALIDATE_NEW_FW_HASH</span></span></span> <span class="pre">TO_SE_CMD_VALIDATE_NEW_FW_HASH</span><a class="headerlink" href="#c.TODRV_HSE_CMD_VALIDATE_NEW_FW_HASH" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_COMMIT_NEW_FW_HASH">
-<span class="target" id="group__command__codes_1ga419b93db94583c6271fb811869cfa7b9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMMIT_NEW_FW_HASH</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00E2)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMMIT_NEW_FW_HASH" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga419b93db94583c6271fb811869cfa7b9"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_COMMIT_NEW_FW_HASH</span></span></span> <span class="pre">TO_SE_CMD_COMMIT_NEW_FW_HASH</span><a class="headerlink" href="#c.TODRV_HSE_CMD_COMMIT_NEW_FW_HASH" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_STORE_NEW_TRUSTED_FW_HASH">
-<span class="target" id="group__command__codes_1gae8d0b8e3cffb79e69f8c073acc779066"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_STORE_NEW_TRUSTED_FW_HASH</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00E3)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_STORE_NEW_TRUSTED_FW_HASH" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gae8d0b8e3cffb79e69f8c073acc779066"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_STORE_NEW_TRUSTED_FW_HASH</span></span></span> <span class="pre">TO_SE_CMD_STORE_NEW_TRUSTED_FW_HASH</span><a class="headerlink" href="#c.TODRV_HSE_CMD_STORE_NEW_TRUSTED_FW_HASH" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_BOOT_MEASUREMENT">
-<span class="target" id="group__command__codes_1ga6b24ec2005bf02b46922811339b95c86"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_BOOT_MEASUREMENT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00E4)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_BOOT_MEASUREMENT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga6b24ec2005bf02b46922811339b95c86"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_BOOT_MEASUREMENT</span></span></span> <span class="pre">TO_SE_CMD_GET_BOOT_MEASUREMENT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_BOOT_MEASUREMENT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_GET_SE_MEASUREMENT">
-<span class="target" id="group__command__codes_1gadd8b1d6ae40cf9dae09a8eafe7fce9ca"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_SE_MEASUREMENT</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00E6)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_SE_MEASUREMENT" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1gadd8b1d6ae40cf9dae09a8eafe7fce9ca"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_GET_SE_MEASUREMENT</span></span></span> <span class="pre">TO_SE_CMD_GET_SE_MEASUREMENT</span><a class="headerlink" href="#c.TODRV_HSE_CMD_GET_SE_MEASUREMENT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TODRV_HSE_CMD_INVALIDATE_NEW_HASH">
-<span class="target" id="group__command__codes_1ga4b480a80167763f9288e229ab69390f0"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_INVALIDATE_NEW_HASH</span></span></span> <span class="pre">((unsigned</span> <span class="pre">short)0x00E5)</span><a class="headerlink" href="#c.TODRV_HSE_CMD_INVALIDATE_NEW_HASH" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__command__codes_1ga4b480a80167763f9288e229ab69390f0"></span><span class="sig-name descname"><span class="n"><span class="pre">TODRV_HSE_CMD_INVALIDATE_NEW_HASH</span></span></span> <span class="pre">TO_SE_CMD_INVALIDATE_NEW_HASH</span><a class="headerlink" href="#c.TODRV_HSE_CMD_INVALIDATE_NEW_HASH" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -1926,7 +1961,7 @@ library error codes in one single variable. See
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
 <dl class="c function">
 <dt class="sig sig-object c">
-<span class="target" id="group__log__level_1gaf9f6ab5afa374f54977a6ff49e8c5661"></span><span class="sig-name descname"><span class="pre">enum</span> <span class="pre">TO_log_level_e</span> <span class="pre">__attribute__</span> <span class="pre">((packed))</span> <span class="pre">TO_log_level_t</span></span></dt>
+<span class="target" id="group__log__level_1ga8a4941fe6340898ae411d460473073fd"></span><span class="sig-name descname"><span class="pre">enum</span> <span class="pre">TO_log_level_e</span> <span class="pre">__attribute__</span> <span class="pre">((packed))</span> <span class="pre">TO_log_level_t</span></span></dt>
 <dd><p>Different log levels that are available to the application. </p>
 </dd></dl>
 
@@ -2317,11 +2352,6 @@ library error codes in one single variable. See
 <dd><p>Certificate constants </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
-<dl class="c macro">
-<dt class="sig sig-object c" id="c.TO_CERT_X509_MAXSIZE">
-<span class="target" id="group__cert__constants_1ga3b4792c3a31cd765255d69120593fbcb"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERT_X509_MAXSIZE</span></span></span> <span class="pre">1024UL</span><a class="headerlink" href="#c.TO_CERT_X509_MAXSIZE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.TO_CERTIFICATE_SIZE">
 <span class="target" id="group__cert__constants_1ga45fafc350779d0444fa975516b86806b"></span><span class="sig-name descname"><span class="n"><span class="pre">TO_CERTIFICATE_SIZE</span></span></span> <span class="pre">(TO_SN_SIZE+TO_ECC_PUB_KEYSIZE+TO_SIGNATURE_SIZE)</span><a class="headerlink" href="#c.TO_CERTIFICATE_SIZE" title="Permalink to this definition">¶</a><br /></dt>

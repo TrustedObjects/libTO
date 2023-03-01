@@ -24,59 +24,12 @@
 /** @addtogroup secure_storage_defs
  * @{ */
 
-/**
- * @brief Secure storage read function.
- * @param[out] data Data destination
- * @param[in] address Address to read, related to Secure Storage base address
- * @param[in] size Data length
- *
- * This function is used by TO-Protect to read data from NVM. You have
- * to implement this function with read NVM function of your platform.
- *
- * @return TO_OK if data has been read successfully, else TO_ERROR
- */
-typedef TO_lib_ret_t TOX_read_func_t(uint8_t *data,
-		const void *address, uint32_t size);
-
-/**
- * @brief Secure storage write function.
- * @param[in] address Address to write, related to Secure Storage base address
- * @param[in] data Data source
- * @param[in] size Data length
- *
- * This function is used by TO-Protect to write to NVM. You have to implement
- * this function with write NVM function of your platform.
- * This function must NOT perform any erase, as it is handled by secure storage
- * implementation directly.
- *
- * @return TO_OK if data has been written successfully, else TO_ERROR
- */
-typedef TO_lib_ret_t TOX_write_func_t(void *address,
-		const uint8_t *data, uint32_t size);
-
-/**
- * @brief Secure storage erase function.
- * @param[in] address Address to erase from, related to Secure Storage base
- * address
- * @param[in] size Data length
- *
- * This function is used by TO-Protect to erase NVM. You have to implement this
- * function with erase NVM function of your platform.
- *
- * @return TO_OK if data has been erased successfully, else TO_ERROR
- */
-typedef TO_lib_ret_t TOX_erase_func_t(void *address,
-		uint32_t size);
-
-/**
- * Secure Storage data type
- */
-enum TOX_type_e {
-	SECURE_STORAGE_INVALID,
-	SECURE_STORAGE_CLEAR_DATA, /**< Data is stored clear */
-	SECURE_STORAGE_SECRET_DATA /**< Data is stored obfuscated */
-};
-typedef enum TOX_type_e TOX_type_t;
+typedef enum data_dalidity_e {
+	TOX_BOTH_STORAGES_ARE_INVALID = 0x7d,
+	TOX_PLAIN_STORAGE_IS_VALID    = 0xed,
+	TOX_SECRET_STORAGE_IS_VALID   = 0x41,
+	TOX_BOTH_STORAGES_ARE_VALID   = (TOX_BOTH_STORAGES_ARE_INVALID ^ TOX_PLAIN_STORAGE_IS_VALID ^ TOX_SECRET_STORAGE_IS_VALID)
+} data_validity_t;
 
 /**
  * External secure storage context
@@ -85,25 +38,17 @@ typedef enum TOX_type_e TOX_type_t;
  * behavior.
  */
 typedef struct TOX_ctx_s {
-	TOX_type_t type;
-	void *address; /**< Secure storage memory address */
-	uint32_t size; /**< Size of this Secure Storage */
-	uint8_t *rambuff; /**< Working buffer, this is a copy of NVM storage,
-				synchronized with NVM just after open or flush */
-	uint8_t *secret_rambuff; /**< Secret data (unobfuscated) RAM buffer */
-	TOX_read_func_t *read_func;
-	TOX_write_func_t *write_func;
-	TOX_erase_func_t *erase_func;
-	uint8_t is_reset; /**< 1 after storage open if a reset has been performed */
-	uint8_t data_changed; /**< 1 if data has changed since last open or flush */
-	uint32_t rng_seed; /**< LFSR RNG seed */
-	struct {
-		uint32_t polyv; /**< LFSR value polynom */
-		uint32_t seedv; /**< LFSR value seed */
-		uint32_t polyr; /**< LFSR random seed */
-	} lfsr;
-	TO_log_ctx_t *log_ctx;
-	uint32_t data_version; /**< Data structure version */
+	uint8_t *raw_ram_buffer;	/**< Buffer provided by the user application to read the whole nvm area */
+	uint8_t *ram_buffer;		/**< Buffer without the tearing header */
+	TO_log_ctx_t *log_ctx;		/**< Pointer to a log structure */
+	void *rng;			/**< Pointer to a RNG structure */
+	uint16_t plain_storage_size;	/**< Current plain storage size */
+	uint16_t secret_storage_size;	/**< Current secret storage size */
+	uint16_t raw_ram_buffer_size;	/**< Raw buffer size */
+	uint16_t ram_buffer_size;	/**< Raw buffer size without the tearing */
+	uint8_t is_reset; 		/**< 1 after storage open if a reset has been performed */
+	uint8_t data_changed; 		/**< 1 if data has changed since last open or flush */
+	data_validity_t data_are_valid;	/**< Indicates that both plain and secret storages are valid (or not) */
 } TOX_ctx_t;
 
 /**

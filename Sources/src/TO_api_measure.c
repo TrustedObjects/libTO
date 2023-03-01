@@ -18,7 +18,6 @@
 #include "TO_cfg.h"
 #ifndef TODRV_HSE_DRIVER_DISABLE
 
-#include "TO_cfg.h"
 #include "TO_defs.h"
 #include "TO_retcodes.h"
 #include "TO_endian.h"

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>TO-Protect TLS API &#8212; libTO 6.3.9 documentation</title>
+    <title>TO-Protect TLS API &#8212; libTO 6.3.10 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -41,7 +41,7 @@
 
 
 
-<p class="blurb">release 6.3.9<br />doc</p>
+<p class="blurb">release 6.3.10<br />doc</p>
 
 
 
@@ -757,13 +757,13 @@ Set certificate distinguished name which will be used in next CSR.</p>
 <span class="target" id="group__auth_1ga5fe897cf4d98238cc9f72cf2e4e21bdc"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_get_certificate_signing_request</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">certificate_index</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">csr</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_get_certificate_signing_request" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get new certificate signing request. </p>
 <p>
-Request a x509 DER formated certificate signing request according to the given index. CSR distinguished name can be set with <a class="reference internal" href="#group__auth_1gaecd896158629de5ae917371454e53762"><span class="std std-ref">TOSE_set_certificate_signing_request_dn()</span></a>, otherwise existing certificate DN will be used (if any). Secure Element CSR size will not exceed TO_CERT_X509_MAXSIZE.</p>
+Request a x509 DER formated certificate signing request according to the given index. CSR distinguished name can be set with <a class="reference internal" href="#group__auth_1gaecd896158629de5ae917371454e53762"><span class="std std-ref">TOSE_set_certificate_signing_request_dn()</span></a>, otherwise existing certificate DN will be used (if any).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_index</strong> – <strong>[in]</strong> Certificate index to renew </p></li>
-<li><p><strong>csr</strong> – <strong>[out]</strong> Returned CSR data (can be NULL to determine needed buffer size) </p></li>
+<li><p><strong>csr</strong> – <strong>[out]</strong> Returned CSR data </p></li>
 <li><p><strong>size</strong> – <strong>[out]</strong> Returned CSR real size</p></li>
 </ul>
 </dd>
@@ -787,7 +787,7 @@ Request a x509 DER formated certificate signing request according to the given i
 <span class="target" id="group__auth_1gae8b92747cda930dabc419154a7ead4c2"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_set_certificate_x509</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">certificate_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">certificate</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_set_certificate_x509" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set new certificate from previously generated CSR. </p>
 <p>
-Set a x509 DER formated certificate according to the given index. The new certificate must be signed by a CA trusted by the Secure Element. Secure Element certificate size cannot exceed TO_CERT_X509_MAXSIZE.</p>
+Set a x509 DER formated certificate according to the given index. The new certificate must be signed by a CA trusted by the Secure Element.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -902,7 +902,7 @@ See TOSE_set_certificate_x509</p>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_get_certificate">
-<span class="target" id="group__auth_1gaf6bb5cd1e5c75e59e9e12e0a419ed10e"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_get_certificate</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">certificate_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">TO_certificate_format_t</span></span><span class="w"> </span><span class="n"><span class="pre">format</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">certificate</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_get_certificate" title="Permalink to this definition">¶</a><br /></dt>
+<span class="target" id="group__auth_1ga6b77925a9a3315599f85b6e66520bd8e"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_get_certificate</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">certificate_index</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">TO_certificate_format_t</span></span><span class="w"> </span><span class="n"><span class="pre">certificate_format</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">certificate</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_get_certificate" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Returns one of the Secure Element certificates. </p>
 <p>
 Request a certificate to Secure Element according to the given index and format.</p>
@@ -911,8 +911,8 @@ Request a certificate to Secure Element according to the given index and format.
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_index</strong> – <strong>[in]</strong> Requested certificate index </p></li>
-<li><p><strong>format</strong> – <strong>[in]</strong> Requested certificate format </p></li>
-<li><p><strong>certificate</strong> – <strong>[out]</strong> Certificate, size depends on the certificate type (see TO_cert_*_t)</p></li>
+<li><p><strong>certificate</strong> – <strong>[out]</strong> Pointer to a buffer, which will receive the Certificate under the desired format. </p></li>
+<li><p><strong>size</strong> – <strong>[out]</strong> Size of the transfered data, is returned in output.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -934,22 +934,21 @@ Request a certificate to Secure Element according to the given index and format.
 <dl class="c function">
 <dt class="sig sig-object c" id="c.TOSE_get_certificate_x509">
 <span class="target" id="group__auth_1ga4c1a22d353b8297d9c80b50468a79fa5"></span><a class="reference internal" href="defs.html#c.TO_ret_t" title="TO_ret_t"><span class="n"><span class="pre">TO_ret_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TOSE_get_certificate_x509</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="defs.html#c.TOSE_ctx_t" title="TOSE_ctx_t"><span class="n"><span class="pre">TOSE_ctx_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ctx</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">certificate_index</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">certificate</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TOSE_get_certificate_x509" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Returns one of the certificates, x509 DER formated. </p>
+<dd><p>Returns one of the certificates, x509 DER formatted. </p>
 <p>
-Request a x509 DER formated certificate according to the given index. Secure Element certificate size will not exceed TO_CERT_X509_MAXSIZE.</p>
+Request a x509 DER formated certificate according to the given index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ctx</strong> – <strong>[in]</strong> Pointer to the SE context </p></li>
 <li><p><strong>certificate_index</strong> – <strong>[in]</strong> Requested certificate index </p></li>
-<li><p><strong>certificate</strong> – <strong>[out]</strong> Returned certificate data (can be NULL to determine needed buffer size) </p></li>
-<li><p><strong>size</strong> – <strong>[out]</strong> Returned certificate real size</p></li>
+<li><p><strong>certificate</strong> – <strong>[out]</strong> Returned certificate data </p></li>
+<li><p><strong>size</strong> – <strong>[out]</strong> Size of the transfered certificate, is returned in output.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>TORSP_SUCCESS on success</p></li>
-<li><p>TORSP_NOT_AVAILABLE: certificate Format not supported</p></li>
 <li><p>TORSP_ARG_OUT_OF_RANGE: invalid Certificate Number</p></li>
 <li><p>TO_DEVICE_WRITE_ERROR: error writing data to Secure Element</p></li>
 <li><p>TO_DEVICE_READ_ERROR: error reading data from Secure Element</p></li>

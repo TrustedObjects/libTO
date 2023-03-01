@@ -100,7 +100,6 @@ COMPILE_ASSERT(sizeof(TO_key_type_t) == sizeof(uint8_t));
  * Certificate constants
  * @{ */
 
-#define TO_CERT_X509_MAXSIZE 1024UL
 #define TO_CERTIFICATE_SIZE (TO_SN_SIZE+TO_ECC_PUB_KEYSIZE+TO_SIGNATURE_SIZE)
 #define TO_CERT_PRIVKEY_SIZE 32UL
 #define TO_ECC_PRIV_KEYSIZE TO_CERT_PRIVKEY_SIZE
@@ -408,6 +407,8 @@ COMPILE_ASSERT(sizeof(TO_tls_extension_t) == sizeof(uint16_t));
 #define TOCERTF_SHORT ((unsigned char)0x01)
 #define TOCERTF_X509 ((unsigned char)0x02)
 #define TOCERTF_SHORT_V2 ((unsigned char)0x03)
+#define TOCERTF_NONE ((unsigned char)0xFF)
+#define TOCERTF_UNKNOWN ((unsigned char)0xFE)
 #define TOCERTF_VALIDITY_DATE_SIZE 7UL
 #define TOCERTF_SUBJECT_NAME_SIZE 15UL
 
@@ -425,6 +426,8 @@ typedef enum TO_certificate_format_e {
 	TO_CERTIFICATE_SHORT = TOCERTF_SHORT,
 	TO_CERTIFICATE_X509 = TOCERTF_X509,
 	TO_CERTIFICATE_SHORT_V2 = TOCERTF_SHORT_V2,
+	TO_CERTIFICATE_NONE = TOCERTF_NONE,
+	TO_CERTIFICATE_UNKNOWN = TOCERTF_UNKNOWN
 } PACKED TO_certificate_format_t;
 
 /**
@@ -455,7 +458,7 @@ typedef struct TO_cert_short_s TO_cert_short_t;
 struct TO_cert_short_v2_s {
 	uint8_t ca_id[TO_SN_CA_ID_SIZE]; /**< Certificate Authority ID */
 	uint8_t serial_number[TO_SN_NB_SIZE]; /**< SE serial number */
-	uint8_t date[TOCERTF_VALIDITY_DATE_SIZE]; /**< Validity date
+	uint8_t date[TOCERTF_VALIDITY_DATE_SIZE]; /**< Validity date (not to be used after xxx)
 						    (Zulu date (UTC)) */
 	uint8_t public_key[TO_ECC_PUB_KEYSIZE]; /**< Public key */
 	uint8_t signature[TO_SIGNATURE_SIZE]; /**< Certificate signature */

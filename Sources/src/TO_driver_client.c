@@ -609,10 +609,10 @@ TO_ret_t TOSE_get_certificate_signing_request(
 TO_ret_t TOSE_get_certificate(
 		TOSE_ctx_t *ctx,
 		const uint8_t certificate_index,
-		const TO_certificate_format_t format,
+		const TO_certificate_format_t certificate_format,
 		uint8_t* certificate
 ) {
-	DRV_CALL_CHECK(ctx, cert_mgmt, get_certificate, GET_PRIV_CTX(ctx), certificate_index, format, certificate)
+	DRV_CALL_CHECK(ctx, cert_mgmt, get_certificate, GET_PRIV_CTX(ctx), certificate_index, certificate_format, certificate)
 }
 TO_ret_t TOSE_get_certificate_x509(
 		TOSE_ctx_t *ctx,

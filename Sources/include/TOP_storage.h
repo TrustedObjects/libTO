@@ -57,10 +57,7 @@ typedef TO_lib_ret_t TOP_data_store_func_t(zone_id_t zone_id,
  * behavior.
  */
 typedef struct TOP_secure_data_ctx_s {
-	TOX_ctx_t clear;
-	TOX_ctx_t secret;
-	uint8_t *ram_buffer;
-	uint8_t *obfuscation_buffer;
+	TOX_ctx_t storage;
 	TOP_data_load_func_t *load_func;
 	TOP_data_store_func_t *store_func;
 	uint32_t current_version;

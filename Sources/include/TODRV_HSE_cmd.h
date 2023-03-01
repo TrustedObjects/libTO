@@ -223,6 +223,9 @@ TODRV_HSE_CMD_API void TODRV_HSE_set_lib_hook_post_write(
 TODRV_HSE_CMD_API void TODRV_HSE_set_lib_hook_post_command(
 		TODRV_HSE_post_command_hook hook);
 
+
+TODRV_HSE_CMD_API void TODRV_HSE_cmd_name_from_number(int number, char *name);
+
 /** @} */
 
 #ifdef __cplusplus

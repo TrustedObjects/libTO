@@ -61,6 +61,10 @@ TODRV_HSE_SYSTEM_API TO_ret_t TODRV_HSE_get_software_version(
 		uint8_t* minor,
 		uint8_t* revision);
 
+TODRV_HSE_SYSTEM_API TO_ret_t TODRV_HSE_access_dummy_data(TODRV_HSE_ctx_t *ctx,
+		uint8_t write_data,
+		uint32_t* dummy_data);
+
 TODRV_HSE_SYSTEM_API TO_ret_t TODRV_HSE_get_product_id(TODRV_HSE_ctx_t *ctx,
 		uint8_t product_id[TO_PRODUCT_ID_SIZE]);
 

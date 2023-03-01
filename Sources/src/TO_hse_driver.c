@@ -13,7 +13,6 @@
 #include "TO_cfg.h"
 #ifndef TODRV_HSE_DRIVER_DISABLE
 
-#include "TO_cfg.h"
 #include "TO_driver.h"
 #include "TO_defs.h"
 
@@ -32,6 +31,9 @@
 #include "TODRV_HSE_tls.h"
 #include "TODRV_HSE_loader.h"
 #include "TODRV_HSE_measure.h"
+#ifdef TODRV_HSE_INTERFACE_TO_SSE
+#include "TODRV_HSE_auth_toprotect.h"
+#endif
 #include "TO_log.h"
 
 static TODRV_HSE_ctx_t hse_ctx_priv;
@@ -53,6 +55,7 @@ const TODRV_api_t drv_hse = {
 			.get_hardware_version = (TODRV_get_hardware_version_f*)TODRV_HSE_get_hardware_version,
 			.get_software_version = (TODRV_get_software_version_f*)TODRV_HSE_get_software_version,
 			.get_product_id = (TODRV_get_product_id_f*)TODRV_HSE_get_product_id,
+			.access_dummy_data = (TODRV_access_dummy_data_f*)TODRV_HSE_access_dummy_data,
 		},
 #endif
 #if TODRV_API_CONFIG_SHA256 > 0

@@ -109,6 +109,16 @@ TODRV_HSE_I2C_API TO_ret_t TODRV_HSE_trp_read(void *data, unsigned int length);
  */
 TODRV_HSE_I2C_API TO_ret_t TODRV_HSE_trp_last_command_duration(unsigned int *duration);
 
+/**
+ * @brief Last command stack depth's usage from Secure Element
+ * @param duration Pointer to store last command stack depth's usage in bytes
+ * *
+ * @return
+ * - TO_OK if data has been read sucessfully
+ * - TO_ERROR if an internal error has occured
+ */
+TODRV_HSE_I2C_API TO_ret_t TODRV_HSE_trp_last_command_stack_usage(unsigned int *stack_depth);
+
 /** @} */
 
 #ifdef __cplusplus
