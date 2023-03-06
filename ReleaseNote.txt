@@ -1,5 +1,12 @@
-2023-02-28 - 6.3.10
-- Update to libTO-6.3.10
+2023-03-06 - 6.3.11
+- to-protect: Add return codes to explicit the issue if initializing Secure Storage fails (TORSP_WRONG_SECURE_STORAGE_VERSION, ...)
+- to-protect: New obfuscation method of the secure storage, improving memory footprint
+- to-protect: Fix sector consumed unnecessarily between two secure storage banks, when Secure Storage is an exact multiple of the platform sector size
+- to-protect: HAL NVM examples updated (STM32, LX6, MBED FlashIAP, RAM emulation)
+- to-protect: Add TOP_CERT_X509_MAXSIZE specific to to-protect
+- to136: Include TO_cfg.h before testing TODRV_HSE_DRIVER_DISABLE
+- to136: Include TO_cfg.h on all I2C wrapper files examples (to get benefit of TO_USER_CONFIG setting)
+- to136: Doc improvments about power management
 
 2023-01-30 - 6.3.9
 - Better default driver configuration

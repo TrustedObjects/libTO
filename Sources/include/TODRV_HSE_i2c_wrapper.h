@@ -167,7 +167,7 @@ TODRV_HSE_I2C_WRAPPER_API TO_lib_ret_t TO_data_last_command_duration(unsigned in
  * @return TO_OK if last command stack usage is available
  * TO_ERROR if an internal error has occured
  */
-TODRV_HSE_I2C_WRAPPER_API TO_lib_ret_t TO_data_last_command_stack_usage(unsigned int *stack_usage);
+TODRV_HSE_I2C_WRAPPER_API TO_lib_ret_t TO_data_last_stack_usage(unsigned int *stack_usage);
 
 #endif
 

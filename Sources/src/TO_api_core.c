@@ -132,23 +132,6 @@ TO_lib_ret_t TODRV_HSE_trp_last_command_duration(unsigned int *duration)
 #endif
 }
 
-TO_lib_ret_t TODRV_HSE_trp_last_command_stack_usage(unsigned int *stack_depth)
-{
-#ifdef TODRV_HSE_I2C_WRAPPER_LAST_COMMAND_STACK_USAGE
-	TO_lib_ret_t ret = 0x9999;
-	ret = TO_data_last_command_stack_usage(stack_depth);
-	if (ret == TO_OK) {
-		TOH_LOG_DBG("%d bytes", *stack_depth);
-	} else {
-		TOH_LOG_DBG("%x ", ret);
-	}
-	return ret;
-#else
-	*stack_depth = 0;
-	return TO_NOT_IMPLEMENTED;
-#endif
-}
-
 #ifdef TODRV_HSE_I2C_WRAPPER_CONFIG
 TO_lib_ret_t TODRV_HSE_trp_config(unsigned char i2c_addr, unsigned char misc_settings)
 {
@@ -393,10 +376,9 @@ static void _prepare_command_data_buffer(void)
 	}
 }
 
-static TO_lib_ret_t _send_command(const uint16_t cmd,
-		uint16_t cmd_data_len,
-		uint16_t *resp_data_len,
-		TO_se_ret_t *resp_status)
+static TO_lib_ret_t _send_command(
+		const uint16_t cmd, uint16_t cmd_data_len,
+		uint16_t *resp_data_len, TO_se_ret_t *resp_status)
 {
 	uint16_t data_len;
 	unsigned int status;
@@ -480,17 +462,16 @@ static TO_lib_ret_t _send_command(const uint16_t cmd,
 	*resp_status = (TO_se_ret_t)TODRV_HSE_io_buffer[2];
 	_resp_data_len = (uint16_t*)TODRV_HSE_io_buffer;
 	*resp_data_len = be16toh(*_resp_data_len);
-	TOH_LOG_DBG("read: %d bytes expected", *resp_data_len);
+	TOH_LOG_DBG("read:", 0);
 	TOH_LOG_DBG_BUF(TODRV_HSE_io_buffer, (*resp_data_len) + TODRV_HSE_RSPHEAD_SIZE);
 
 	/* On command success, check size validity */
-	if ((*resp_status == TORSP_SUCCESS) &&
-			(*resp_data_len > data_len - TODRV_HSE_RSPHEAD_SIZE)) {
+	if (*resp_status == TORSP_SUCCESS
+			&& *resp_data_len > data_len - TODRV_HSE_RSPHEAD_SIZE) {
 		TOH_LOG_ERR("(cmd=%04X) read error, response length "
-				"(%u bytes) overflows buffer (%lu bytes)",
+				"(%uB) overflows buffer (%luB)",
 				cmd,
-				*resp_data_len,
-				data_len - TODRV_HSE_RSPHEAD_SIZE);
+				*resp_data_len, data_len - TODRV_HSE_RSPHEAD_SIZE);
 		return TO_INVALID_RESPONSE_LENGTH;
 	}
 
@@ -575,10 +556,6 @@ void TODRV_HSE_cmd_name_from_number(int number, char *name)
 	switch (number) {
 		case TODRV_HSE_CMD_INIT:
 			strcpy(name, "INIT");
-			break;
-
-		case TODRV_HSE_CMD_ACCESS_DUMMY_DATA:
-			strcpy(name, "ACCESS_DUMMY_DATA");
 			break;
 
 		case TODRV_HSE_CMD_GET_SN:
